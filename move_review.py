@@ -1,7 +1,28 @@
+import shutil
 import chess
 import chess.engine
 
-ENGINE_PATH = "stockfish.exe"
+def find_engine():
+    # Try the common Linux command names first (Streamlit Cloud installs via apt).
+    for name in ("stockfish", "Stockfish"):
+        found = shutil.which(name)
+        if found:
+            return found
+    # Some Debian builds install to a versioned path; check the usual spot.
+    for path in ("/usr/games/stockfish", "/usr/bin/stockfish"):
+        if shutil.which(path) or __import__("os").path.exists(path):
+            return path
+    # Local Windows fallback.
+    if shutil.which("stockfish.exe") or __import__("os").path.exists("stockfish.exe"):
+        return "stockfish.exe"
+    # Nothing found — raise a clear message instead of a cryptic crash.
+    raise RuntimeError(
+        "Stockfish engine not found. On Streamlit Cloud, ensure packages.txt "
+        "(at repo root) contains the line 'stockfish'. Locally, place stockfish.exe "
+        "next to this file."
+    )
+
+ENGINE_PATH = find_engine()
 
 def _pov_score(info, color):
     """Return the score in centipawns from `color`'s perspective.
