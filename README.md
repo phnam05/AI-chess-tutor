@@ -1,5 +1,5 @@
 # Chess Tutor — an Explainable AI Coach
-
+# Quickstart [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-chess-tutor-phnam05.streamlit.app/)
 An explainable-AI prototype that turns a chess engine's cold numerical judgments
 into clear, level-adapted coaching. Given a position, it retrieves a strong
 engine's analysis and explains *why* the best move is good — in language pitched
