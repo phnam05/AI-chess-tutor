@@ -1,7 +1,16 @@
+import shutil
 import chess
 import chess.engine
 
-ENGINE_PATH = "stockfish.exe"
+def find_engine():
+    # On Streamlit Cloud (Linux), Stockfish is installed on the system PATH as "stockfish".
+    found = shutil.which("stockfish")
+    if found:
+        return found
+    # Locally on Windows, fall back to the executable sitting next to this file.
+    return "stockfish.exe"
+
+ENGINE_PATH = find_engine()
 
 def analyze_position(fen, think_time=1.0):
     """
