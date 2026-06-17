@@ -4,7 +4,7 @@ from google import genai
 from google.genai import types
 
 load_dotenv()
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+client = genai.Client(api_key="AQ.Ab8RN6KFiJIDAXzposYTJm5govjG53GvMfOpUvpfmUYrBcRZDQ")
 
 LEVEL_INSTRUCTIONS = {
     "beginner": """The player is a BEGINNER. Talk only about concrete, visible things:
