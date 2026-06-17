@@ -1,0 +1,16 @@
+# Secrets — never commit your API key
+.env
+
+# The Stockfish engine binary (users download their own)
+stockfish.exe
+stockfish
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
