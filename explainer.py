@@ -2,9 +2,15 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-
+import streamlit as st
 load_dotenv()
-client = genai.Client(api_key="AQ.Ab8RN6KFiJIDAXzposYTJm5govjG53GvMfOpUvpfmUYrBcRZDQ")
+
+
+
+# Works on Streamlit Cloud (st.secrets) and locally (.streamlit/secrets.toml or env var)
+API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+client = genai.Client(api_key=API_KEY)
+
 
 LEVEL_INSTRUCTIONS = {
     "beginner": """The player is a BEGINNER. Talk only about concrete, visible things:
