@@ -114,13 +114,13 @@ def classify_move(best_score, played_score, is_best):
     if is_best:
         return "Best"
     drop = win_chance(best_score) - win_chance(played_score)   # percentage points
-    if drop < 2:
+    if drop < 1:
         return "Excellent"
-    if drop < 5:
+    if drop < 3:
         return "Good"
-    if drop < 10:
+    if drop < 8:
         return "Inaccuracy"
-    if drop < 20:
+    if drop < 15:
         return "Mistake"
     return "Blunder"
 
