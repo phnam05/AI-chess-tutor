@@ -7,8 +7,14 @@ load_dotenv()
 
 
 
-# Works on Streamlit Cloud (st.secrets) and locally (.streamlit/secrets.toml or env var)
-API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+# Works on Streamlit Cloud (st.secrets) and locally (.env / env var). Touching
+# st.secrets when no secrets.toml exists raises StreamlitSecretNotFoundError, so
+# guard it and fall back to the environment variable.
+try:
+    API_KEY = st.secrets.get("GOOGLE_API_KEY")
+except Exception:
+    API_KEY = None
+API_KEY = API_KEY or os.environ.get("GOOGLE_API_KEY")
 client = genai.Client(api_key=API_KEY)
 
 

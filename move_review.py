@@ -1,3 +1,4 @@
+import math
 import shutil
 import chess
 import chess.engine
@@ -12,9 +13,15 @@ def find_engine():
     for path in ("/usr/games/stockfish", "/usr/bin/stockfish"):
         if shutil.which(path) or __import__("os").path.exists(path):
             return path
-    # Local Windows fallback.
-    if shutil.which("stockfish.exe") or __import__("os").path.exists("stockfish.exe"):
-        return "stockfish.exe"
+    # Local Windows fallback: look next to this file and return an absolute
+    # path, since a bare relative name won't reliably launch as a subprocess.
+    import os
+    local = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stockfish.exe")
+    if os.path.exists(local):
+        return local
+    found = shutil.which("stockfish.exe")
+    if found:
+        return found
     # Nothing found — raise a clear message instead of a cryptic crash.
     raise RuntimeError(
         "Stockfish engine not found. On Streamlit Cloud, ensure packages.txt "
@@ -64,8 +71,8 @@ def review_move(fen, played_move_uci, think_time=1.0):
     # 3. The gap = how much the player gave up, in centipawns. Never negative.
     centipawn_loss = max(0, best_score - played_score)
 
-    # 4. Map the loss to a label.
-    label = classify_move(centipawn_loss, played_move == info_before["pv"][0])
+    # 4. Map the move to a label using the win-% the move gave up.
+    label = classify_move(best_score, played_score, played_move == info_before["pv"][0])
 
     return {
         "fen": fen,
@@ -78,15 +85,34 @@ def review_move(fen, played_move_uci, think_time=1.0):
     }
 
 
-def classify_move(loss, is_best):
-    """Turn centipawn loss into a chess.com-style label."""
+def win_chance(cp):
+    """Convert a centipawn eval to a 0-100 win chance for the side to move.
+
+    This is the logistic curve chess.com / Lichess use: equal (0 cp) maps to
+    50%, and the curve flattens at the extremes so a swing matters far more in
+    a close game than when one side is already winning. The constant was fit to
+    real game outcomes. Clamp first so a mate score doesn't overflow exp().
+    """
+    cp = max(-1000, min(1000, cp))
+    return 50 + 50 * (2 / (1 + math.exp(-0.00368208 * cp)) - 1)
+
+
+def classify_move(best_score, played_score, is_best):
+    """Label a move by how much win chance it gave up, chess.com style.
+
+    Grading on win-% drop (not raw centipawns) makes the same eval swing count
+    for more in a tight game than in a lopsided one.
+    """
     if is_best:
         return "Best"
-    if loss <= 20:
+    drop = win_chance(best_score) - win_chance(played_score)   # percentage points
+    if drop < 2:
+        return "Excellent"
+    if drop < 5:
         return "Good"
-    if loss <= 70:
-        return "Inaccurate"
-    if loss <= 100:
+    if drop < 10:
+        return "Inaccuracy"
+    if drop < 20:
         return "Mistake"
     return "Blunder"
 
