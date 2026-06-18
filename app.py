@@ -119,6 +119,37 @@ st.markdown(
       .movepair .played { font-weight: 600; }
       .movepair .best   { font-weight: 600; color: var(--walnut); }
 
+      /* The numbers behind the verdict */
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0 0 16px 0;
+      }
+      .metric {
+        background: #ffffff;
+        border: 1px solid rgba(43,38,34,0.10);
+        border-radius: 8px;
+        padding: 8px 14px;
+        display: flex;
+        flex-direction: column;
+      }
+      .metric .mv {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+      .metric .ml {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--walnut);
+        margin-top: 2px;
+      }
+
       /* Quiet the default Streamlit chrome */
       .block-container { padding-top: 2.2rem; max-width: 1100px; }
       .stRadio > label, .stSelectbox > label, .stTextInput > label {
@@ -247,6 +278,19 @@ else:
             f'<div class="movepair">'
             f'You played <span class="played">{review["played_move"]}</span> &nbsp;·&nbsp; '
             f'best was <span class="best">{review["best_move"]}</span>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+        # How the verdict was reached: the win-% drop drives the label, with the
+        # raw evals and centipawn loss shown for those who want the detail.
+        st.markdown(
+            f'<div class="metrics">'
+            f'  <div class="metric"><span class="mv">−{review["win_prob_drop"]:.1f}%</span>'
+            f'    <span class="ml">win chance lost</span></div>'
+            f'  <div class="metric"><span class="mv">{review["best_win_pct"]:.0f}% → {review["played_win_pct"]:.0f}%</span>'
+            f'    <span class="ml">your winning chances</span></div>'
+            f'  <div class="metric"><span class="mv">{review["best_eval"]} → {review["played_eval"]}</span>'
+            f'    <span class="ml">engine eval ({review["centipawn_loss"]} cp lost)</span></div>'
             f'</div>',
             unsafe_allow_html=True,
         )

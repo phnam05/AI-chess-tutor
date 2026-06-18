@@ -71,6 +71,11 @@ def review_move(fen, played_move_uci, think_time=1.0):
     # 3. The gap = how much the player gave up, in centipawns. Never negative.
     centipawn_loss = max(0, best_score - played_score)
 
+    # Same gap expressed as win chance — this is what the label is based on.
+    best_win = win_chance(best_score)
+    played_win = win_chance(played_score)
+    win_prob_drop = max(0.0, best_win - played_win)
+
     # 4. Map the move to a label using the win-% the move gave up.
     label = classify_move(best_score, played_score, played_move == info_before["pv"][0])
 
@@ -81,6 +86,9 @@ def review_move(fen, played_move_uci, think_time=1.0):
         "best_eval": f"{best_score/100:+.2f}",
         "played_eval": f"{played_score/100:+.2f}",
         "centipawn_loss": centipawn_loss,
+        "best_win_pct": round(best_win, 1),
+        "played_win_pct": round(played_win, 1),
+        "win_prob_drop": round(win_prob_drop, 1),
         "label": label,
     }
 
