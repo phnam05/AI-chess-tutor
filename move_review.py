@@ -55,7 +55,8 @@ def review_move(fen, played_move_uci, think_time=1.0):
     # 1. Best available: evaluate the position before the move.
     info_before = engine.analyse(board, chess.engine.Limit(time=think_time))
     best_score = _pov_score(info_before, mover_color)          # from mover's POV
-    best_move = board.san(info_before["pv"][0])                # readable best move
+    best_move_obj = info_before["pv"][0]                        # the engine's pick
+    best_move = board.san(best_move_obj)                       # readable best move
 
     # 2. The player's actual move: play it, then evaluate the result.
     played_move = chess.Move.from_uci(played_move_uci)
@@ -77,12 +78,14 @@ def review_move(fen, played_move_uci, think_time=1.0):
     win_prob_drop = max(0.0, best_win - played_win)
 
     # 4. Map the move to a label using the win-% the move gave up.
-    label = classify_move(best_score, played_score, played_move == info_before["pv"][0])
+    label = classify_move(best_score, played_score, played_move == best_move_obj)
 
     return {
         "fen": fen,
         "played_move": played_san,
+        "played_move_uci": played_move_uci,
         "best_move": best_move,
+        "best_move_uci": best_move_obj.uci(),
         "best_eval": f"{best_score/100:+.2f}",
         "played_eval": f"{played_score/100:+.2f}",
         "centipawn_loss": centipawn_loss,

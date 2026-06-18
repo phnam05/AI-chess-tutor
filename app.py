@@ -35,6 +35,29 @@ LEVELS = {
     "Advanced":     "advanced",
 }
 
+# Warm boxwood-and-walnut board, matching the page palette.
+BOARD_COLORS = {"square light": "#f0e6d2", "square dark": "#b08d57"}
+
+
+def move_board_svg(fen, move_uci, *, after, arrow_color, size=320):
+    """Render one move on a board.
+
+    `after=True` plays the move first, so you see the resulting position with
+    the from/to squares lit — the "here's what the move did" view used for both
+    the played move and the engine's pick. `after=False` keeps the starting
+    position (no piece moved), for showing a move purely as a suggestion. Either
+    way a colored arrow traces the move from origin to target.
+    """
+    bd = chess.Board(fen)
+    move = chess.Move.from_uci(move_uci)
+    arrow = chess.svg.Arrow(move.from_square, move.to_square, color=arrow_color)
+    lastmove = move if after else None
+    if after:
+        bd.push(move)
+    return chess.svg.board(
+        bd, size=size, lastmove=lastmove, arrows=[arrow], colors=BOARD_COLORS,
+    )
+
 # ----------------------------------------------------------------------------
 # Styling. The palette comes from the board itself — aged boxwood and walnut,
 # the warm neutrals of a study set — rather than generic dashboard blue.
@@ -164,6 +187,23 @@ st.markdown(
         line-height: 1.6;
         color: var(--ink);
       }
+
+      /* Caption above each board in the move comparison */
+      .boardcap { font-family: 'Inter', sans-serif; margin: 2px 0 6px 0; }
+      .boardcap .role {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--walnut);
+      }
+      .boardcap .mv {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 1.2rem;
+        line-height: 1.1;
+        color: var(--vc, #2b2622);
+      }
     </style>
     """,
     unsafe_allow_html=True,
@@ -209,19 +249,9 @@ with left:
     level = LEVELS[level_label]
 
 with right:
-    last_move = None
-    # If we just reviewed a move, highlight it on the board.
-    if st.session_state.get("last_uci"):
-        try:
-            last_move = chess.Move.from_uci(st.session_state["last_uci"])
-        except ValueError:
-            last_move = None
-    svg = chess.svg.board(
-        board,
-        size=380,
-        lastmove=last_move,
-        colors={"square light": "#f0e6d2", "square dark": "#b08d57"},
-    )
+    # The top board is simply the position you entered. The move you review
+    # gets its own dedicated before/after boards in the result, below.
+    svg = chess.svg.board(board, size=380, colors=BOARD_COLORS)
     st.image(svg)
 
 st.divider()
@@ -263,9 +293,6 @@ else:
             review = review_move(fen, legal[chosen_san])
             comment = explain_move(review, level=level)
 
-        # Remember the move so the board can highlight it on rerun.
-        st.session_state["last_uci"] = legal[chosen_san]
-
         meta = QUALITY.get(review["label"], {"color": "#888", "gloss": ""})
         st.markdown(
             f'<div class="verdict" style="--vc:{meta["color"]}">'
@@ -274,13 +301,48 @@ else:
             f'</div>',
             unsafe_allow_html=True,
         )
-        st.markdown(
-            f'<div class="movepair">'
-            f'You played <span class="played">{review["played_move"]}</span> &nbsp;·&nbsp; '
-            f'best was <span class="best">{review["best_move"]}</span>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
+
+        # Show the move on the board: both moves are played out (squares lit,
+        # plus an arrow) so the two boards read the same way — yours in the
+        # verdict's color, the engine's pick in green. If you found the best
+        # move, one board is enough.
+        played_uci = legal[chosen_san]
+        best_uci = review.get("best_move_uci")
+        is_best = bool(best_uci) and best_uci == played_uci
+
+        if best_uci and not is_best:
+            you_col, best_col = st.columns(2, gap="medium")
+            with you_col:
+                st.markdown(
+                    f'<div class="boardcap" style="--vc:{meta["color"]}">'
+                    f'<div class="role">You played</div>'
+                    f'<div class="mv">{review["played_move"]}</div></div>',
+                    unsafe_allow_html=True,
+                )
+                st.image(move_board_svg(
+                    fen, played_uci, after=True, arrow_color=meta["color"],
+                ))
+            with best_col:
+                st.markdown(
+                    '<div class="boardcap" style="--vc:#1a7f5a">'
+                    '<div class="role">Engine&rsquo;s best</div>'
+                    f'<div class="mv">{review["best_move"]}</div></div>',
+                    unsafe_allow_html=True,
+                )
+                st.image(move_board_svg(
+                    fen, best_uci, after=True, arrow_color="#1a7f5a",
+                ))
+        else:
+            role = "You played &mdash; the engine&rsquo;s top choice" if is_best else "You played"
+            st.markdown(
+                f'<div class="boardcap" style="--vc:{meta["color"]}">'
+                f'<div class="role">{role}</div>'
+                f'<div class="mv">{review["played_move"]}</div></div>',
+                unsafe_allow_html=True,
+            )
+            st.image(move_board_svg(
+                fen, played_uci, after=True, arrow_color=meta["color"], size=380,
+            ))
         # How the verdict was reached: the win-% drop drives the label, with the
         # raw evals and centipawn loss shown for those who want the detail.
         # Guard against an out-of-date review dict (e.g. a stale module cached on
