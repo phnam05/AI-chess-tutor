@@ -283,15 +283,23 @@ else:
         )
         # How the verdict was reached: the win-% drop drives the label, with the
         # raw evals and centipawn loss shown for those who want the detail.
-        st.markdown(
-            f'<div class="metrics">'
-            f'  <div class="metric"><span class="mv">−{review["win_prob_drop"]:.1f}%</span>'
-            f'    <span class="ml">win chance lost</span></div>'
-            f'  <div class="metric"><span class="mv">{review["best_win_pct"]:.0f}% → {review["played_win_pct"]:.0f}%</span>'
-            f'    <span class="ml">your winning chances</span></div>'
-            f'  <div class="metric"><span class="mv">{review["best_eval"]} → {review["played_eval"]}</span>'
-            f'    <span class="ml">engine eval ({review["centipawn_loss"]} cp lost)</span></div>'
-            f'</div>',
-            unsafe_allow_html=True,
+        # Guard against an out-of-date review dict (e.g. a stale module cached on
+        # Streamlit Cloud after a deploy) so a missing key degrades gracefully
+        # instead of hard-crashing the whole app.
+        metric_keys = (
+            "win_prob_drop", "best_win_pct", "played_win_pct",
+            "best_eval", "played_eval", "centipawn_loss",
         )
+        if all(k in review for k in metric_keys):
+            st.markdown(
+                f'<div class="metrics">'
+                f'  <div class="metric"><span class="mv">−{review["win_prob_drop"]:.1f}%</span>'
+                f'    <span class="ml">win chance lost</span></div>'
+                f'  <div class="metric"><span class="mv">{review["best_win_pct"]:.0f}% → {review["played_win_pct"]:.0f}%</span>'
+                f'    <span class="ml">your winning chances</span></div>'
+                f'  <div class="metric"><span class="mv">{review["best_eval"]} → {review["played_eval"]}</span>'
+                f'    <span class="ml">engine eval ({review["centipawn_loss"]} cp lost)</span></div>'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
         st.markdown(f'<div class="commentary">{comment}</div>', unsafe_allow_html=True)
