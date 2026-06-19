@@ -3,7 +3,7 @@ import chess
 import chess.svg
 from engine_analysis import analyze_position
 from explainer import explain_position, explain_move
-from move_review import review_move
+from move_review import review_move, win_chance
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
 
@@ -109,29 +109,26 @@ def _build_move(board, frm, to):
     return chess.Move(frm, to)
 
 
-def _play_and_review(move, level):
-    """The one place per move where the engine and LLM run: grade the move from
-    the mover's POV, get the coach's phrasing, then push it. review_move already
-    scores from board.turn's side, so each colour is judged correctly. If Gemini
-    is unreachable we keep the engine verdict and drop the prose."""
+def _play_and_review(move):
+    """Grade the move with the engine — the single source of truth — and push it.
+    review_move already scores from board.turn's side, so each colour is judged
+    correctly. No LLM here: the coach's prose costs an API call, so it's fetched
+    later and only if the student asks for it (see _render_coach_panel)."""
     board = st.session_state.g_board
     fen = board.fen()
     mover = "White" if board.turn == chess.WHITE else "Black"
     move_no = board.fullmove_number
     review = review_move(fen, move.uci())
-    try:
-        comment = explain_move(review, level=level)
-    except Exception:
-        comment = None
     board.push(move)
     st.session_state.g_lastmove = move
     st.session_state.g_history.append({
-        "move_no": move_no, "color": mover, "san": review["played_move"],
-        "label": review["label"], "best": review["best_move"], "comment": comment,
+        "move_no": move_no, "color": mover,
+        "review": review,     # full engine facts: label + win-chance/eval metrics
+        "comment": None,      # LLM explanation, filled in on demand
     })
 
 
-def _handle_click(sq, level):
+def _handle_click(sq):
     """Lichess-style selection rules for one click. Cancel-on-misclick: clicking
     anything that isn't a legal target simply puts the piece down."""
     board = st.session_state.g_board
@@ -153,56 +150,90 @@ def _handle_click(sq, level):
         return
     move = _build_move(board, frm, sq)
     if move in board.legal_moves:
-        with st.spinner("Coach is reviewing your move…"):
-            _play_and_review(move, level)
+        with st.spinner("Grading your move…"):
+            _play_and_review(move)
     st.session_state.g_from = None                   # moved, or misclick: clear it
 
 
 def _render_coach_panel():
-    """Right-hand column: the latest verdict + coach note, then the full move log
-    of verdict chips. Reuses the QUALITY colours and the existing verdict CSS."""
+    """Right-hand column: the latest move's engine verdict + metrics (free with
+    every move), an opt-in coach explanation, then the full move log of verdict
+    chips. The engine grades; the LLM only speaks when the student asks."""
     st.markdown('<div class="eyebrow">The coach</div>', unsafe_allow_html=True)
     history = st.session_state.g_history
     if not history:
         st.markdown(
-            '<div class="commentary">Play a move for either side and I&rsquo;ll tell '
-            'you how it went &mdash; what it did well, or what it missed.</div>',
+            '<div class="commentary">Play a move for either side and I&rsquo;ll grade '
+            'it &mdash; the verdict, the win-chance swing, and the engine&rsquo;s pick. '
+            'Press <em>Explain this move</em> whenever you want it put into words.</div>',
             unsafe_allow_html=True,
         )
         return
 
     last = history[-1]
-    meta = QUALITY.get(last["label"], {"color": "#888", "gloss": ""})
+    review = last["review"]
+    meta = QUALITY.get(review["label"], {"color": "#888", "gloss": ""})
     st.markdown(
         f'<div class="verdict" style="--vc:{meta["color"]}">'
-        f'  <div class="label">{last["san"]} &mdash; {last["label"]}</div>'
+        f'  <div class="label">{review["played_move"]} &mdash; {review["label"]}</div>'
         f'  <div class="gloss">{meta["gloss"]}</div>'
         f'</div>',
         unsafe_allow_html=True,
     )
-    if last["label"] not in ("Best", "Excellent") and last["best"] != last["san"]:
+    # Whenever the move wasn't the engine's top pick — even a near-perfect
+    # "Excellent" — name the best move beside the verdict.
+    if review["best_move"] != review["played_move"]:
         st.markdown(
-            f'<div class="movepair">Engine preferred '
-            f'<span class="best">{last["best"]}</span></div>',
+            f'<div class="movepair">Best move was '
+            f'<span class="best">{review["best_move"]}</span></div>',
             unsafe_allow_html=True,
         )
-    if last["comment"]:
-        st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
-    else:
+
+    # The engine facts behind the verdict — the same trio the Analyze tab shows,
+    # free with every move. Guarded so a stale review dict degrades gracefully.
+    metric_keys = ("win_prob_drop", "best_win_pct", "played_win_pct",
+                   "best_eval", "played_eval", "centipawn_loss")
+    if all(k in review for k in metric_keys):
+        st.markdown(
+            f'<div class="metrics">'
+            f'  <div class="metric"><span class="mv">−{review["win_prob_drop"]:.1f}%</span>'
+            f'    <span class="ml">win chance lost</span></div>'
+            f'  <div class="metric"><span class="mv">{review["best_win_pct"]:.0f}% → {review["played_win_pct"]:.0f}%</span>'
+            f'    <span class="ml">your winning chances</span></div>'
+            f'  <div class="metric"><span class="mv">{review["best_eval"]} → {review["played_eval"]}</span>'
+            f'    <span class="ml">engine eval ({review["centipawn_loss"]} cp lost)</span></div>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+    # The explanation is opt-in: only call Gemini when the student presses the
+    # button, then cache the prose on the move so reruns don't re-call it.
+    if not last["comment"]:
+        if st.button("Explain this move", key=f"g_explain_{len(history)}"):
+            level = LEVELS[st.session_state.get("g_level_label", "Intermediate")]
+            with st.spinner("Coach is thinking…"):
+                try:
+                    last["comment"] = explain_move(review, level=level)
+                except Exception:
+                    last["comment"] = "__unavailable__"
+    if last["comment"] == "__unavailable__":
         st.caption("Coach commentary unavailable — check GOOGLE_API_KEY. The engine verdict still stands.")
+    elif last["comment"]:
+        st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="eyebrow" style="margin-top:22px;">Move log</div>', unsafe_allow_html=True)
     rows = []
     for h in reversed(history):
-        c = QUALITY.get(h["label"], {"color": "#888"})["color"]
+        hr = h["review"]
+        c = QUALITY.get(hr["label"], {"color": "#888"})["color"]
         num = f'{h["move_no"]}.' if h["color"] == "White" else f'{h["move_no"]}&hellip;'
         rows.append(
             '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;'
             'border-bottom:1px solid var(--line);">'
             f'<span style="font-family:Inter,sans-serif;font-size:0.8rem;color:var(--walnut);width:40px;">{num}</span>'
-            f'<span style="font-family:Fraunces,serif;font-weight:600;font-size:0.98rem;color:var(--ink);flex:1;">{h["san"]}</span>'
+            f'<span style="font-family:Fraunces,serif;font-weight:600;font-size:0.98rem;color:var(--ink);flex:1;">{hr["played_move"]}</span>'
             f'<span style="font-family:Inter,sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.03em;'
-            f'color:#fff;background:{c};border-radius:5px;padding:2px 9px;">{h["label"]}</span>'
+            f'color:#fff;background:{c};border-radius:5px;padding:2px 9px;">{hr["label"]}</span>'
             '</div>'
         )
     st.markdown(''.join(rows), unsafe_allow_html=True)
@@ -210,6 +241,12 @@ def _render_coach_panel():
 
 def render_game():
     if "g_board" not in st.session_state:
+        _init_game()
+    # A game already in session state from before this version stored a flatter
+    # per-move dict (no "review" key); reset it once so the panel can rely on the
+    # new schema instead of crashing on a stale entry.
+    stale = st.session_state.g_history
+    if stale and "review" not in stale[0]:
         _init_game()
 
     left, right = st.columns([5, 4], gap="large")
@@ -258,7 +295,9 @@ def render_game():
         click = streamlit_image_coordinates(img, key="g_click", use_column_width="always")
 
         # --- Per-move controls ---------------------------------------------
-        level_label = st.radio(
+        # The level only matters when the student asks for an explanation; the
+        # coach panel reads it from session state (key) at that point.
+        st.radio(
             "Explain for", list(LEVELS.keys()), index=1, horizontal=True,
             key="g_level_label",
         )
@@ -293,7 +332,7 @@ def render_game():
                         click["y"] * BOARD_PX / disp_h,
                         flipped,
                     )
-                    _handle_click(sq, LEVELS[level_label])
+                    _handle_click(sq)
                 st.rerun()
 
     with right:
@@ -527,14 +566,34 @@ if mode == "Explain this position":
     if st.button("Coach me", type="primary"):
         with st.spinner("Reading the position..."):
             analysis = analyze_position(fen)
-            explanation = explain_position(analysis, level=level)
 
+        # Engine facts first, so they show even if the explanation call fails.
         st.markdown(
             f'<div class="movepair">Best move &nbsp;'
-            f'<span class="best">{analysis["best_move"]}</span> &nbsp;·&nbsp; '
-            f'{analysis["eval_text"]}</div>',
+            f'<span class="best">{analysis["best_move"]}</span></div>',
             unsafe_allow_html=True,
         )
+
+        # The numbers behind the move, like the Review tab — but there's no played
+        # move here, so "win chance lost" doesn't apply: we show the current
+        # winning chance (with best play) and the eval, not a swing.
+        cp = analysis["eval_centipawns"]
+        if cp is None:                      # forced mate: 100% unless it's against us
+            win_pct = 0.0 if "-" in analysis["eval_text"] else 100.0
+        else:
+            win_pct = win_chance(cp)
+        st.markdown(
+            f'<div class="metrics">'
+            f'  <div class="metric"><span class="mv">{win_pct:.0f}%</span>'
+            f'    <span class="ml">{analysis["turn"]}&rsquo;s winning chance</span></div>'
+            f'  <div class="metric"><span class="mv">{analysis["eval_text"]}</span>'
+            f'    <span class="ml">engine evaluation</span></div>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+        with st.spinner("Writing your explanation..."):
+            explanation = explain_position(analysis, level=level)
         st.markdown(f'<div class="commentary">{explanation}</div>', unsafe_allow_html=True)
 
 # --- Review a move ----------------------------------------------------------
