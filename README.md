@@ -46,8 +46,10 @@ game**.
   explains the reasoning behind it.
 - **Review a move** — compares your move to the engine's best, labels its quality
   (*Best* down to *Blunder*), and coaches the difference: affirming a strong move,
-  or gently explaining what a weaker one missed and what it cost. This turns a
-  mistake into a targeted lesson — the heart of tutoring rather than mere analysis.
+  or, for a weaker one, leading with *why* it fails — walking through the engine's
+  refutation, the punishing reply you overlooked — before naming the better move.
+  This turns a mistake into a targeted lesson — the heart of tutoring rather than
+  mere analysis.
 
 <p align="center">
   <img src="images/analyze-position.svg" width="360" alt="A chess position with Black having played e5 and Nc6, White to move">
@@ -65,9 +67,11 @@ game**.
 **Play a game** is an interactive, click-to-move board where you play both sides
 and the coach reviews *every* move as it's made — labelling its quality, naming
 the engine's preferred move when you missed it, and explaining the difference at
-your chosen level. A running move log keeps each verdict on screen. It reuses the
-exact same engine grading and explanation layer as *Review a move*, applied move
-after move: a continuous lesson rather than one-shot analysis.
+your chosen level. A running move log keeps each verdict on screen, and the live
+position is shown beneath the board as a copyable FEN, so you can replicate it in
+any other board or engine. It reuses the exact same engine grading and explanation
+layer as *Review a move*, applied move after move: a continuous lesson rather than
+one-shot analysis.
 
 <p align="center">
   <img src="images/play-game.png" width="360" alt="The interactive game board with the f1 bishop selected, its legal moves marked by dots, and the last move tinted">
@@ -83,7 +87,7 @@ Position (FEN)  [+ a played move, in Review mode]
       ▼
 python-chess ──► Stockfish        →  best move, evaluation (centipawns),
    (rules,         (analysis)          principal variation; and, in Review
-    board)                              mode, the eval of the played move
+    board)                              mode, the played move's eval + refutation
       │
       ▼
 Explanation layer (Gemini)        →  grounded, level-adapted coaching
@@ -95,7 +99,9 @@ Streamlit UI                      →  board + engine verdict + coaching
 1. The user supplies a position (FEN) and a skill level, then asks for an
    explanation or selects a move to review.
 2. `python-chess` validates the position and queries Stockfish; in Review mode it
-   also evaluates the played move, so the two can be compared.
+   also evaluates the played move and captures the engine's line *after* it — the
+   refutation — so the two can be compared and the coach can explain how a weak
+   move gets punished.
 3. The analysis is packaged into a prompt for Gemini, with a system instruction
    that assigns a focused coach persona, forbids suggesting a different move or
    inventing evaluations, and adapts depth to the chosen level.
@@ -164,6 +170,7 @@ chess-tutor/
 ├── engine_analysis.py       # Stage 1: queries Stockfish → facts (the backbone)
 ├── move_review.py           # grades a played move against the engine's best
 ├── explainer.py             # Stage 2–3: grounded, level-adapted explanation layer
+├── engine_pool.py           # one shared, persistent Stockfish process + engine discovery
 ├── board_ui.py              # renders the clickable game board + maps click → square
 ├── app.py                   # Stage 4: Streamlit interface (analyze + play modes)
 ├── requirements.txt
@@ -184,8 +191,8 @@ being hand-made mock-ups.
 - Explanation quality depends on the language model; despite grounding, it can
   phrase an idea loosely. The architecture constrains *what* it can claim, not the
   polish of every sentence.
-- The engine runs at a short think-time for responsiveness, so evaluations are
-  strong but not exhaustive-depth.
+- The engine searches to a bounded depth (with a short time cap) for
+  responsiveness, so evaluations are strong but not exhaustive-depth.
 - *Play a game* coaches move by move, but the coaching is still per-move: there's
   no conversation across the game and no memory between sessions (see Future
   directions).
