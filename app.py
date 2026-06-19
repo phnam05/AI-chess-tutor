@@ -66,11 +66,14 @@ def move_board_svg(fen, move_uci, *, after, arrow_color, size=320):
     )
 
 # ----------------------------------------------------------------------------
-# "Play a game" mode — an interactive, click-to-move board where the student
-# plays BOTH sides and the coach reviews every move. The chess stays the
-# engine's job: every move runs through review_move (the single source of truth
-# for quality) and explain_move (which only phrases the verdict), both reused
-# untouched. The only new logic here is the board UI + the session-state loop.
+# The app's single screen — an interactive, click-to-move board where the
+# student plays BOTH sides and the coach reviews every move, plus a "Show best
+# move" button that analyses whatever position is on the board (for whichever
+# side is to move). The chess stays the engine's job: every move runs through
+# review_move (the single source of truth for quality) and explain_move (which
+# only phrases the verdict), and the hint runs through analyze_position /
+# explain_position — all reused untouched. The only new logic here is the board
+# UI + the session-state loop.
 # ----------------------------------------------------------------------------
 PROMO = {
     "Queen": chess.QUEEN, "Rook": chess.ROOK,
@@ -101,6 +104,7 @@ def _init_game():
     st.session_state.g_history = []
     st.session_state.g_from = None
     st.session_state.g_lastmove = None
+    st.session_state.g_hint = None          # cached "best move here" analysis
     st.session_state.setdefault("g_last_click", None)
     st.session_state.setdefault("g_flip", False)
 
@@ -194,8 +198,9 @@ def _render_coach_panel():
             unsafe_allow_html=True,
         )
 
-    # The engine facts behind the verdict — the same trio the Analyze tab shows,
-    # free with every move. Guarded so a stale review dict degrades gracefully.
+    # The engine facts behind the verdict — the win-% swing, your winning
+    # chances, and the eval — free with every move. Guarded so a stale review
+    # dict degrades gracefully.
     metric_keys = ("win_prob_drop", "best_win_pct", "played_win_pct",
                    "best_eval", "played_eval", "centipawn_loss")
     if all(k in review for k in metric_keys):
@@ -270,6 +275,135 @@ def _board_image(fen, flipped, selected, lastmove_uci):
     bd = chess.Board(fen)
     lm = chess.Move.from_uci(lastmove_uci) if lastmove_uci else None
     return render_board(bd, flipped=flipped, selected=selected, lastmove=lm)
+
+
+def _render_hint(board):
+    """The "best move here" coach — the old Analyze tab's single-position read,
+    now a button beside the live board. It asks the engine for the strongest
+    move in the CURRENT position (whichever side is to move) and shows it with
+    the numbers; the written explanation is opt-in, like a move review. The
+    result is keyed to the live FEN, so it shows only while the position is
+    unchanged and clears itself the moment you play on. The engine supplies the
+    move and eval; the LLM only phrases them."""
+    if board.is_game_over():
+        return
+    cur_fen = board.fen()
+    if st.button("Show best move", key="g_show_best", use_container_width=True):
+        with st.spinner("Reading the position…"):
+            st.session_state.g_hint = {
+                "fen": cur_fen,
+                "analysis": analyze_position(cur_fen),
+                "comment": None,
+                "comment_level": None,
+            }
+
+    hint = st.session_state.get("g_hint")
+    if not hint or hint["fen"] != cur_fen:
+        return
+    analysis = hint["analysis"]
+
+    st.markdown(
+        f'<div class="movepair">Best move &nbsp;'
+        f'<span class="best">{analysis["best_move"]}</span></div>',
+        unsafe_allow_html=True,
+    )
+
+    # No played move here, so "win chance lost" doesn't apply: show the current
+    # winning chance (with best play) and the eval, not a swing. Forced mate has
+    # no centipawn number — it's 100% unless the mate is against the side to move.
+    cp = analysis["eval_centipawns"]
+    if cp is None:
+        win_pct = 0.0 if "-" in analysis["eval_text"] else 100.0
+    else:
+        win_pct = win_chance(cp)
+    st.markdown(
+        f'<div class="metrics">'
+        f'  <div class="metric"><span class="mv">{win_pct:.0f}%</span>'
+        f'    <span class="ml">{analysis["turn"]}&rsquo;s winning chance</span></div>'
+        f'  <div class="metric"><span class="mv">{analysis["eval_text"]}</span>'
+        f'    <span class="ml">engine evaluation</span></div>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
+    # The explanation is opt-in and cached on the hint, mirroring the move panel:
+    # only call Gemini when asked, and offer a re-explain if the level has moved
+    # on since the prose was written.
+    cur_label = st.session_state.get("g_level_label", "Intermediate")
+    cur_level = LEVELS[cur_label]
+
+    def _write_comment():
+        with st.spinner("Coach is thinking…"):
+            try:
+                hint["comment"] = explain_position(analysis, level=cur_level)
+            except Exception:
+                hint["comment"] = "__unavailable__"
+            hint["comment_level"] = cur_level
+
+    if not hint["comment"]:
+        if st.button("Explain this position", key="g_hint_explain"):
+            _write_comment()
+    elif hint["comment"] != "__unavailable__" and hint.get("comment_level") != cur_level:
+        if st.button(f"Re-explain for {cur_label}", key="g_hint_reexplain"):
+            _write_comment()
+
+    if hint["comment"] == "__unavailable__":
+        st.caption("Coach commentary unavailable — check GOOGLE_API_KEY. The engine's move still stands.")
+    elif hint["comment"]:
+        st.markdown(f'<div class="commentary">{hint["comment"]}</div>', unsafe_allow_html=True)
+
+
+def _render_move_boards():
+    """Full-width strip below the board+coach columns: the latest move drawn out
+    — your move with its from/to squares lit and an arrow, and, when it wasn't
+    the engine's pick, the engine's best beside it in green. This is the old
+    Analyze tab's before/after comparison, kept for game mode. It renders
+    straight from the stored review (pre-move FEN + both UCIs), so it's a pure
+    redraw — no new engine call."""
+    history = st.session_state.g_history
+    if not history:
+        return
+    review = history[-1]["review"]
+    fen0 = review.get("fen")
+    played_uci = review.get("played_move_uci")
+    best_uci = review.get("best_move_uci")
+    if not fen0 or not played_uci:        # stale review dict — degrade gracefully
+        return
+    meta = QUALITY.get(review["label"], {"color": "#888", "gloss": ""})
+    is_best = bool(best_uci) and best_uci == played_uci
+
+    st.markdown(
+        '<div class="eyebrow" style="margin-top:6px;">The move on the board</div>',
+        unsafe_allow_html=True,
+    )
+
+    if best_uci and not is_best:
+        you_col, best_col = st.columns(2, gap="medium")
+        with you_col:
+            st.markdown(
+                f'<div class="boardcap" style="--vc:{meta["color"]}">'
+                f'<div class="role">You played</div>'
+                f'<div class="mv">{review["played_move"]}</div></div>',
+                unsafe_allow_html=True,
+            )
+            st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"]))
+        with best_col:
+            st.markdown(
+                '<div class="boardcap" style="--vc:#1a7f5a">'
+                '<div class="role">Engine&rsquo;s best</div>'
+                f'<div class="mv">{review["best_move"]}</div></div>',
+                unsafe_allow_html=True,
+            )
+            st.image(move_board_svg(fen0, best_uci, after=True, arrow_color="#1a7f5a"))
+    else:
+        role = "You played &mdash; the engine&rsquo;s top choice" if is_best else "You played"
+        st.markdown(
+            f'<div class="boardcap" style="--vc:{meta["color"]}">'
+            f'<div class="role">{role}</div>'
+            f'<div class="mv">{review["played_move"]}</div></div>',
+            unsafe_allow_html=True,
+        )
+        st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"], size=380))
 
 
 def render_game():
@@ -364,6 +498,10 @@ def render_game():
         )
         st.selectbox("Promote a pawn to", list(PROMO.keys()), key="g_promo")
 
+        # --- "Best move here" hint -----------------------------------------
+        # Analyse the live position on demand (for whichever side is to move).
+        _render_hint(board)
+
         # --- Act on a fresh click ------------------------------------------
         if click is not None:
             pt = (click["x"], click["y"])
@@ -384,6 +522,11 @@ def render_game():
 
     with right:
         _render_coach_panel()
+
+    # Full-width below both columns: the latest graded move drawn out — your
+    # move and, when it differs, the engine's pick beside it (the old Analyze
+    # tab's before/after view, kept for game mode).
+    _render_move_boards()
 
 # ----------------------------------------------------------------------------
 # Styling. The palette comes from the board itself — aged boxwood and walnut,
@@ -550,179 +693,8 @@ st.markdown(
 )
 
 # ----------------------------------------------------------------------------
-# Top-level mode: analyse one position, or play a whole game with the coach
-# watching every move. "Play a game" short-circuits the single-position UI.
+# One screen: an interactive board you play on (the coach grades every move),
+# with a "Show best move" button that analyses whatever position is on the
+# board — for whichever side is to move.
 # ----------------------------------------------------------------------------
-app_mode = st.radio(
-    "What would you like to do?",
-    ["Analyze a position", "Play a game"],
-    horizontal=True,
-)
-
-if app_mode == "Play a game":
-    render_game()
-    st.stop()
-
-# ----------------------------------------------------------------------------
-# Controls + board, side by side
-# ----------------------------------------------------------------------------
-DEFAULT_FEN = "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"
-
-left, right = st.columns([5, 4], gap="large")
-
-with left:
-    st.markdown('<div class="eyebrow">The position</div>', unsafe_allow_html=True)
-    fen = st.text_input("FEN", value=DEFAULT_FEN, label_visibility="collapsed")
-
-    # Validate once, up front. Keep the board on screen no matter what.
-    try:
-        board = chess.Board(fen)
-    except ValueError:
-        st.error("That isn't a valid position. Paste a FEN string, or reset to the starting setup.")
-        st.stop()
-
-    level_label = st.radio(
-        "Explain for",
-        list(LEVELS.keys()),
-        index=1,
-        horizontal=True,
-    )
-    level = LEVELS[level_label]
-
-with right:
-    # The top board is simply the position you entered. The move you review
-    # gets its own dedicated before/after boards in the result, below.
-    svg = chess.svg.board(board, size=380, colors=BOARD_COLORS)
-    st.image(svg)
-
-st.divider()
-
-# ----------------------------------------------------------------------------
-# Mode
-# ----------------------------------------------------------------------------
-st.markdown('<div class="eyebrow">What do you want?</div>', unsafe_allow_html=True)
-mode = st.radio(
-    "Mode",
-    ["Explain this position", "Review a move"],
-    horizontal=True,
-    label_visibility="collapsed",
-)
-
-# --- Explain the position ---------------------------------------------------
-if mode == "Explain this position":
-    if st.button("Coach me", type="primary"):
-        with st.spinner("Reading the position..."):
-            analysis = analyze_position(fen)
-
-        # Engine facts first, so they show even if the explanation call fails.
-        st.markdown(
-            f'<div class="movepair">Best move &nbsp;'
-            f'<span class="best">{analysis["best_move"]}</span></div>',
-            unsafe_allow_html=True,
-        )
-
-        # The numbers behind the move, like the Review tab — but there's no played
-        # move here, so "win chance lost" doesn't apply: we show the current
-        # winning chance (with best play) and the eval, not a swing.
-        cp = analysis["eval_centipawns"]
-        if cp is None:                      # forced mate: 100% unless it's against us
-            win_pct = 0.0 if "-" in analysis["eval_text"] else 100.0
-        else:
-            win_pct = win_chance(cp)
-        st.markdown(
-            f'<div class="metrics">'
-            f'  <div class="metric"><span class="mv">{win_pct:.0f}%</span>'
-            f'    <span class="ml">{analysis["turn"]}&rsquo;s winning chance</span></div>'
-            f'  <div class="metric"><span class="mv">{analysis["eval_text"]}</span>'
-            f'    <span class="ml">engine evaluation</span></div>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
-
-        with st.spinner("Writing your explanation..."):
-            explanation = explain_position(analysis, level=level)
-        st.markdown(f'<div class="commentary">{explanation}</div>', unsafe_allow_html=True)
-
-# --- Review a move ----------------------------------------------------------
-else:
-    # Friendly dropdown: human notation (SAN) shown, engine notation (UCI) kept.
-    legal = {board.san(m): m.uci() for m in board.legal_moves}
-    chosen_san = st.selectbox("Which move did you play?", sorted(legal.keys()))
-
-    if st.button("Review my move", type="primary"):
-        with st.spinner("Reviewing..."):
-            review = review_move(fen, legal[chosen_san])
-            comment = explain_move(review, level=level)
-
-        meta = QUALITY.get(review["label"], {"color": "#888", "gloss": ""})
-        st.markdown(
-            f'<div class="verdict" style="--vc:{meta["color"]}">'
-            f'  <div class="label">{review["label"]}</div>'
-            f'  <div class="gloss">{meta["gloss"]}</div>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
-
-        # Show the move on the board: both moves are played out (squares lit,
-        # plus an arrow) so the two boards read the same way — yours in the
-        # verdict's color, the engine's pick in green. If you found the best
-        # move, one board is enough.
-        played_uci = legal[chosen_san]
-        best_uci = review.get("best_move_uci")
-        is_best = bool(best_uci) and best_uci == played_uci
-
-        if best_uci and not is_best:
-            you_col, best_col = st.columns(2, gap="medium")
-            with you_col:
-                st.markdown(
-                    f'<div class="boardcap" style="--vc:{meta["color"]}">'
-                    f'<div class="role">You played</div>'
-                    f'<div class="mv">{review["played_move"]}</div></div>',
-                    unsafe_allow_html=True,
-                )
-                st.image(move_board_svg(
-                    fen, played_uci, after=True, arrow_color=meta["color"],
-                ))
-            with best_col:
-                st.markdown(
-                    '<div class="boardcap" style="--vc:#1a7f5a">'
-                    '<div class="role">Engine&rsquo;s best</div>'
-                    f'<div class="mv">{review["best_move"]}</div></div>',
-                    unsafe_allow_html=True,
-                )
-                st.image(move_board_svg(
-                    fen, best_uci, after=True, arrow_color="#1a7f5a",
-                ))
-        else:
-            role = "You played &mdash; the engine&rsquo;s top choice" if is_best else "You played"
-            st.markdown(
-                f'<div class="boardcap" style="--vc:{meta["color"]}">'
-                f'<div class="role">{role}</div>'
-                f'<div class="mv">{review["played_move"]}</div></div>',
-                unsafe_allow_html=True,
-            )
-            st.image(move_board_svg(
-                fen, played_uci, after=True, arrow_color=meta["color"], size=380,
-            ))
-        # How the verdict was reached: the win-% drop drives the label, with the
-        # raw evals and centipawn loss shown for those who want the detail.
-        # Guard against an out-of-date review dict (e.g. a stale module cached on
-        # Streamlit Cloud after a deploy) so a missing key degrades gracefully
-        # instead of hard-crashing the whole app.
-        metric_keys = (
-            "win_prob_drop", "best_win_pct", "played_win_pct",
-            "best_eval", "played_eval", "centipawn_loss",
-        )
-        if all(k in review for k in metric_keys):
-            st.markdown(
-                f'<div class="metrics">'
-                f'  <div class="metric"><span class="mv">−{review["win_prob_drop"]:.1f}%</span>'
-                f'    <span class="ml">win chance lost</span></div>'
-                f'  <div class="metric"><span class="mv">{review["best_win_pct"]:.0f}% → {review["played_win_pct"]:.0f}%</span>'
-                f'    <span class="ml">your winning chances</span></div>'
-                f'  <div class="metric"><span class="mv">{review["best_eval"]} → {review["played_eval"]}</span>'
-                f'    <span class="ml">engine eval ({review["centipawn_loss"]} cp lost)</span></div>'
-                f'</div>',
-                unsafe_allow_html=True,
-            )
-        st.markdown(f'<div class="commentary">{comment}</div>', unsafe_allow_html=True)
+render_game()

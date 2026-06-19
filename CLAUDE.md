@@ -38,7 +38,7 @@ app.py              Streamlit UI — the only entry point. Orchestrates the stag
   ├─ move_review.py       Grades a *played* move vs. the engine's best.
   ├─ explainer.py         Stage 2: engine facts → grounded, level-adapted prose.
   ├─ engine_pool.py       Shared persistent Stockfish handle + engine discovery.
-  └─ board_ui.py          Pillow board for the "Play a game" click-to-move UI.
+  └─ board_ui.py          Pillow board for the interactive click-to-move UI.
 ```
 
 Each file is one stage of a pipeline and is meant to stay independently runnable

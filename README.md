@@ -37,57 +37,60 @@ staying easy to understand. The model is a translator, not a player.
 
 ## Ways to use it
 
-The app has two top-level modes: **analyze a single position** or **play a full
-game**.
+The app is a single screen: an interactive, click-to-move board you play on — for
+both sides — with the coach watching every move, plus a **Show best move** button
+that reads whatever position is on the board.
 
-**Analyze a position** offers two actions on a position you enter (as a FEN):
+**Play a move.** Click a piece (its legal moves dot the board) and move it, for
+either colour. The coach grades the move the instant it's made — a quality label
+(*Best* down to *Blunder*), the win-chance swing, and the engine's preferred move
+when you missed it. Below the board, your move and the engine's pick are drawn out
+side by side. For a weaker move the coaching leads with *why* it fails — walking
+through the engine's refutation, the punishing reply you overlooked — before naming
+the better move. This turns a mistake into a targeted lesson, the heart of tutoring
+rather than mere analysis. A running move log keeps each verdict on screen, and the
+written explanation for any move is one click away, at your chosen level.
 
-- **Explain this position** — shows the engine's best move and evaluation, and
-  explains the reasoning behind it.
-- **Review a move** — compares your move to the engine's best, labels its quality
-  (*Best* down to *Blunder*), and coaches the difference: affirming a strong move,
-  or, for a weaker one, leading with *why* it fails — walking through the engine's
-  refutation, the punishing reply you overlooked — before naming the better move.
-  This turns a mistake into a targeted lesson — the heart of tutoring rather than
-  mere analysis.
+<p align="center">
+  <img src="images/play-game.png" width="360" alt="The interactive game board with the f1 bishop selected, its legal moves marked by dots, and the last move tinted">
+</p>
+
+<p align="center"><em>Click a piece and its legal moves dot the board; the last move stays tinted. The coach grades every move, for both sides, as you go.</em></p>
+
+**Show best move.** At any point, ask the engine for the strongest move in the
+current position — for whichever side is to move — and its evaluation, then have the
+coach put the reasoning into words. It's a hint on demand, not a running spoiler.
 
 <p align="center">
   <img src="images/analyze-position.svg" width="360" alt="A chess position with Black having played e5 and Nc6, White to move">
 </p>
 
-<p align="center"><em><strong>Explain this position</strong> — for this position the engine's pick is <strong>Bb5</strong> (eval <strong>+0.32</strong>), which the coach then puts into words at your chosen level.</em></p>
+<p align="center"><em><strong>Show best move</strong> — for this position the engine's pick is <strong>Bb5</strong> (eval <strong>+0.32</strong>), which the coach then puts into words at your chosen level.</em></p>
+
+**The before/after comparison.** Whenever a move is graded, the two boards beneath
+show your move and the engine's best side by side — yours arrowed in the verdict's
+colour, the engine's in green — so the difference is visible, not just described.
 
 <table align="center"><tr>
   <td align="center"><img src="images/review-you.svg" width="300" alt="The board after Black plays the knight to f6, with a red arrow marking the move"><br><em>You played <strong>…Nf6</strong></em></td>
   <td align="center"><img src="images/review-best.svg" width="300" alt="The board after Black plays a pawn to g6, with a green arrow marking the engine's preferred move"><br><em>Engine's best, <strong>…g6</strong></em></td>
 </tr></table>
 
-<p align="center"><em><strong>Review a move</strong> — the natural-looking <strong>…Nf6</strong> even attacks the queen, yet it's a <strong>Blunder</strong>: it allows Scholar's mate (Qxf7#), and the win chance falls from <strong>54% to 3%</strong>. The coach contrasts it with the engine's <strong>…g6</strong>.</em></p>
+<p align="center"><em>The natural-looking <strong>…Nf6</strong> even attacks the queen, yet it's a <strong>Blunder</strong>: it allows Scholar's mate (Qxf7#), and the win chance falls from <strong>54% to 3%</strong>. The coach contrasts it with the engine's <strong>…g6</strong>.</em></p>
 
-**Play a game** is an interactive, click-to-move board where you play both sides
-and the coach reviews *every* move as it's made — labelling its quality, naming
-the engine's preferred move when you missed it, and explaining the difference at
-your chosen level. A running move log keeps each verdict on screen, and the live
-position is shown beneath the board as a copyable FEN, so you can replicate it in
-any other board or engine. It reuses the exact same engine grading and explanation
-layer as *Review a move*, applied move after move: a continuous lesson rather than
-one-shot analysis.
-
-<p align="center">
-  <img src="images/play-game.png" width="360" alt="The interactive game board with the f1 bishop selected, its legal moves marked by dots, and the last move tinted">
-</p>
-
-<p align="center"><em><strong>Play a game</strong> — click a piece and its legal moves dot the board; the last move stays tinted. The coach grades every move, for both sides, as you go.</em></p>
+**Set up any position.** The live position is shown beneath the board as a copyable
+FEN; editing it and pressing *Load* jumps the board there, so you can study a
+specific spot or replicate it in any other board or engine.
 
 ## How it works
 
 ```
-Position (FEN)  [+ a played move, in Review mode]
+Position (FEN)  [+ a played move, when you make one]
       │
       ▼
 python-chess ──► Stockfish        →  best move, evaluation (centipawns),
-   (rules,         (analysis)          principal variation; and, in Review
-    board)                              mode, the played move's eval + refutation
+   (rules,         (analysis)          principal variation; and, for a played
+    board)                              move, its eval + refutation
       │
       ▼
 Explanation layer (Gemini)        →  grounded, level-adapted coaching
@@ -96,16 +99,16 @@ Explanation layer (Gemini)        →  grounded, level-adapted coaching
 Streamlit UI                      →  board + engine verdict + coaching
 ```
 
-1. The user supplies a position (FEN) and a skill level, then asks for an
-   explanation or selects a move to review.
-2. `python-chess` validates the position and queries Stockfish; in Review mode it
-   also evaluates the played move and captures the engine's line *after* it — the
-   refutation — so the two can be compared and the coach can explain how a weak
-   move gets punished.
+1. The user sets up a position (the live board, or a pasted FEN) and a skill
+   level, then either plays a move or asks for the best move.
+2. `python-chess` validates the position and queries Stockfish; when a move has
+   been played it also evaluates that move and captures the engine's line *after*
+   it — the refutation — so the two can be compared and the coach can explain how
+   a weak move gets punished.
 3. The analysis is packaged into a prompt for Gemini, with a system instruction
    that assigns a focused coach persona, forbids suggesting a different move or
    inventing evaluations, and adapts depth to the chosen level.
-4. The board, the engine verdict (plus the move-quality label in Review mode),
+4. The board, the engine verdict (plus the move-quality label for a played move),
    and the coaching are shown in a Streamlit page.
 
 ## Level adaptation
@@ -193,13 +196,13 @@ being hand-made mock-ups.
   polish of every sentence.
 - The engine searches to a bounded depth (with a short time cap) for
   responsiveness, so evaluations are strong but not exhaustive-depth.
-- *Play a game* coaches move by move, but the coaching is still per-move: there's
+- The board coaches move by move, but the coaching is still per-move: there's
   no conversation across the game and no memory between sessions (see Future
   directions).
 
 ## Future directions
 
-- **Conversational dialogue.** Interactive play already exists (*Play a game*),
+- **Conversational dialogue.** Interactive play already exists (the live board),
   but the coach speaks one move at a time. The next step is genuine back-and-forth
   — letting the student ask "why?" or "what if?" and having the coach respond in
   context across the whole game, closer to a real tutoring session.
