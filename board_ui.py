@@ -56,7 +56,15 @@ GLYPHS = {
 # Candidate fonts: Cloud (Debian) first, then Windows, then macOS. Pieces need a
 # chess-glyph font; the coordinate labels just need plain letters/digits (some
 # symbol fonts lack Latin), so they get their own text-font list.
+#
+# Cloud gotcha: DejaVu Sans IS on Streamlit Cloud (so the a–h / 1–8 labels render)
+# but it has NO chess glyphs, so the pieces come out blank. FreeSerif (apt:
+# fonts-freefont-ttf, see packages.txt) does carry them, so for the PIECES it must
+# come before DejaVu — _load_font picks the first font that opens, not the first
+# that has the glyph. (Locally on Windows the FreeSerif path is absent, so
+# seguisym still wins, exactly as before.)
 _PIECE_FONT_CANDIDATES = (
+    "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",  # Cloud — has chess glyphs
     "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
     "DejaVuSans.ttf",
     "C:/Windows/Fonts/seguisym.ttf",       # Segoe UI Symbol
