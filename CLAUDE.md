@@ -55,6 +55,14 @@ is deliberate and correct; don't "simplify" it back to centipawns. `classify_mov
 turns the drop into the labels Best / Excellent / Good / Inaccuracy / Mistake /
 Blunder, which `app.py`'s `QUALITY` dict maps to colors and one-line glosses.
 
+`review_move` also returns a `refutation`: the engine's PV *after* the played
+move (SAN, opponent to move first). For a weak move this is the punishment line —
+the concrete *why was my move wrong* — and `explainer.py` leads the coaching with
+it instead of just naming the better move. It's an engine fact like any other, so
+the explainer narrates it; it must never invent its own refutation. This is the
+invariant's textbook shape: a new chess fact comes from the engine first, and only
+then does the LLM phrase it.
+
 ## Running it
 
 ```bash

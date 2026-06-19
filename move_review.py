@@ -40,6 +40,21 @@ def review_move(fen, played_move_uci, depth=DEFAULT_DEPTH):
     # side. Flip it back to the mover's perspective.
     played_score = _pov_score(info_after, mover_color)
 
+    # The engine's line *after* the played move (opponent to move first). For a
+    # weak move this IS the refutation: it shows concretely how the opponent
+    # punishes it — the reply that was overlooked, the piece or square that
+    # falls. That's the "why was my move wrong" the coach needs, and it's an
+    # engine fact (we render and narrate it, never invent it). Rendered as SAN
+    # from the post-move position; capped at a few plies to stay coachable.
+    refutation = []
+    line_board = board.copy()
+    for mv in info_after.get("pv", [])[:6]:
+        try:
+            refutation.append(line_board.san(mv))
+        except (ValueError, AssertionError):
+            break
+        line_board.push(mv)
+
     # 3. The gap = how much the player gave up, in centipawns. Never negative.
     centipawn_loss = max(0, best_score - played_score)
 
@@ -64,6 +79,7 @@ def review_move(fen, played_move_uci, depth=DEFAULT_DEPTH):
         "played_win_pct": round(played_win, 1),
         "win_prob_drop": round(win_prob_drop, 1),
         "label": label,
+        "refutation": refutation,
     }
 
 
