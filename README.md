@@ -88,13 +88,6 @@ The same engine facts are explained differently per player:
 - **Intermediate** — plans, why a move creates pressure, typical responses.
 - **Advanced** — pawn structure, the bishop pair, tempo, long-term imbalances.
 
-## Tutoring, not lecturing
-
-An early version produced long, encyclopedic answers — accurate, but
-pedagogically poor: a wall of text does the learner's thinking for them. The
-prompt was redesigned around a coaching persona that says less, targets the one
-or two ideas that matter, and leaves room for the student to think. **Good
-tutoring withholds and paces; it does not dump everything it knows.**
 
 ## Tech stack
 
