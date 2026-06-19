@@ -674,6 +674,18 @@ st.markdown(
         line-height: 1.1;
         color: var(--vc, #2b2622);
       }
+
+      /* A quiet maker's mark in the bottom corner */
+      .credit {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        color: var(--walnut);
+        opacity: 0.55;
+        text-align: right;
+        margin: 40px 0 6px 0;
+      }
+      .credit a { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -698,3 +710,10 @@ st.markdown(
 # board — for whichever side is to move.
 # ----------------------------------------------------------------------------
 render_game()
+
+# A subtle maker's mark, tucked in the bottom-right corner.
+st.markdown(
+    '<div class="credit">Developed by Nam Ngo · '
+    '<a href="https://github.com/phnam05" target="_blank" rel="noopener">phnam05</a></div>',
+    unsafe_allow_html=True,
+)
