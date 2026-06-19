@@ -2,6 +2,10 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-chess-tutor-phnam05.streamlit.app/)
 
+<p align="center">
+  <img src="images/hero.png" width="440" alt="The tutor's chess board, showing an Italian Game position with the last move highlighted">
+</p>
+
 An explainable-AI prototype that turns a chess engine's cold numbers into clear,
 level-adapted coaching. It works three ways: **explain a position** (why the
 engine's best move is good), **review a move** (grade a move you played and
@@ -45,12 +49,31 @@ game**.
   or gently explaining what a weaker one missed and what it cost. This turns a
   mistake into a targeted lesson — the heart of tutoring rather than mere analysis.
 
+<p align="center">
+  <img src="images/analyze-position.svg" width="360" alt="A chess position with Black having played e5 and Nc6, White to move">
+</p>
+
+<p align="center"><em><strong>Explain this position</strong> — for this position the engine's pick is <strong>Bb5</strong> (eval <strong>+0.32</strong>), which the coach then puts into words at your chosen level.</em></p>
+
+<table align="center"><tr>
+  <td align="center"><img src="images/review-you.svg" width="300" alt="The board after Black plays the knight to f6, with a red arrow marking the move"><br><em>You played <strong>…Nf6</strong></em></td>
+  <td align="center"><img src="images/review-best.svg" width="300" alt="The board after Black plays a pawn to g6, with a green arrow marking the engine's preferred move"><br><em>Engine's best, <strong>…g6</strong></em></td>
+</tr></table>
+
+<p align="center"><em><strong>Review a move</strong> — the natural-looking <strong>…Nf6</strong> even attacks the queen, yet it's a <strong>Blunder</strong>: it allows Scholar's mate (Qxf7#), and the win chance falls from <strong>54% to 3%</strong>. The coach contrasts it with the engine's <strong>…g6</strong>.</em></p>
+
 **Play a game** is an interactive, click-to-move board where you play both sides
 and the coach reviews *every* move as it's made — labelling its quality, naming
 the engine's preferred move when you missed it, and explaining the difference at
 your chosen level. A running move log keeps each verdict on screen. It reuses the
 exact same engine grading and explanation layer as *Review a move*, applied move
 after move: a continuous lesson rather than one-shot analysis.
+
+<p align="center">
+  <img src="images/play-game.png" width="360" alt="The interactive game board with the f1 bishop selected, its legal moves marked by dots, and the last move tinted">
+</p>
+
+<p align="center"><em><strong>Play a game</strong> — click a piece and its legal moves dot the board; the last move stays tinted. The coach grades every move, for both sides, as you go.</em></p>
 
 ## How it works
 
@@ -144,9 +167,17 @@ chess-tutor/
 ├── board_ui.py              # renders the clickable game board + maps click → square
 ├── app.py                   # Stage 4: Streamlit interface (analyze + play modes)
 ├── requirements.txt
+├── packages.txt             # apt packages for Streamlit Cloud (Stockfish + a chess font)
+├── images/                  # README screenshots, generated from the app's own renderers
+├── scripts/
+│   └── make_readme_images.py  # regenerates images/ so they always match the live UI
 ├── .streamlit/secrets.toml  # your API key (not committed)
 └── stockfish.exe            # the engine (not committed)
 ```
+
+The README images are produced by `python scripts/make_readme_images.py` using the
+app's actual rendering code — so they stay honest to what the UI shows rather than
+being hand-made mock-ups.
 
 ## Limitations
 
