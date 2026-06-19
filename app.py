@@ -6,6 +6,7 @@ from explainer import explain_position, explain_move
 from move_review import review_move, win_chance
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
+from engine_pool import warmup
 
 # ----------------------------------------------------------------------------
 # Page setup
@@ -16,6 +17,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+
+# Spawn the shared Stockfish now, while the page is loading, so the student's
+# first move or analysis doesn't pay the engine's one-time launch cost mid-click.
+warmup()
 
 # ----------------------------------------------------------------------------
 # Move-quality vocabulary. This is the heart of the tutor: every verdict the
@@ -239,6 +244,20 @@ def _render_coach_panel():
     st.markdown(''.join(rows), unsafe_allow_html=True)
 
 
+@st.cache_data(show_spinner=False, max_entries=64)
+def _board_image(fen, flipped, selected, lastmove_uci):
+    """Render the Play board, cached by everything that affects how it looks.
+
+    The board is redrawn on *every* Streamlit rerun — each click, but also each
+    unrelated widget change (the level radio, the promote selectbox, Explain).
+    Keying the render on visible state means only a genuinely new position or
+    selection pays the ~25ms draw; the rest are instant lookups, so the board
+    stays responsive between moves."""
+    bd = chess.Board(fen)
+    lm = chess.Move.from_uci(lastmove_uci) if lastmove_uci else None
+    return render_board(bd, flipped=flipped, selected=selected, lastmove=lm)
+
+
 def render_game():
     if "g_board" not in st.session_state:
         _init_game()
@@ -282,10 +301,10 @@ def render_game():
         # it across reruns. We keep a watermark (g_last_click) of the click we
         # already acted on and ignore any rerun that reports that same click, so
         # that pressing a button (or the post-move rerun) can't replay a move.
-        img = render_board(
-            board, flipped=flipped,
-            selected=st.session_state.g_from,
-            lastmove=st.session_state.g_lastmove,
+        lm = st.session_state.g_lastmove
+        img = _board_image(
+            board.fen(), flipped, st.session_state.g_from,
+            lm.uci() if lm else None,
         )
         # use_column_width="always" scales the board to the column width (CSS
         # width:100%) so its right edge — the rank labels and frame — never

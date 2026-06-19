@@ -36,7 +36,9 @@ app.py              Streamlit UI — the only entry point. Orchestrates the stag
   │
   ├─ engine_analysis.py   Stage 1: FEN → engine facts (best move, eval, PV).
   ├─ move_review.py       Grades a *played* move vs. the engine's best.
-  └─ explainer.py         Stage 2: engine facts → grounded, level-adapted prose.
+  ├─ explainer.py         Stage 2: engine facts → grounded, level-adapted prose.
+  ├─ engine_pool.py       Shared persistent Stockfish handle + engine discovery.
+  └─ board_ui.py          Pillow board for the "Play a game" click-to-move UI.
 ```
 
 Each file is one stage of a pipeline and is meant to stay independently runnable
@@ -63,8 +65,10 @@ streamlit run app.py
 Requirements (out of the repo's control, intentionally not committed):
 - **Stockfish binary.** Locally: put `stockfish.exe` next to the source (Windows)
   or have `stockfish` on PATH. On Streamlit Cloud: `packages.txt` installs it via
-  apt. `find_engine()` (duplicated in `engine_analysis.py` and `move_review.py`)
-  resolves all these cases — if you change engine discovery, change both copies.
+  apt. `find_engine()` in `engine_pool.py` resolves all these cases — it's now the
+  single source of engine discovery (it used to be copy-pasted into both stage
+  files and the copies had drifted: one returned a bare relative `stockfish.exe`
+  that won't launch as a subprocess on Windows).
 - **Gemini API key** as `GOOGLE_API_KEY`. Read via `st.secrets` first, then the
   environment / `.env` (see the guarded lookup at the top of `explainer.py`).
   Never hardcode or commit it — `.gitignore` already excludes `.env` and
@@ -96,8 +100,13 @@ python explainer.py          # explains a sample position at all 3 levels
   styling. The metrics block is guarded against a stale/old `review` dict
   (missing keys degrade gracefully). Preserve that guard when changing the
   review payload — Streamlit Cloud can cache an old module across a deploy.
-- **Engine lifecycle:** each request opens and quits a `SimpleEngine`. Fine for a
-  single-user prototype; if you add concurrency, pool or reuse the engine instead.
+- **Engine lifecycle:** one persistent `SimpleEngine` is shared across all calls —
+  created lazily, reused, lock-guarded, closed at exit (`engine_pool.py`). The old
+  design spawned and quit an engine *per request*, which cost a full process launch
+  every call (~2.4s to grade one move); reuse drops that to ~0.1s. Analyses are
+  **depth-limited** (depth 15, 1s cap), not time-limited: still far stronger than
+  any student — so the engine is still the source of truth — but the before/after
+  evals are searched to the same depth, which keeps them comparable for grading.
 
 ## When extending
 

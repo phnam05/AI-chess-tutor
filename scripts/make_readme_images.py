@@ -83,8 +83,8 @@ render_board(hero, lastmove=hero.move_stack[-1]).save(os.path.join(IMG, "hero.pn
 print("wrote", os.path.relpath(os.path.join(IMG, "hero.png"), ROOT))
 
 # Print the real facts so the README captions stay faithful to the engine.
-# (Use review_move for the Analyze fact too — same engine, and engine_analysis's
-# find_engine returns a bare relative path that won't launch on Windows.)
+# (We read the engine's best move via review_move; analyze_position would work
+# too — both now share the one engine in engine_pool.)
 an = review_move(DEFAULT_FEN, "a2a3")   # any legal move; we only read the engine's best
 print("\n--- faithful facts for captions ---")
 print(f"Analyze: best {an['best_move']}, eval {an['best_eval']} (White POV)")

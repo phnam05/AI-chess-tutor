@@ -1,39 +1,16 @@
-import shutil
 import chess
-import chess.engine
+from engine_pool import analyse, DEFAULT_DEPTH
 
-def find_engine():
-    # Try the common Linux command names first (Streamlit Cloud installs via apt).
-    for name in ("stockfish", "Stockfish"):
-        found = shutil.which(name)
-        if found:
-            return found
-    # Some Debian builds install to a versioned path; check the usual spot.
-    for path in ("/usr/games/stockfish", "/usr/bin/stockfish"):
-        if shutil.which(path) or __import__("os").path.exists(path):
-            return path
-    # Local Windows fallback.
-    if shutil.which("stockfish.exe") or __import__("os").path.exists("stockfish.exe"):
-        return "stockfish.exe"
-    # Nothing found — raise a clear message instead of a cryptic crash.
-    raise RuntimeError(
-        "Stockfish engine not found. On Streamlit Cloud, ensure packages.txt "
-        "(at repo root) contains the line 'stockfish'. Locally, place stockfish.exe "
-        "next to this file."
-    )
-
-ENGINE_PATH = find_engine()
-def analyze_position(fen, think_time=1.0):
+def analyze_position(fen, depth=DEFAULT_DEPTH):
     """
     Given a board position (as a FEN string), return the engine's
     key facts: best move, evaluation in centipawns, and the predicted line.
     """
     board = chess.Board(fen)
 
-    # Open the engine, ask for a full analysis, then close it.
-    engine = chess.engine.SimpleEngine.popen_uci(ENGINE_PATH)
-    info = engine.analyse(board, chess.engine.Limit(time=think_time))
-    engine.quit()
+    # The engine is a shared, persistent process (see engine_pool) — reused
+    # across calls instead of spawned per request.
+    info = analyse(board, depth=depth)
 
     # --- 1. The score ---
     # .pov(board.turn) reframes the score from the moving side's perspective.

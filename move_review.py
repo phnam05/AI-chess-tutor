@@ -1,35 +1,6 @@
 import math
-import shutil
 import chess
-import chess.engine
-
-def find_engine():
-    # Try the common Linux command names first (Streamlit Cloud installs via apt).
-    for name in ("stockfish", "Stockfish"):
-        found = shutil.which(name)
-        if found:
-            return found
-    # Some Debian builds install to a versioned path; check the usual spot.
-    for path in ("/usr/games/stockfish", "/usr/bin/stockfish"):
-        if shutil.which(path) or __import__("os").path.exists(path):
-            return path
-    # Local Windows fallback: look next to this file and return an absolute
-    # path, since a bare relative name won't reliably launch as a subprocess.
-    import os
-    local = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stockfish.exe")
-    if os.path.exists(local):
-        return local
-    found = shutil.which("stockfish.exe")
-    if found:
-        return found
-    # Nothing found — raise a clear message instead of a cryptic crash.
-    raise RuntimeError(
-        "Stockfish engine not found. On Streamlit Cloud, ensure packages.txt "
-        "(at repo root) contains the line 'stockfish'. Locally, place stockfish.exe "
-        "next to this file."
-    )
-
-ENGINE_PATH = find_engine()
+from engine_pool import analyse, DEFAULT_DEPTH
 
 def _pov_score(info, color):
     """Return the score in centipawns from `color`'s perspective.
@@ -41,19 +12,21 @@ def _pov_score(info, color):
     return score.score()
 
 
-def review_move(fen, played_move_uci, think_time=1.0):
+def review_move(fen, played_move_uci, depth=DEFAULT_DEPTH):
     """
     Judge a single move. Returns the engine's best move, the move the
     player actually made, how much was lost, and a quality label.
     `played_move_uci` is a move like 'e2e4' or 'g8f6'.
+
+    Both positions are searched to the same depth on the shared, persistent
+    engine (see engine_pool), so the two evals are directly comparable and the
+    whole review costs ~0.1s instead of a spawn plus two one-second searches.
     """
     board = chess.Board(fen)
     mover_color = board.turn  # whose move we are judging
 
-    engine = chess.engine.SimpleEngine.popen_uci(ENGINE_PATH)
-
     # 1. Best available: evaluate the position before the move.
-    info_before = engine.analyse(board, chess.engine.Limit(time=think_time))
+    info_before = analyse(board, depth=depth)
     best_score = _pov_score(info_before, mover_color)          # from mover's POV
     best_move_obj = info_before["pv"][0]                        # the engine's pick
     best_move = board.san(best_move_obj)                       # readable best move
@@ -62,12 +35,10 @@ def review_move(fen, played_move_uci, think_time=1.0):
     played_move = chess.Move.from_uci(played_move_uci)
     played_san = board.san(played_move)                        # readable, before pushing
     board.push(played_move)
-    info_after = engine.analyse(board, chess.engine.Limit(time=think_time))
+    info_after = analyse(board, depth=depth)
     # After the move it's the opponent's turn, so the engine reports from THEIR
     # side. Flip it back to the mover's perspective.
     played_score = _pov_score(info_after, mover_color)
-
-    engine.quit()
 
     # 3. The gap = how much the player gave up, in centipawns. Never negative.
     centipawn_loss = max(0, best_score - played_score)
