@@ -212,15 +212,29 @@ def _render_coach_panel():
         )
 
     # The explanation is opt-in: only call Gemini when the student presses the
-    # button, then cache the prose on the move so reruns don't re-call it.
+    # button, then cache the prose on the move so reruns don't re-call it. We
+    # also record the level it was written for: if the student changes the level
+    # afterwards, the cached prose is stuck at the old level with no button to
+    # redo it, so we offer a re-explain whenever the selected level has moved on.
+    cur_label = st.session_state.get("g_level_label", "Intermediate")
+    cur_level = LEVELS[cur_label]
+
+    def _write_comment():
+        with st.spinner("Coach is thinking…"):
+            try:
+                last["comment"] = explain_move(review, level=cur_level)
+            except Exception:
+                last["comment"] = "__unavailable__"
+            last["comment_level"] = cur_level
+
     if not last["comment"]:
         if st.button("Explain this move", key=f"g_explain_{len(history)}"):
-            level = LEVELS[st.session_state.get("g_level_label", "Intermediate")]
-            with st.spinner("Coach is thinking…"):
-                try:
-                    last["comment"] = explain_move(review, level=level)
-                except Exception:
-                    last["comment"] = "__unavailable__"
+            _write_comment()
+    elif last["comment"] != "__unavailable__" and last.get("comment_level") != cur_level:
+        # Already explained, but the student has since picked a different level.
+        if st.button(f"Re-explain for {cur_label}", key=f"g_reexplain_{len(history)}"):
+            _write_comment()
+
     if last["comment"] == "__unavailable__":
         st.caption("Coach commentary unavailable — check GOOGLE_API_KEY. The engine verdict still stands.")
     elif last["comment"]:
@@ -313,13 +327,33 @@ def render_game():
         # pixels, so we rescale to the board's own pixels below.
         click = streamlit_image_coordinates(img, key="g_click", use_column_width="always")
 
-        # --- Current position as copyable text -----------------------------
-        # The live board's FEN, re-read every rerun so it tracks each move.
-        # st.code renders it in monospace with a one-click copy button on
-        # hover, so the student can drop the exact position into another board
-        # or engine as they play.
-        st.caption("Current position (FEN)")
-        st.code(board.fen(), language=None)
+        # --- Position as FEN: read it, copy it, or edit + Load it ----------
+        # One box does both jobs the two old controls did separately: it always
+        # shows the live position (refreshed after every move, undo, and new
+        # game) so it can be copied as the game goes, and editing it + pressing
+        # Load jumps the board to that position. We reseed the box from the board
+        # only when the position *actually* changed — never on a plain rerun — so
+        # a FEN the student is part-way through typing isn't wiped from under
+        # them. (Seeding session state before the widget is the Streamlit-blessed
+        # way to set a text_input's value programmatically.)
+        cur_fen = board.fen()
+        if st.session_state.get("g_fen_synced") != cur_fen:
+            st.session_state["g_fen_box"] = cur_fen
+            st.session_state["g_fen_synced"] = cur_fen
+        st.caption("Position (FEN) — copy the live position, or edit it and press Load")
+        fc1, fc2 = st.columns([5, 1])
+        fen_text = fc1.text_input(
+            "Position (FEN)", key="g_fen_box", label_visibility="collapsed",
+        )
+        if fc2.button("Load", use_container_width=True):
+            try:
+                nb = chess.Board(fen_text)
+            except ValueError:
+                st.error("That isn't a valid FEN.")
+            else:
+                _init_game()
+                st.session_state.g_board = nb
+                st.rerun()
 
         # --- Per-move controls ---------------------------------------------
         # The level only matters when the student asks for an explanation; the
@@ -329,20 +363,6 @@ def render_game():
             key="g_level_label",
         )
         st.selectbox("Promote a pawn to", list(PROMO.keys()), key="g_promo")
-        with st.expander("Start from a position (FEN)"):
-            fen_in = st.text_input(
-                "FEN", value=chess.STARTING_FEN, key="g_start_fen",
-                label_visibility="collapsed",
-            )
-            if st.button("Start this position"):
-                try:
-                    nb = chess.Board(fen_in)
-                except ValueError:
-                    st.error("That isn't a valid FEN.")
-                else:
-                    _init_game()
-                    st.session_state.g_board = nb
-                    st.rerun()
 
         # --- Act on a fresh click ------------------------------------------
         if click is not None:
