@@ -313,6 +313,14 @@ def render_game():
         # pixels, so we rescale to the board's own pixels below.
         click = streamlit_image_coordinates(img, key="g_click", use_column_width="always")
 
+        # --- Current position as copyable text -----------------------------
+        # The live board's FEN, re-read every rerun so it tracks each move.
+        # st.code renders it in monospace with a one-click copy button on
+        # hover, so the student can drop the exact position into another board
+        # or engine as they play.
+        st.caption("Current position (FEN)")
+        st.code(board.fen(), language=None)
+
         # --- Per-move controls ---------------------------------------------
         # The level only matters when the student asks for an explanation; the
         # coach panel reads it from session state (key) at that point.
