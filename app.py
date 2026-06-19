@@ -4,6 +4,8 @@ import chess.svg
 from engine_analysis import analyze_position
 from explainer import explain_position, explain_move
 from move_review import review_move
+from board_ui import render_board, click_to_square, SIZE as BOARD_PX
+from streamlit_image_coordinates import streamlit_image_coordinates
 
 # ----------------------------------------------------------------------------
 # Page setup
@@ -57,6 +59,245 @@ def move_board_svg(fen, move_uci, *, after, arrow_color, size=320):
     return chess.svg.board(
         bd, size=size, lastmove=lastmove, arrows=[arrow], colors=BOARD_COLORS,
     )
+
+# ----------------------------------------------------------------------------
+# "Play a game" mode — an interactive, click-to-move board where the student
+# plays BOTH sides and the coach reviews every move. The chess stays the
+# engine's job: every move runs through review_move (the single source of truth
+# for quality) and explain_move (which only phrases the verdict), both reused
+# untouched. The only new logic here is the board UI + the session-state loop.
+# ----------------------------------------------------------------------------
+PROMO = {
+    "Queen": chess.QUEEN, "Rook": chess.ROOK,
+    "Bishop": chess.BISHOP, "Knight": chess.KNIGHT,
+}
+
+
+def _result_text(board):
+    """Plain-language game result, for the turn indicator when the game ends."""
+    if board.is_checkmate():
+        winner = "Black" if board.turn == chess.WHITE else "White"
+        return f"Checkmate — {winner} wins"
+    if board.is_stalemate():
+        return "Draw — stalemate"
+    if board.is_insufficient_material():
+        return "Draw — not enough material to mate"
+    if board.is_seventyfive_moves():
+        return "Draw — seventy-five-move rule"
+    if board.is_fivefold_repetition():
+        return "Draw — repetition"
+    return "Game over"
+
+
+def _init_game():
+    """Reset to a fresh game. g_last_click is a watermark, not game state, so we
+    only seed it (setdefault) — never clear it (see render_game for why)."""
+    st.session_state.g_board = chess.Board()
+    st.session_state.g_history = []
+    st.session_state.g_from = None
+    st.session_state.g_lastmove = None
+    st.session_state.setdefault("g_last_click", None)
+    st.session_state.setdefault("g_flip", False)
+
+
+def _build_move(board, frm, to):
+    """frm->to as a Move, promoting (to the selector's piece, default queen)
+    when a pawn lands on the back rank."""
+    piece = board.piece_at(frm)
+    if piece and piece.piece_type == chess.PAWN and chess.square_rank(to) in (0, 7):
+        return chess.Move(frm, to, promotion=PROMO[st.session_state.get("g_promo", "Queen")])
+    return chess.Move(frm, to)
+
+
+def _play_and_review(move, level):
+    """The one place per move where the engine and LLM run: grade the move from
+    the mover's POV, get the coach's phrasing, then push it. review_move already
+    scores from board.turn's side, so each colour is judged correctly. If Gemini
+    is unreachable we keep the engine verdict and drop the prose."""
+    board = st.session_state.g_board
+    fen = board.fen()
+    mover = "White" if board.turn == chess.WHITE else "Black"
+    move_no = board.fullmove_number
+    review = review_move(fen, move.uci())
+    try:
+        comment = explain_move(review, level=level)
+    except Exception:
+        comment = None
+    board.push(move)
+    st.session_state.g_lastmove = move
+    st.session_state.g_history.append({
+        "move_no": move_no, "color": mover, "san": review["played_move"],
+        "label": review["label"], "best": review["best_move"], "comment": comment,
+    })
+
+
+def _handle_click(sq, level):
+    """Lichess-style selection rules for one click. Cancel-on-misclick: clicking
+    anything that isn't a legal target simply puts the piece down."""
+    board = st.session_state.g_board
+    frm = st.session_state.g_from
+    if sq is None:                                   # clicked off the board
+        st.session_state.g_from = None
+        return
+    if frm is None:                                  # nothing picked up yet
+        piece = board.piece_at(sq)
+        if piece and piece.color == board.turn:
+            st.session_state.g_from = sq             # pick up your own piece
+        return
+    if sq == frm:
+        st.session_state.g_from = None               # click it again = put it down
+        return
+    piece = board.piece_at(sq)
+    if piece and piece.color == board.turn:
+        st.session_state.g_from = sq                 # switch to a different piece
+        return
+    move = _build_move(board, frm, sq)
+    if move in board.legal_moves:
+        with st.spinner("Coach is reviewing your move…"):
+            _play_and_review(move, level)
+    st.session_state.g_from = None                   # moved, or misclick: clear it
+
+
+def _render_coach_panel():
+    """Right-hand column: the latest verdict + coach note, then the full move log
+    of verdict chips. Reuses the QUALITY colours and the existing verdict CSS."""
+    st.markdown('<div class="eyebrow">The coach</div>', unsafe_allow_html=True)
+    history = st.session_state.g_history
+    if not history:
+        st.markdown(
+            '<div class="commentary">Play a move for either side and I&rsquo;ll tell '
+            'you how it went &mdash; what it did well, or what it missed.</div>',
+            unsafe_allow_html=True,
+        )
+        return
+
+    last = history[-1]
+    meta = QUALITY.get(last["label"], {"color": "#888", "gloss": ""})
+    st.markdown(
+        f'<div class="verdict" style="--vc:{meta["color"]}">'
+        f'  <div class="label">{last["san"]} &mdash; {last["label"]}</div>'
+        f'  <div class="gloss">{meta["gloss"]}</div>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+    if last["label"] not in ("Best", "Excellent") and last["best"] != last["san"]:
+        st.markdown(
+            f'<div class="movepair">Engine preferred '
+            f'<span class="best">{last["best"]}</span></div>',
+            unsafe_allow_html=True,
+        )
+    if last["comment"]:
+        st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
+    else:
+        st.caption("Coach commentary unavailable — check GOOGLE_API_KEY. The engine verdict still stands.")
+
+    st.markdown('<div class="eyebrow" style="margin-top:22px;">Move log</div>', unsafe_allow_html=True)
+    rows = []
+    for h in reversed(history):
+        c = QUALITY.get(h["label"], {"color": "#888"})["color"]
+        num = f'{h["move_no"]}.' if h["color"] == "White" else f'{h["move_no"]}&hellip;'
+        rows.append(
+            '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;'
+            'border-bottom:1px solid var(--line);">'
+            f'<span style="font-family:Inter,sans-serif;font-size:0.8rem;color:var(--walnut);width:40px;">{num}</span>'
+            f'<span style="font-family:Fraunces,serif;font-weight:600;font-size:0.98rem;color:var(--ink);flex:1;">{h["san"]}</span>'
+            f'<span style="font-family:Inter,sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.03em;'
+            f'color:#fff;background:{c};border-radius:5px;padding:2px 9px;">{h["label"]}</span>'
+            '</div>'
+        )
+    st.markdown(''.join(rows), unsafe_allow_html=True)
+
+
+def render_game():
+    if "g_board" not in st.session_state:
+        _init_game()
+
+    left, right = st.columns([5, 4], gap="large")
+
+    with left:
+        # --- Controls -------------------------------------------------------
+        b1, b2, b3 = st.columns(3)
+        if b1.button("New game", use_container_width=True):
+            _init_game()
+        if b2.button("Undo", use_container_width=True) and st.session_state.g_history:
+            st.session_state.g_board.pop()
+            st.session_state.g_history.pop()
+            st.session_state.g_from = None
+            stack = st.session_state.g_board.move_stack
+            st.session_state.g_lastmove = stack[-1] if stack else None
+        if b3.button("Flip board", use_container_width=True):
+            st.session_state.g_flip = not st.session_state.get("g_flip", False)
+
+        board = st.session_state.g_board
+        flipped = st.session_state.get("g_flip", False)
+
+        # --- Turn / result indicator ---------------------------------------
+        if board.is_game_over():
+            head = _result_text(board)
+        else:
+            head = f'{"White" if board.turn == chess.WHITE else "Black"} to move'
+            if not st.session_state.g_history:
+                head += " · click a piece to begin"
+        st.markdown(f'<div class="eyebrow">{head}</div>', unsafe_allow_html=True)
+
+        # --- The clickable board -------------------------------------------
+        # streamlit_image_coordinates reports the LAST click and keeps reporting
+        # it across reruns. We keep a watermark (g_last_click) of the click we
+        # already acted on and ignore any rerun that reports that same click, so
+        # that pressing a button (or the post-move rerun) can't replay a move.
+        img = render_board(
+            board, flipped=flipped,
+            selected=st.session_state.g_from,
+            lastmove=st.session_state.g_lastmove,
+        )
+        # use_column_width="always" scales the board to the column width (CSS
+        # width:100%) so its right edge — the rank labels and frame — never
+        # overflows and gets clipped. ("auto" leaves it at natural 528px, which
+        # the narrow column then cuts off.) The click comes back in *displayed*
+        # pixels, so we rescale to the board's own pixels below.
+        click = streamlit_image_coordinates(img, key="g_click", use_column_width="always")
+
+        # --- Per-move controls ---------------------------------------------
+        level_label = st.radio(
+            "Explain for", list(LEVELS.keys()), index=1, horizontal=True,
+            key="g_level_label",
+        )
+        st.selectbox("Promote a pawn to", list(PROMO.keys()), key="g_promo")
+        with st.expander("Start from a position (FEN)"):
+            fen_in = st.text_input(
+                "FEN", value=chess.STARTING_FEN, key="g_start_fen",
+                label_visibility="collapsed",
+            )
+            if st.button("Start this position"):
+                try:
+                    nb = chess.Board(fen_in)
+                except ValueError:
+                    st.error("That isn't a valid FEN.")
+                else:
+                    _init_game()
+                    st.session_state.g_board = nb
+                    st.rerun()
+
+        # --- Act on a fresh click ------------------------------------------
+        if click is not None:
+            pt = (click["x"], click["y"])
+            if pt != st.session_state.g_last_click:
+                st.session_state.g_last_click = pt
+                if not board.is_game_over():
+                    # Convert the click from displayed pixels (the image may be
+                    # scaled to fit the column) back to the board's own pixels.
+                    disp_w = click.get("width") or BOARD_PX
+                    disp_h = click.get("height") or BOARD_PX
+                    sq = click_to_square(
+                        click["x"] * BOARD_PX / disp_w,
+                        click["y"] * BOARD_PX / disp_h,
+                        flipped,
+                    )
+                    _handle_click(sq, LEVELS[level_label])
+                st.rerun()
+
+    with right:
+        _render_coach_panel()
 
 # ----------------------------------------------------------------------------
 # Styling. The palette comes from the board itself — aged boxwood and walnut,
@@ -221,6 +462,20 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# ----------------------------------------------------------------------------
+# Top-level mode: analyse one position, or play a whole game with the coach
+# watching every move. "Play a game" short-circuits the single-position UI.
+# ----------------------------------------------------------------------------
+app_mode = st.radio(
+    "What would you like to do?",
+    ["Analyze a position", "Play a game"],
+    horizontal=True,
+)
+
+if app_mode == "Play a game":
+    render_game()
+    st.stop()
 
 # ----------------------------------------------------------------------------
 # Controls + board, side by side

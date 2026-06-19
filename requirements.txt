@@ -2,3 +2,5 @@ streamlit
 python-chess
 google-genai
 python-dotenv
+pillow
+streamlit-image-coordinates

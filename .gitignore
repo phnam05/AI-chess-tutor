@@ -8,8 +8,12 @@ stockfish
 
 # Python
 venv/
+.venv/
 __pycache__/
 *.pyc
+
+# Runtime logs
+*.log
 
 # Editor / OS noise
 .vscode/

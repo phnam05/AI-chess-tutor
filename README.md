@@ -3,10 +3,11 @@
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-chess-tutor-phnam05.streamlit.app/)
 
 An explainable-AI prototype that turns a chess engine's cold numbers into clear,
-level-adapted coaching. It works two ways: **explain a position** (why the
-engine's best move is good) and **review a move** (grade a move you played and
-explain what it did well or missed). Both adapt to the player's level — beginner,
-intermediate, or advanced.
+level-adapted coaching. It works three ways: **explain a position** (why the
+engine's best move is good), **review a move** (grade a move you played and
+explain what it did well or missed), and **play a full game** on a click-to-move
+board where the coach reviews every move, for both sides, as you go. All adapt to
+the player's level — beginner, intermediate, or advanced.
 
 It's a small prototype of a larger idea: an AI that **explains its reasoning so
 people learn from it**, rather than one that simply plays well.
@@ -30,7 +31,12 @@ chess — they hallucinate moves and miscount material. Grounding every explanat
 in the engine's verified output keeps the tutor faithful to correct chess while
 staying easy to understand. The model is a translator, not a player.
 
-## Two modes
+## Ways to use it
+
+The app has two top-level modes: **analyze a single position** or **play a full
+game**.
+
+**Analyze a position** offers two actions on a position you enter (as a FEN):
 
 - **Explain this position** — shows the engine's best move and evaluation, and
   explains the reasoning behind it.
@@ -38,6 +44,13 @@ staying easy to understand. The model is a translator, not a player.
   (*Best* down to *Blunder*), and coaches the difference: affirming a strong move,
   or gently explaining what a weaker one missed and what it cost. This turns a
   mistake into a targeted lesson — the heart of tutoring rather than mere analysis.
+
+**Play a game** is an interactive, click-to-move board where you play both sides
+and the coach reviews *every* move as it's made — labelling its quality, naming
+the engine's preferred move when you missed it, and explaining the difference at
+your chosen level. A running move log keeps each verdict on screen. It reuses the
+exact same engine grading and explanation layer as *Review a move*, applied move
+after move: a continuous lesson rather than one-shot analysis.
 
 ## How it works
 
@@ -89,7 +102,10 @@ tutoring withholds and paces; it does not dump everything it knows.**
 - **Stockfish** — chess engine (off-the-shelf; not part of this project's
   contribution)
 - **python-chess** — board representation, rules, FEN/PGN parsing, engine
-  communication, board rendering
+  communication, and SVG board rendering for the analysis view
+- **Pillow** — renders the clickable game board to a PNG (no system libraries, so
+  it looks identical locally and on Streamlit Cloud); pairs with
+  **streamlit-image-coordinates** to turn a click into a square
 - **Google Gemini** (`google-genai` SDK) — the explanation layer
 - **Streamlit** — web interface
 
@@ -132,7 +148,8 @@ chess-tutor/
 ├── engine_analysis.py       # Stage 1: queries Stockfish → facts (the backbone)
 ├── move_review.py           # grades a played move against the engine's best
 ├── explainer.py             # Stage 2–3: grounded, level-adapted explanation layer
-├── app.py                   # Stage 4: Streamlit interface
+├── board_ui.py              # renders the clickable game board + maps click → square
+├── app.py                   # Stage 4: Streamlit interface (analyze + play modes)
 ├── requirements.txt
 ├── .streamlit/secrets.toml  # your API key (not committed)
 └── stockfish.exe            # the engine (not committed)
@@ -145,14 +162,16 @@ chess-tutor/
   polish of every sentence.
 - The engine runs at a short think-time for responsiveness, so evaluations are
   strong but not exhaustive-depth.
-- The tutor works one position or move at a time, not a continuous game (see
-  Future directions).
+- *Play a game* coaches move by move, but the coaching is still per-move: there's
+  no conversation across the game and no memory between sessions (see Future
+  directions).
 
 ## Future directions
 
-- **Interactive play and dialogue.** Let the user make a series of moves and have
-  the coach respond across the whole game — a back-and-forth lesson closer to a
-  real tutoring session.
+- **Conversational dialogue.** Interactive play already exists (*Play a game*),
+  but the coach speaks one move at a time. The next step is genuine back-and-forth
+  — letting the student ask "why?" or "what if?" and having the coach respond in
+  context across the whole game, closer to a real tutoring session.
 - **A learner model.** Track a player's moves over time to infer *characteristic*
   weaknesses (e.g. missing tactical defenses) and shape explanations around the
   recurring gap. Inferring a learner's hidden understanding from behavior parallels
