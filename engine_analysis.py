@@ -33,13 +33,17 @@ def analyze_position(fen, depth=DEFAULT_DEPTH):
         pv_san.append(pv_board.san(move))
         pv_board.push(move)
 
-    # --- 3. The best move (first move of the line), in human notation ---
+    # --- 3. The best move (first move of the line) ---
     best_move_san = pv_san[0] if pv_san else None
+    # UCI too, so the UI can draw an arrow for the move (SAN can't address
+    # squares). It's the same engine fact, just in the other notation.
+    best_move_uci = pv_moves[0].uci() if pv_moves else None
 
     return {
         "fen": fen,
         "turn": "White" if board.turn == chess.WHITE else "Black",
         "best_move": best_move_san,
+        "best_move_uci": best_move_uci,
         "eval_centipawns": eval_centipawns,
         "eval_text": eval_text,
         "principal_variation": pv_san,

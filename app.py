@@ -27,13 +27,15 @@ warmup()
 # engine gives a move maps to a color and a short plain-language gloss, so the
 # label teaches rather than just scores.
 # ----------------------------------------------------------------------------
+# `mark` is the move-log badge glyph — a distinct *shape* per tier (not just a
+# color), so the three greens are still told apart at a glance, chess.com style.
 QUALITY = {
-    "Best":       {"color": "#1a7f5a", "gloss": "The strongest move available."},
-    "Excellent":  {"color": "#4a9d6e", "gloss": "Nearly the engine's top choice."},
-    "Good":       {"color": "#7fae5a", "gloss": "A solid, principled move."},
-    "Inaccuracy": {"color": "#d8a838", "gloss": "Playable, but a better idea was there."},
-    "Mistake":    {"color": "#d97742", "gloss": "Loses meaningful ground."},
-    "Blunder":    {"color": "#c0392b", "gloss": "A serious error that changes the game."},
+    "Best":       {"color": "#1a7f5a", "mark": "★",  "gloss": "The strongest move available."},
+    "Excellent":  {"color": "#4a9d6e", "mark": "!",  "gloss": "Nearly the engine's top choice."},
+    "Good":       {"color": "#7fae5a", "mark": "✓",  "gloss": "A solid, principled move."},
+    "Inaccuracy": {"color": "#d8a838", "mark": "?!", "gloss": "Playable, but a better idea was there."},
+    "Mistake":    {"color": "#d97742", "mark": "?",  "gloss": "Loses meaningful ground."},
+    "Blunder":    {"color": "#c0392b", "mark": "??", "gloss": "A serious error that changes the game."},
 }
 
 LEVELS = {
@@ -166,8 +168,9 @@ def _handle_click(sq):
 
 def _render_coach_panel():
     """Right-hand column: the latest move's engine verdict + metrics (free with
-    every move), an opt-in coach explanation, then the full move log of verdict
-    chips. The engine grades; the LLM only speaks when the student asks."""
+    every move), the played-vs-best boards, and an opt-in coach explanation. The
+    running move log lives in the left column (see _render_move_log). The engine
+    grades; the LLM only speaks when the student asks."""
     st.markdown('<div class="eyebrow">The coach</div>', unsafe_allow_html=True)
     history = st.session_state.g_history
     if not history:
@@ -216,6 +219,12 @@ def _render_coach_panel():
             unsafe_allow_html=True,
         )
 
+    # The visual proof, right under the numbers: your move and the engine's pick
+    # drawn side by side. This sits in the same top-of-column "board slot" the
+    # hint uses before you move — the hint clears the moment you play, so only
+    # one of the two is ever on screen, and it's visible without scrolling.
+    _render_move_boards()
+
     # The explanation is opt-in: only call Gemini when the student presses the
     # button, then cache the prose on the move so reruns don't re-call it. We
     # also record the level it was written for: if the student changes the level
@@ -245,22 +254,56 @@ def _render_coach_panel():
     elif last["comment"]:
         st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
 
-    st.markdown('<div class="eyebrow" style="margin-top:22px;">Move log</div>', unsafe_allow_html=True)
-    rows = []
-    for h in reversed(history):
-        hr = h["review"]
-        c = QUALITY.get(hr["label"], {"color": "#888"})["color"]
-        num = f'{h["move_no"]}.' if h["color"] == "White" else f'{h["move_no"]}&hellip;'
-        rows.append(
-            '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;'
-            'border-bottom:1px solid var(--line);">'
-            f'<span style="font-family:Inter,sans-serif;font-size:0.8rem;color:var(--walnut);width:40px;">{num}</span>'
-            f'<span style="font-family:Fraunces,serif;font-weight:600;font-size:0.98rem;color:var(--ink);flex:1;">{hr["played_move"]}</span>'
-            f'<span style="font-family:Inter,sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.03em;'
-            f'color:#fff;background:{c};border-radius:5px;padding:2px 9px;">{hr["label"]}</span>'
-            '</div>'
+
+def _render_move_log():
+    """The running record of every move and its verdict chip. Lives in its own
+    narrow panel on the far left, beside the board, so the coach column's verdict
+    + boards + commentary can't keep pushing it off the bottom of the screen as
+    they grow."""
+    history = st.session_state.g_history
+    if not history:
+        return
+    st.markdown('<div class="eyebrow">Move log</div>', unsafe_allow_html=True)
+
+    # Pair the half-moves into chess.com-style rows: one full-move number with
+    # White's and Black's move side by side. A row can be half-filled — Black
+    # hasn't replied yet, or (from a FEN that starts on Black's move) there's no
+    # White move. White's and Black's plies share the same fullmove number, so we
+    # fold a Black ply into the open White row and otherwise start a new row.
+    pairs = []
+    for h in history:
+        open_row = pairs[-1] if pairs else None
+        if (h["color"] == "Black" and open_row
+                and open_row["no"] == h["move_no"]
+                and open_row["white"] is not None and open_row["black"] is None):
+            open_row["black"] = h
+        else:
+            side = "white" if h["color"] == "White" else "black"
+            pairs.append({"no": h["move_no"], "white": None, "black": None, side: h})
+
+    def _cell(entry):
+        """One move + a quality badge (full label on hover), or an empty slot."""
+        if entry is None:
+            return '<span class="logcell"></span>'
+        hr = entry["review"]
+        meta = QUALITY.get(hr["label"], {"color": "#888", "mark": ""})
+        return (
+            f'<span class="logcell" title="{hr["label"]}">{hr["played_move"]}'
+            f'<span class="qpill" style="background:{meta["color"]}">{meta.get("mark", "")}</span></span>'
         )
-    st.markdown(''.join(rows), unsafe_allow_html=True)
+
+    # Newest full-move first, so the latest move stays pinned at the top of the
+    # scroll panel — no scrolling to see the move you just made.
+    rows = []
+    for p in reversed(pairs):
+        white = (_cell(p["white"]) if p["white"] is not None
+                 else '<span class="logcell muted">&hellip;</span>')
+        rows.append(
+            f'<div class="logrow"><span class="lognum">{p["no"]}.</span>'
+            f'{white}{_cell(p["black"])}</div>'
+        )
+    # Fixed-height scroll panel so a long game can't run off the page.
+    st.markdown(f'<div class="movelog">{"".join(rows)}</div>', unsafe_allow_html=True)
 
 
 @st.cache_data(show_spinner=False, max_entries=64)
@@ -308,6 +351,15 @@ def _render_hint(board):
         unsafe_allow_html=True,
     )
 
+    # Draw the best move on the board with a green arrow, the same visual
+    # language as the played-vs-best comparison below. after=True plays the move
+    # so you see the resulting position with the from/to squares lit and the
+    # arrow tracing it. `.get` so a stale analysis without the UCI degrades
+    # gracefully.
+    best_uci = analysis.get("best_move_uci")
+    if best_uci:
+        st.image(move_board_svg(analysis["fen"], best_uci, after=True, arrow_color="#1a7f5a"))
+
     # No played move here, so "win chance lost" doesn't apply: show the current
     # winning chance (with best play) and the eval, not a swing. Forced mate has
     # no centipawn number — it's 100% unless the mate is against the side to move.
@@ -354,12 +406,12 @@ def _render_hint(board):
 
 
 def _render_move_boards():
-    """Full-width strip below the board+coach columns: the latest move drawn out
-    — your move with its from/to squares lit and an arrow, and, when it wasn't
-    the engine's pick, the engine's best beside it in green. This is the old
-    Analyze tab's before/after comparison, kept for game mode. It renders
-    straight from the stored review (pre-move FEN + both UCIs), so it's a pure
-    redraw — no new engine call."""
+    """Inside the coach column, under the verdict: the latest move drawn out —
+    your move with its from/to squares lit and an arrow, and, when it wasn't the
+    engine's pick, the engine's best beside it in green. This is the old Analyze
+    tab's before/after comparison, kept for game mode. It renders straight from
+    the stored review (pre-move FEN + both UCIs), so it's a pure redraw — no new
+    engine call. Boards are kept small because the coach column is narrow."""
     history = st.session_state.g_history
     if not history:
         return
@@ -378,7 +430,7 @@ def _render_move_boards():
     )
 
     if best_uci and not is_best:
-        you_col, best_col = st.columns(2, gap="medium")
+        you_col, best_col = st.columns(2, gap="small")
         with you_col:
             st.markdown(
                 f'<div class="boardcap" style="--vc:{meta["color"]}">'
@@ -386,7 +438,7 @@ def _render_move_boards():
                 f'<div class="mv">{review["played_move"]}</div></div>',
                 unsafe_allow_html=True,
             )
-            st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"]))
+            st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"], size=210))
         with best_col:
             st.markdown(
                 '<div class="boardcap" style="--vc:#1a7f5a">'
@@ -394,7 +446,7 @@ def _render_move_boards():
                 f'<div class="mv">{review["best_move"]}</div></div>',
                 unsafe_allow_html=True,
             )
-            st.image(move_board_svg(fen0, best_uci, after=True, arrow_color="#1a7f5a"))
+            st.image(move_board_svg(fen0, best_uci, after=True, arrow_color="#1a7f5a", size=210))
     else:
         role = "You played &mdash; the engine&rsquo;s top choice" if is_best else "You played"
         st.markdown(
@@ -403,7 +455,7 @@ def _render_move_boards():
             f'<div class="mv">{review["played_move"]}</div></div>',
             unsafe_allow_html=True,
         )
-        st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"], size=380))
+        st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"], size=300))
 
 
 def render_game():
@@ -416,7 +468,13 @@ def render_game():
     if stale and "review" not in stale[0]:
         _init_game()
 
-    left, right = st.columns([5, 4], gap="large")
+    # Three columns: the move log gets its own panel on the far left (beside the
+    # board, not stacked beneath it), the board in the middle, the coach on the
+    # right. Adding the log column necessarily narrows the board a little.
+    log_col, left, right = st.columns([2, 5, 4], gap="large")
+
+    with log_col:
+        _render_move_log()
 
     with left:
         # --- Controls -------------------------------------------------------
@@ -498,10 +556,6 @@ def render_game():
         )
         st.selectbox("Promote a pawn to", list(PROMO.keys()), key="g_promo")
 
-        # --- "Best move here" hint -----------------------------------------
-        # Analyse the live position on demand (for whichever side is to move).
-        _render_hint(board)
-
         # --- Act on a fresh click ------------------------------------------
         if click is not None:
             pt = (click["x"], click["y"])
@@ -521,12 +575,12 @@ def render_game():
                 st.rerun()
 
     with right:
+        # "Show best move" lives at the top of the coach column — always on
+        # screen (the column is top-aligned with the board), so it's reachable
+        # without scrolling past the tall board, and its arrow board sits right
+        # under the button. The coach's per-move verdict follows below.
+        _render_hint(board)
         _render_coach_panel()
-
-    # Full-width below both columns: the latest graded move drawn out — your
-    # move and, when it differs, the engine's pick beside it (the old Analyze
-    # tab's before/after view, kept for game mode).
-    _render_move_boards()
 
 # ----------------------------------------------------------------------------
 # Styling. The palette comes from the board itself — aged boxwood and walnut,
@@ -643,8 +697,63 @@ st.markdown(
         margin-top: 2px;
       }
 
-      /* Quiet the default Streamlit chrome */
-      .block-container { padding-top: 2.2rem; max-width: 1100px; }
+      /* The move log — a fixed-height scroll panel so a long game can't run off
+         the page; newest move is pinned at the top. The scrollbar only appears
+         once the rows overflow, which doubles as the "this scrolls" cue. */
+      .movelog {
+        max-height: 540px;
+        overflow-y: auto;
+        padding-right: 8px;        /* breathing room for the scrollbar */
+      }
+      .logrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 2px;
+        border-bottom: 1px solid var(--line);
+        border-radius: 4px;
+      }
+      .logrow:hover { background: rgba(43,38,34,0.03); }
+      .movelog .logrow:last-child { border-bottom: none; }
+      .lognum {
+        flex: none;
+        width: 28px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.78rem;
+        color: var(--walnut);
+      }
+      .logcell {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Fraunces', serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--ink);
+      }
+      .logcell.muted { color: var(--walnut); }
+      .qpill {
+        flex: none;
+        min-width: 15px;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.62rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        border-radius: 4px;
+        padding: 2px 4px;
+      }
+      .movelog::-webkit-scrollbar { width: 8px; }
+      .movelog::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+      .movelog::-webkit-scrollbar-thumb:hover { background: var(--walnut); }
+      .movelog::-webkit-scrollbar-track { background: transparent; }
+
+      /* Quiet the default Streamlit chrome. Wider than the old 1100px because
+         the layout is now three columns (log | board | coach); the extra room
+         brings the board back up to its pre-log-column size. */
+      .block-container { padding-top: 2.2rem; max-width: 1320px; }
       .stRadio > label, .stSelectbox > label, .stTextInput > label {
         font-family: 'Inter', sans-serif;
         font-weight: 600;
