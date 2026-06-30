@@ -14,6 +14,7 @@ __pycache__/
 
 # Runtime logs
 *.log
+faithfulness_log.jsonl
 
 # Editor / OS noise
 .vscode/

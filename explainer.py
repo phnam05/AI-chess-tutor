@@ -1,8 +1,13 @@
 import os
+import json
+import logging
+from datetime import datetime
+from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 import streamlit as st
+from faithfulness import check_faithfulness
 load_dotenv()
 
 
@@ -55,6 +60,60 @@ Your job is to coach this one student. Follow these rules:
   to…").
 - End on something that invites the student to think, but never lecture."""
 
+
+# --- Output-level faithfulness watchdog --------------------------------------
+# The system prompt above keeps Gemini honest at the *prompt* level; faithfulness.py
+# checks the prose it actually produced (does it name a move the engine never gave?).
+# We run that check on every explanation and append the result to a log, so we can
+# later measure how often the coach stays grounded — and keep the outputs without
+# re-spending API calls. It is passive by design: it never changes the explanation
+# and never raises. A bug in the watchdog must not break the coaching it watches.
+_FAITH_LOG = Path(__file__).with_name("faithfulness_log.jsonl")
+_faith_logger = logging.getLogger("faithfulness")
+
+
+def _check_and_log(text, facts, kind, level):
+    """Check the coach's prose against the engine facts, then log the result.
+
+    `facts` is the analysis/review dict (not the prompt string); `kind` is
+    "position" or "move". Returns the checker's result dict, but callers use it
+    only for its side effect — the explanation itself is returned unchanged.
+    """
+    try:
+        result = check_faithfulness(text, facts)
+        record = {
+            "time": datetime.now().isoformat(timespec="seconds"),
+            "kind": kind,
+            "level": level,
+            "fen": facts.get("fen"),
+            "ok": result["ok"],
+            "grounded": result["grounded"],
+            "ungrounded_moves": result["ungrounded_moves"],
+            "unverified_squares": result["unverified_squares"],
+            "text": text,
+        }
+        with _FAITH_LOG.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+        # Always-on console signal: see the watchdog run for every explanation
+        # (clean or flagged), so you don't have to open the log to confirm it works.
+        print(
+            f"[faithfulness] {kind}/{level}: ok={result['ok']} "
+            f"grounded={result['grounded']} ungrounded={result['ungrounded_moves']}",
+            flush=True,
+        )
+        if not result["ok"]:
+            _faith_logger.warning(
+                "coach named ungrounded move(s) %s [%s/%s]",
+                result["ungrounded_moves"], kind, level,
+            )
+        return result
+    except Exception as e:
+        # Never break coaching — but surface the error instead of vanishing,
+        # so a real bug can't hide behind a silent except again.
+        print(f"[faithfulness] check failed: {e!r}", flush=True)
+        return None
+
+
 def explain_position(analysis, level="intermediate"):
     """
     Take the fact-dictionary from Stage 1 and return a natural-language
@@ -73,7 +132,9 @@ Explain this position and why the best move is strong."""
         config=types.GenerateContentConfig(system_instruction=SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]),
         contents=facts,
     )
-    return response.text
+    text = response.text
+    _check_and_log(text, analysis, "position", level)
+    return text
 
 
 def explain_move(review, level="intermediate"):
@@ -111,7 +172,9 @@ isn't there. Be encouraging and specific."""
         ),
         contents=facts,
     )
-    return response.text
+    text = response.text
+    _check_and_log(text, review, "move", level)
+    return text
 
 
 # --- Self-test on HARDCODED facts (engine not connected yet) ---
