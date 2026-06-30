@@ -43,6 +43,7 @@ Per case, fill:
 
 ### 1. Ruy Lopez (after 3...a6)  (position, beginner)
 
+**Board (FEN)** — `r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4`
 **Engine facts** — best: `Ba4` · eval: `+0.42 pawns` · PV: `Ba4, Nf6, O-O, Nxe4, d4, b5`
 **Checker** — clean (grounded: —)
 
@@ -58,6 +59,7 @@ Per case, fill:
 
 ### 2. Italian Game (Giuoco Piano)  (position, intermediate)
 
+**Board (FEN)** — `r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4`
 **Engine facts** — best: `c3` · eval: `+0.20 pawns` · PV: `c3, Nf6, d4, exd4, e5, d5`
 **Checker** — clean (grounded: c3, d4, Nf6)
 
@@ -73,6 +75,7 @@ Per case, fill:
 
 ### 3. Sicilian Najdorf  (position, advanced)
 
+**Board (FEN)** — `rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6`
 **Engine facts** — best: `Be3` · eval: `+0.51 pawns` · PV: `Be3, e5, Nb3, Ng4, Bd2, Nf6`
 **Checker** — clean (grounded: Be3, e5)
 
@@ -88,6 +91,7 @@ Per case, fill:
 
 ### 4. Queen's Gambit Declined  (position, intermediate)
 
+**Board (FEN)** — `rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 4 5`
 **Engine facts** — best: `e3` · eval: `+0.31 pawns` · PV: `e3, h6, Bh4, O-O, Nf3, Ne4`
 **Checker** — clean (grounded: e3, h6)
 
@@ -103,6 +107,7 @@ Per case, fill:
 
 ### 5. French Defence (Winawer)  (position, advanced)
 
+**Board (FEN)** — `rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4`
 **Engine facts** — best: `e5` · eval: `+0.64 pawns` · PV: `e5, c5, a3, Bxc3+, bxc3, Qc7`
 **Checker** — clean (grounded: e5, c5)
 
@@ -118,6 +123,7 @@ Per case, fill:
 
 ### 6. King's Indian Defence  (position, intermediate)
 
+**Board (FEN)** — `rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5`
 **Engine facts** — best: `Nf3` · eval: `+0.65 pawns` · PV: `Nf3, O-O, Be2, e5, Be3, Qe8`
 **Checker** — clean (grounded: e5)
 
@@ -133,6 +139,7 @@ Per case, fill:
 
 ### 7. Caro-Kann Defence  (position, beginner)
 
+**Board (FEN)** — `rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3`
 **Engine facts** — best: `e5` · eval: `+0.30 pawns` · PV: `e5, Bf5, c4, e6, Nc3, Ne7`
 **Checker** — clean (grounded: e5)
 
@@ -148,6 +155,7 @@ Per case, fill:
 
 ### 8. Closed centre, Black to plan  (position, intermediate)
 
+**Board (FEN)** — `r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9`
 **Engine facts** — best: `Qc7` · eval: `-4.79 pawns` · PV: `Qc7, Bc2, Rad8, a4, Rfe8, Qe2`
 **Checker** — clean (grounded: Qc7)
 
@@ -163,6 +171,7 @@ Per case, fill:
 
 ### 9. Queen on f4, White attacking  (position, advanced)
 
+**Board (FEN)** — `r1bq1rk1/pp3pp1/2n1p3/2P1P2p/5Q2/8/PPP2PPP/R1B1KB1R w KQ - 1 13`
 **Engine facts** — best: `Be3` · eval: `+2.68 pawns` · PV: `Be3, Qd5, Bc4, Qxe5, O-O-O, Qxf4`
 **Checker** — clean (grounded: Be3)
 
@@ -178,6 +187,7 @@ Per case, fill:
 
 ### 10. Open game, Black to move  (position, beginner)
 
+**Board (FEN)** — `r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5`
 **Engine facts** — best: `dxe4` · eval: `-0.87 pawns` · PV: `dxe4, Nxe5, Qd5, Bxc6+, bxc6, d4`
 **Checker** — clean (grounded: dxe4, Nxe5)
 
@@ -193,6 +203,7 @@ Per case, fill:
 
 ### 11. King + pawn vs king  (position, beginner)
 
+**Board (FEN)** — `8/8/4k3/8/4K3/8/4P3/8 w - - 0 1`
 **Engine facts** — best: `e3` · eval: `+5.11 pawns` · PV: `e3, Kf6, Kd5, Kf7, e4, Ke7`
 **Checker** — clean (grounded: e3)
 
@@ -208,6 +219,7 @@ Per case, fill:
 
 ### 12. Rook + pawn endgame  (position, intermediate)
 
+**Board (FEN)** — `8/8/8/4k3/8/8/4P3/4K2R w K - 0 1`
 **Engine facts** — best: `Kd2` · eval: `+6.30 pawns` · PV: `Kd2, Ke4, Rg1, Kd4, e3+, Ke4`
 **Checker** — clean (grounded: Kd2, Rg1, e3)
 
@@ -223,6 +235,7 @@ Per case, fill:
 
 ### 13. Queen vs lone king (mating)  (position, beginner)
 
+**Board (FEN)** — `8/5k2/8/8/8/8/5K2/5Q2 w - - 0 1`
 **Engine facts** — best: `Kg3+` · eval: `+5.09 pawns` · PV: `Kg3+, Kg6, Kh4, Kh6, Qf5, Kg7`
 **Checker** — clean (grounded: —)
 
@@ -238,6 +251,7 @@ Per case, fill:
 
 ### 14. Central king & pawn  (position, advanced)
 
+**Board (FEN)** — `8/8/8/3k4/8/3K4/3P4/8 w - - 0 1`
 **Engine facts** — best: `Kc3` · eval: `+0.44 pawns` · PV: `Kc3, Kc5, d4+, Kb6, Kc4`
 **Checker** — clean (grounded: Kc3, Kc5, d4+)
 
@@ -253,6 +267,7 @@ Per case, fill:
 
 ### 15. Italian: 3.Bb5 (good)  (move, beginner)
 
+**Board (FEN)** — `r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3` (the position *before* the played move)
 **Engine facts** — played: `Bb5` · best: `Bb5` · grade: `Best` · evals: played `+0.44` / best `+0.35` · refutation: `a6, Ba4, Nf6, O-O, Be7, Re1`
 **Checker** — clean (grounded: a6)
 
@@ -268,6 +283,7 @@ Per case, fill:
 
 ### 16. Opening move 1.e4 (good)  (move, beginner)
 
+**Board (FEN)** — `rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1` (the position *before* the played move)
 **Engine facts** — played: `e4` · best: `e4` · grade: `Best` · evals: played `+0.35` / best `+0.49` · refutation: `e5, Nf3, Nc6, Bb5, a6, Bxc6`
 **Checker** — clean (grounded: e4, e5)
 
@@ -283,6 +299,7 @@ Per case, fill:
 
 ### 17. Ruy Lopez: 4.Ba4 (good)  (move, intermediate)
 
+**Board (FEN)** — `r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4` (the position *before* the played move)
 **Engine facts** — played: `Ba4` · best: `Ba4` · grade: `Best` · evals: played `+0.48` / best `+0.42` · refutation: `Nf6, O-O, b5, Bb3, Nxe4, d4`
 **Checker** — clean (grounded: Ba4, Nf6, d4, b5, Nxe4)
 
@@ -298,6 +315,7 @@ Per case, fill:
 
 ### 18. Develop with ...Be7 (good)  (move, intermediate)
 
+**Board (FEN)** — `r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5` (the position *before* the played move)
 **Engine facts** — played: `Be7` · best: `dxe4` · grade: `Mistake` · evals: played `-2.42` / best `-0.87` · refutation: `Nxe5, O-O, Bxc6, bxc6, Nxc6, Qd6`
 **Checker** — clean (grounded: Be7, dxe4, Nxe5)
 
@@ -313,6 +331,7 @@ Per case, fill:
 
 ### 19. Scotch: ...exd4 (good)  (move, intermediate)
 
+**Board (FEN)** — `r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3` (the position *before* the played move)
 **Engine facts** — played: `exd4` · best: `exd4` · grade: `Best` · evals: played `-0.42` / best `-0.18` · refutation: `Nxd4, Nf6, Nxc6, dxc6, Qxd8+, Kxd8`
 **Checker** — clean (grounded: Nf6)
 
@@ -328,6 +347,7 @@ Per case, fill:
 
 ### 20. Scholar's mate trap: ...Nf6?? (blunder)  (move, beginner)
 
+**Board (FEN)** — `r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3` (the position *before* the played move)
 **Engine facts** — played: `Nf6` · best: `g6` · grade: `Blunder` · evals: played `-100.00` / best `+0.40` · refutation: `Qxf7#`
 **Checker** — clean (grounded: Qxf7#, g6)
 
@@ -343,6 +363,7 @@ Per case, fill:
 
 ### 21. ...Nxe4?? drops a piece (blunder)  (move, intermediate)
 
+**Board (FEN)** — `r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5` (the position *before* the played move)
 **Engine facts** — played: `Nxe4` · best: `dxe4` · grade: `Mistake` · evals: played `-2.47` / best `-0.87` · refutation: `d3, Nxf2, Bxc6+, bxc6, Rxe5+, Be6`
 **Checker** — clean (grounded: d3, Nxf2, Bxc6+, dxe4)
 
@@ -358,6 +379,7 @@ Per case, fill:
 
 ### 22. Wing push 1.a4 (passive)  (move, beginner)
 
+**Board (FEN)** — `rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1` (the position *before* the played move)
 **Engine facts** — played: `a4` · best: `e4` · grade: `Inaccuracy` · evals: played `-0.32` / best `+0.49` · refutation: `e5, e4, Nf6, Nf3, d5, exd5`
 **Checker** — clean (grounded: a4, e5, e4)
 
@@ -373,6 +395,7 @@ Per case, fill:
 
 ### 23. Edge push 1.h4 (passive)  (move, beginner)
 
+**Board (FEN)** — `rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1` (the position *before* the played move)
 **Engine facts** — played: `h4` · best: `e4` · grade: `Mistake` · evals: played `-0.43` / best `+0.49` · refutation: `d5, d4, Nf6, e3, c5, c4`
 **Checker** — clean (grounded: d5, e4)
 
@@ -388,6 +411,7 @@ Per case, fill:
 
 ### 24. Premature 3.Ng5?! (inaccuracy)  (move, advanced)
 
+**Board (FEN)** — `r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3` (the position *before* the played move)
 **Engine facts** — played: `Ng5` · best: `Bb5` · grade: `Blunder` · evals: played `-4.00` / best `+0.35` · refutation: `Qxg5, d4, Qg6, dxe5, d6, exd6`
 **Checker** — clean (grounded: Qxg5)
 
@@ -403,6 +427,7 @@ Per case, fill:
 
 ### 25. Passive 2.Na3 (inaccuracy)  (move, intermediate)
 
+**Board (FEN)** — `rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2` (the position *before* the played move)
 **Engine facts** — played: `Na3` · best: `Nf3` · grade: `Good` · evals: played `+0.06` / best `+0.36` · refutation: `e6, Nf3, a6, Be2, d5, exd5`
 **Checker** — clean (grounded: Na3, Nf3, e6, d5)
 

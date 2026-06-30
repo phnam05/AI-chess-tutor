@@ -55,6 +55,8 @@ def build(records):
         verdict = "clean" if rec["check"]["ok"] else "flagged"
         grounded = ", ".join(rec["check"]["grounded"]) or "—"
         out.append(f"### {i}. {rec['name']}  ({rec['kind']}, {rec['level']})\n")
+        fen_note = " (the position *before* the played move)" if rec["kind"] == "move" else ""
+        out.append(f"**Board (FEN)** — `{rec['fen']}`{fen_note}")
         out.append(f"**Engine facts** — {facts_line(rec)}")
         out.append(f"**Checker** — {verdict} (grounded: {grounded})")
         out.append(f"\n**Coach said:**\n> {rec['text'].strip()}\n")
