@@ -8,9 +8,10 @@ single move cost ~2.4s. That was the lag you felt on every move.
 
 Streamlit imports a module once per process, so a module-level engine here is
 reused across every rerun and every call. Measured locally, an analysis drops
-from ~1.4s (spawn + time=1.0) to ~0.08s. One lock serialises access: a single
-SimpleEngine can't run two analyses at once, and Streamlit may call in from
-session threads.
+from ~1.4s (spawn + time=1.0) to ~0.02-0.23s — reuse, not a time cap, is the win
+(see DEFAULT_DEPTH for why we dropped the cap). One lock serialises access: a
+single SimpleEngine can't run two analyses at once, and Streamlit may call in
+from session threads.
 
 This is also the single source of truth for engine discovery — `find_engine`
 used to be copy-pasted into engine_analysis.py and move_review.py, and the two
@@ -54,15 +55,25 @@ def find_engine():
 
 ENGINE_PATH = find_engine()
 
-# How hard the engine thinks. We limit by DEPTH, not wall-clock time, for three
-# reasons: depth-15 Stockfish is far stronger than any student (so "the engine
-# decides the chess" still holds), it returns in ~0.08s instead of a fixed 1.0s,
-# and — because the before/after positions are both searched to the same depth —
-# their evals are directly comparable, which is exactly what move grading needs.
-# TIME_CAP is a safety net so a pathological tactical position can never stall
-# the UI longer than a second.
+# How hard the engine thinks — and why its answer is DETERMINISTIC (same position
+# -> same best move, every run). Reproducibility matters here: the coaching and the
+# faithfulness evaluation must rest on facts that don't wobble between runs. Three
+# settings make it so, and each was measured to matter (single-threading alone is
+# NOT enough):
+#   1. Limit by DEPTH only, never wall-clock time. A time cap stops the search at a
+#      load-dependent depth, so the "best move" changes run to run; a fixed depth
+#      always explores the same tree. (Bonus: move grading searches the before- and
+#      after-move positions to the SAME depth, so their evals stay comparable.)
+#   2. One thread. Parallel workers finish in a timing-dependent order and race on
+#      shared memory, so >1 thread wobbles even at a fixed depth.
+#   3. Wipe the transposition table before each search (see analyse). A reused engine
+#      keeps its memory between calls, so the same position could resolve differently
+#      depending on what ran before — this was the main cause of the app showing a
+#      different "best move" on repeated clicks.
+# depth-15 Stockfish is still far stronger than any student, so "the engine decides
+# the chess" holds; measured cost is ~0.02-0.23s per call (the process is still
+# reused — that, not a time cap, is what keeps it fast).
 DEFAULT_DEPTH = 15
-TIME_CAP = 1.0
 
 _engine = None
 _lock = threading.Lock()
@@ -70,11 +81,13 @@ _lock = threading.Lock()
 
 def _new_engine():
     eng = chess.engine.SimpleEngine.popen_uci(ENGINE_PATH)
-    # A little muscle so the target depth is reached fast: more threads reach a
-    # fixed depth quicker, and Hash gives the search a real transposition table.
-    # Capped at 4 so we don't oversubscribe a small Cloud box.
+    # Single-threaded ON PURPOSE: multi-threaded search is non-deterministic (the
+    # workers race), and a stable answer is worth more here than raw speed — depth-15
+    # single-thread still returns in a fraction of a second. Hash still gives the
+    # search a transposition table within one call; we wipe it between calls (see
+    # analyse) so a result never depends on what was searched before.
     try:
-        eng.configure({"Threads": min(4, os.cpu_count() or 1), "Hash": 128})
+        eng.configure({"Threads": 1, "Hash": 128})
     except chess.engine.EngineError:
         pass
     return eng
@@ -115,15 +128,19 @@ def analyse(board, *, depth=DEFAULT_DEPTH):
     slow call rather than taking the whole app down.
     """
     global _engine
-    limit = chess.engine.Limit(depth=depth, time=TIME_CAP)
+    limit = chess.engine.Limit(depth=depth)
     with _lock:
         if _engine is None:
             _engine = _spawn()
         try:
-            return _engine.analyse(board, limit)
+            # A fresh `game` token each call makes python-chess send `ucinewgame`,
+            # so Stockfish clears its transposition table before searching — the
+            # wipe that, with single-threading + fixed depth, makes the result
+            # deterministic. The process itself is still reused (the speed win).
+            return _engine.analyse(board, limit, game=object())
         except chess.engine.EngineError:
             _engine = _spawn()
-            return _engine.analyse(board, limit)
+            return _engine.analyse(board, limit, game=object())
 
 
 def warmup():
