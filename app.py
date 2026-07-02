@@ -3,7 +3,7 @@ import chess
 import chess.svg
 from engine_analysis import analyze_position
 from explainer import explain_position, explain_move
-from move_review import review_move, win_chance
+from move_review import review_move, review_game, win_chance
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
 from engine_pool import warmup
@@ -30,12 +30,12 @@ warmup()
 # `mark` is the move-log badge glyph — a distinct *shape* per tier (not just a
 # color), so the three greens are still told apart at a glance, chess.com style.
 QUALITY = {
-    "Best":       {"color": "#1a7f5a", "mark": "★",  "gloss": "The strongest move available."},
-    "Excellent":  {"color": "#4a9d6e", "mark": "!",  "gloss": "Nearly the engine's top choice."},
-    "Good":       {"color": "#7fae5a", "mark": "✓",  "gloss": "A solid, principled move."},
-    "Inaccuracy": {"color": "#d8a838", "mark": "?!", "gloss": "Playable, but a better idea was there."},
-    "Mistake":    {"color": "#d97742", "mark": "?",  "gloss": "Loses meaningful ground."},
-    "Blunder":    {"color": "#c0392b", "mark": "??", "gloss": "A serious error that changes the game."},
+    "Best":       {"color": "#1a7f5a", "mark": "★",  "badge": "green",  "gloss": "The strongest move available."},
+    "Excellent":  {"color": "#4a9d6e", "mark": "!",  "badge": "green",  "gloss": "Nearly the engine's top choice."},
+    "Good":       {"color": "#7fae5a", "mark": "✓",  "badge": "green",  "gloss": "A solid, principled move."},
+    "Inaccuracy": {"color": "#d8a838", "mark": "?!", "badge": "yellow", "gloss": "Playable, but a better idea was there."},
+    "Mistake":    {"color": "#d97742", "mark": "?",  "badge": "orange", "gloss": "Loses meaningful ground."},
+    "Blunder":    {"color": "#c0392b", "mark": "??", "badge": "red",    "gloss": "A serious error that changes the game."},
 }
 
 LEVELS = {
@@ -107,8 +107,23 @@ def _init_game():
     st.session_state.g_from = None
     st.session_state.g_lastmove = None
     st.session_state.g_hint = None          # cached "best move here" analysis
+    st.session_state.g_selected = None      # move-log pick; None = latest move
     st.session_state.setdefault("g_last_click", None)
     st.session_state.setdefault("g_flip", False)
+
+
+def _load_reviewed_game(entries):
+    """Install a graded game (from review_game) as the live session: the board
+    at the final position, every move in the history with its engine review.
+    From here it behaves exactly like a game played on the board — click any
+    move in the log to rewind to it, per-move verdicts, opt-in explanations."""
+    _init_game()
+    board = chess.Board(entries[0]["review"]["fen"])
+    for e in entries:
+        board.push(chess.Move.from_uci(e["review"]["played_move_uci"]))
+    st.session_state.g_board = board
+    st.session_state.g_history = [dict(e, comment=None) for e in entries]
+    st.session_state.g_lastmove = board.move_stack[-1]
 
 
 def _build_move(board, frm, to):
@@ -137,6 +152,7 @@ def _play_and_review(move):
         "review": review,     # full engine facts: label + win-chance/eval metrics
         "comment": None,      # LLM explanation, filled in on demand
     })
+    st.session_state.g_selected = None       # a new move: coach snaps back to it
 
 
 def _handle_click(sq):
@@ -167,9 +183,10 @@ def _handle_click(sq):
 
 
 def _render_coach_panel():
-    """Right-hand column: the latest move's engine verdict + metrics (free with
-    every move), the played-vs-best boards, and an opt-in coach explanation. The
-    running move log lives in the left column (see _render_move_log). The engine
+    """Right-hand column: one move's engine verdict + metrics (free with every
+    move), the played-vs-best boards, and an opt-in coach explanation. By
+    default that's the latest move; clicking a move in the log (g_selected)
+    brings any earlier verdict — and its cached explanation — back. The engine
     grades; the LLM only speaks when the student asks."""
     st.markdown('<div class="eyebrow">The coach</div>', unsafe_allow_html=True)
     history = st.session_state.g_history
@@ -177,13 +194,26 @@ def _render_coach_panel():
         st.markdown(
             '<div class="commentary">Play a move for either side and I&rsquo;ll grade '
             'it &mdash; the verdict, the win-chance swing, and the engine&rsquo;s pick. '
-            'Press <em>Explain this move</em> whenever you want it put into words.</div>',
+            'Press <em>Explain this move</em> whenever you want it put into words. '
+            'Or paste a game&rsquo;s PGN below the board and I&rsquo;ll grade every '
+            'move of it.</div>',
             unsafe_allow_html=True,
         )
         return
 
-    last = history[-1]
+    # Which move is on the coach's desk: the log's pick, or the latest move.
+    sel = st.session_state.get("g_selected")
+    idx = sel if sel is not None and 0 <= sel < len(history) else len(history) - 1
+    last = history[idx]
     review = last["review"]
+    if idx != len(history) - 1:
+        st.caption(
+            f'Reviewing move {last["move_no"]} ({last["color"]}) — the board '
+            f'shows the position after it.'
+        )
+        if st.button("Back to the latest move", key="g_back_latest"):
+            st.session_state.g_selected = None
+            st.rerun()
     meta = QUALITY.get(review["label"], {"color": "#888", "gloss": ""})
     st.markdown(
         f'<div class="verdict" style="--vc:{meta["color"]}">'
@@ -223,7 +253,7 @@ def _render_coach_panel():
     # drawn side by side. This sits in the same top-of-column "board slot" the
     # hint uses before you move — the hint clears the moment you play, so only
     # one of the two is ever on screen, and it's visible without scrolling.
-    _render_move_boards()
+    _render_move_boards(review)
 
     # The explanation is opt-in: only call Gemini when the student presses the
     # button, then cache the prose on the move so reruns don't re-call it. We
@@ -242,11 +272,11 @@ def _render_coach_panel():
             last["comment_level"] = cur_level
 
     if not last["comment"]:
-        if st.button("Explain this move", key=f"g_explain_{len(history)}"):
+        if st.button("Explain this move", key=f"g_explain_{idx}"):
             _write_comment()
     elif last["comment"] != "__unavailable__" and last.get("comment_level") != cur_level:
         # Already explained, but the student has since picked a different level.
-        if st.button(f"Re-explain for {cur_label}", key=f"g_reexplain_{len(history)}"):
+        if st.button(f"Re-explain for {cur_label}", key=f"g_reexplain_{idx}"):
             _write_comment()
 
     if last["comment"] == "__unavailable__":
@@ -256,10 +286,13 @@ def _render_coach_panel():
 
 
 def _render_move_log():
-    """The running record of every move and its verdict chip. Lives in its own
-    narrow panel on the far left, beside the board, so the coach column's verdict
-    + boards + commentary can't keep pushing it off the bottom of the screen as
-    they grow."""
+    """The running record of every move — and now the way back to any of them:
+    each move is a button, and pressing it puts that move's verdict (and its
+    cached explanation, if one was written) back on the coach's desk. Lives in
+    its own narrow panel on the far left, beside the board. Streamlit widgets
+    can't sit inside custom HTML, so the old styled rows became compact buttons
+    (restyled in the CSS block below); the quality mark rides in the label and
+    the full label appears on hover."""
     history = st.session_state.g_history
     if not history:
         return
@@ -270,40 +303,55 @@ def _render_move_log():
     # hasn't replied yet, or (from a FEN that starts on Black's move) there's no
     # White move. White's and Black's plies share the same fullmove number, so we
     # fold a Black ply into the open White row and otherwise start a new row.
+    # Each cell keeps its index into g_history — that's what a click selects.
     pairs = []
-    for h in history:
+    for idx, h in enumerate(history):
         open_row = pairs[-1] if pairs else None
         if (h["color"] == "Black" and open_row
                 and open_row["no"] == h["move_no"]
                 and open_row["white"] is not None and open_row["black"] is None):
-            open_row["black"] = h
+            open_row["black"] = (idx, h)
         else:
             side = "white" if h["color"] == "White" else "black"
-            pairs.append({"no": h["move_no"], "white": None, "black": None, side: h})
+            pairs.append({"no": h["move_no"], "white": None, "black": None, side: (idx, h)})
 
-    def _cell(entry):
-        """One move + a quality badge (full label on hover), or an empty slot."""
+    sel = st.session_state.get("g_selected")
+    shown = sel if sel is not None and 0 <= sel < len(history) else len(history) - 1
+
+    def _cell(col, entry):
+        """One move as a quiet button styled like the old score-sheet row: the
+        SAN in serif plus the colored quality chip (a markdown badge — named
+        colors only, so the three greens share a hue and the marks ★ ! ✓ keep
+        them apart, as before). The move on the coach's desk is highlighted."""
         if entry is None:
-            return '<span class="logcell"></span>'
-        hr = entry["review"]
-        meta = QUALITY.get(hr["label"], {"color": "#888", "mark": ""})
-        return (
-            f'<span class="logcell" title="{hr["label"]}">{hr["played_move"]}'
-            f'<span class="qpill" style="background:{meta["color"]}">{meta.get("mark", "")}</span></span>'
-        )
+            return
+        idx, h = entry
+        hr = h["review"]
+        meta = QUALITY.get(hr["label"], {})
+        mark, badge = meta.get("mark", ""), meta.get("badge", "gray")
+        label = f'{hr["played_move"]} :{badge}-badge[{mark}]' if mark else hr["played_move"]
+        if col.button(
+            label,
+            key=f"g_log_{idx}",
+            type="primary" if idx == shown else "secondary",
+            use_container_width=True,
+            help=hr["label"],
+        ):
+            st.session_state.g_selected = idx
+            st.rerun()
 
     # Newest full-move first, so the latest move stays pinned at the top of the
-    # scroll panel — no scrolling to see the move you just made.
-    rows = []
-    for p in reversed(pairs):
-        white = (_cell(p["white"]) if p["white"] is not None
-                 else '<span class="logcell muted">&hellip;</span>')
-        rows.append(
-            f'<div class="logrow"><span class="lognum">{p["no"]}.</span>'
-            f'{white}{_cell(p["black"])}</div>'
-        )
-    # Fixed-height scroll panel so a long game can't run off the page.
-    st.markdown(f'<div class="movelog">{"".join(rows)}</div>', unsafe_allow_html=True)
+    # scroll panel — no scrolling to see the move you just made. The container
+    # only gets a fixed height (and so a scrollbar) once the game is long enough
+    # to need one ("content" = grow with the rows; height=None is not accepted).
+    with st.container(height=540 if len(pairs) > 10 else "content", key="g_movelog"):
+        for p in reversed(pairs):
+            # The number column stays skinny so the two move buttons get the
+            # width — long SANs like Qxf4 need it to render on one line.
+            num, wcol, bcol = st.columns([0.6, 2, 2], gap="small")
+            num.markdown(f'<div class="lognum">{p["no"]}.</div>', unsafe_allow_html=True)
+            _cell(wcol, p["white"])
+            _cell(bcol, p["black"])
 
 
 @st.cache_data(show_spinner=False, max_entries=64)
@@ -405,17 +453,14 @@ def _render_hint(board):
         st.markdown(f'<div class="commentary">{hint["comment"]}</div>', unsafe_allow_html=True)
 
 
-def _render_move_boards():
-    """Inside the coach column, under the verdict: the latest move drawn out —
-    your move with its from/to squares lit and an arrow, and, when it wasn't the
-    engine's pick, the engine's best beside it in green. This is the old Analyze
-    tab's before/after comparison, kept for game mode. It renders straight from
-    the stored review (pre-move FEN + both UCIs), so it's a pure redraw — no new
-    engine call. Boards are kept small because the coach column is narrow."""
-    history = st.session_state.g_history
-    if not history:
-        return
-    review = history[-1]["review"]
+def _render_move_boards(review):
+    """Inside the coach column, under the verdict: one move drawn out — the
+    played move with its from/to squares lit and an arrow, and, when it wasn't
+    the engine's pick, the engine's best beside it in green. This is the old
+    Analyze tab's before/after comparison, kept for game mode. It renders
+    straight from the stored review (pre-move FEN + both UCIs), so it's a pure
+    redraw — no new engine call. Boards are kept small because the coach column
+    is narrow."""
     fen0 = review.get("fen")
     played_uci = review.get("played_move_uci")
     best_uci = review.get("best_move_uci")
@@ -485,6 +530,7 @@ def render_game():
             st.session_state.g_board.pop()
             st.session_state.g_history.pop()
             st.session_state.g_from = None
+            st.session_state.g_selected = None    # the picked move may be gone
             stack = st.session_state.g_board.move_stack
             st.session_state.g_lastmove = stack[-1] if stack else None
         if b3.button("Flip board", use_container_width=True):
@@ -493,8 +539,32 @@ def render_game():
         board = st.session_state.g_board
         flipped = st.session_state.get("g_flip", False)
 
+        # --- Time travel: a log click rewinds the big board -----------------
+        # When an earlier move is picked in the log, the board shows the
+        # position right after that move (rebuilt from the review's stored
+        # pre-move FEN — a pure redraw, no engine call). Play pauses while
+        # browsing: board clicks are ignored until "Back to the latest move"
+        # (or the newest log entry) resumes the game. Picking the newest move
+        # IS the live position, so that stays playable.
+        history = st.session_state.g_history
+        sel = st.session_state.get("g_selected")
+        browsing = sel is not None and 0 <= sel < len(history) - 1
+        if browsing:
+            r = history[sel]["review"]
+            disp_move = chess.Move.from_uci(r["played_move_uci"])
+            disp_board = chess.Board(r["fen"])
+            disp_board.push(disp_move)
+            disp_last = disp_move
+        else:
+            disp_board = board
+            disp_last = st.session_state.g_lastmove
+
         # --- Turn / result indicator ---------------------------------------
-        if board.is_game_over():
+        if browsing:
+            h = history[sel]
+            head = (f'Viewing move {h["move_no"]} ({h["color"]}) &mdash; '
+                    f'back to the latest move to keep playing')
+        elif board.is_game_over():
             head = _result_text(board)
         else:
             head = f'{"White" if board.turn == chess.WHITE else "Black"} to move'
@@ -507,10 +577,10 @@ def render_game():
         # it across reruns. We keep a watermark (g_last_click) of the click we
         # already acted on and ignore any rerun that reports that same click, so
         # that pressing a button (or the post-move rerun) can't replay a move.
-        lm = st.session_state.g_lastmove
         img = _board_image(
-            board.fen(), flipped, st.session_state.g_from,
-            lm.uci() if lm else None,
+            disp_board.fen(), flipped,
+            None if browsing else st.session_state.g_from,
+            disp_last.uci() if disp_last else None,
         )
         # use_column_width="always" scales the board to the column width (CSS
         # width:100%) so its right edge — the rank labels and frame — never
@@ -528,7 +598,7 @@ def render_game():
         # a FEN the student is part-way through typing isn't wiped from under
         # them. (Seeding session state before the widget is the Streamlit-blessed
         # way to set a text_input's value programmatically.)
-        cur_fen = board.fen()
+        cur_fen = disp_board.fen()      # while browsing, the box shows the viewed position
         if st.session_state.get("g_fen_synced") != cur_fen:
             st.session_state["g_fen_box"] = cur_fen
             st.session_state["g_fen_synced"] = cur_fen
@@ -547,6 +617,38 @@ def render_game():
                 st.session_state.g_board = nb
                 st.rerun()
 
+        # --- Review a whole game (PGN) ---------------------------------------
+        # The chess.com-style game review: paste a finished game and the engine
+        # grades every move of it up front (one progress bar, no LLM calls);
+        # the coach's explanations stay opt-in per move, so a 40-move game
+        # costs zero API quota until the student asks about a move.
+        with st.expander("Review a full game (PGN)"):
+            st.caption(
+                "Paste a game in PGN format — the standard text export from "
+                "chess.com or lichess — and the engine grades every move. "
+                "Then click any move in the log to see its verdict."
+            )
+            pgn_text = st.text_area(
+                "PGN", key="g_pgn_box", height=140, label_visibility="collapsed",
+                placeholder="1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 ...",
+            )
+            if st.button("Grade the game", key="g_pgn_grade", use_container_width=True):
+                bar = st.progress(0.0, text="Reading the game…")
+                try:
+                    entries = review_game(
+                        pgn_text,
+                        progress=lambda done, total: bar.progress(
+                            done / total, text=f"Grading move {done} of {total}…"
+                        ),
+                    )
+                except ValueError as err:
+                    bar.empty()
+                    st.error(str(err))
+                else:
+                    bar.empty()
+                    _load_reviewed_game(entries)
+                    st.rerun()
+
         # --- Per-move controls ---------------------------------------------
         # The level only matters when the student asks for an explanation; the
         # coach panel reads it from session state (key) at that point.
@@ -560,8 +662,10 @@ def render_game():
         if click is not None:
             pt = (click["x"], click["y"])
             if pt != st.session_state.g_last_click:
+                # Watermark the click even while browsing history, so it can't
+                # replay as a move the instant the student returns to the game.
                 st.session_state.g_last_click = pt
-                if not board.is_game_over():
+                if not browsing and not board.is_game_over():
                     # Convert the click from displayed pixels (the image may be
                     # scaled to fit the column) back to the board's own pixels.
                     disp_w = click.get("width") or BOARD_PX
@@ -578,8 +682,10 @@ def render_game():
         # "Show best move" lives at the top of the coach column — always on
         # screen (the column is top-aligned with the board), so it's reachable
         # without scrolling past the tall board, and its arrow board sits right
-        # under the button. The coach's per-move verdict follows below.
-        _render_hint(board)
+        # under the button. It reads the DISPLAYED board, so while browsing an
+        # earlier move it analyses that position — engine only, still opt-in.
+        # The coach's per-move verdict follows below.
+        _render_hint(disp_board)
         _render_coach_panel()
 
 # ----------------------------------------------------------------------------
@@ -697,58 +803,57 @@ st.markdown(
         margin-top: 2px;
       }
 
-      /* The move log — a fixed-height scroll panel so a long game can't run off
-         the page; newest move is pinned at the top. The scrollbar only appears
-         once the rows overflow, which doubles as the "this scrolls" cue. */
-      .movelog {
-        max-height: 540px;
-        overflow-y: auto;
-        padding-right: 8px;        /* breathing room for the scrollbar */
-      }
-      .logrow {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 5px 2px;
-        border-bottom: 1px solid var(--line);
+      /* The move log — every move is a button now (click = rewind to it), but
+         styled to read like the original score sheet: quiet borderless rows,
+         serif SAN, a colored chip per move, a thin rule between full moves.
+         Scoped to the log container's key so the app's real buttons keep
+         their normal look. The move on the coach's desk ("primary") gets a
+         soft boxwood fill instead of a loud filled button. */
+      .st-key-g_movelog .stButton button {
+        min-height: 1.6rem;
+        padding: 1px 4px;
+        justify-content: flex-start;
+        color: var(--ink);
+        background: transparent;
+        border: none;
         border-radius: 4px;
       }
-      .logrow:hover { background: rgba(43,38,34,0.03); }
-      .movelog .logrow:last-child { border-bottom: none; }
-      .lognum {
-        flex: none;
-        width: 28px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.78rem;
-        color: var(--walnut);
-      }
-      .logcell {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        gap: 6px;
+      /* The label lives in a markdown <p> INSIDE the button, which carries
+         Streamlit's own font rules — style it directly or the serif/bold
+         never reaches the text (the old .logcell look). Streamlit also sets
+         word-break on markdown, which snaps "Qxf4" into "Qxf / 4" when the
+         column is tight — a move name must never wrap. */
+      .st-key-g_movelog .stButton button p {
         font-family: 'Fraunces', serif;
         font-weight: 600;
         font-size: 0.95rem;
+        color: inherit;
+        white-space: nowrap;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      .st-key-g_movelog .stButton button:hover {
+        background: rgba(43,38,34,0.05);
         color: var(--ink);
       }
-      .logcell.muted { color: var(--walnut); }
-      .qpill {
-        flex: none;
-        min-width: 15px;
-        text-align: center;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.62rem;
-        font-weight: 700;
-        line-height: 1;
-        color: #fff;
-        border-radius: 4px;
-        padding: 2px 4px;
+      .st-key-g_movelog .stButton button:focus:not(:focus-visible) {
+        color: var(--ink);
       }
-      .movelog::-webkit-scrollbar { width: 8px; }
-      .movelog::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-      .movelog::-webkit-scrollbar-thumb:hover { background: var(--walnut); }
-      .movelog::-webkit-scrollbar-track { background: transparent; }
+      .st-key-g_movelog .stButton button[kind="primary"] {
+        background: var(--boxwood);
+        color: var(--ink);
+      }
+      .st-key-g_movelog [data-testid="stHorizontalBlock"] {
+        gap: 6px;
+        padding: 2px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .lognum {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.78rem;
+        color: var(--walnut);
+        padding-top: 0.3rem;
+      }
 
       /* Quiet the default Streamlit chrome. Wider than the old 1100px because
          the layout is now three columns (log | board | coach); the extra room
