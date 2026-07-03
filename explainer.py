@@ -34,9 +34,10 @@ toward over the next few moves. You may use standard terms like space, tempo, an
 initiative. Keep it to 3-4 sentences.""",
 
     "advanced": """The player is ADVANCED. Focus on the underlying imbalances: pawn
-structure, long-term weaknesses, and what the evaluation reflects. Be precise about
-the eval — do not round a slight edge into "equal." Assume the player knows the
-basics and wants the deeper reasoning. Keep it tight, 3-4 sentences.""",
+structure, long-term weaknesses, and the ideas the engine's line shows. Be precise
+about the eval — do not round a slight edge into "equal," and never guess at why
+the eval is what it is. Assume the player knows the basics and wants the deeper
+reasoning. Keep it tight, 3-4 sentences.""",
 }
 
 SYSTEM_INSTRUCTION = """You are a friendly chess coach sitting next to one
@@ -53,6 +54,13 @@ Your job is to coach this one student. Follow these rules:
   simple language.
 - Do NOT suggest a different move than the engine's best move.
 - Do NOT invent tactics or evaluations that aren't in the analysis given to you.
+- The evaluation is a NUMBER the engine computed; it comes with no reason
+  attached. State it and say who it favors, but do NOT explain WHY it is what
+  it is unless the reason is visible in the facts you were given (the line wins
+  material, or forces mate). If you don't know the reason, say what the eval
+  means for the player without inventing one.
+- When you describe what a move is FOR, take its purpose from what the given
+  line actually shows happening next, not from general chess knowledge.
 - A predicted/refutation line is the engine's EXPECTED best play, not a
   certainty — the opponent may not find it. Phrase it as what would *likely* or
   *probably* follow, or call a reply the *critical* or *main* try. Never state a
@@ -90,6 +98,8 @@ def _check_and_log(text, facts, kind, level):
             "grounded": result["grounded"],
             "ungrounded_moves": result["ungrounded_moves"],
             "unverified_squares": result["unverified_squares"],
+            "causal_invented": result["causal_invented"],
+            "causal_unverified": result["causal_unverified"],
             "text": text,
         }
         with _FAITH_LOG.open("a", encoding="utf-8") as fh:
@@ -98,13 +108,19 @@ def _check_and_log(text, facts, kind, level):
         # (clean or flagged), so you don't have to open the log to confirm it works.
         print(
             f"[faithfulness] {kind}/{level}: ok={result['ok']} "
-            f"grounded={result['grounded']} ungrounded={result['ungrounded_moves']}",
+            f"grounded={result['grounded']} ungrounded={result['ungrounded_moves']} "
+            f"invented_cause={len(result['causal_invented'])}",
             flush=True,
         )
-        if not result["ok"]:
+        if result["ungrounded_moves"]:
             _faith_logger.warning(
                 "coach named ungrounded move(s) %s [%s/%s]",
                 result["ungrounded_moves"], kind, level,
+            )
+        if result["causal_invented"]:
+            _faith_logger.warning(
+                "coach invented a cause for the eval: %s [%s/%s]",
+                result["causal_invented"], kind, level,
             )
         return result
     except Exception as e:
