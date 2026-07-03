@@ -2,6 +2,7 @@ import io
 import math
 import chess
 import chess.pgn
+from engine_analysis import render_line
 from engine_pool import analyse, DEFAULT_DEPTH
 
 def _pov_score(info, color):
@@ -38,16 +39,11 @@ def _review_from_infos(board, played_move, info_before, info_after):
     # punishes it — the reply that was overlooked, the piece or square that
     # falls. That's the "why was my move wrong" the coach needs, and it's an
     # engine fact (we render and narrate it, never invent it). Rendered as SAN
-    # from the post-move position; capped at a few plies to stay coachable.
-    refutation = []
+    # from the post-move position; kept to a few plies to stay coachable, but
+    # never cut in the middle of a capture exchange (see render_line).
     line_board = board.copy()
     line_board.push(played_move)
-    for mv in info_after.get("pv", [])[:6]:
-        try:
-            refutation.append(line_board.san(mv))
-        except (ValueError, AssertionError):
-            break
-        line_board.push(mv)
+    refutation = render_line(line_board, info_after.get("pv", []))
 
     # 3. The gap = how much the player gave up, in centipawns. Never negative.
     centipawn_loss = max(0, best_score - played_score)

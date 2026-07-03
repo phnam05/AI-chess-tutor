@@ -115,6 +115,17 @@ python explainer.py          # explains a sample position at all 3 levels
   **depth-limited** (depth 15, 1s cap), not time-limited: still far stronger than
   any student — so the engine is still the source of truth — but the before/after
   evals are searched to the same depth, which keeps them comparable for grading.
+- **The engine's line (PV) is a forecast, not a promise.** In a fixed-depth
+  search only the first move gets the full depth; each later move in the line was
+  effectively searched shallower. So re-analysing a position you reached *by
+  following the line* can prefer a different, near-equal move (observed: a PV
+  said the reply to Be3 is Qd5, but a fresh search after playing Be3 picks Qa5+ —
+  the two are ~0.2 pawns apart, and both answers are individually deterministic).
+  Every engine and analysis site behaves this way. Do **not** "fix" it with a PV
+  cache — that would serve staler, shallower answers than a fresh search.
+  Relatedly, `render_line` (`engine_analysis.py`) never cuts a displayed line in
+  the middle of a capture exchange: a line truncated at "…Qxf4" looked like a
+  hung queen when the very next ply was the Bxf4 recapture.
 
 ## When extending
 

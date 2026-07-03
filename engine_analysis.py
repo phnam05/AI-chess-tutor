@@ -1,6 +1,30 @@
 import chess
 from engine_pool import analyse, DEFAULT_DEPTH
 
+
+def render_line(board, moves, length=6):
+    """Render an engine line (list of Move objects) as SAN for humans.
+
+    Cut at `length` plies — but never in the middle of a capture exchange: keep
+    going while the next move is a capture, so the line ends on a quiet move.
+    A line cut one ply before a recapture reads as a piece hung for nothing
+    (a real case: a PV shown as "... O-O-O, Qxf4" looked like White losing the
+    queen; the very next ply was Bxf4, an even trade). Shared by the position
+    line and the refutation so the two renderings can't drift apart.
+    """
+    board = board.copy()
+    san = []
+    for i, move in enumerate(moves):
+        if i >= length and not board.is_capture(move):
+            break
+        try:
+            san.append(board.san(move))
+        except (ValueError, AssertionError):
+            break  # a corrupt tail shouldn't kill the whole analysis
+        board.push(move)
+    return san
+
+
 def analyze_position(fen, depth=DEFAULT_DEPTH):
     """
     Given a board position (as a FEN string), return the engine's
@@ -25,13 +49,12 @@ def analyze_position(fen, depth=DEFAULT_DEPTH):
         eval_text = f"{eval_centipawns / 100:+.2f} pawns"  # e.g. "+0.45 pawns"
 
     # --- 2. The principal variation (predicted best line) ---
+    # NOTE: this line is a *forecast*, not a promise. Deeper moves in it were
+    # searched shallower than the first, so re-analysing a position reached by
+    # following it can prefer a different, near-equal move. That is inherent to
+    # fixed-depth search (every engine does it) — do not "fix" it by caching.
     pv_moves = info.get("pv", [])
-    # Convert the line to human notation by replaying it on a copy of the board.
-    pv_board = board.copy()
-    pv_san = []
-    for move in pv_moves[:6]:          # first 6 plies is plenty for an explanation
-        pv_san.append(pv_board.san(move))
-        pv_board.push(move)
+    pv_san = render_line(board, pv_moves)   # ~6 plies, never cut mid-exchange
 
     # --- 3. The best move (first move of the line) ---
     best_move_san = pv_san[0] if pv_san else None
