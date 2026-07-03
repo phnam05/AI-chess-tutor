@@ -44,6 +44,10 @@ from faithfulness import check_faithfulness
 # given). For move cases, `played` is the SAN move we hand to the grader. We mix
 # phases (opening / middlegame / endgame) and deliberately include weak moves, so
 # the refutation path — where invented tactics are most tempting — is well covered.
+# The grade in a move-case's name is the ENGINE's verdict, not a guess: the human
+# audit (2026-07-03) caught four hand-guessed labels contradicting the real grade
+# field, so the names were corrected to match. If the engine's grading ever
+# changes, re-check the names against a fresh run rather than editing by feel.
 CASES = [
     # ---- Opening positions ----
     dict(name="Ruy Lopez (after 3...a6)", phase="opening", level="beginner",
@@ -90,7 +94,9 @@ CASES = [
          setup=[], played="e4", kind="move"),
     dict(name="Ruy Lopez: 4.Ba4 (good)", phase="opening", level="intermediate",
          setup=["e4", "e5", "Nf3", "Nc6", "Bb5", "a6"], played="Ba4", kind="move"),
-    dict(name="Develop with ...Be7 (good)", phase="middlegame", level="intermediate",
+    # Designed as a quiet developing move, but in THIS position Be7 ignores the
+    # central tension and the engine grades it a Mistake — the name says so.
+    dict(name="Develop with ...Be7 (mistake)", phase="middlegame", level="intermediate",
          fen="r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
          setup=[], played="Be7", kind="move"),
     dict(name="Scotch: ...exd4 (good)", phase="opening", level="intermediate",
@@ -99,16 +105,16 @@ CASES = [
     # ---- Weak moves (lead with the engine's refutation line) ----
     dict(name="Scholar's mate trap: ...Nf6?? (blunder)", phase="opening", level="beginner",
          setup=["e4", "e5", "Bc4", "Nc6", "Qh5"], played="Nf6", kind="move"),
-    dict(name="...Nxe4?? drops a piece (blunder)", phase="middlegame", level="intermediate",
+    dict(name="...Nxe4? loses material (mistake)", phase="middlegame", level="intermediate",
          fen="r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
          setup=[], played="Nxe4", kind="move"),
     dict(name="Wing push 1.a4 (passive)", phase="opening", level="beginner",
          setup=[], played="a4", kind="move"),
     dict(name="Edge push 1.h4 (passive)", phase="opening", level="beginner",
          setup=[], played="h4", kind="move"),
-    dict(name="Premature 3.Ng5?! (inaccuracy)", phase="opening", level="advanced",
+    dict(name="Premature 3.Ng5?? (blunder)", phase="opening", level="advanced",
          setup=["e4", "e5", "Nf3", "Nc6"], played="Ng5", kind="move"),
-    dict(name="Passive 2.Na3 (inaccuracy)", phase="opening", level="intermediate",
+    dict(name="Passive 2.Na3 (good)", phase="opening", level="intermediate",
          setup=["e4", "c5"], played="Na3", kind="move"),
 ]
 

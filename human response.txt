@@ -1,0 +1,195 @@
+Human audit verdict — all 25 cases of faithfulness_audit.md
+Audited by: Nam (phnam05)
+Date: 2026-07-03
+Pasted verbatim from the user's message.
+
+=====================================================================
+
+Case 1 — Ruy Lopez (Ba4)
+
+A. Faithful? Partially. Chess claims are fine, but nothing is engine-grounded (grounded: —).
+B. Invented? Yes. "The slight edge comes from keeping your pieces active..." fabricates a reason for +0.42 that Stockfish never gave.
+C. What I'd change: Cut the eval-justification sentence, or replace with a grounded fact. Rewrite the closing question — it's redundant and teaches nothing.
+D. Type: Causal invention (eval attribution) + weak pedagogical follow-up.
+
+Case 2 — Italian (c3)
+
+A. Faithful? Partially. Move sequence matches PV (c3, Nf6, d4 grounded); stated purpose of d4 drifts.
+B. Invented? Mild. "Open lines for your pieces" isn't the PV's point — the real idea is e5 hitting the f6-knight for a tempo.
+C. What I'd change: Name c3's subject explicitly ("c3 sets up d4 next move"). Cut redundancy with sentence 1. Ground the "why" in e5 hitting the knight.
+D. Type: Pedagogical clarity (ambiguous referent, redundancy) + mild causal drift (purpose ≠ PV mechanism).
+
+Case 3 — Najdorf (Be3)
+
+A. Faithful? Partially.
+B. Invented? Yes. Eval attribution ("+0.51 because it anticipates e5") is unverified. Also "preparing to challenge the kingside knight" misdescribes Nb3 — PV shows black's Ng4 attacking the bishop, not White challenging a knight.
+C. What I'd change: Cut the eval-causal sentence. Fix the Nb3 description to match what the PV actually shows.
+D. Type: Causal invention + causal drift.
+
+Case 4 — QGD (e3)
+
+A. Faithful? No.
+B. Invented? Yes — and this one's a real error, not just unverified filler: the bishop on g5 is dark-squared (came from c1), not "light-squared" as stated. Plus the usual eval-causal invention.
+C. What I'd change: Fix the bishop color. This is a factual chess error, not a phrasing issue — flag as higher severity than the other cases.
+D. Type: Factual error + causal invention.
+
+Case 5 — French Winawer (e5)
+
+A. Faithful? Partially.
+B. Invented? Mild. Eval-causal claim again. "Forces the black knight to relocate" is imprecise — knight hasn't moved yet, e5 just denies it the f6 square.
+C. What I'd change: Say "denies Nf6" instead of "forces relocation." Drop the eval justification or ground it in the PV's actual bxc3 doubled-pawn outcome.
+D. Type: Causal invention + minor imprecision.
+
+Case 6 — KID (Nf3)
+
+A. Faithful? Mostly yes.
+B. Invented? Mild — only the eval-causal line ("gives you a slight edge in space").
+C. What I'd change: Cut/soften that one sentence. Rest is well grounded (Be3 follow-up matches PV).
+D. Type: Causal invention (isolated).
+
+Case 7 — Caro-Kann (e5)
+
+A. Faithful? Yes.
+B. Invented? No major issue. "Forces their bishop to move" is a bit strong (it's best practice, not forced) but low risk.
+C. What I'd change: Soften "forces" to "encourages" or "invites."
+D. Type: Pedagogical (word choice).
+
+Case 8 — Closed centre (Qc7)
+
+A. Faithful? Partially.
+B. Invented? Yes, and worth flagging harder than most: -4.79 is a huge eval, and "your pieces dominate open files" is a speculative story for a swing that size. Large evals like this often hide a concrete tactic/material point the coach doesn't actually know about — this is the risk pattern your checker should probably catch.
+C. What I'd change: Either don't explain large evals causally at all, or explicitly hedge ("the engine sees a big advantage here, likely from more than just piece activity").
+D. Type: Causal invention (high-risk instance).
+
+Case 9 — Queen on f4 (Be3)
+
+A. Faithful? Partially.
+B. Invented? Yes. Eval-causal claim again. Also, the stated purpose ("reinforcing d4, linking rooks") doesn't match the PV, which is actually a sharp tactical queen-chase line (Qd5, Bc4, Qxe5...). Separately — the PV itself ends oddly with Black playing Qxf4, seemingly capturing White's own queen still sitting on f4. That may be a data artifact worth double-checking, not a coach error.
+C. What I'd change: Rewrite Be3's purpose to reflect the tactical PV, not generic development language.
+D. Type: Causal invention + causal drift. Also flag: possible PV data anomaly (Qxf4).
+
+Case 10 — Open game (dxe4)
+
+A. Faithful? Mostly yes.
+B. Invented? Mild — only the eval-causal sentence. "Pressure on their knight" claim is actually correct (pawn on e4 hits Nf3).
+C. What I'd change: Cut/rephrase eval justification.
+D. Type: Causal invention (isolated).
+
+Case 11 — King+pawn endgame (e3)
+
+A. Faithful? No.
+B. Invented? Yes — this one's logically backwards. "e3 supports your king" and "the pawn protects your king" get the relationship inverted; in king-and-pawn endgames the king escorts the pawn, not the other way round.
+C. What I'd change: Rewrite to say the king should shepherd the pawn forward, not that the pawn protects the king.
+D. Type: Factual/logical error (causal direction reversed).
+
+Case 12 — Rook+pawn endgame (Kd2)
+
+A. Faithful? Mostly yes.
+B. Invented? Mild — generic eval justification, but the Rg1/e3 follow-through is accurately grounded.
+C. What I'd change: Minor — tighten the opening eval sentence.
+D. Type: Causal invention (low severity).
+
+Case 13 — Queen vs king mate (Kg3+)
+
+A. Faithful? Partially — misses the actual mechanism.
+B. Invented? Mild. Kg3+ is a discovered check via the queen on the f-file (king was blocking it). The coach never explains this — it's the whole point of the move — and substitutes vague "cutting off escape squares" narrative instead.
+C. What I'd change: Explicitly name the discovered check. This is a missed teaching opportunity, not a wrong claim.
+D. Type: Pedagogical (missed key insight) — nothing false, just thin.
+
+Case 14 — Central king & pawn (Kc3)
+
+A. Faithful? Mostly yes.
+B. Invented? Yes — eval-causal claim ("+0.44 edge hinges on maintaining tension"). Kc5/d4+ follow-up is well grounded.
+C. What I'd change: Cut the eval justification.
+D. Type: Causal invention (isolated).
+
+Case 15 — Italian 3.Bb5 (good)
+
+A. Faithful? Yes.
+B. Invented? No.
+C. What I'd change: Nothing major. Side note: played eval (+0.44) is higher than "best" eval (+0.35) in the data — likely a data quirk, not a coach issue.
+D. Type: Clean.
+
+Case 16 — 1.e4 (good)
+
+A. Faithful? Yes.
+B. Invented? No.
+C. What I'd change: Nothing. One of the cleanest responses.
+D. Type: Clean.
+
+Case 17 — Ruy Lopez 4.Ba4 (good)
+
+A. Faithful? Mostly yes.
+B. Invented? Mild. "Pressure on the e5-pawn" oversimplifies — it's really pressure on the knight defending e5. "Lead in development" is unverified flavor text.
+C. What I'd change: Say "pressure on the knight defending e5" instead.
+D. Type: Minor causal drift.
+
+Case 18 — ...Be7 (labeled "good," engine grade is actually Mistake)
+
+A. Faithful? Yes — text correctly treats it as an error, matching the real grade.
+B. Invented? No.
+C. What I'd change: Nothing in the coach text. Flag the case label itself — titled "(good)" but engine data says Mistake (-2.42 vs -0.87 best). Dataset labeling bug.
+D. Type: Clean text / dataset label mismatch #1.
+
+Case 19 — Scotch ...exd4 (good)
+
+A. Faithful? Yes.
+B. Invented? No significant fabrication. Queen-trade/king-activity claim isn't in the "grounded" list but does match the refutation line — checker gap, not a coach error.
+C. What I'd change: Nothing major.
+D. Type: Clean (checker under-coverage noted).
+
+Case 20 — Scholar's mate ...Nf6?? (blunder)
+
+A. Faithful? Yes.
+B. Invented? No.
+C. What I'd change: Nothing. Strongest case in the set — urgent tone matches severity, fully grounded.
+D. Type: Clean.
+
+Case 21 — ...Nxe4?? (title says blunder, grade field says Mistake)
+
+A. Faithful? Yes — very well grounded, ties d3/Nxf2/Bxc6+/dxe4 into a coherent line.
+B. Invented? No.
+C. What I'd change: Nothing in the text. Flag label mismatch #2: title "blunder," grade "Mistake."
+D. Type: Clean text / dataset label mismatch.
+
+Case 22 — 1.a4 (passive)
+
+A. Faithful? Yes.
+B. Invented? No major issue. "Block your path" is odd phrasing (a4 wasn't going anywhere) but not factually wrong.
+C. What I'd change: Reword "block your path."
+D. Type: Pedagogical (phrasing).
+
+Case 23 — 1.h4 (passive)
+
+A. Faithful? Yes.
+B. Invented? No.
+C. What I'd change: Nothing factual. Note: nearly template-identical to case 22 — worth checking if the coach is low-diversity on "passive move" responses.
+D. Type: Clean / style repetition flag.
+
+Case 24 — 3.Ng5?! (title says inaccuracy, grade field says Blunder)
+
+A. Faithful? Yes — correctly treats it with blunder-level urgency despite the title downgrading it.
+B. Invented? No. Notably, the eval-causal claim here ("-4.00 because you're down a full piece") is actually justified — rare good example of a grounded causal explanation. Bishop-color claim ("light-squared") is also correct this time.
+C. What I'd change: Nothing in text. Flag label mismatch #3: title "inaccuracy," grade "Blunder."
+D. Type: Clean text / dataset label mismatch. Worth noting: bishop color was right here but wrong in case 4 — suggests the model isn't reliably tracking square color, just getting lucky/unlucky.
+
+Case 25 — 2.Na3 (title says inaccuracy, grade field says Good)
+
+A. Faithful? Yes — tone correctly reflects a mild, non-serious issue (matches "Good," not "inaccuracy").
+B. Invented? No.
+C. What I'd change: Nothing in text. Flag label mismatch #4 — most severe: title says "inaccuracy," engine grade literally says "Good." These aren't adjacent severities, they're contradictory.
+D. Type: Clean text / dataset label mismatch (severe).
+
+=====================================================================
+
+Cross-cutting patterns worth writing up separately:
+
+Causal invention (eval attribution) — by far the most common issue, appears in ~13 of 25 cases. The coach routinely explains why an eval is what it is, when Stockfish never gave a reason. Sometimes harmless (small evals, plausible strategic story), sometimes risky (case 8's -4.79 explained by "open files" when the real cause is unknown).
+
+Causal drift — stated purpose of a move doesn't match what the PV actually does (cases 2, 3, 9, 17). Different from invention: the move is real and grounded, but the reason given isn't what the engine line shows.
+
+Two genuine factual errors — case 4 (bishop color) and case 11 (backwards pawn/king logic). These are rarer but more serious than the causal-invention pattern since they're just wrong, not just unverified.
+
+Dataset label/grade mismatches — 4 cases (18, 21, 24, 25) where the case title's quality label contradicts the actual engine grade field. Interestingly, in every one of these the coach text correctly followed the real grade, not the wrong title — so this looks like a metadata/labeling bug in your case file, not a coach failure. Worth checking your labeling pipeline before drawing conclusions from title-based groupings.
+
+Checker under-coverage — a few cases (7, 17, 19) have claims that match the PV correctly but aren't in the grounded field, meaning the checker isn't catching everything it could verify. Not a coach error, but it means "clean (grounded: X)" understates how much of the response is actually checkable.
