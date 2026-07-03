@@ -54,11 +54,17 @@ def build(records):
     for i, rec in enumerate(records, 1):
         verdict = "clean" if rec["check"]["ok"] else "flagged"
         grounded = ", ".join(rec["check"]["grounded"]) or "—"
+        # .get: records written before the eval-causality check lack these keys.
+        causal = ""
+        if rec["check"].get("causal_invented"):
+            causal = f"; invented eval-cause: {len(rec['check']['causal_invented'])} sentence(s)"
+        elif rec["check"].get("causal_unverified"):
+            causal = f"; unverified eval-cause: {len(rec['check']['causal_unverified'])} sentence(s)"
         out.append(f"### {i}. {rec['name']}  ({rec['kind']}, {rec['level']})\n")
         fen_note = " (the position *before* the played move)" if rec["kind"] == "move" else ""
         out.append(f"**Board (FEN)** — `{rec['fen']}`{fen_note}")
         out.append(f"**Engine facts** — {facts_line(rec)}")
-        out.append(f"**Checker** — {verdict} (grounded: {grounded})")
+        out.append(f"**Checker** — {verdict} (grounded: {grounded}{causal})")
         out.append(f"\n**Coach said:**\n> {rec['text'].strip()}\n")
         out.append("- **A. Faithful?** ")
         out.append("- **B. Invented?** ")

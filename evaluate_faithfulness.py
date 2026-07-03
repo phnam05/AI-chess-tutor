@@ -179,6 +179,8 @@ def run_case(case):
         "grounded": check["grounded"],
         "ungrounded_moves": check["ungrounded_moves"],
         "unverified_squares": check["unverified_squares"],
+        "causal_invented": check["causal_invented"],
+        "causal_unverified": check["causal_unverified"],
         "text": text,
     }
 
@@ -191,35 +193,45 @@ def write_report(results, path):
     rate = 100 * faithful / total if total else 0
     lines = []
     lines.append("# Faithfulness evaluation\n")
-    lines.append(f"**{faithful} of {total} explanations ({rate:.0f}%) named only moves "
-                 "the engine actually produced.**\n")
+    lines.append(f"**{faithful} of {total} explanations ({rate:.0f}%) passed both checks: "
+                 "every move they named was one the engine produced, and no sentence "
+                 "asserted a cause for the evaluation the engine didn't back.**\n")
     lines.append("Each explanation was produced by the real coach (Stockfish facts → "
-                 "Gemini prose) and checked by `faithfulness.check_faithfulness`. A case "
-                 "is *faithful* when the prose invents no move the engine never gave.\n")
+                 "Gemini prose) and checked by `faithfulness.check_faithfulness`.\n")
     lines.append("## What this measures — and what it does not\n")
-    lines.append("This is an automatic, string-based check: it reads the moves the coach "
-                 "named *in notation* (e.g. `Nf3`, `Bxc3+`, `O-O`) and confirms each was a "
-                 "move the engine actually gave — its best move, its principal variation, or "
-                 "(for a graded move) its refutation line. Its scope is deliberate:\n")
+    lines.append("This is an automatic, string-based check with two parts. The *move* check "
+                 "reads the moves the coach named in notation (e.g. `Nf3`, `Bxc3+`, `O-O`) "
+                 "and confirms each was a move the engine actually gave — its best move, its "
+                 "principal variation, or (for a graded move) its refutation line. The "
+                 "*eval-causality* check — added after the 2026-07-03 human audit found "
+                 "invented reasons were the dominant failure — reads sentences that both "
+                 "name the evaluation and assert a cause for it. Its scope is deliberate:\n")
     lines.append("- **Catches** invented piece moves, captures, checks and mates — the "
                  "attention-grabbing hallucination (\"you can play Nxe5, forking the king\").")
+    lines.append("- **Catches** invented *reasons* for the evaluation (\"the edge comes from "
+                 "your active pieces\") when the sentence cites no engine move at all; a "
+                 "causal sentence that does cite a grounded move is reported as *unverified* "
+                 "rather than failed, because the audit saw that kind be right.")
     lines.append("- **Does not hard-flag** a bare pawn push written as a square (e.g. `c3`, "
                  "`h4`): the coach may simply be pointing at a square, so these are reported "
                  "as *unverified* rather than failed, to avoid false alarms.")
-    lines.append("- **Does not check** eval numbers or verbal claims (\"this pins the "
-                 "knight\") — only moves written in notation.\n")
+    lines.append("- **Does not check** other verbal claims (\"this pins the knight\") or "
+                 "whether a move's stated *purpose* matches the engine's line.\n")
     lines.append("These limits are validated two ways: a *positive control* (planting fake "
                  "piece-moves in real explanations confirms the check flags them) and a "
                  "*human audit* (how often this automatic verdict agrees with a person's "
-                 "judgement).\n")
-    lines.append("| # | Position | Phase | Type | Level | Faithful | Grounded moves | Invented |")
-    lines.append("|--:|----------|-------|------|-------|:--------:|----------------|----------|")
+                 "judgement — see `validate_checker.py`, which scores the eval-causality "
+                 "check against the audited 25 cases).\n")
+    lines.append("| # | Position | Phase | Type | Level | Faithful | Grounded moves | Invented | Eval-causal claim |")
+    lines.append("|--:|----------|-------|------|-------|:--------:|----------------|----------|-------------------|")
     for i, r in enumerate(results, 1):
         flag = "yes" if r["ok"] else "**NO**"
         grounded = ", ".join(r["grounded"]) or "—"
         invented = ", ".join(r["ungrounded_moves"]) or "—"
+        causal = ("**invented**" if r["causal_invented"]
+                  else "unverified" if r["causal_unverified"] else "—")
         lines.append(f"| {i} | {r['name']} | {r['phase']} | {r['kind']} | {r['level']} "
-                     f"| {flag} | {grounded} | {invented} |")
+                     f"| {flag} | {grounded} | {invented} | {causal} |")
     lines.append("\n## Explanations\n")
     for i, r in enumerate(results, 1):
         lines.append(f"**{i}. {r['name']}** ({r['kind']}, {r['level']}) — engine: {r['engine_move']}")
@@ -248,6 +260,8 @@ def write_records(results, path):
                 "grounded": r["grounded"],
                 "ungrounded_moves": r["ungrounded_moves"],
                 "unverified_squares": r["unverified_squares"],
+                "causal_invented": r["causal_invented"],
+                "causal_unverified": r["causal_unverified"],
             },
         })
     Path(path).write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -277,7 +291,8 @@ def main():
             continue
         flag = "PASS" if r["ok"] else "FLAG"
         print(f"[{flag}] {i:>2}/{len(cases)} {r['name']:<40} "
-              f"grounded={r['grounded']} invented={r['ungrounded_moves']}")
+              f"grounded={r['grounded']} invented={r['ungrounded_moves']} "
+              f"invented_cause={len(r['causal_invented'])}")
         results.append(r)
         if i < len(cases):
             time.sleep(args.delay)   # throttle for the 15-requests-per-minute limit

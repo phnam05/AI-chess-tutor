@@ -18,9 +18,18 @@ one that happens to be legal. We err toward NOT crying wolf: a bare square like
 ungrounded *piece/capture/castle/promotion* move is a hard flag, while a bare,
 ungrounded square is only reported as "unverified".
 
-Limitation (honest, by design): this checks *moves*, not eval numbers or verbal
-claims, and it matches SAN text rather than re-deriving legality on the board.
-That covers the failure mode that actually bites — invented moves/tactics — and
+The 2026-07-03 human audit (`faithfulness_audit.md`) showed the move check alone
+is not enough: the dominant real failure was not invented moves but invented
+*reasons* — the coach explaining WHY the evaluation is what it is ("the edge
+comes from your active pieces") when the engine only ever emitted a number. So a
+second, sentence-level check looks for exactly that shape: a sentence that names
+the evaluation AND asserts a cause for it (see `check_eval_causality`).
+
+Limitation (honest, by design): both checks are string-based. Moves are matched
+as SAN text, not re-derived on the board; causal claims are matched lexically,
+so a reason phrased without eval words slips through, and verbal chess claims
+("this pins the knight") are still unchecked. That covers the two failure modes
+the audit actually found bite — invented moves and invented eval-causes — and
 leaves the rest as a clear extension point.
 """
 
@@ -89,14 +98,91 @@ def build_allowed(facts):
     return allowed
 
 
+# --- Eval-causality check -----------------------------------------------------
+# The engine outputs a *number*, never a reason. So any sentence that explains the
+# evaluation is, at best, the coach's own story. The human audit found this was
+# the dominant failure (10 of 25 cases) and that it comes in two kinds, so the
+# check grades rather than shrieks:
+#   invented   -> the causal sentence cites NO move the engine produced: the story
+#                 has no engine anchor at all. Hard flag (fails `ok`).
+#   unverified -> the causal sentence cites a grounded engine move (e.g. "-4.00
+#                 because Qxg5 wins the knight", where Qxg5 is the refutation):
+#                 the story points at real evidence but only a human can confirm
+#                 it. Reported, not failed — the audit saw this kind be right.
+
+_SENTENCE = re.compile(r"(?<=[.!?])\s+")
+
+# A reference to the engine's verdict: a signed eval number, or the small
+# vocabulary the coach uses for it. Deliberately tight — words like "better",
+# "stronger", "winning" appear in ordinary chess advice and would cry wolf.
+# "The edge" is excluded because that phrasing is the board's edge ("play on
+# the edge"); the eval sense is "a/slight/your edge".
+_EVAL_REF = re.compile(
+    r"[+-]\d+(?:\.\d+)?"
+    r"|\beval(?:uation)?\b"
+    r"|(?<!the )\bedge\b"
+    r"|\badvantage\b"
+    r"|in your favou?r",
+    re.IGNORECASE,
+)
+
+# The assertion of a cause. Generic phrases like "by ...ing" only count because
+# the caller requires an eval reference in the same sentence.
+_CAUSAL = re.compile(
+    r"\bbecause\b"
+    r"|\bcomes? from\b"
+    r"|\bdue to\b"
+    r"|\bthanks to\b"
+    r"|\bhinges? on\b"
+    r"|\bjustif\w*\b"
+    r"|\bwhy\b"
+    r"|\bby \w+ing\b",
+    re.IGNORECASE,
+)
+
+# "Gives you an edge" is causal when a chess claim is the giver ("your active
+# pieces give you an edge" — an invented reason) but mere translation when the
+# eval itself is ("evaluated at +0.20, which gives you a slight edge" — the
+# coach restating the number, which is its job). Proxy: an explicit
+# engine/evaluation attribution in the sentence marks the giver as the number.
+_GIVES_YOU = re.compile(r"\bgiv(?:es?|ing) you\b", re.IGNORECASE)
+_ENGINE_SAYS = re.compile(
+    r"\b(?:engine|stockfish|computer)\b[^.;]*\b(?:eval\w*|gives?|shows?|says?|rates?)\b"
+    r"|\bevaluated at\b",
+    re.IGNORECASE,
+)
+
+
+def check_eval_causality(text, allowed):
+    """Split the prose into sentences and return (invented, unverified): causal
+    claims about the eval with no engine anchor, and ones citing a grounded move."""
+    invented, unverified = [], []
+    for sentence in _SENTENCE.split(text.strip()):
+        if not _EVAL_REF.search(sentence):
+            continue
+        causal = _CAUSAL.search(sentence) or (
+            _GIVES_YOU.search(sentence) and not _ENGINE_SAYS.search(sentence)
+        )
+        if not causal:
+            continue
+        cites_engine_move = any(
+            _forms(token) & allowed for token in _SAN.findall(sentence)
+        )
+        (unverified if cites_engine_move else invented).append(sentence.strip())
+    return invented, unverified
+
+
 def check_faithfulness(text, facts):
     """Check the coach's prose against the engine's facts.
 
     Returns a dict:
-      ok                 -> False if any invented *move* was found
+      ok                 -> False if an invented *move* or an invented *cause for
+                            the eval* was found
       grounded           -> moves named that the engine really produced
       ungrounded_moves   -> moves named that the engine never produced (the flag)
       unverified_squares -> bare squares not in the facts (could be a reference)
+      causal_invented    -> sentences explaining the eval with no engine anchor
+      causal_unverified  -> eval-causal sentences that at least cite engine moves
       allowed            -> the engine moves we checked against (for debugging)
     """
     allowed = build_allowed(facts)
@@ -114,11 +200,15 @@ def check_faithfulness(text, facts):
         else:
             unverified_squares.append(token)
 
+    causal_invented, causal_unverified = check_eval_causality(text, allowed)
+
     return {
-        "ok": not ungrounded_moves,
+        "ok": not ungrounded_moves and not causal_invented,
         "grounded": grounded,
         "ungrounded_moves": ungrounded_moves,
         "unverified_squares": unverified_squares,
+        "causal_invented": causal_invented,
+        "causal_unverified": causal_unverified,
         "allowed": sorted(allowed),
     }
 
@@ -162,6 +252,24 @@ if __name__ == "__main__":
          analysis,
          "Your pawn on e5 is well defended, so c4 is safe to play.",
          True),
+        ("eval explained, no engine anchor",
+         analysis,
+         "You have a clear advantage because your pieces are more active. "
+         "Pushing c4 gains more space.",
+         False),
+        ("eval explained, grounded in the line",
+         analysis,
+         "Pushing c4 forces the bishop back to Bc2, which is why you keep a "
+         "small edge here.",
+         True),
+        ("eval stated but never explained",
+         analysis,
+         "The engine gives you a small edge. The move to play is c4.",
+         True),
+        ("eval translated, not explained",
+         analysis,
+         "The position is evaluated at +0.20, which gives you a slight edge.",
+         True),
     ]
 
     all_good = True
@@ -177,4 +285,8 @@ if __name__ == "__main__":
             print(f"        INVENTED:   {r['ungrounded_moves']}")
         if r["unverified_squares"]:
             print(f"        unverified: {r['unverified_squares']}")
+        if r["causal_invented"]:
+            print(f"        INVENTED CAUSE: {r['causal_invented']}")
+        if r["causal_unverified"]:
+            print(f"        unverified cause: {r['causal_unverified']}")
     print("\nself-test:", "all expectations met" if all_good else "MISMATCH — fix the checker")
