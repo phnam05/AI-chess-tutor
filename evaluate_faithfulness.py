@@ -198,6 +198,12 @@ def write_report(results, path):
                  "asserted a cause for the evaluation the engine didn't back.**\n")
     lines.append("Each explanation was produced by the real coach (Stockfish facts → "
                  "Gemini prose) and checked by `faithfulness.check_faithfulness`.\n")
+    lines.append("This is a single run. The engine facts are deterministic, but the coach "
+                 "(Gemini) is not — so the rate moves run to run and a different handful of "
+                 "cases flags each time. Across repeated runs it sits near 88% (e.g. 22/25); "
+                 "read the number as a sample of that rate, not a fixed score. The residual "
+                 "flags are invented *causes* for the evaluation, the known limit a string "
+                 "checker and a prompt guardrail can reduce but not eliminate.\n")
     lines.append("## What this measures — and what it does not\n")
     lines.append("This is an automatic, string-based check with two parts. The *move* check "
                  "reads the moves the coach named in notation (e.g. `Nf3`, `Bxc3+`, `O-O`) "
