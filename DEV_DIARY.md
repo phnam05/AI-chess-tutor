@@ -47,8 +47,10 @@ Steps 1–2 answer part (1). Step 3 is part (2).
 | "Explain plainly" experiment | 16/25 with it vs. 22/25 without, so it was removed |
 | Invented moves in the latest run | **0** |
 
-**Waiting on you:** (1) OK the Step 3b method? (2) The checker's blind spot
-(reasons joined with "as…"): keep it as a documented limit, or improve and re-measure?
+**Waiting on you:** (1) **Push the latest commits from a network outside the
+company firewall** (`git push`); until then the live app runs the old code.
+(2) OK the Step 3b method? (3) The checker's blind spot (reasons joined with
+"as…"): keep it as a documented limit, or improve and re-measure?
 
 ---
 
@@ -329,7 +331,7 @@ with chess.
 4. **Step 3a:** built the mistake detector (below).
 5. Started this diary.
 
-**Difficulties → how we got past them**
+**Difficulties → how we got past them** (the last one isn't solved yet)
 - *The checker makes mistakes in both directions (found today in the latest
   run):*
   - **Miss:** case 1 says "+0.42 … a slight edge, **as** your pieces are
@@ -364,6 +366,15 @@ with chess.
   the engine didn't list first was graded Blunder, and mating scores showed −100
   instead of +100. The cause: a sign test that mistook "you just gave mate" for
   "you are mated". → One-line fix, tested.
+- *Pushing to GitHub failed:* "certificate … not trusted". Checked: the
+  certificate that arrives for github.com is issued by **Fortinet**, a company
+  firewall on this network that opens and inspects secure connections. Git
+  correctly refuses it, because it can't tell the firewall from an attacker. The
+  SSH route is blocked too, and this laptop has no SSH key. → **Not solved on
+  this network, on purpose:** turning off git's security check would let anyone
+  on the network impersonate GitHub. The commits are safe on the laptop; push them
+  from another network (home Wi-Fi or a phone hotspot) with `git push`. Long term:
+  ask IT to install the firewall's certificate, or to exempt github.com.
 
 **Step 3a: the mistake detector.** Every bad move now gets one of five kinds,
 decided only from the engine's lines and a piece count (pawn 1, knight/bishop 3,
@@ -380,12 +391,14 @@ rook 5, queen 9). No AI guessing:
 Tested with one position per kind; all correct. Limit: it only sees about 6
 moves ahead.
 
-**Commits (all pushed):** `8c415ac` mistake detector + mate fix · `27f5e1b` coach
-reliability + fixed versions · this diary.
+**Commits (made, not yet pushed; see the GitHub difficulty above):** `8c415ac`
+mistake detector + mate fix · `27f5e1b` coach reliability + fixed versions ·
+`c842515` and the next commit: this diary.
 
-**State at end of day:** Steps 1–2 done and re-verified; 3a done; the live app
-handles Gemini hiccups. **Next:** your OK on the Step 3b method, then build the
-learner model.
+**State at end of day:** Steps 1–2 done and re-verified; 3a done; the coach
+fix is ready. **The live app keeps the old behaviour until the commits are
+pushed** (Streamlit Cloud rebuilds from GitHub). **Next:** push from another
+network; your OK on the Step 3b method; then build the learner model.
 
 ---
 
