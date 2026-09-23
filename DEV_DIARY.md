@@ -25,15 +25,23 @@ decisions to a human (1) *faithfully*, saying nothing the engine didn't support,
 and (2) adapted to that particular learner? And can both be *measured*?
 Steps 1–2 answer part (1). Step 3 is part (2).
 
+**Where we are:** Steps 1–2 done. Step 3's mistake detector, learner model and
+first simulation test are done; the learner model isn't in the app yet. Recent
+commits are on the laptop only, waiting to be pushed.
+
 | Step | What | Status |
 |---|---|---|
 | 1 | Faithfulness checker: a program that checks the coach's text against the engine's facts | ✅ Done (re-checked 2026-09-23) |
 | 2 | Evaluation: 25 test cases, your hand audit, a measured faithful rate | ✅ Done |
 | 3a | Mistake detector: name the *kind* of each bad move | ✅ Done 2026-09-23 |
-| 3b | Learner model: estimate how often *this player* makes each kind | ⏳ Next: waiting for your OK on the method |
-| 3c | Use it: show it to the player, and give it to the coach as a fact | Planned |
-| 3d | Test it: fake players with a *known* weakness; does the model find it, and how fast? | Planned |
-| 4 | Writing: README built around the research question; how this carries over to Go | Planned |
+| 3b | Learner model: estimate how often *this player* makes each kind | ✅ Built 2026-09-23 |
+| 3d | Test it: computer players with a *planted* weakness; does the model find it? | ✅ First run 2026-09-23 |
+| 3c | Use it: show it to the player (app), then give it to the coach (a prompt change, so re-measure faithfulness) | Next |
+| 6 | **Bigger faithfulness test:** ~100+ positions from real games, not 25 hand-picked | Needed for the thesis |
+| 7 | **Second judge:** someone else rates part of the cases; report how often you agree | Needed for the thesis |
+| 8 | **Measure the levels:** is "beginner" text really simpler? | Needed for the thesis |
+| 9 | **Small study with real players** (needs ethics approval: apply early) | Needed for the thesis |
+| 4 | Writing: related work, README built around the research question | Planned |
 | 5 | Optional: faithful rate with a confidence range (like Marcolino's ReCePS paper) | Idea |
 
 **Headline numbers you can quote**
@@ -47,10 +55,52 @@ Steps 1–2 answer part (1). Step 3 is part (2).
 | "Explain plainly" experiment | 16/25 with it vs. 22/25 without, so it was removed |
 | Invented moves in the latest run | **0** |
 
-**Waiting on you:** (1) **Push the latest commits from a network outside the
+**Waiting on you:** **push the latest commits from a network outside the
 company firewall** (`git push`); until then the live app runs the old code.
-(2) OK the Step 3b method? (3) The checker's blind spot (reasons joined with
-"as…"): keep it as a documented limit, or improve and re-measure?
+
+### Is it good enough for a master's thesis? (honest verdict, 23 Sep 2026)
+
+**As a working system and a first study: yes, and it's more rigorous than most
+student projects.** It has a clear design idea (the engine decides, the AI
+explains). It measures its own honesty with a checker that was *itself* tested
+(planted lies, a human judge). It reports failures openly (the "explain plainly"
+backfire, the lucky 24/25). And it has real findings: the AI rarely invents
+*moves* but often invents *reasons*, and asking for simpler words made it
+*less* faithful.
+
+**As a complete thesis: not yet.** What's missing, most important first:
+
+1. **Too few test cases.** With 25 cases, "88% faithful" really means
+   *somewhere between 70% and 96%*, and the before/after ranges overlap
+   (76%: 57–89%; 88%: 70–96%). So we can't yet *prove* the prompt fix helped.
+   About 100 positions narrows it to roughly 80–93%. Re-running the same 25
+   doesn't help much; it needs *different* positions, ideally from real games
+   rather than hand-picked.
+2. **One judge, who is also the author.** A thesis needs a second, independent
+   person to rate part of the cases, and a number for how often you agree.
+3. **The levels are claimed, never measured.** Nothing yet shows the
+   "beginner" text is actually easier to read.
+4. **No evidence yet that it helps people learn**, which is the aim of Project
+   #40 ("fostering learning"). That needs a small study with real players, and
+   studies with people need ethics approval, which takes time, so plan it early.
+5. **The learner model** now works on computer players (see 23 Sep), but it's
+   not in the app yet, its bars are set by hand, and it hasn't seen real human
+   games.
+6. **No related-work chapter yet**: the thesis must show where it sits among
+   existing research (reading list below).
+
+**Reading list to start with** (check each one before citing it):
+- Jacovi & Goldberg (2020): *faithfulness* vs. *plausibility* of AI explanations (ACL). This is the core idea behind Step 1.
+- Jhamtani et al. (2018): generating move-by-move chess commentary (ACL).
+- McGrath et al. (2022): *Acquisition of chess knowledge in AlphaZero* (PNAS).
+- McIlroy-Young et al. (2020): **Maia**, human-like chess engines for each rating level (KDD).
+- Bull & Kay: *open learner models* (the brief's "open learning models").
+- Marcolino's group: on-line estimators of teammates' types and parameters (JAAMAS 2022); *It Is Among Us* (AAMAS 2024).
+
+**An idea worth raising with Dr. Marcolino:** use Maia to work out a player's
+*level* from their moves (the same "work out the hidden type from actions"
+problem as his research), then pick the explanation level automatically. That
+would tie the brief's "adapt to the player's level" directly to his methods.
 
 ---
 
@@ -395,10 +445,109 @@ moves ahead.
 mistake detector + mate fix · `27f5e1b` coach reliability + fixed versions ·
 `c842515` and the next commit: this diary.
 
-**State at end of day:** Steps 1–2 done and re-verified; 3a done; the coach
+**State after this part:** Steps 1–2 done and re-verified; 3a done; the coach
 fix is ready. **The live app keeps the old behaviour until the commits are
 pushed** (Streamlit Cloud rebuilds from GitHub). **Next:** push from another
 network; your OK on the Step 3b method; then build the learner model.
+
+### 23 September 2026 (later the same day) — An honest verdict; the learner model built and put to the test
+
+You couldn't reach another network yet, so pushing waits. You asked me to carry
+on with what I think should come next, and to judge honestly whether the
+results are good enough.
+
+**What we did**
+1. **The verdict** (full text in "Is it good enough for a master's thesis?" at
+   the top). In short: a strong prototype and first study, but not yet a full
+   thesis. The biggest issue is the sample: with 25 cases, "88%" really means
+   *70–96%*, so the prompt fix is likely but not proven.
+2. **"Chances" added to every move review:** two engine facts about the position
+   *before* the move: was there a forced mate, and did the engine's best line win
+   material? A "missed" mistake is only possible when a chance was there.
+3. **Step 3b, the learner model** (`learner_model.py`). For each mistake kind it
+   counts *chances* (moves where that mistake was possible) and *misses* (times
+   it happened). Every player starts from a starting guess worth 10 moves, so
+   one slip can't label anyone. A kind becomes a **pattern** only when we're 80%
+   sure the player's rate is above a bar (e.g. "hangs material on more than 1
+   move in 10") **and** it has happened at least 3 times. It's **fine** when
+   we're 80% sure the rate is below the bar, and **unsure** in between. The math
+   is exact, and was checked against 200,000 random samples.
+4. **Step 3d, the test** (`simulate_learners.py`). Four computer "players" play
+   like the engine except for one planted weakness (**hangs** pieces, **misses**
+   free material, **drifts** with random quiet moves, and **solid**, the control
+   with no weakness). Each plays real games against Stockfish, and every move
+   goes through the real pipeline. There are 5 players per bot, 40 moves each.
+
+**First results**
+
+| Bot | Weakness found? | Other kinds flagged | Engine agreed with the planted mistake |
+|---|---|---|---|
+| hangs | **5 of 5**, after about 4 moves | 0 | **44 of 44** |
+| misses | 0 of 5 | 0 | 12 of 24 |
+| drifts | 0 of 5 | 1 | 34 of 78 |
+| solid (control) | correctly nothing | **0** | — |
+
+**Difficulties → how we got past them**
+- *My first bots were too crude.* A "safe quiet" move only checked the piece
+  that moved, so it often left *another* piece hanging. → The bots now check
+  every piece. Even so, the engine still finds losses the simple check can't see
+  (pins, forks).
+- *"misses" and "drifts" weren't found.* Looking at every move showed the
+  learner model was doing its job; the causes were elsewhere:
+  - **The plan isn't the move.** 24 of the drifter's "safe" moves really lost
+    material, and when the misser skipped a recapture, the opponent often took
+    *more*. The engine judges what the move really was, so the planted label
+    isn't a clean answer key.
+  - **One habit, split across two kinds.** Skipping a recapture was labelled
+    "missed material" half the time and "lost material" the other half, so
+    neither count reached its bar.
+  - **Chances are rare.** Only about 7 chances to win material per 40 moves, so
+    a "misses chances" habit needs many games before anyone can be sure.
+  - **The bars are guesses.** "Misses more than half its chances" is too
+    lenient: the engine itself misses 0%.
+  - The one "other kind flagged" was a drifter losing material on 8 of 40
+    moves. That's a **real** weakness it showed, not a false alarm.
+  - → **Decided not to tune the rules until my own bots pass.** That would be
+    marking my own exam. The proper fix is real human games (next point).
+- *Real games were blocked.* Lichess publishes all its games for free, which
+  would let us set the bars from data and check that weaker players show more
+  hung pieces. The company firewall blocks it, just like GitHub. → Next time
+  you're on another network.
+- *A pattern flickered on and off.* In the first run, "positional" was flagged
+  after just 2 moves (2 slips in 2 moves) and vanished later. That breaks the
+  model's own rule that a slip or two must not label a player. → New rule:
+  **at least 3 mistakes of a kind before it can be called a pattern.** The
+  experiment was re-run (below).
+- *Re-running cost 15 minutes each time.* → The experiment now saves every
+  graded move, so a future change to the model can be re-scored in seconds.
+
+**Re-run with the new rule**
+
+| Bot | Weakness found? | First flagged at move (median) | Other kinds flagged |
+|---|---|---|---|
+| hangs | **5 of 5** | 9 (was 4) | 0 |
+| misses | 0 of 5 | — | 0 |
+| drifts | 0 of 5 | — (the move-2 flicker is gone) | 1 (the real material losses) |
+| solid (control) | correctly nothing | — | **0** |
+
+- Every game came out **identical** to the first run (same games, same planted
+  moves for all 20 players), so the experiment is repeatable.
+- Trade-off, chosen on purpose: the model now needs 3 hung pieces before saying
+  "habit", so it's slower (move 9 instead of 4) but never jumps to conclusions.
+- **What this shows:** the model reliably finds a clear, frequent habit (hanging
+  pieces, the classic beginner problem), never labels a clean player, and
+  refuses to guess on thin evidence. What it can't do yet is find *rare* habits
+  (missed chances) within one 40-move session, or sort overlapping kinds. Both
+  need real data to fix properly.
+
+**Commits:** made on the laptop, **not pushed yet** (firewall).
+
+**State at end of day:** Steps 1–2 done; Step 3's detector, learner model and
+first simulation test done. The model is not yet in the app. **Next:**
+(1) push from another network; (2) on that network, download real Lichess games
+to set the bars from data and test the model on real people; (3) show the
+learner model in the app (the "open learner model"); (4) only then give it to
+the coach, which is a prompt change, so faithfulness is re-measured.
 
 ---
 
@@ -446,6 +595,9 @@ extra rook").
 | `faithfulness_records_audited.json` | **Frozen** copy of the run you audited. Never overwrite it |
 | `faithfulness_audit.md` · `human response.txt` | Your audit sheet · your verdicts |
 | `validate_checker.py` | Scores the checker against your audit |
+| `learner_model.py` | Step 3: the tutor's running notes on one player (chances, misses, pattern / fine / unsure) |
+| `simulate_learners.py` | Step 3d: computer players with planted weaknesses play Stockfish; writes `learner_eval.md` |
+| `learner_eval.md` · `learner_eval_records.json` | The simulation's report · every graded move (so a model change can be re-scored with `--rescore`) |
 
 ## C. How we work (agreed rules)
 
@@ -482,3 +634,8 @@ extra rook").
 | **Open learner model** | A learner model the player can see (the project brief mentions "open learning models") |
 | **Type** (Marcolino's research) | An agent's hidden style or habit, worked out from how it acts. Our analogue: a player's typical mistakes |
 | **Bayesian updating** | Start from a sensible starting guess, then adjust it with each piece of evidence, so one slip doesn't label a player |
+| **Chance / miss** | A *chance* is a move where a mistake was possible (e.g. there was free material). A *miss* is a chance where the mistake happened |
+| **Bar** | The rate we'd call worth coaching, e.g. "hangs material on more than 1 move in 10" |
+| **Pattern / fine / unsure** | Pattern = 80% sure the player's rate is above the bar (and it has happened 3+ times). Fine = 80% sure it's below. Unsure = not enough evidence yet |
+| **Confidence range** | The range the true value probably lies in. With few cases it's wide: 22/25 = 88%, but really 70–96% |
+| **Simulated player (bot)** | A computer player with a weakness we planted on purpose, so we know the right answer when testing the learner model |
