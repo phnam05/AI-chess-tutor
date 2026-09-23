@@ -89,7 +89,14 @@ Requirements (out of the repo's control, intentionally not committed):
 - **Gemini API key** as `GOOGLE_API_KEY`. Read via `st.secrets` first, then the
   environment / `.env` (see the guarded lookup at the top of `explainer.py`).
   Never hardcode or commit it — `.gitignore` already excludes `.env` and
-  `.streamlit/secrets.toml`.
+  `.streamlit/secrets.toml`. With no key the app still runs (engine, grading,
+  board); only the coach reports that the key is missing.
+
+`requirements.txt` is **pinned** to the versions the app is run and tested with.
+Streamlit Cloud reinstalls dependencies on every deploy, so unpinned it silently
+picked up whatever was newest (by 2026-09 the Gemini SDK had started refusing a
+missing key at import, which would crash the whole app). Upgrade deliberately:
+bump a pin, run the app, then push.
 
 Stage self-tests (no UI needed):
 ```bash
@@ -100,10 +107,16 @@ python explainer.py          # explains a sample position at all 3 levels
 
 ## Conventions & gotchas
 
-- **The LLM model id lives in `explainer.py`** (`gemini-3.1-flash-lite`). That is
-  the canonical one used by the app. `test_engine.py` and `test_llm.py` are
+- **The LLM model id lives in `explainer.py`** (`MODEL = "gemini-3.1-flash-lite"`).
+  That is the canonical one used by the app. `test_engine.py` and `test_llm.py` are
   throwaway smoke scripts from early bring-up, *not* a test suite — don't treat
   them as the source of truth (e.g. `test_llm.py` pins an older model).
+- **Gemini calls retry, and failures say why.** The client retries transient
+  errors (429 quota, 5xx overload) 3 times with short waits — the SDK does *not*
+  retry by default, and one blip once broke a live demo. `describe_coach_error`
+  turns a failure into a plain reason (quota / busy / bad key / retired model);
+  the app shows it and keeps a "Try again" button. Never go back to one
+  catch-all "check GOOGLE_API_KEY" message — it hid the real cause.
 - **Scores are always taken from the moving side's POV** via `.pov(board.turn)`.
   After a move is pushed it's the opponent's turn, so `move_review.py` flips the
   post-move score back to the mover's perspective. Watch this whenever you touch

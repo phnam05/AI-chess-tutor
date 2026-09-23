@@ -20,7 +20,55 @@ try:
 except Exception:
     API_KEY = None
 API_KEY = API_KEY or os.environ.get("GOOGLE_API_KEY")
-client = genai.Client(api_key=API_KEY)
+
+MODEL = "gemini-3.1-flash-lite"
+
+# The SDK never retries unless asked, so one busy moment on Gemini's side (a 503,
+# or a 429 from the free tier's ~15 requests/minute) used to fail the explanation
+# outright — that is what broke a live demo. Retry those, briefly: 3 attempts
+# with ~2s then ~4s waits keeps the student's wait short. The SDK only retries
+# transient codes (408/429/5xx), never a bad key or a bad request.
+# No key -> no client: newer SDKs raise at construction, which used to crash the
+# whole app on import; now only the coach is unavailable and the engine still works.
+client = genai.Client(
+    api_key=API_KEY,
+    http_options=types.HttpOptions(
+        retry_options=types.HttpRetryOptions(attempts=3, initial_delay=2, max_delay=8)
+    ),
+) if API_KEY else None
+
+
+def describe_coach_error(err):
+    """Why the coach couldn't answer, in plain words for the UI. Every failure
+    used to read "check GOOGLE_API_KEY", which sent a quota or overload hiccup
+    looking for a key problem that didn't exist."""
+    code = getattr(err, "code", None)
+    if client is None:
+        return "Coach unavailable: no GOOGLE_API_KEY is set."
+    if code == 429:
+        return ("The coach hit Gemini's usage limit (the free plan allows about 15 "
+                "requests a minute). Wait a minute, then try again.")
+    if code in (500, 502, 503, 504):
+        return "Gemini is busy right now. Try again in a moment."
+    if code in (400, 401, 403):
+        return f"Gemini rejected the request (error {code}) — check that GOOGLE_API_KEY is valid."
+    if code == 404:
+        return f"Gemini doesn't recognise the model '{MODEL}' — it may have been retired."
+    return f"Coach unavailable ({type(err).__name__}). Try again in a moment."
+
+
+def _generate(level, facts):
+    """One coach call: the fixed persona + the level, then the engine facts."""
+    if client is None:
+        raise RuntimeError("no GOOGLE_API_KEY set")
+    response = client.models.generate_content(
+        model=MODEL,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]
+        ),
+        contents=facts,
+    )
+    return response.text
 
 
 LEVEL_INSTRUCTIONS = {
@@ -147,12 +195,7 @@ Engine's predicted line: {', '.join(analysis['principal_variation'])}
 
 Explain this position and why the best move is strong."""
 
-    response = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
-        config=types.GenerateContentConfig(system_instruction=SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]),
-        contents=facts,
-    )
-    text = response.text
+    text = _generate(level, facts)
     _check_and_log(text, analysis, "position", level)
     return text
 
@@ -185,14 +228,7 @@ Read the position from the FEN to ground your explanation, but state only what
 the facts and that line show — never invent a threat, tactic, or line that
 isn't there. Be encouraging and specific."""
 
-    response = client.models.generate_content(
-        model="gemini-3.1-flash-lite",
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]
-        ),
-        contents=facts,
-    )
-    text = response.text
+    text = _generate(level, facts)
     _check_and_log(text, review, "move", level)
     return text
 

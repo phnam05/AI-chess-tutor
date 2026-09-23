@@ -2,7 +2,7 @@ import streamlit as st
 import chess
 import chess.svg
 from engine_analysis import analyze_position
-from explainer import explain_position, explain_move
+from explainer import explain_position, explain_move, describe_coach_error
 from move_review import review_move, review_game, win_chance
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
@@ -263,25 +263,32 @@ def _render_coach_panel():
     cur_label = st.session_state.get("g_level_label", "Intermediate")
     cur_level = LEVELS[cur_label]
 
+    # A failed call stores its reason, not a placeholder comment, so the move
+    # stays explainable: the button comes back as "Try again". (It used to store
+    # a sentinel that hid the button for good — one quota blip mid-demo and that
+    # move could never be explained.) The level is recorded only on success.
     def _write_comment():
         with st.spinner("Coach is thinking…"):
             try:
                 last["comment"] = explain_move(review, level=cur_level)
-            except Exception:
-                last["comment"] = "__unavailable__"
-            last["comment_level"] = cur_level
+                last["comment_level"] = cur_level
+                last["comment_error"] = None
+            except Exception as err:
+                print(f"[coach] explain_move failed: {err!r}", flush=True)
+                last["comment_error"] = describe_coach_error(err)
 
     if not last["comment"]:
-        if st.button("Explain this move", key=f"g_explain_{idx}"):
+        label = "Try again" if last.get("comment_error") else "Explain this move"
+        if st.button(label, key=f"g_explain_{idx}"):
             _write_comment()
-    elif last["comment"] != "__unavailable__" and last.get("comment_level") != cur_level:
+    elif last.get("comment_level") != cur_level:
         # Already explained, but the student has since picked a different level.
         if st.button(f"Re-explain for {cur_label}", key=f"g_reexplain_{idx}"):
             _write_comment()
 
-    if last["comment"] == "__unavailable__":
-        st.caption("Coach commentary unavailable — check GOOGLE_API_KEY. The engine verdict still stands.")
-    elif last["comment"]:
+    if last.get("comment_error"):
+        st.caption(f'{last["comment_error"]} The engine verdict still stands.')
+    if last["comment"]:
         st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
 
 
@@ -432,24 +439,28 @@ def _render_hint(board):
     cur_label = st.session_state.get("g_level_label", "Intermediate")
     cur_level = LEVELS[cur_label]
 
+    # Same failure handling as the move panel: keep the reason, offer a retry.
     def _write_comment():
         with st.spinner("Coach is thinking…"):
             try:
                 hint["comment"] = explain_position(analysis, level=cur_level)
-            except Exception:
-                hint["comment"] = "__unavailable__"
-            hint["comment_level"] = cur_level
+                hint["comment_level"] = cur_level
+                hint["comment_error"] = None
+            except Exception as err:
+                print(f"[coach] explain_position failed: {err!r}", flush=True)
+                hint["comment_error"] = describe_coach_error(err)
 
     if not hint["comment"]:
-        if st.button("Explain this position", key="g_hint_explain"):
+        label = "Try again" if hint.get("comment_error") else "Explain this position"
+        if st.button(label, key="g_hint_explain"):
             _write_comment()
-    elif hint["comment"] != "__unavailable__" and hint.get("comment_level") != cur_level:
+    elif hint.get("comment_level") != cur_level:
         if st.button(f"Re-explain for {cur_label}", key="g_hint_reexplain"):
             _write_comment()
 
-    if hint["comment"] == "__unavailable__":
-        st.caption("Coach commentary unavailable — check GOOGLE_API_KEY. The engine's move still stands.")
-    elif hint["comment"]:
+    if hint.get("comment_error"):
+        st.caption(f'{hint["comment_error"]} The engine\'s move still stands.')
+    if hint["comment"]:
         st.markdown(f'<div class="commentary">{hint["comment"]}</div>', unsafe_allow_html=True)
 
 
