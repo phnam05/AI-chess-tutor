@@ -55,8 +55,21 @@ commits are on the laptop only, waiting to be pushed.
 | "Explain plainly" experiment | 16/25 with it vs. 22/25 without, so it was removed |
 | Invented moves in the latest run | **0** |
 
-**Waiting on you:** **push the latest commits from a network outside the
-company firewall** (`git push`); until then the live app runs the old code.
+**Your to-do list** (things only you can do):
+1. **Push** from a network outside the company firewall (`git push`). Until
+   then, the live app runs the old code, including the bug from the demo.
+2. **Talk to Dr. Marcolino:** share this diary's verdict, ask which part should
+   be the thesis's main focus (faithfulness, the learner model, or both), raise
+   the Maia "infer the player's level" idea, and ask how ethics approval works
+   at VinUniversity for a small study with real players. Start that early.
+3. **Find a second judge:** a friend who plays chess, to rate some of the
+   coach's answers the way you did. That's needed so the thesis doesn't rest on
+   the author's opinion alone.
+4. Optional: ask IT whether github.com and lichess.org can be let through the
+   firewall.
+
+**Next for me (no GitHub needed):** show the learner model inside the app;
+measure whether the three levels really differ; write up the related research.
 
 ### Is it good enough for a master's thesis? (honest verdict, 23 Sep 2026)
 
