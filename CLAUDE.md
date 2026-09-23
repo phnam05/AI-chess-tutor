@@ -152,6 +152,14 @@ python explainer.py          # explains a sample position at all 3 levels
   the middle of a capture exchange: a line truncated at "…Qxf4" looked like a
   hung queen when the very next ply was the Bxf4 recapture.
 
+## Development diary
+
+`DEV_DIARY.md` is the project's running story, written for the author: plain
+words, no unexplained jargon. At the end of **every** working session, add a
+dated entry at the end of Part 3 in the same shape (what we did → difficulties
+and how we got past them → state at end of day) and refresh "Where the project
+stands". Record honest results, including what failed or was reverted.
+
 ## When extending
 
 - New factual capability → add it to the engine stage and surface it as data;
