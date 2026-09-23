@@ -66,6 +66,7 @@ def _review_from_infos(board, played_move, info_before, info_after):
     # kind can be checked by hand against the lines it came from.
     best_line = render_line(board, info_before.get("pv", []))
     mistake_type = classify_mistake(board, played_move, info_before, info_after, label)
+    chances = position_chances(board, info_before)
 
     return {
         "fen": board.fen(),
@@ -83,6 +84,7 @@ def _review_from_infos(board, played_move, info_before, info_after):
         "refutation": refutation,
         "best_line": best_line,
         "mistake_type": mistake_type,
+        "chances": chances,
     }
 
 
@@ -204,6 +206,22 @@ def _material_at_line_end(board, moves, color):
     for move in moves[:len(render_line(board, moves))]:
         end.push(move)
     return material(end, color)
+
+
+def position_chances(board, info_before):
+    """What the position offered BEFORE the move, whatever was then played:
+    a forced mate for the mover, and/or a best line that wins material. These
+    are the moments a "missed" mistake was even possible — the learner model
+    counts a missed chance against the chances there were, not against every
+    move (you can't miss a free piece that wasn't there)."""
+    mover = board.turn
+    best = info_before["score"].pov(mover)
+    gain = (_material_at_line_end(board, info_before.get("pv", []), mover)
+            - material(board, mover))
+    return {
+        "mate": best.is_mate() and best > chess.engine.Cp(0),
+        "material": gain >= 1,
+    }
 
 
 def classify_mistake(board, played_move, info_before, info_after, label):

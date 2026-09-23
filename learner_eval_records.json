@@ -1,0 +1,8150 @@
+{
+ "hangs": [
+  {
+   "bot": "hangs",
+   "seed": 0,
+   "games": 7,
+   "moves": [
+    {
+     "where": "game 1, move 4 Ba4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 d4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Bf4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 8 d5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Re1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 dxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Qe2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 Nc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Rad1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 b4",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 Nh5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 6 g6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Qc5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 6 gxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 7 Bc5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 5 Bc4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 6 Nxc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 7 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 8 Bh6",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 6 Nd5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 7, move 3 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 4 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 5 d3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 6 a3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 7 bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 8 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 9 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 10 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 11 Bg5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    }
+   ]
+  },
+  {
+   "bot": "hangs",
+   "seed": 1,
+   "games": 6,
+   "moves": [
+    {
+     "where": "game 1, move 5 Bf5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 4 Bh6",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Nge2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 Ng3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 Bb5+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 Nxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Bxc6+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 12 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 13 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Nh5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 15 Nf6",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 Ng8",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 3 Ba6",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 4 Qe2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 Qd3",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 7 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 8 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 9 g5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 10 Nh6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 11 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 12 Nxf5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 13 gxh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 14 Nxh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 15 Nd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 16 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 17 Ne5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 18 Qf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 19 Bd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 20 Bh3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 21 Qf5",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 3 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 4 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 5 d3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 6 a3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 7 bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "hangs",
+   "seed": 2,
+   "games": 5,
+   "moves": [
+    {
+     "where": "game 1, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Ne4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 7 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Ba6",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 3 Bc5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 4 d4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 Bf5",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 8 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 9 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 10 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 Rg1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 12 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 13 dxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 14 Nfd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 15 f4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 16 fxg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 17 Bb5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 18 Bf4",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 5 Bh3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 6 Ng4",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 3 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 4 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 5 d3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 6 a3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 7 bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 8 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 9 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 10 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 11 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 12 a4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 13 Nh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 14 Nf5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 15 Ng3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "hangs",
+   "seed": 3,
+   "games": 8,
+   "moves": [
+    {
+     "where": "game 1, move 3 Qg5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 3 Bh6",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 4 Nc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 h5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Nxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 Ng3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 Qd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 f3",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 8 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 9 Bf5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 10 g5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 Nc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 3 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 4 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 Nd4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 4 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 5 Ba3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 4 Nd4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 5 Bc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 6 Bxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 7 Be6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 8 Nbd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 9 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 11 Nb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 12 Qd7",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 7, move 13 Qb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 14 Bf5",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 8, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 8, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 8, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 8, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 8, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 8, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "hangs",
+   "seed": 4,
+   "games": 8,
+   "moves": [
+    {
+     "where": "game 1, move 3 Ba6",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 4 Qe2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 Bd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Qh5",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 f5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 d3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Nd4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 4 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 6 Ba7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 7 Nd5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 4 Nd4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 5 Bc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 6 Bxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 7 Be6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 8 Nbd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 9 Nh5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 10 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 11 Bc4",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 7, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 10 Qa4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 11 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 12 Bxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 13 Qxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 14 Qb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 7, move 15 Qc6",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 8, move 3 Bc5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    }
+   ]
+  }
+ ],
+ "misses": [
+  {
+   "bot": "misses",
+   "seed": 0,
+   "games": 4,
+   "moves": [
+    {
+     "where": "game 1, move 4 Ba4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 d4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Bb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Be3",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 9 Bxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 Na3",
+     "label": "Blunder",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 11 Qxf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 c4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Rad1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 Nb1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 Rfe1",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Be6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 Nbd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Nb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 12 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 13 Nbxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Qc7",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 15 Kd8",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 10 Qa4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 Rg1",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 12 Nxg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 13 O-O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 14 Rxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 15 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 16 Bc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 17 Bxf7+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "misses",
+   "seed": 1,
+   "games": 3,
+   "moves": [
+    {
+     "where": "game 1, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Be6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Nbd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Nb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Nbxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Be7",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 15 e4",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 Qa4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 12 O-O-O",
+     "label": "Blunder",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 13 Qxa8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Nxg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 15 Nxf7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 16 Bxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 17 Bd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 18 Qxf8+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 19 Nb1",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 gxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 8 Nd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 9 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 Bb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 12 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 13 Bf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 14 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 15 c5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "misses",
+   "seed": 2,
+   "games": 3,
+   "moves": [
+    {
+     "where": "game 1, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 Qa4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 Bxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Qxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Nd4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 15 Nc2",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 gxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 Nd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Bb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 12 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 13 Bf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 15 c5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 16 Qc7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 17 Rac8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 18 Ne5",
+     "label": "Blunder",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 19 Bxg2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 20 Bg7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 21 Rfd8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 8 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 9 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 10 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 Bd3",
+     "label": "Inaccuracy",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    }
+   ]
+  },
+  {
+   "bot": "misses",
+   "seed": 3,
+   "games": 3,
+   "moves": [
+    {
+     "where": "game 1, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 a5",
+     "label": "Blunder",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 7 h5",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Bc1",
+     "label": "Inaccuracy",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 12 gxh5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 13 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Nxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 15 b3",
+     "label": "Blunder",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 16 Rh3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 17 Rh1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 18 Rh2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 19 Rh3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 20 Rg3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 21 Bd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 22 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 23 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 24 bxa6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 25 Ng5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 26 Rh3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 27 Bf3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 8 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 9 g5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 10 Nh6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 12 a6",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 13 Nxf5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 14 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "misses",
+   "seed": 4,
+   "games": 2,
+   "moves": [
+    {
+     "where": "game 1, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Nc5",
+     "label": "Blunder",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 12 dxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 gxh5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Bd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 Bf3",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 17 Nxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 18 Bg2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 19 Qc1",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 g5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 Nh6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 12 Bh8",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 13 Nxf5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Bf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 15 Nd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 16 Qxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 17 Bf5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 18 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 19 Nd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 20 exd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 21 Bxc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 22 Rae8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 23 a5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 24 c5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 25 bxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 26 Ne5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 27 c5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  }
+ ],
+ "drifts": [
+  {
+   "bot": "drifts",
+   "seed": 0,
+   "games": 4,
+   "moves": [
+    {
+     "where": "game 1, move 4 Ba4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 d4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 c3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 8 d5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Nxe5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Nxf6+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 Qd2",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 13 Qc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Qd2",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 e6",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 7 Qc7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 h5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 d5",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 11 e5",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 12 axb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 13 Qxd6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Nc6",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 15 Bf5",
+     "label": "Mistake",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 Qe5+",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 8 h4",
+     "label": "Blunder",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 9 a3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 6 gxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 7 Bf8",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 8 c6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 9 b5",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 10 Bb4",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 11 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 12 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 13 Qd5",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 14 a5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "drifts",
+   "seed": 1,
+   "games": 5,
+   "moves": [
+    {
+     "where": "game 1, move 5 Qd7",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 6 b5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 Kd2",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 Ne7",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 4 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 a5",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 6 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 7 g6",
+     "label": "Blunder",
+     "mistake_type": "allowed_mate",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 3 h4",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 4 Bc4",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 5 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 6 Bb3",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 8 Kf1",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 9 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 10 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 11 Bxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 12 Bxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 13 Ba4+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 14 Nc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 15 Ne3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 16 c4",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 17 Qb1",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 18 Qc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 19 g3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 20 Re1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 21 Ne2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 22 Nc1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 23 Rh2",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 24 Kg2",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 25 Nd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 26 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 27 Qc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 28 bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 29 Rxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 30 Rh3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 31 Rf3",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "drifts",
+   "seed": 2,
+   "games": 4,
+   "moves": [
+    {
+     "where": "game 1, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Nh4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 3 Ke7",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 4 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 c6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 h5",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 7 Qe8",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 8 Kd8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 Nd7",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 10 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Bd6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 12 Nf8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 13 g5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 14 Rb8",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 15 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 16 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 17 h3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 18 Kc7",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 Be2",
+     "label": "Excellent",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 7 Bh5",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 8 Ke2",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 9 c3",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 10 g4",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 11 f3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 12 Qf1",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 7 Ng4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 8 f6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 9 g5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 10 h6",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 11 Na6",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 12 Bxg4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 13 h5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 14 Bxf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 15 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "drifts",
+   "seed": 3,
+   "games": 4,
+   "moves": [
+    {
+     "where": "game 1, move 3 g6",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 4 c6",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 5 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Nd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Ne7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Bg7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Qa5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 h5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 12 exf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 g4",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 7 h3",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 8 Nc5",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 6 b6",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 7 a5",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 8 Bg4",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 9 dxe5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 10 Bxe2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 11 c6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 12 Qc7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 13 Nfd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 14 a4",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 15 Re8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 16 Ra5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 17 Qc8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 18 Qc7",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 19 e6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 20 e5",
+     "label": "Inaccuracy",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 21 Re6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 22 Nxe5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 3, move 23 Rd6",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 3 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 4 e4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 d3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 6 a3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 7 Nd2",
+     "label": "Blunder",
+     "mistake_type": "missed_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    }
+   ]
+  },
+  {
+   "bot": "drifts",
+   "seed": 4,
+   "games": 6,
+   "moves": [
+    {
+     "where": "game 1, move 3 Bd3",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 4 Bxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 Bf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Bh5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 1, move 7 Qxh5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 Ne5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 h4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 5 c5",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 6 Kd7",
+     "label": "Blunder",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 7 Kc7",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 2, move 8 Kb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 a5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 10 dxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 11 Nbd7",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 3 f3",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 4 d4",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 3, move 5 Bg5",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 4 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 5 g6",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 6 h5",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 7 Bd6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 8 Bf8",
+     "label": "Inaccuracy",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 4, move 9 d5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 10 Nxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 11 Be6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 12 fxe6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 13 Rg8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 14 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 15 Qd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 4, move 16 Bg5",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 4 Bd3",
+     "label": "Mistake",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 5 h4",
+     "label": "Blunder",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 5, move 6 Bxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 5, move 7 a3",
+     "label": "Mistake",
+     "mistake_type": "lost_material",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 6, move 7 Qc7",
+     "label": "Inaccuracy",
+     "mistake_type": "positional",
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    },
+    {
+     "where": "game 6, move 8 Nbd7",
+     "label": "Good",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": true
+    }
+   ]
+  }
+ ],
+ "solid": [
+  {
+   "bot": "solid",
+   "seed": 0,
+   "games": 1,
+   "moves": [
+    {
+     "where": "game 1, move 4 Ba4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 d4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Bb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 dxe5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 Nbd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Bc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 Rxf2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Kxf2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Nf1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 Kg1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 Ne3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 17 Nxe5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 18 Bxh7+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 19 Qh5+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 20 Qxe5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 21 b3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 22 Ba3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 23 cxb4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 24 Nf1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 25 Qg3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 26 bxc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 27 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 28 Bb2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 29 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 30 Qxe3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 31 Nf1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 32 Bc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 33 Ng3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 34 Re1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 35 Rxe2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 36 Re5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 37 Rxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 38 Ra5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 39 Kh2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 40 h5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 41 Rxa6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 42 Kg3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 43 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "solid",
+   "seed": 1,
+   "games": 2,
+   "moves": [
+    {
+     "where": "game 1, move 5 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Be6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Nbd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Nb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Nbxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Nxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 Nxe3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 Rc8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 17 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 18 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 19 d5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 20 Ra8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 21 Rb8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 22 Qd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 23 Rfd8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 24 Rb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 25 Qb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 26 Rb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 27 Rb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 28 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 29 Rb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 30 Rb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 31 Bf2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 32 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 33 Bf2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 34 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 35 Bf2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 36 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 37 Bf2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 38 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 2, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "solid",
+   "seed": 2,
+   "games": 1,
+   "moves": [
+    {
+     "where": "game 1, move 4 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 cxd5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Qxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Bg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 e3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Bb5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 Qa4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Bh4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 Bxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Qxc6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Qb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 Bg3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 Qxb4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 17 Be5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 18 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 19 Bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 20 bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 21 Rfd1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 22 Rdb1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 23 Nd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 24 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 25 a3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 26 Rb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 27 Kf1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 28 Ke2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 29 Kd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 30 Ra6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 31 Ra5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 32 Ra6+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 33 Ra8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 34 Rh8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 35 Ra8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 36 Ra6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 37 Ra5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 38 Ra6+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 39 Ra2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 40 Ra7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 41 Kxc1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 42 Rb2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 43 Kxb2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "solid",
+   "seed": 3,
+   "games": 1,
+   "moves": [
+    {
+     "where": "game 1, move 3 Nf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 4 dxe4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 Be7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 gxf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 f5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 Nd7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 a6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 b5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Bb7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 Bf6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 b4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 c5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 Qc7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 17 Rac8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 18 a5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 19 Ba6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 20 Nxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 21 Qxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 22 Rb8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 23 Rb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 24 Rd6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 25 Qxd6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 26 Rd8",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 27 Qd1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 28 Rxd1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 29 Rxe1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 30 Bxc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 31 Bxe1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 32 Bc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 33 Bb2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 34 axb4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 35 Bd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 36 Kg7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 37 fxg4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 38 Be5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 39 Bc7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 40 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 41 Bxb6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 42 Bc7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  },
+  {
+   "bot": "solid",
+   "seed": 4,
+   "games": 1,
+   "moves": [
+    {
+     "where": "game 1, move 3 e5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 4 Nd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 5 Nb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 6 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 7 Be3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 8 c3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 9 Be2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 10 g4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 11 Rg1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 12 h4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 13 dxc5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 14 Nfd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 15 f4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 16 fxg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 17 Bxg5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 18 Nf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 19 Rf1",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 20 Rxf3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 21 Rh3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 22 Bxe7",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 23 h5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 24 gxf5",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 25 Nd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 26 Qc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 27 cxd4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 28 Qxf5+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 29 b3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 30 Qd3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 31 O-O-O",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 32 bxc4",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 33 Rd2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 34 Rxe2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 35 h6",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 36 Qg3+",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 37 Rh2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 38 Qxh2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": true
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 39 Kc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 40 Kc3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 41 Kc2",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    },
+    {
+     "where": "game 1, move 42 Kb3",
+     "label": "Best",
+     "mistake_type": null,
+     "chances": {
+      "mate": false,
+      "material": false
+     },
+     "planted": false
+    }
+   ]
+  }
+ ]
+}

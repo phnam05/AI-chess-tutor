@@ -38,7 +38,14 @@ app.py              Streamlit UI — the only entry point. Orchestrates the stag
   ├─ move_review.py       Grades a *played* move vs. the engine's best.
   ├─ explainer.py         Stage 2: engine facts → grounded, level-adapted prose.
   ├─ engine_pool.py       Shared persistent Stockfish handle + engine discovery.
-  └─ board_ui.py          Pillow board for the interactive click-to-move UI.
+  ├─ board_ui.py          Pillow board for the interactive click-to-move UI.
+  └─ learner_model.py     Step 3: per-player mistake-rate estimates (not yet in the UI).
+
+Research scripts (run by hand, not imported by the app):
+  faithfulness.py / evaluate_faithfulness.py / validate_checker.py / build_audit.py
+                          Steps 1–2: check, measure and audit the coach's faithfulness.
+  simulate_learners.py    Step 3d: bots with planted weaknesses → does the learner
+                          model find them? Writes learner_eval.md.
 ```
 
 Each file is one stage of a pipeline and is meant to stay independently runnable
@@ -103,6 +110,7 @@ Stage self-tests (no UI needed):
 python engine_analysis.py   # prints facts for a sample FEN
 python move_review.py        # grades a good move and a bad one
 python explainer.py          # explains a sample position at all 3 levels
+python learner_model.py      # learner-model rules on hand-made reviews (no engine)
 ```
 
 ## Conventions & gotchas
@@ -172,6 +180,9 @@ stands". Record honest results, including what failed or was reverted.
 
 ## Out of scope (by design, for now)
 
-No multi-turn game state, no learner model, no persistence, no automated test
-suite. These are noted as future directions in the README — don't assume they
-exist.
+No conversation with the coach across moves, no persistence between sessions,
+no automated test suite (only the per-stage self-tests). The learner model
+(`learner_model.py`, Step 3) exists and is validated in simulation, but is not
+wired into the app yet: showing it to the student and giving it to the coach is
+Step 3c, and the coach part is a prompt change — measure faithfulness again
+after it.
