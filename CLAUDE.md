@@ -63,6 +63,15 @@ the explainer narrates it; it must never invent its own refutation. This is the
 invariant's textbook shape: a new chess fact comes from the engine first, and only
 then does the LLM phrase it.
 
+For a weak move (Inaccuracy / Mistake / Blunder), `classify_mistake` also names
+its **kind** — `allowed_mate`, `missed_mate`, `lost_material`, `missed_material`,
+or `positional` — by comparing the engine's best line (`best_line`, kept in the
+review) with the line after the played move, on mate and a plain 1/3/3/5/9
+material count. It's the same kind of fact as the label: read off engine output,
+never guessed. `positional` deliberately doesn't say *which* positional thing
+went wrong, because the engine doesn't say. These kinds are the input for the
+session learner model (Step 3).
+
 ## Running it
 
 ```bash
@@ -101,6 +110,9 @@ python explainer.py          # explains a sample position at all 3 levels
   eval math — a sign error here silently corrupts every grade.
 - **Mate scores** aren't centipawns. `engine_analysis.py` renders them as text
   ("Mate in N"); `move_review.py` substitutes ±10000 so comparisons still work.
+  Take a mate's sign by comparing with `Cp(0)`, never `mate() > 0`: the side that
+  just delivered mate gets `MateGiven`, whose `mate()` is 0 (that bug once graded
+  a mating move that wasn't the engine's pick a Blunder).
 - **Coaching is deliberately short.** The persona in `explainer.py` withholds and
   paces on purpose (good tutoring ≠ an info dump). Don't "improve" it into longer,
   exhaustive, bulleted answers — brevity is a feature, enforced by the prompt.
