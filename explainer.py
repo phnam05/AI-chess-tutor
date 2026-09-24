@@ -21,10 +21,11 @@ KEY_NAMES = ("GOOGLE_API_KEY", "GEMINI_API_KEY")
 
 
 def _find_api_key():
+    secrets_error = None
     try:
         secrets = dict(st.secrets)
-    except Exception:
-        secrets = {}
+    except Exception as err:
+        secrets, secrets_error = {}, err
     for name in KEY_NAMES:
         if secrets.get(name):
             return secrets[name]
@@ -36,10 +37,12 @@ def _find_api_key():
     for name in KEY_NAMES:
         if os.environ.get(name):
             return os.environ[name]
+    # Say what *was* there (names only, never values) so the Cloud logs show
+    # whether the secret is misnamed or the secrets box didn't parse at all.
+    print(f"[coach] no API key found; secret names: {sorted(secrets)}; "
+          f"secrets error: {secrets_error!r}", flush=True)
     return None
 
-
-API_KEY = _find_api_key()
 
 MODEL = "gemini-3.1-flash-lite"
 
@@ -50,12 +53,23 @@ MODEL = "gemini-3.1-flash-lite"
 # transient codes (408/429/5xx), never a bad key or a bad request.
 # No key -> no client: newer SDKs raise at construction, which used to crash the
 # whole app on import; now only the coach is unavailable and the engine still works.
-client = genai.Client(
-    api_key=API_KEY,
-    http_options=types.HttpOptions(
-        retry_options=types.HttpRetryOptions(attempts=3, initial_delay=2, max_delay=8)
-    ),
-) if API_KEY else None
+# Built on first use, not at import: an import-time lookup kept a key added in
+# Streamlit's settings unseen until the app was rebooted.
+_client = None
+
+
+def _get_client():
+    global _client
+    if _client is None:
+        key = _find_api_key()
+        if key:
+            _client = genai.Client(
+                api_key=key,
+                http_options=types.HttpOptions(
+                    retry_options=types.HttpRetryOptions(attempts=3, initial_delay=2, max_delay=8)
+                ),
+            )
+    return _client
 
 
 def describe_coach_error(err):
@@ -63,7 +77,7 @@ def describe_coach_error(err):
     used to read "check GOOGLE_API_KEY", which sent a quota or overload hiccup
     looking for a key problem that didn't exist."""
     code = getattr(err, "code", None)
-    if client is None:
+    if _client is None:
         return "Coach unavailable: no GOOGLE_API_KEY (or GEMINI_API_KEY) is set."
     if code == 429:
         return ("The coach hit Gemini's usage limit (the free plan allows about 15 "
@@ -79,6 +93,7 @@ def describe_coach_error(err):
 
 def _generate(level, facts):
     """One coach call: the fixed persona + the level, then the engine facts."""
+    client = _get_client()
     if client is None:
         raise RuntimeError("no GOOGLE_API_KEY set")
     response = client.models.generate_content(
