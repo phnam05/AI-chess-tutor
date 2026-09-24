@@ -14,12 +14,32 @@ load_dotenv()
 
 # Works on Streamlit Cloud (st.secrets) and locally (.env / env var). Touching
 # st.secrets when no secrets.toml exists raises StreamlitSecretNotFoundError, so
-# guard it and fall back to the environment variable.
-try:
-    API_KEY = st.secrets.get("GOOGLE_API_KEY")
-except Exception:
-    API_KEY = None
-API_KEY = API_KEY or os.environ.get("GOOGLE_API_KEY")
+# guard it and fall back to the environment variable. Accept both names the SDK
+# itself reads (GOOGLE_API_KEY, GEMINI_API_KEY), at the top level or under a
+# [section]: checking only GOOGLE_API_KEY once left the deployed coach keyless.
+KEY_NAMES = ("GOOGLE_API_KEY", "GEMINI_API_KEY")
+
+
+def _find_api_key():
+    try:
+        secrets = dict(st.secrets)
+    except Exception:
+        secrets = {}
+    for name in KEY_NAMES:
+        if secrets.get(name):
+            return secrets[name]
+    for section in secrets.values():
+        if hasattr(section, "get"):
+            for name in KEY_NAMES:
+                if section.get(name):
+                    return section[name]
+    for name in KEY_NAMES:
+        if os.environ.get(name):
+            return os.environ[name]
+    return None
+
+
+API_KEY = _find_api_key()
 
 MODEL = "gemini-3.1-flash-lite"
 
@@ -44,7 +64,7 @@ def describe_coach_error(err):
     looking for a key problem that didn't exist."""
     code = getattr(err, "code", None)
     if client is None:
-        return "Coach unavailable: no GOOGLE_API_KEY is set."
+        return "Coach unavailable: no GOOGLE_API_KEY (or GEMINI_API_KEY) is set."
     if code == 429:
         return ("The coach hit Gemini's usage limit (the free plan allows about 15 "
                 "requests a minute). Wait a minute, then try again.")
