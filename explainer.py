@@ -14,34 +14,20 @@ load_dotenv()
 
 # Works on Streamlit Cloud (st.secrets) and locally (.env / env var). Touching
 # st.secrets when no secrets.toml exists raises StreamlitSecretNotFoundError, so
-# guard it and fall back to the environment variable. Accept both names the SDK
-# itself reads (GOOGLE_API_KEY, GEMINI_API_KEY), at the top level or under a
-# [section]: checking only GOOGLE_API_KEY once left the deployed coach keyless.
-KEY_NAMES = ("GOOGLE_API_KEY", "GEMINI_API_KEY")
-
-
+# guard it and fall back to the environment variable.
 def _find_api_key():
     secrets_error = None
     try:
         secrets = dict(st.secrets)
     except Exception as err:
         secrets, secrets_error = {}, err
-    for name in KEY_NAMES:
-        if secrets.get(name):
-            return secrets[name]
-    for section in secrets.values():
-        if hasattr(section, "get"):
-            for name in KEY_NAMES:
-                if section.get(name):
-                    return section[name]
-    for name in KEY_NAMES:
-        if os.environ.get(name):
-            return os.environ[name]
-    # Say what *was* there (names only, never values) so the Cloud logs show
-    # whether the secret is misnamed or the secrets box didn't parse at all.
-    print(f"[coach] no API key found; secret names: {sorted(secrets)}; "
-          f"secrets error: {secrets_error!r}", flush=True)
-    return None
+    key = secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not key:
+        # Say what *was* there (names only, never values) so the Cloud logs show
+        # whether the secret is misnamed or the secrets box didn't parse at all.
+        print(f"[coach] no API key found; secret names: {sorted(secrets)}; "
+              f"secrets error: {secrets_error!r}", flush=True)
+    return key
 
 
 MODEL = "gemini-3.1-flash-lite"
@@ -78,7 +64,7 @@ def describe_coach_error(err):
     looking for a key problem that didn't exist."""
     code = getattr(err, "code", None)
     if _client is None:
-        return "Coach unavailable: no GOOGLE_API_KEY (or GEMINI_API_KEY) is set."
+        return "Coach unavailable: no GOOGLE_API_KEY is set."
     if code == 429:
         return ("The coach hit Gemini's usage limit (the free plan allows about 15 "
                 "requests a minute). Wait a minute, then try again.")
