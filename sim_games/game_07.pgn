@@ -1,0 +1,10 @@
+[Event "Simulated game: Stockfish Skill Level 0 vs itself"]
+[Site "simulate_games.py"]
+[Date "2026.09.26"]
+[Round "7"]
+[White "Player A"]
+[Black "Player B"]
+[Result "0-1"]
+[Termination "White resigned (5+ pawns down or mate coming)"]
+
+1. e4 e6 2. Nf3 a6 3. e5 d6 4. d4 h6 5. Be2 b6 6. Nc3 Nc6 7. O-O d5 8. Bf4 Bb7 9. Bd2 Na5 10. a3 Nc4 11. Bc1 Ne7 12. b3 b5 13. a4 Nb6 14. axb5 axb5 15. Rxa8 Bxa8 16. Bd3 Ng6 17. Bxb5+ Nd7 18. g3 Bb4 19. Ne2 O-O 20. Bd3 c5 21. Bd2 Qb8 22. h4 cxd4 23. Nexd4 Ngxe5 24. Bxb4 Qxb4 25. Qe2 Nxf3+ 26. Kg2 Qxd4 27. h5 Qc3 28. Rb1 Nfe5 0-1

@@ -1,0 +1,7536 @@
+{
+ "date": "2026-09-26",
+ "games": [
+  {
+   "game": 1,
+   "moves": 31,
+   "White": "Player A",
+   "Black": "Player B",
+   "Result": "0-1",
+   "Termination": "White resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 2,
+   "moves": 28,
+   "White": "Player B",
+   "Black": "Player A",
+   "Result": "1-0",
+   "Termination": "Black resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 3,
+   "moves": 41,
+   "White": "Player A",
+   "Black": "Player B",
+   "Result": "1-0",
+   "Termination": "Black resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 4,
+   "moves": 33,
+   "White": "Player B",
+   "Black": "Player A",
+   "Result": "1-0",
+   "Termination": "Black resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 5,
+   "moves": 42,
+   "White": "Player A",
+   "Black": "Player B",
+   "Result": "0-1",
+   "Termination": "checkmate"
+  },
+  {
+   "game": 6,
+   "moves": 22,
+   "White": "Player B",
+   "Black": "Player A",
+   "Result": "0-1",
+   "Termination": "White resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 7,
+   "moves": 28,
+   "White": "Player A",
+   "Black": "Player B",
+   "Result": "0-1",
+   "Termination": "White resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 8,
+   "moves": 8,
+   "White": "Player B",
+   "Black": "Player A",
+   "Result": "0-1",
+   "Termination": "White resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 9,
+   "moves": 29,
+   "White": "Player A",
+   "Black": "Player B",
+   "Result": "0-1",
+   "Termination": "White resigned (5+ pawns down or mate coming)"
+  },
+  {
+   "game": 10,
+   "moves": 26,
+   "White": "Player B",
+   "Black": "Player A",
+   "Result": "0-1",
+   "Termination": "White resigned (5+ pawns down or mate coming)"
+  }
+ ],
+ "moves": [
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 1,
+   "color": "White",
+   "san": "d4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 1,
+   "color": "Black",
+   "san": "d5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 2,
+   "color": "White",
+   "san": "Bf4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 2,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 3,
+   "color": "White",
+   "san": "c3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 3,
+   "color": "Black",
+   "san": "c5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 4,
+   "color": "White",
+   "san": "e3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 4,
+   "color": "Black",
+   "san": "e6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 5,
+   "color": "White",
+   "san": "Be2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Qb6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 6,
+   "color": "White",
+   "san": "Qb3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 6,
+   "color": "Black",
+   "san": "Be7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 7,
+   "color": "White",
+   "san": "Nd2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 7,
+   "color": "Black",
+   "san": "Qd8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 8,
+   "color": "White",
+   "san": "Qc2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 8,
+   "color": "Black",
+   "san": "Nc6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 9,
+   "color": "White",
+   "san": "Ngf3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 9,
+   "color": "Black",
+   "san": "Nh5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 10,
+   "color": "White",
+   "san": "Be5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 10,
+   "color": "Black",
+   "san": "cxd4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 11,
+   "color": "White",
+   "san": "Nxd4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 11,
+   "color": "Black",
+   "san": "Nxe5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 12,
+   "color": "White",
+   "san": "Qa4+",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 12,
+   "color": "Black",
+   "san": "Nd7",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 13,
+   "color": "White",
+   "san": "Bxh5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 13,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 14,
+   "color": "White",
+   "san": "N4b3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 14,
+   "color": "Black",
+   "san": "e5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 15,
+   "color": "White",
+   "san": "Qa5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 15,
+   "color": "Black",
+   "san": "g6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 16,
+   "color": "White",
+   "san": "Qxd8",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 16,
+   "color": "Black",
+   "san": "Rxd8",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 17,
+   "color": "White",
+   "san": "Bd1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Nb6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 18,
+   "color": "White",
+   "san": "a4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 18,
+   "color": "Black",
+   "san": "h5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 19,
+   "color": "White",
+   "san": "O-O",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 19,
+   "color": "Black",
+   "san": "a5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 20,
+   "color": "White",
+   "san": "Re1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 20,
+   "color": "Black",
+   "san": "f6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 21,
+   "color": "White",
+   "san": "Bc2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Kg7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 22,
+   "color": "White",
+   "san": "Kf1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 22,
+   "color": "Black",
+   "san": "f5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 23,
+   "color": "White",
+   "san": "f4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 23,
+   "color": "Black",
+   "san": "Nc4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 24,
+   "color": "White",
+   "san": "g3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Bd7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 25,
+   "color": "White",
+   "san": "Nxc4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 25,
+   "color": "Black",
+   "san": "dxc4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 26,
+   "color": "White",
+   "san": "fxe5",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 26,
+   "color": "Black",
+   "san": "cxb3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 27,
+   "color": "White",
+   "san": "Bxb3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 27,
+   "color": "Black",
+   "san": "Bc6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 28,
+   "color": "White",
+   "san": "h3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 28,
+   "color": "Black",
+   "san": "Rd2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 29,
+   "color": "White",
+   "san": "Rab1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 29,
+   "color": "Black",
+   "san": "Be4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 30,
+   "color": "White",
+   "san": "Red1",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 30,
+   "color": "Black",
+   "san": "Rad8",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 1,
+   "player": "A",
+   "move_no": 31,
+   "color": "White",
+   "san": "Rbc1",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 1,
+   "player": "B",
+   "move_no": 31,
+   "color": "Black",
+   "san": "h4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 1,
+   "color": "White",
+   "san": "e3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 1,
+   "color": "Black",
+   "san": "d5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 2,
+   "color": "White",
+   "san": "Be2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 2,
+   "color": "Black",
+   "san": "a6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 3,
+   "color": "White",
+   "san": "d4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 3,
+   "color": "Black",
+   "san": "g6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 4,
+   "color": "White",
+   "san": "b3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 4,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 5,
+   "color": "White",
+   "san": "a3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Bg7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 6,
+   "color": "White",
+   "san": "Bb2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 6,
+   "color": "Black",
+   "san": "c6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 7,
+   "color": "White",
+   "san": "Nd2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 7,
+   "color": "Black",
+   "san": "h5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 8,
+   "color": "White",
+   "san": "c4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 8,
+   "color": "Black",
+   "san": "Qd6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 9,
+   "color": "White",
+   "san": "c5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 9,
+   "color": "Black",
+   "san": "Qe6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 10,
+   "color": "White",
+   "san": "b4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 10,
+   "color": "Black",
+   "san": "a5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 11,
+   "color": "White",
+   "san": "bxa5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 11,
+   "color": "Black",
+   "san": "Ne4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 12,
+   "color": "White",
+   "san": "Ngf3",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 12,
+   "color": "Black",
+   "san": "Nxc5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 13,
+   "color": "White",
+   "san": "Ng5",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 13,
+   "color": "Black",
+   "san": "Qd7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 14,
+   "color": "White",
+   "san": "Bc3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 14,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 15,
+   "color": "White",
+   "san": "Rc1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 15,
+   "color": "Black",
+   "san": "f6",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 16,
+   "color": "White",
+   "san": "Bb4",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 16,
+   "color": "Black",
+   "san": "Qe8",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 17,
+   "color": "White",
+   "san": "Rxc5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 17,
+   "color": "Black",
+   "san": "fxg5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 18,
+   "color": "White",
+   "san": "h3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 18,
+   "color": "Black",
+   "san": "Nd7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 19,
+   "color": "White",
+   "san": "Rc3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Kh7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 20,
+   "color": "White",
+   "san": "Bd3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 20,
+   "color": "Black",
+   "san": "Kh8",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 21,
+   "color": "White",
+   "san": "O-O",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Bf6",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 22,
+   "color": "White",
+   "san": "Qc1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 22,
+   "color": "Black",
+   "san": "Qf7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 23,
+   "color": "White",
+   "san": "e4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 23,
+   "color": "Black",
+   "san": "g4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 24,
+   "color": "White",
+   "san": "Nb3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Bh4",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 25,
+   "color": "White",
+   "san": "Qh6+",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 25,
+   "color": "Black",
+   "san": "Kg8",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 26,
+   "color": "White",
+   "san": "exd5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 26,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 27,
+   "color": "White",
+   "san": "g3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "A",
+   "move_no": 27,
+   "color": "Black",
+   "san": "Ne4",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 2,
+   "player": "B",
+   "move_no": 28,
+   "color": "White",
+   "san": "Bxe4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 1,
+   "color": "White",
+   "san": "c3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 1,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 2,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 2,
+   "color": "Black",
+   "san": "d5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 3,
+   "color": "White",
+   "san": "g3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 3,
+   "color": "Black",
+   "san": "Nbd7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 4,
+   "color": "White",
+   "san": "Qc2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 4,
+   "color": "Black",
+   "san": "c6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 5,
+   "color": "White",
+   "san": "b3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 5,
+   "color": "Black",
+   "san": "h6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 6,
+   "color": "White",
+   "san": "d4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 6,
+   "color": "Black",
+   "san": "e6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 7,
+   "color": "White",
+   "san": "Bg2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 7,
+   "color": "Black",
+   "san": "b5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 8,
+   "color": "White",
+   "san": "c4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 8,
+   "color": "Black",
+   "san": "Bb4+",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 9,
+   "color": "White",
+   "san": "Bd2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 9,
+   "color": "Black",
+   "san": "dxc4",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 10,
+   "color": "White",
+   "san": "O-O",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Nd5",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 11,
+   "color": "White",
+   "san": "a3",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 11,
+   "color": "Black",
+   "san": "Bxd2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 12,
+   "color": "White",
+   "san": "Nbxd2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 12,
+   "color": "Black",
+   "san": "cxb3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 13,
+   "color": "White",
+   "san": "Qxb3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 13,
+   "color": "Black",
+   "san": "Qb6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 14,
+   "color": "White",
+   "san": "e4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 14,
+   "color": "Black",
+   "san": "Ne7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 15,
+   "color": "White",
+   "san": "Qb2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 15,
+   "color": "Black",
+   "san": "Ng6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 16,
+   "color": "White",
+   "san": "a4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 16,
+   "color": "Black",
+   "san": "bxa4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 17,
+   "color": "White",
+   "san": "Qa3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Qc7",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 18,
+   "color": "White",
+   "san": "Rfc1",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 18,
+   "color": "Black",
+   "san": "c5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 19,
+   "color": "White",
+   "san": "e5",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Rb8",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 20,
+   "color": "White",
+   "san": "Qxa4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 20,
+   "color": "Black",
+   "san": "Bb7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 21,
+   "color": "White",
+   "san": "dxc5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 21,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 22,
+   "color": "White",
+   "san": "Qa3",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 22,
+   "color": "Black",
+   "san": "Ngxe5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 23,
+   "color": "White",
+   "san": "Nxe5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 23,
+   "color": "Black",
+   "san": "Qxe5",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 24,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Qf6",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 25,
+   "color": "White",
+   "san": "Nd2",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 25,
+   "color": "Black",
+   "san": "Ne5",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 26,
+   "color": "White",
+   "san": "c6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 26,
+   "color": "Black",
+   "san": "Bc8",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 27,
+   "color": "White",
+   "san": "Ne4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 27,
+   "color": "Black",
+   "san": "Qd8",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 28,
+   "color": "White",
+   "san": "Qd6",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 28,
+   "color": "Black",
+   "san": "a5",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 29,
+   "color": "White",
+   "san": "c7",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 29,
+   "color": "Black",
+   "san": "Qxd6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 30,
+   "color": "White",
+   "san": "Nxd6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 30,
+   "color": "Black",
+   "san": "Rb3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 31,
+   "color": "White",
+   "san": "Rxa5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 31,
+   "color": "Black",
+   "san": "Ng6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 32,
+   "color": "White",
+   "san": "Rd1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 32,
+   "color": "Black",
+   "san": "Rb6",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 33,
+   "color": "White",
+   "san": "f3",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 33,
+   "color": "Black",
+   "san": "Kh7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 34,
+   "color": "White",
+   "san": "f4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 34,
+   "color": "Black",
+   "san": "e5",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 35,
+   "color": "White",
+   "san": "Nxc8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 35,
+   "color": "Black",
+   "san": "Rxc8",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 36,
+   "color": "White",
+   "san": "f5",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 36,
+   "color": "Black",
+   "san": "Ne7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 37,
+   "color": "White",
+   "san": "Rc1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 37,
+   "color": "Black",
+   "san": "Nxf5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 38,
+   "color": "White",
+   "san": "Bh3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 38,
+   "color": "Black",
+   "san": "Kg6",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 39,
+   "color": "White",
+   "san": "Rxe5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 39,
+   "color": "Black",
+   "san": "Nd4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 40,
+   "color": "White",
+   "san": "Bxc8",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 3,
+   "player": "B",
+   "move_no": 40,
+   "color": "Black",
+   "san": "Rb1",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 3,
+   "player": "A",
+   "move_no": 41,
+   "color": "White",
+   "san": "Re6+",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 1,
+   "color": "White",
+   "san": "d4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 1,
+   "color": "Black",
+   "san": "c6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 2,
+   "color": "White",
+   "san": "g3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 2,
+   "color": "Black",
+   "san": "g6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 3,
+   "color": "White",
+   "san": "Nc3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 3,
+   "color": "Black",
+   "san": "d5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 4,
+   "color": "White",
+   "san": "e4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 4,
+   "color": "Black",
+   "san": "dxe4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 5,
+   "color": "White",
+   "san": "Nxe4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Nd7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 6,
+   "color": "White",
+   "san": "Qe2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 6,
+   "color": "Black",
+   "san": "Qa5+",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 7,
+   "color": "White",
+   "san": "Bd2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 7,
+   "color": "Black",
+   "san": "Qc7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 8,
+   "color": "White",
+   "san": "h4",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 8,
+   "color": "Black",
+   "san": "Ndf6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 9,
+   "color": "White",
+   "san": "Ng5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 9,
+   "color": "Black",
+   "san": "Bg4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 10,
+   "color": "White",
+   "san": "Qc4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Nd5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 11,
+   "color": "White",
+   "san": "Be2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 11,
+   "color": "Black",
+   "san": "Ngf6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 12,
+   "color": "White",
+   "san": "Bxg4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 12,
+   "color": "Black",
+   "san": "Nxg4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 13,
+   "color": "White",
+   "san": "Qe2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 13,
+   "color": "Black",
+   "san": "Ngf6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 14,
+   "color": "White",
+   "san": "c4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 14,
+   "color": "Black",
+   "san": "h6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 15,
+   "color": "White",
+   "san": "cxd5",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 15,
+   "color": "Black",
+   "san": "hxg5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 16,
+   "color": "White",
+   "san": "Bxg5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 16,
+   "color": "Black",
+   "san": "Qd6",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 17,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 17,
+   "color": "Black",
+   "san": "cxd5",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 18,
+   "color": "White",
+   "san": "Kf1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 18,
+   "color": "Black",
+   "san": "Ne4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 19,
+   "color": "White",
+   "san": "Bf4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Qb6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 20,
+   "color": "White",
+   "san": "Rc1",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 20,
+   "color": "Black",
+   "san": "Bh6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 21,
+   "color": "White",
+   "san": "Bxh6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Rxh6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 22,
+   "color": "White",
+   "san": "Qe3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 22,
+   "color": "Black",
+   "san": "Rh5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 23,
+   "color": "White",
+   "san": "b3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 23,
+   "color": "Black",
+   "san": "Kf8",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 24,
+   "color": "White",
+   "san": "g4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Rh7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 25,
+   "color": "White",
+   "san": "Rc2",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 25,
+   "color": "Black",
+   "san": "Kg8",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 26,
+   "color": "White",
+   "san": "Ne5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 26,
+   "color": "Black",
+   "san": "Qe6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 27,
+   "color": "White",
+   "san": "Kg2",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 27,
+   "color": "Black",
+   "san": "Rc8",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 28,
+   "color": "White",
+   "san": "Rxc8+",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 28,
+   "color": "Black",
+   "san": "Kg7",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 29,
+   "color": "White",
+   "san": "Rcc1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 29,
+   "color": "Black",
+   "san": "f6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 30,
+   "color": "White",
+   "san": "Qe2",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 30,
+   "color": "Black",
+   "san": "Rh8",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 31,
+   "color": "White",
+   "san": "Nd3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 31,
+   "color": "Black",
+   "san": "Nc3",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 32,
+   "color": "White",
+   "san": "Qf3",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 4,
+   "player": "A",
+   "move_no": 32,
+   "color": "Black",
+   "san": "Qc8",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 4,
+   "player": "B",
+   "move_no": 33,
+   "color": "White",
+   "san": "a3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 1,
+   "color": "White",
+   "san": "c3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 1,
+   "color": "Black",
+   "san": "e6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 2,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 2,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 3,
+   "color": "White",
+   "san": "g3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 3,
+   "color": "Black",
+   "san": "b6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 4,
+   "color": "White",
+   "san": "a4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 4,
+   "color": "Black",
+   "san": "Bb7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 5,
+   "color": "White",
+   "san": "Bg2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Be7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 6,
+   "color": "White",
+   "san": "b3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 6,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 7,
+   "color": "White",
+   "san": "Bb2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 7,
+   "color": "Black",
+   "san": "Re8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 8,
+   "color": "White",
+   "san": "c4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 8,
+   "color": "Black",
+   "san": "h6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 9,
+   "color": "White",
+   "san": "a5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 9,
+   "color": "Black",
+   "san": "bxa5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 10,
+   "color": "White",
+   "san": "O-O",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Bb4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 11,
+   "color": "White",
+   "san": "Na3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 11,
+   "color": "Black",
+   "san": "c5",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 12,
+   "color": "White",
+   "san": "Nc2",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 12,
+   "color": "Black",
+   "san": "d6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 13,
+   "color": "White",
+   "san": "Nfe1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 13,
+   "color": "Black",
+   "san": "d5",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 14,
+   "color": "White",
+   "san": "d3",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 14,
+   "color": "Black",
+   "san": "e5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 15,
+   "color": "White",
+   "san": "Nxb4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 15,
+   "color": "Black",
+   "san": "axb4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 16,
+   "color": "White",
+   "san": "e3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 16,
+   "color": "Black",
+   "san": "Nc6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 17,
+   "color": "White",
+   "san": "Qc2",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Na5",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 18,
+   "color": "White",
+   "san": "cxd5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 18,
+   "color": "Black",
+   "san": "a6",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 19,
+   "color": "White",
+   "san": "d6",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Qb6",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 20,
+   "color": "White",
+   "san": "e4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 20,
+   "color": "Black",
+   "san": "Rad8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 21,
+   "color": "White",
+   "san": "f4",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Nd7",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 22,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 22,
+   "color": "Black",
+   "san": "f6",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 23,
+   "color": "White",
+   "san": "Rf2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 23,
+   "color": "Black",
+   "san": "Re6",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 24,
+   "color": "White",
+   "san": "Bf1",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Ree8",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 25,
+   "color": "White",
+   "san": "Bh3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 25,
+   "color": "Black",
+   "san": "Ba8",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 26,
+   "color": "White",
+   "san": "Bxd7",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 26,
+   "color": "Black",
+   "san": "Rxd7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 27,
+   "color": "White",
+   "san": "fxe5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 27,
+   "color": "Black",
+   "san": "fxe5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 28,
+   "color": "White",
+   "san": "Bxe5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 28,
+   "color": "Black",
+   "san": "Nc6",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 29,
+   "color": "White",
+   "san": "Bb2",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 29,
+   "color": "Black",
+   "san": "Kh7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 30,
+   "color": "White",
+   "san": "Qc4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 30,
+   "color": "Black",
+   "san": "Na5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 31,
+   "color": "White",
+   "san": "Rxa5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 31,
+   "color": "Black",
+   "san": "Qxa5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 32,
+   "color": "White",
+   "san": "Be5",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 32,
+   "color": "Black",
+   "san": "Qb5",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 33,
+   "color": "White",
+   "san": "Qc2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 33,
+   "color": "Black",
+   "san": "Rf8",
+   "label": "Blunder",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 34,
+   "color": "White",
+   "san": "g4",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 34,
+   "color": "Black",
+   "san": "Rdf7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 35,
+   "color": "White",
+   "san": "Qe2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 35,
+   "color": "Black",
+   "san": "Bb7",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 36,
+   "color": "White",
+   "san": "Bg3",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 36,
+   "color": "Black",
+   "san": "Kg8",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 37,
+   "color": "White",
+   "san": "g5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 37,
+   "color": "Black",
+   "san": "Bc8",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 38,
+   "color": "White",
+   "san": "gxh6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 38,
+   "color": "Black",
+   "san": "Bh3",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 39,
+   "color": "White",
+   "san": "Ne5",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 39,
+   "color": "Black",
+   "san": "Rxf2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 40,
+   "color": "White",
+   "san": "h7+",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 40,
+   "color": "Black",
+   "san": "Kxh7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 41,
+   "color": "White",
+   "san": "Qxf2",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 41,
+   "color": "Black",
+   "san": "Rxf2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "A",
+   "move_no": 42,
+   "color": "White",
+   "san": "d7",
+   "label": "Mistake",
+   "mistake_type": "allowed_mate",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 5,
+   "player": "B",
+   "move_no": 42,
+   "color": "Black",
+   "san": "Rf1#",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": true,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 1,
+   "color": "White",
+   "san": "d4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 1,
+   "color": "Black",
+   "san": "d6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 2,
+   "color": "White",
+   "san": "c3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 2,
+   "color": "Black",
+   "san": "g6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 3,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 3,
+   "color": "Black",
+   "san": "Nd7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 4,
+   "color": "White",
+   "san": "e4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 4,
+   "color": "Black",
+   "san": "c6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 5,
+   "color": "White",
+   "san": "Bd3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Qc7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 6,
+   "color": "White",
+   "san": "Be3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 6,
+   "color": "Black",
+   "san": "a5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 7,
+   "color": "White",
+   "san": "O-O",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 7,
+   "color": "Black",
+   "san": "a4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 8,
+   "color": "White",
+   "san": "Re1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 8,
+   "color": "Black",
+   "san": "Bg7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 9,
+   "color": "White",
+   "san": "Na3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 9,
+   "color": "Black",
+   "san": "h6",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 10,
+   "color": "White",
+   "san": "Rc1",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Ngf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 11,
+   "color": "White",
+   "san": "c4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 11,
+   "color": "Black",
+   "san": "e5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 12,
+   "color": "White",
+   "san": "d5",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 12,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 13,
+   "color": "White",
+   "san": "Qc2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 13,
+   "color": "Black",
+   "san": "Ng4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 14,
+   "color": "White",
+   "san": "c5",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 14,
+   "color": "Black",
+   "san": "Nxc5",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 15,
+   "color": "White",
+   "san": "Bf1",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 15,
+   "color": "Black",
+   "san": "Nxe3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 16,
+   "color": "White",
+   "san": "Rxe3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 16,
+   "color": "Black",
+   "san": "f5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 17,
+   "color": "White",
+   "san": "Nh4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Rf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 18,
+   "color": "White",
+   "san": "Bc4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 18,
+   "color": "Black",
+   "san": "Kh7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 19,
+   "color": "White",
+   "san": "dxc6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Qxc6",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 20,
+   "color": "White",
+   "san": "Bb5",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 20,
+   "color": "Black",
+   "san": "Qb6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 21,
+   "color": "White",
+   "san": "Nxg6",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 21,
+   "color": "Black",
+   "san": "f4",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 6,
+   "player": "B",
+   "move_no": 22,
+   "color": "White",
+   "san": "Be8",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 6,
+   "player": "A",
+   "move_no": 22,
+   "color": "Black",
+   "san": "fxe3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 1,
+   "color": "White",
+   "san": "e4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 1,
+   "color": "Black",
+   "san": "e6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 2,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 2,
+   "color": "Black",
+   "san": "a6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 3,
+   "color": "White",
+   "san": "e5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 3,
+   "color": "Black",
+   "san": "d6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 4,
+   "color": "White",
+   "san": "d4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 4,
+   "color": "Black",
+   "san": "h6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 5,
+   "color": "White",
+   "san": "Be2",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 5,
+   "color": "Black",
+   "san": "b6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 6,
+   "color": "White",
+   "san": "Nc3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 6,
+   "color": "Black",
+   "san": "Nc6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 7,
+   "color": "White",
+   "san": "O-O",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 7,
+   "color": "Black",
+   "san": "d5",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 8,
+   "color": "White",
+   "san": "Bf4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 8,
+   "color": "Black",
+   "san": "Bb7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 9,
+   "color": "White",
+   "san": "Bd2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 9,
+   "color": "Black",
+   "san": "Na5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 10,
+   "color": "White",
+   "san": "a3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Nc4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 11,
+   "color": "White",
+   "san": "Bc1",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 11,
+   "color": "Black",
+   "san": "Ne7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 12,
+   "color": "White",
+   "san": "b3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 12,
+   "color": "Black",
+   "san": "b5",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 13,
+   "color": "White",
+   "san": "a4",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 13,
+   "color": "Black",
+   "san": "Nb6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 14,
+   "color": "White",
+   "san": "axb5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 14,
+   "color": "Black",
+   "san": "axb5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 15,
+   "color": "White",
+   "san": "Rxa8",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 15,
+   "color": "Black",
+   "san": "Bxa8",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 16,
+   "color": "White",
+   "san": "Bd3",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 16,
+   "color": "Black",
+   "san": "Ng6",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 17,
+   "color": "White",
+   "san": "Bxb5+",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Nd7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 18,
+   "color": "White",
+   "san": "g3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 18,
+   "color": "Black",
+   "san": "Bb4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 19,
+   "color": "White",
+   "san": "Ne2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 19,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 20,
+   "color": "White",
+   "san": "Bd3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 20,
+   "color": "Black",
+   "san": "c5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 21,
+   "color": "White",
+   "san": "Bd2",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Qb8",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 22,
+   "color": "White",
+   "san": "h4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 22,
+   "color": "Black",
+   "san": "cxd4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 23,
+   "color": "White",
+   "san": "Nexd4",
+   "label": "Blunder",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 23,
+   "color": "Black",
+   "san": "Ngxe5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 24,
+   "color": "White",
+   "san": "Bxb4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Qxb4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 25,
+   "color": "White",
+   "san": "Qe2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 25,
+   "color": "Black",
+   "san": "Nxf3+",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 26,
+   "color": "White",
+   "san": "Kg2",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 26,
+   "color": "Black",
+   "san": "Qxd4",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 27,
+   "color": "White",
+   "san": "h5",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 27,
+   "color": "Black",
+   "san": "Qc3",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 7,
+   "player": "A",
+   "move_no": 28,
+   "color": "White",
+   "san": "Rb1",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 7,
+   "player": "B",
+   "move_no": 28,
+   "color": "Black",
+   "san": "Nfe5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 1,
+   "color": "White",
+   "san": "e4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 1,
+   "color": "Black",
+   "san": "e6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 2,
+   "color": "White",
+   "san": "d4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 2,
+   "color": "Black",
+   "san": "d5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 3,
+   "color": "White",
+   "san": "e5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 3,
+   "color": "Black",
+   "san": "c5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 4,
+   "color": "White",
+   "san": "c3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 4,
+   "color": "Black",
+   "san": "h6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 5,
+   "color": "White",
+   "san": "h4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Qb6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 6,
+   "color": "White",
+   "san": "h5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 6,
+   "color": "Black",
+   "san": "Nc6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 7,
+   "color": "White",
+   "san": "Be3",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 7,
+   "color": "Black",
+   "san": "cxd4",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 8,
+   "player": "B",
+   "move_no": 8,
+   "color": "White",
+   "san": "Ne2",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 8,
+   "player": "A",
+   "move_no": 8,
+   "color": "Black",
+   "san": "dxe3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 1,
+   "color": "White",
+   "san": "e4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 1,
+   "color": "Black",
+   "san": "e5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 2,
+   "color": "White",
+   "san": "c3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 2,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 3,
+   "color": "White",
+   "san": "d3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 3,
+   "color": "Black",
+   "san": "h6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 4,
+   "color": "White",
+   "san": "Be2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 4,
+   "color": "Black",
+   "san": "d5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 5,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Nbd7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 6,
+   "color": "White",
+   "san": "Nbd2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 6,
+   "color": "Black",
+   "san": "Bd6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 7,
+   "color": "White",
+   "san": "O-O",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 7,
+   "color": "Black",
+   "san": "c5",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 8,
+   "color": "White",
+   "san": "exd5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 8,
+   "color": "Black",
+   "san": "b5",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 9,
+   "color": "White",
+   "san": "a4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 9,
+   "color": "Black",
+   "san": "bxa4",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 10,
+   "color": "White",
+   "san": "Nc4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Bb8",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 11,
+   "color": "White",
+   "san": "Ncxe5",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 11,
+   "color": "Black",
+   "san": "Nxe5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 12,
+   "color": "White",
+   "san": "Re1",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 12,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 13,
+   "color": "White",
+   "san": "c4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 13,
+   "color": "Black",
+   "san": "Nxf3+",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 14,
+   "color": "White",
+   "san": "gxf3",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 14,
+   "color": "Black",
+   "san": "Bd7",
+   "label": "Mistake",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 15,
+   "color": "White",
+   "san": "f4",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 15,
+   "color": "Black",
+   "san": "a5",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 16,
+   "color": "White",
+   "san": "Ra3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 16,
+   "color": "Black",
+   "san": "Re8",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 17,
+   "color": "White",
+   "san": "Bf1",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Ra6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 18,
+   "color": "White",
+   "san": "b3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 18,
+   "color": "Black",
+   "san": "Rb6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 19,
+   "color": "White",
+   "san": "Rxe8+",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Bxe8",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 20,
+   "color": "White",
+   "san": "d4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 20,
+   "color": "Black",
+   "san": "axb3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 21,
+   "color": "White",
+   "san": "Rxb3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Rxb3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 22,
+   "color": "White",
+   "san": "Qxb3",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 22,
+   "color": "Black",
+   "san": "a4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 23,
+   "color": "White",
+   "san": "Qb1",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 23,
+   "color": "Black",
+   "san": "cxd4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 24,
+   "color": "White",
+   "san": "Qa1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 24,
+   "color": "Black",
+   "san": "Bd7",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 25,
+   "color": "White",
+   "san": "Qxd4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 25,
+   "color": "Black",
+   "san": "Qc8",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 26,
+   "color": "White",
+   "san": "d6",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 26,
+   "color": "Black",
+   "san": "Qc6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 27,
+   "color": "White",
+   "san": "c5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 27,
+   "color": "Black",
+   "san": "Qf3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 28,
+   "color": "White",
+   "san": "Bb2",
+   "label": "Blunder",
+   "mistake_type": "allowed_mate",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 28,
+   "color": "Black",
+   "san": "a3",
+   "label": "Mistake",
+   "mistake_type": "missed_mate",
+   "chances": {
+    "mate": true,
+    "material": true
+   }
+  },
+  {
+   "game": 9,
+   "player": "A",
+   "move_no": 29,
+   "color": "White",
+   "san": "Qxf6",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 9,
+   "player": "B",
+   "move_no": 29,
+   "color": "Black",
+   "san": "gxf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 1,
+   "color": "White",
+   "san": "e3",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 1,
+   "color": "Black",
+   "san": "Nf6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 2,
+   "color": "White",
+   "san": "Nf3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 2,
+   "color": "Black",
+   "san": "e6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 3,
+   "color": "White",
+   "san": "b3",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 3,
+   "color": "Black",
+   "san": "Be7",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 4,
+   "color": "White",
+   "san": "Bb2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 4,
+   "color": "Black",
+   "san": "O-O",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 5,
+   "color": "White",
+   "san": "Be2",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 5,
+   "color": "Black",
+   "san": "Re8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 6,
+   "color": "White",
+   "san": "O-O",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 6,
+   "color": "Black",
+   "san": "c5",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 7,
+   "color": "White",
+   "san": "Nc3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 7,
+   "color": "Black",
+   "san": "b6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 8,
+   "color": "White",
+   "san": "Re1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 8,
+   "color": "Black",
+   "san": "a6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 9,
+   "color": "White",
+   "san": "d4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 9,
+   "color": "Black",
+   "san": "Bb7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 10,
+   "color": "White",
+   "san": "Bf1",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 10,
+   "color": "Black",
+   "san": "Qc7",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 11,
+   "color": "White",
+   "san": "dxc5",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 11,
+   "color": "Black",
+   "san": "bxc5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 12,
+   "color": "White",
+   "san": "Na4",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 12,
+   "color": "Black",
+   "san": "d6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 13,
+   "color": "White",
+   "san": "Qe2",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 13,
+   "color": "Black",
+   "san": "h6",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 14,
+   "color": "White",
+   "san": "c4",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 14,
+   "color": "Black",
+   "san": "Nc6",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 15,
+   "color": "White",
+   "san": "Rab1",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 15,
+   "color": "Black",
+   "san": "Rab8",
+   "label": "Excellent",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 16,
+   "color": "White",
+   "san": "a3",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 16,
+   "color": "Black",
+   "san": "e5",
+   "label": "Mistake",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 17,
+   "color": "White",
+   "san": "Qc2",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 17,
+   "color": "Black",
+   "san": "Bf8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 18,
+   "color": "White",
+   "san": "Ba1",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 18,
+   "color": "Black",
+   "san": "Qe7",
+   "label": "Inaccuracy",
+   "mistake_type": "positional",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 19,
+   "color": "White",
+   "san": "b4",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 19,
+   "color": "Black",
+   "san": "Ba8",
+   "label": "Good",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 20,
+   "color": "White",
+   "san": "Qd2",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 20,
+   "color": "Black",
+   "san": "e4",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 21,
+   "color": "White",
+   "san": "Bxf6",
+   "label": "Blunder",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 21,
+   "color": "Black",
+   "san": "Qxf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 22,
+   "color": "White",
+   "san": "b5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 22,
+   "color": "Black",
+   "san": "axb5",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 23,
+   "color": "White",
+   "san": "Qb2",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": false
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 23,
+   "color": "Black",
+   "san": "exf3",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 24,
+   "color": "White",
+   "san": "Qxf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 24,
+   "color": "Black",
+   "san": "gxf6",
+   "label": "Best",
+   "mistake_type": null,
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 25,
+   "color": "White",
+   "san": "Nxc5",
+   "label": "Mistake",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 25,
+   "color": "Black",
+   "san": "fxg2",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "B",
+   "move_no": 26,
+   "color": "White",
+   "san": "cxb5",
+   "label": "Inaccuracy",
+   "mistake_type": "lost_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  },
+  {
+   "game": 10,
+   "player": "A",
+   "move_no": 26,
+   "color": "Black",
+   "san": "gxf1=N",
+   "label": "Inaccuracy",
+   "mistake_type": "missed_material",
+   "chances": {
+    "mate": false,
+    "material": true
+   }
+  }
+ ]
+}
