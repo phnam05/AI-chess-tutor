@@ -4,6 +4,8 @@ import chess.svg
 from engine_analysis import analyze_position
 from explainer import explain_position, explain_move, describe_coach_error
 from move_review import review_move, review_game, win_chance
+from learner_model import (KINDS, CONFIDENT, MIN_MISSES, new_model,
+                           update as learner_update, summary as learner_summary)
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
 from engine_pool import warmup
@@ -101,7 +103,12 @@ def _result_text(board):
 
 def _init_game():
     """Reset to a fresh game. g_last_click is a watermark, not game state, so we
-    only seed it (setdefault) — never clear it (see render_game for why)."""
+    only seed it (setdefault) — never clear it (see render_game for why). The
+    learner notes are NOT reset: the game being cleared is filed away first, so
+    patterns build up across every game of the session."""
+    _archive_current_game()
+    st.session_state.lm_started = st.session_state.get("lm_started", 0) + 1
+    st.session_state.g_game_key = f'live:{st.session_state.lm_started}'
     st.session_state.g_board = chess.Board()
     st.session_state.g_history = []
     st.session_state.g_from = None
@@ -112,18 +119,28 @@ def _init_game():
     st.session_state.setdefault("g_flip", False)
 
 
-def _load_reviewed_game(entries):
+def _load_reviewed_game(entries, side):
     """Install a graded game (from review_game) as the live session: the board
     at the final position, every move in the history with its engine review.
     From here it behaves exactly like a game played on the board — click any
-    move in the log to rewind to it, per-move verdicts, opt-in explanations."""
+    move in the log to rewind to it, per-move verdicts, opt-in explanations.
+
+    A PGN game has two players, and only one is the student: `side` ("White",
+    "Black" or "Both sides") marks which moves are theirs, so the learner notes
+    never mix in the opponent's mistakes. The game's key is its moves, so
+    re-grading the same game (say, to switch sides) replaces it in the notes
+    instead of counting it twice."""
     _init_game()
     board = chess.Board(entries[0]["review"]["fen"])
     for e in entries:
         board.push(chess.Move.from_uci(e["review"]["played_move_uci"]))
     st.session_state.g_board = board
-    st.session_state.g_history = [dict(e, comment=None) for e in entries]
+    st.session_state.g_history = [
+        dict(e, comment=None, mine=side in (e["color"], "Both sides")) for e in entries
+    ]
     st.session_state.g_lastmove = board.move_stack[-1]
+    st.session_state.g_game_key = "pgn:" + entries[0]["review"]["fen"] + " " + " ".join(
+        e["review"]["played_move_uci"] for e in entries)
 
 
 def _build_move(board, frm, to):
@@ -151,6 +168,7 @@ def _play_and_review(move):
         "move_no": move_no, "color": mover,
         "review": review,     # full engine facts: label + win-chance/eval metrics
         "comment": None,      # LLM explanation, filled in on demand
+        "mine": True,         # on the live board the student moves both sides
     })
     st.session_state.g_selected = None       # a new move: coach snaps back to it
 
@@ -514,6 +532,124 @@ def _render_move_boards(review):
         st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"], size=300))
 
 
+# ----------------------------------------------------------------------------
+# The open learner model: the tutor's running notes on which kinds of mistake
+# the student repeats — shown to the student, with the evidence. Every input is
+# an engine fact (each weak move's kind and the chances the position offered,
+# both from move_review); learner_model only counts them. No LLM here.
+# ----------------------------------------------------------------------------
+STATUS = {                       # verdict -> (words, badge colour); also the display order
+    "pattern": ("Pattern", "red"),
+    "unsure":  ("Not sure yet", "gray"),
+    "fine":    ("Fine", "green"),
+}
+
+
+def _move_name(entry):
+    """'12. Qg5' for White, '12... Qg5' for Black, as a score sheet writes it."""
+    dots = "." if entry["color"] == "White" else "..."
+    return f'{entry["move_no"]}{dots} {entry["review"]["played_move"]}'
+
+
+def _my_moves(history):
+    """The student's graded moves in one game: not the opponent's in a reviewed
+    PGN, and not a stale entry from before reviews existed."""
+    return [e for e in history if e.get("review") and e.get("mine", True)]
+
+
+def _archive_current_game():
+    """File the game about to be cleared under the session's learner notes.
+    A game keeps its slot (and its "game N" name) if it comes back — that's how
+    a re-graded PGN replaces itself instead of being counted twice."""
+    moves = _my_moves(st.session_state.get("g_history", []))
+    if not moves:
+        return
+    past = st.session_state.setdefault("lm_past", {})
+    key = st.session_state.get("g_game_key") or f"old:{len(past)}"
+    label = past[key]["label"] if key in past else f"game {len(past) + 1}"
+    past[key] = {"label": label, "moves": moves}
+
+
+def _learner_model():
+    """Rebuild the notes from the moves themselves on every render (a few
+    counters per move, so it's instant). Rebuilding rather than updating in
+    place means Undo or a re-graded PGN can never leave a stale count behind.
+    Returns the model and how many games fed it."""
+    model, games = new_model(), 0
+    cur = st.session_state.get("g_game_key")
+    for key, game in st.session_state.get("lm_past", {}).items():
+        if key == cur:
+            continue                  # the same PGN is on the board again: count it once
+        games += 1
+        for e in game["moves"]:
+            learner_update(model, e["review"], where=f'{_move_name(e)} ({game["label"]})')
+    mine = _my_moves(st.session_state.get("g_history", []))
+    games += bool(mine)
+    for e in mine:
+        learner_update(model, e["review"], where=_move_name(e))
+    return model, games
+
+
+def _bar_words(kind, bar):
+    """The bar in plain words: how often is often enough to be worth coaching."""
+    if KINDS[kind][0] == "every":
+        return f"more than 1 move in {round(1 / bar)}"
+    return f"more than {bar:.0%} of the chances"
+
+
+def _render_patterns():
+    """The "open learner model" of the project brief: the student sees exactly
+    what the tutor believes about them — each kind of mistake, the verdict,
+    the counts behind it, the bar it's judged against, and the moves that are
+    the evidence. It's a plain section rather than an expander on purpose: an
+    expander whose title changes (the count does, every move) resets itself."""
+    st.markdown('<div class="eyebrow" style="margin-top:22px;">Your patterns</div>',
+                unsafe_allow_html=True)
+    model, games = _learner_model()
+    rows = learner_summary(model)
+    moves = max(r["chances"] for r in rows)   # every-move kinds count every move
+    if not moves:
+        st.markdown(
+            '<div class="commentary">Play or review a game and I&rsquo;ll keep notes '
+            'on which kinds of mistake you repeat, with the moves as evidence.</div>',
+            unsafe_allow_html=True,
+        )
+        return
+    st.caption(f'From {moves} of your moves'
+               + (f' across {games} games.' if games > 1 else '.'))
+
+    for status in ("pattern", "unsure"):
+        name, color = STATUS[status]
+        for r in (r for r in rows if r["status"] == status):
+            if KINDS[r["kind"]][0] == "every":
+                count = f'{r["misses"]} in {r["chances"]} moves'
+            elif r["chances"]:
+                count = f'{r["misses"]} of {r["chances"]} chances'
+            else:
+                count = "no chance has come up yet"
+            st.markdown(f':{color}-badge[{name}] **{r["words"].capitalize()}** · {count}')
+            detail = f'Bar: {_bar_words(r["kind"], r["bar"])}.'
+            if r["examples"]:
+                shown = r["examples"][-6:]
+                more = len(r["examples"]) - len(shown)
+                detail += (' Moves: ' + (f'(+{more} earlier) ' if more else '')
+                           + ', '.join(shown))
+            st.caption(detail)
+
+    fine = [r["words"] for r in rows if r["status"] == "fine"]
+    if fine:
+        name, color = STATUS["fine"]
+        st.markdown(f':{color}-badge[{name}] ' + ' · '.join(fine))
+
+    st.caption(
+        f'A kind of mistake becomes a pattern only after {MIN_MISSES} or more '
+        f"slips, once I'm {CONFIDENT:.0%} sure it happens more often than "
+        'its bar. One slip never labels you. Only your moves count (in a '
+        'reviewed game, the side you picked). The notes carry over to new games '
+        'and last until you reload the page.'
+    )
+
+
 def render_game():
     if "g_board" not in st.session_state:
         _init_game()
@@ -643,6 +779,10 @@ def render_game():
                 "PGN", key="g_pgn_box", height=140, label_visibility="collapsed",
                 placeholder="1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 ...",
             )
+            # A game has two players; only the student's moves go into their
+            # patterns, so the opponent's mistakes aren't pinned on them.
+            side = st.radio("You played", ["White", "Black", "Both sides"],
+                            horizontal=True, key="g_pgn_side")
             if st.button("Grade the game", key="g_pgn_grade", use_container_width=True):
                 bar = st.progress(0.0, text="Reading the game…")
                 try:
@@ -657,7 +797,7 @@ def render_game():
                     st.error(str(err))
                 else:
                     bar.empty()
-                    _load_reviewed_game(entries)
+                    _load_reviewed_game(entries, side)
                     st.rerun()
 
         # --- Per-move controls ---------------------------------------------
@@ -698,6 +838,7 @@ def render_game():
         # The coach's per-move verdict follows below.
         _render_hint(disp_board)
         _render_coach_panel()
+        _render_patterns()
 
 # ----------------------------------------------------------------------------
 # Styling. The palette comes from the board itself — aged boxwood and walnut,
