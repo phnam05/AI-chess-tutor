@@ -23,3 +23,11 @@ faithfulness_log.jsonl
 
 #secret file
 leandro.txt
+
+# Lab chat export (Discord HTML): holds private personal data, never publish
+NESPeD-Lab*.html
+
+# Private: notes from the lab chat (repo is public) and the frozen long diary
+# that quotes them. Both stay on the laptop only.
+lab_notes.md
+DEV_DIARY_full.md

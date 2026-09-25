@@ -2,653 +2,281 @@
 
 MSc project, **VinUniversity** · supervisor **Dr. Leandro Marcolino** · author: phnam05
 
-This is the story of the project, in order, from the first day. It has three parts:
-
-1. **The first version**: how and what we built at the start.
-2. **Was the first version good?** An honest verdict.
-3. **Upgrading it, step by step**: one entry per working day, including the
-   problems we hit and how we got past them.
-
-A new entry is added at the end of every working session. Words in *italics*
-are explained in the **Glossary** at the bottom.
+The project's story, a few lines per working day. **What to do next is in
+`TODO.md`**, not here. Every detail up to 24 Sep 2026 is in the frozen long
+version, `DEV_DIARY_full.md` (on your laptop only, not on GitHub): open it
+only when you need one day in full.
+Words in *italics* are in the Glossary at the bottom.
 
 ---
 
-## Where the project stands — updated 2026-09-23
+## Where the project stands (26 Sep 2026)
 
-**In one line:** a chess tutor where **the engine decides the chess and the AI
-only explains it**. The *engine* (Stockfish) supplies every fact; the language
-AI (Gemini) only puts those facts into words at the player's level.
+**The idea:** the *engine* (Stockfish) decides the chess; a language AI
+(Gemini), called **the coach** here, only puts the engine's facts into words,
+at the player's level.
 
-**Research question (working version):** can an AI tutor explain a strong AI's
-decisions to a human (1) *faithfully*, saying nothing the engine didn't support,
-and (2) adapted to that particular learner? And can both be *measured*?
-Steps 1–2 answer part (1). Step 3 is part (2).
+**Research question:** can an AI tutor explain a strong engine's decisions
+(1) *faithfully*, saying nothing the engine didn't support, and (2) adapted to
+the learner? And can both be measured?
 
-**Where we are:** Steps 1–2 done. Step 3's mistake detector, learner model and
-first simulation test are done; the learner model isn't in the app yet. Recent
-commits are on the laptop only, waiting to be pushed.
+**Your decisions (23 Sep):** the thesis covers both parts · aim for a paper in
+a *Q1 journal* within about a year · the study uses after-game review (pasting
+a finished game), not help during live play.
 
 | Step | What | Status |
 |---|---|---|
-| 1 | Faithfulness checker: a program that checks the coach's text against the engine's facts | ✅ Done (re-checked 2026-09-23) |
-| 2 | Evaluation: 25 test cases, your hand audit, a measured faithful rate | ✅ Done |
-| 3a | Mistake detector: name the *kind* of each bad move | ✅ Done 2026-09-23 |
-| 3b | Learner model: estimate how often *this player* makes each kind | ✅ Built 2026-09-23 |
-| 3d | Test it: computer players with a *planted* weakness; does the model find it? | ✅ First run 2026-09-23 |
-| 3c | Use it: show it to the player (app), then give it to the coach (a prompt change, so re-measure faithfulness) | Next |
-| 6 | **Bigger faithfulness test:** ~100+ positions from real games, not 25 hand-picked | Needed for the thesis |
-| 7 | **Second judge:** someone else rates part of the cases; report how often you agree | Needed for the thesis |
-| 8 | **Measure the levels:** is "beginner" text really simpler? | Needed for the thesis |
-| 9 | **Small study with real players** (needs ethics approval: apply early) | Needed for the thesis |
-| 4 | Writing: related work, README built around the research question | Planned |
-| 5 | Optional: faithful rate with a confidence range (like Marcolino's ReCePS paper) | Idea |
+| 1 | Checker: compares the coach's text with the engine's facts | ✅ Done |
+| 2 | Test: 25 cases, your hand audit, a measured faithful rate | ✅ Done |
+| 3a | Name the *kind* of each bad move | ✅ Done |
+| 3b | Learner model: how often *this* player makes each kind | ✅ Built |
+| 3c | Show it in the app · give it to the coach | ✅ In the app (on GitHub, 26 Sep) · coach later |
+| 3d | Test it on *bots* with a planted weakness | ✅ First run |
+| — | Walk through engine lines your way (your rules, 24 Sep) | Built, not committed · your hand check (25 Sep): 10 of 13 answers have a problem · board-fact fixes in progress (26 Sep) |
 
-**Headline numbers you can quote**
+**Numbers you can quote**
+- Your hand audit of 25 coach answers (3 Jul, before the coach fix), asking "did the coach stick to the engine's facts?": 11 Yes · 5 Mostly yes · 7 Partially · 2 No.
+- Checker vs. your audit: of the 10 answers you marked as inventing a reason for the eval, it found **all 10**, and it wrongly failed **0** good answers.
+- *Planted-lie test*: **25/25** fake moves and **25/25** fake reasons caught.
+- *Faithful rate*: 19/25 (76%) → **22/25 (≈88%)** after the fixes to the coach's instructions on 3 and 17 Jul (22/25 in every July re-run; 21 and 23 when re-run on 24 Sep). Invented moves: **0**.
+- Asking for plainer words made it worse (16/25 vs. 22/25), so it was removed.
 
-| Measurement | Result |
-|---|---|
-| Your hand audit of 25 coach answers (before the fixes) | 11 Yes · 5 Mostly · 7 Partially · 2 No |
-| Checker vs. your audit, on invented reasons | found **10 of 10** you marked; **0** good answers wrongly failed |
-| Planted-lie test (2026-09-23) | **25/25** fake moves caught · **25/25** fake reasons caught |
-| Faithful rate: before the prompt fix → after | 19/25 (76%) → **22/25 (≈88%)**, same in repeated runs |
-| "Explain plainly" experiment | 16/25 with it vs. 22/25 without, so it was removed |
-| Invented moves in the latest run | **0** |
+**What the thesis still needs** (the 23 Sep verdict plus the plan; most important first)
+1. **More test cases.** With 25, "88%" really means somewhere in 70–96% (the *confidence range*), so the fix isn't proven yet. ~100 positions from real games narrows it to ~80–93%. Report it with a confidence range, as Dr. Marcolino's ReCePS paper does.
+2. **A check on the grading.** You are the only judge and also the author. Plan: grade *blind* (not knowing which version wrote each answer), re-grade some weeks later, and ask Dr. Marcolino for a second person.
+3. **Proof that the 3 levels really differ.** Nothing yet shows "beginner" text is simpler, and advanced-level text still uses heavy vocabulary.
+4. **Guessing the player's level automatically** from their moves, so the tutor picks the level itself (Dr. Marcolino's *Bayes' rule* idea, using *Maia*). This is the core of the "adapt to the learner" half.
+5. **Proof that it helps people learn:** a study with real players. It needs ethics approval, which takes months, so start early.
+6. **Comparisons (*baselines*)**, e.g. the coach without the engine's facts. Reviewers expect them.
+7. **The learner model on real human games** (*Lichess* is blocked by the office *firewall*). Its bars are still hand-set guesses, and it isn't given to the coach yet.
+8. **A related-work chapter** (started in `related_work.md`).
 
-**Your to-do list** (things only you can do):
-1. **Push** from a network outside the company firewall (`git push`). Until
-   then, the live app runs the old code, including the bug from the demo.
-2. **Talk to Dr. Marcolino:** share this diary's verdict, ask which part should
-   be the thesis's main focus (faithfulness, the learner model, or both), raise
-   the Maia "infer the player's level" idea, and ask how ethics approval works
-   at VinUniversity for a small study with real players. Start that early.
-3. **Find a second judge:** a friend who plays chess, to rate some of the
-   coach's answers the way you did. That's needed so the thesis doesn't rest on
-   the author's opinion alone.
-4. Optional: ask IT whether github.com and lichess.org can be let through the
-   firewall.
-
-**Next for me (no GitHub needed):** show the learner model inside the app;
-measure whether the three levels really differ; write up the related research.
-
-### Is it good enough for a master's thesis? (honest verdict, 23 Sep 2026)
-
-**As a working system and a first study: yes, and it's more rigorous than most
-student projects.** It has a clear design idea (the engine decides, the AI
-explains). It measures its own honesty with a checker that was *itself* tested
-(planted lies, a human judge). It reports failures openly (the "explain plainly"
-backfire, the lucky 24/25). And it has real findings: the AI rarely invents
-*moves* but often invents *reasons*, and asking for simpler words made it
-*less* faithful.
-
-**As a complete thesis: not yet.** What's missing, most important first:
-
-1. **Too few test cases.** With 25 cases, "88% faithful" really means
-   *somewhere between 70% and 96%*, and the before/after ranges overlap
-   (76%: 57–89%; 88%: 70–96%). So we can't yet *prove* the prompt fix helped.
-   About 100 positions narrows it to roughly 80–93%. Re-running the same 25
-   doesn't help much; it needs *different* positions, ideally from real games
-   rather than hand-picked.
-2. **One judge, who is also the author.** A thesis needs a second, independent
-   person to rate part of the cases, and a number for how often you agree.
-3. **The levels are claimed, never measured.** Nothing yet shows the
-   "beginner" text is actually easier to read.
-4. **No evidence yet that it helps people learn**, which is the aim of Project
-   #40 ("fostering learning"). That needs a small study with real players, and
-   studies with people need ethics approval, which takes time, so plan it early.
-5. **The learner model** now works on computer players (see 23 Sep), but it's
-   not in the app yet, its bars are set by hand, and it hasn't seen real human
-   games.
-6. **No related-work chapter yet**: the thesis must show where it sits among
-   existing research (reading list below).
-
-**Reading list to start with** (check each one before citing it):
-- Jacovi & Goldberg (2020): *faithfulness* vs. *plausibility* of AI explanations (ACL). This is the core idea behind Step 1.
-- Jhamtani et al. (2018): generating move-by-move chess commentary (ACL).
-- McGrath et al. (2022): *Acquisition of chess knowledge in AlphaZero* (PNAS).
-- McIlroy-Young et al. (2020): **Maia**, human-like chess engines for each rating level (KDD).
-- Bull & Kay: *open learner models* (the brief's "open learning models").
-- Marcolino's group: on-line estimators of teammates' types and parameters (JAAMAS 2022); *It Is Among Us* (AAMAS 2024).
-
-**An idea worth raising with Dr. Marcolino:** use Maia to work out a player's
-*level* from their moves (the same "work out the hidden type from actions"
-problem as his research), then pick the explanation level automatically. That
-would tie the brief's "adapt to the player's level" directly to his methods.
+**Git:** everything is on GitHub except the walk-through code (board facts,
+the coach's new instructions, their test files), which is still being fixed.
+The office firewall usually blocks GitHub (and Lichess, Maia); pushing over
+your phone hotspot works. The repo is public, so private lab notes live in
+`lab_notes.md`, which git ignores.
 
 ---
 
-# Part 1 — The first version (17–19 June 2026)
+## Part 1 — The first version (June 2026)
 
-### 17 June 2026 — Day one: the idea and the first working app
+### 17 Jun — Day one
+- **Did:** built the whole chain from position to explanation. `engine_analysis.py` asks Stockfish for the best move, *eval* and *line*; `move_review.py` grades a move you played; `explainer.py` has Gemini explain at 3 levels, with strict "don't invent" rules; `app.py` is the web page. Put it online on *Streamlit Cloud*.
+- **Problems → fixes:** Stockfish didn't run on the cloud (it runs Linux, not Windows) → `packages.txt` installs the Linux version there. The *API key* had to stay secret → read from secret settings, never written in the code.
 
-**The idea.** Chess engines know the best move, but they only give a number, not
-an explanation. Language AIs explain well, but they're bad at chess: they make
-up moves and miscount pieces. So we split the work. **The engine decides, the AI
-only explains.** The engine gives the facts (best move, score, expected line);
-the AI is told to put those facts into words and never judge the position itself.
+### 19 Jun — A real tutor
+- **Did:** fairer *grades* by *win chance* lost instead of *centipawns* lost; side-by-side boards; a clickable board to play a game; the coach now says *why* a move was wrong, using the engine's *refutation*.
+- **Problems → fixes:** pieces invisible on the cloud (its font has no chess symbols) → installed FreeSerif. Clicks replayed the previous move → remember which click was already handled. Grading took 2.4 s → one shared engine instead of a new one per request: **0.1 s**.
 
-**What we built:**
-- `engine_analysis.py`: gives a position to Stockfish and gets back the best
-  move, the *eval* and the *line*.
-- `move_review.py`: grades a move you played by how many *centipawns* it lost
-  compared with the best move (Best / Good / Inaccurate / Mistake / Blunder).
-- `explainer.py`: sends those facts to Gemini with strict rules ("don't suggest
-  a different move, don't invent tactics") and three levels: beginner,
-  intermediate, advanced.
-- `app.py`: a Streamlit web page with two screens. **Analyze a position**: paste
-  a position (*FEN*) and press "Coach me". **Review my move**: pick the move you
-  played from a dropdown.
-- Put online on Streamlit Cloud.
+## Part 2 — Was the first version good?
 
-**Difficulties → how we got past them**
-- *The engine wouldn't start on Streamlit Cloud.* The cloud runs Linux, not
-  Windows, so `stockfish.exe` doesn't work there. → `packages.txt` installs the
-  Linux Stockfish, and the code looks for whichever one exists.
-- *The API key had to stay secret.* → Read from Streamlit's secret settings,
-  never written into the code; `.gitignore` keeps key files out of GitHub.
-- *Git got tangled.* Editing on the GitHub website and on the laptop at the
-  same time caused merge commits. → From then on, changes were made on the
-  laptop and pushed.
+A sound idea and a working product, but **not research yet**. The promise "the
+AI never makes up chess" was never checked, nothing was measured, and it didn't
+adapt to one player. Hidden bugs turned up later: the engine could give
+different best moves for the same position, lines could stop in the middle of a
+*trade*, and a checkmate could be graded "Blunder".
 
-**State at end of day:** a working online prototype. You could analyse a
-position or grade one move, with an explanation at your level.
+## Part 3 — Upgrading it, step by step
 
-### 19 June 2026 — Making it a real tutor: fair grading, a playable board, speed
+### 27 Jun — From demo to research
+- **Did:** studied Dr. Marcolino's project description (Project #40: virtual tutors that explain an AI's decisions, adapt to the player's level and find errors) and his own research (working out a player's or program's hidden *type* from how it acts). Agreed a 3-step plan: (1) a faithfulness checker, (2) a small test, (3) a *learner model*.
+- **Problem → fix:** you got lost in jargon → new rule: plain words, every term explained, short answers.
 
-**What we built:**
-- **Fairer grading.** Switched from "centipawns lost" to **win-chance lost**.
-  Losing half a pawn matters a lot when the game is equal and hardly at all when
-  you're already winning by a queen. Win chance captures that.
-- The numbers behind each grade are shown (win chance before → after, the eval).
-- **Side-by-side boards:** your move vs. the engine's best, with arrows.
-- **Play-a-game mode:** a clickable board. You play both sides and every move
-  gets graded.
-- **"Why was my move wrong?"** Before, the coach only named the better move.
-  Now it gets the engine's *refutation* (the opponent's punishing reply) and
-  starts with that.
-- The coach says what will *likely* happen, not what *will* happen.
-- Merged the screens into one; added a copyable FEN box and "re-explain at a new
-  level".
+### 30 Jun — Step 1: the checker
+- **Did:** `faithfulness.py` finds every move in the coach's text and flags any move the engine didn't give (how it works: see Reference). Planted fake moves: 6/6 caught.
+- **Problem → fix:** the checker seemed not to run in the app → an old copy of the app was still running old code; restarted it.
 
-**Difficulties → how we got past them**
-- *A grading label never showed its colour.* The grader said "Inaccurate" but
-  the page expected "Inaccuracy". → Fixed the label.
-- *The app crashed locally with no secrets file.* → A guarded lookup falls back
-  to an environment variable.
-- *The engine wouldn't launch on Windows* (a relative file path). → Use the full
-  path.
-- *Pieces were invisible on Streamlit Cloud.* The Cloud's font has no chess
-  symbols. → Install a font that has them (FreeSerif).
-- *The board was cut off on the right.* → Changed a display setting ("auto" →
-  "always") so it scales to the column.
-- *Clicks replayed the previous move.* The click widget keeps reporting the last
-  click on every redraw. → Remember the last click already handled and ignore it.
-- *Grading one move took ~2.4 seconds.* A new Stockfish was started and shut
-  down for every request. → Keep one engine running and share it: **~0.1s**.
-  (During this work I ran many silent commands and killed processes, and you
-  got lost. We agreed I explain each step as I go.)
+### 1 Jul — A repeatable engine; "is the checker blind?"
+- **Did:** made the engine *repeatable* (same position → same answer). There were three causes of randomness, all fixed: a time limit (it searched deeper when the laptop was less busy), several parts of the engine searching at once and racing each other, and memory left over from earlier positions. Built the 25-case test (`evaluate_faithfulness.py`: 14 positions and 11 played moves, from openings to endgames): 25/25 clean.
+- **Problems → fixes:** a perfect score looked suspicious (your point: the checker might be blind) → you hand-audited all 25. I called Step 2 "done" before your audit was finished → new rule: a step is done only when you've reviewed it.
 
-**State at end of day:** a complete, playable tutor: board, grading, "why it was
-wrong", three levels, online.
+### 3 Jul — Your audit changes everything
+- **Did:** your audit found what the checker had missed. Main problem: the coach **invents reasons for the eval** (you marked 10 of 25 answers), e.g. "explaining" −4.79 by "open files", a reason the engine never gave. Also: move purposes that didn't match the engine's line, and 2 plain factual errors.
+- **Decided together:** fix the checker first, then the coach, then re-measure. Fixing the coach with a checker that can't see the problem would prove nothing.
+- **Then:** the checker now flags a sentence that has the score and a reason ("because", "due to"…) but no engine move. It matches your audit (10/10), and the honest starting rate is **19/25**. The coach fix, "ground it or drop it": give a reason for the eval only if the facts show one (material won in the line, or mate). Also added full-game review from a pasted *PGN*.
+- **Problems → fixes:** a line cut one move before a *recapture* looked like a *hung* queen → lines are never cut mid-trade. Each test run overwrote the results you audited → saved a frozen copy.
+
+### 17 Jul — Two experiments, and the honest number
+- **Did:** you checked the last 4 flags yourself; 3 of them were only wording, not lies. You also named two quality problems: later moves mentioned out of order or on the wrong side (fixed and kept) and heavy vocabulary at advanced level (**still open**). Tried "keep language plain at every level": 16/25 vs. 22/25 without it, so **removed**. Why it backfired: plain explanations push the AI to say "because…", exactly what the rules forbid. Found by switching the change off and re-measuring (an *ablation*).
+- **Problems → fixes:** 24/25 turned out to be luck; re-runs gave 22/25 → reported **≈88%**. The flags I showed you didn't match your audit sheet: they came from a newer run, and Gemini words things differently every run → always say which run a number comes from.
+- **End state:** Steps 1–2 closed and pushed.
+
+### 23 Sep — Accepted into the MSc; Step 3 begins
+- **News:** accepted at VinUniversity with Dr. Marcolino; he agreed to chess instead of Go.
+- **Did:** re-checked the checker from scratch (planted lies caught 25/25 and 25/25; the same text always gets the same verdict). Fixed a checkmate graded "Blunder". Built the mistake detector (Step 3a): each bad move gets one of 5 *kinds*, read from the engine's lines and a *material* count, no AI guessing. Limit: it sees only about 6 moves ahead.
+- **The coach failed during your demo to Dr. Marcolino.** The cause was temporary (the free plan's limit of 15 requests a minute, or Gemini briefly busy), but the app made it permanent. Now it tries up to 3 times, names the real cause instead of always "check GOOGLE_API_KEY", and shows a "Try again" button. A missing key stops only the coach, not the whole app. The add-on libraries are locked to tested versions (the cloud used to install the newest, untested ones).
+- **Problems → fixes:** the checker errs both ways. It misses "…, as your pieces are developing" (no trigger word) and wrongly flags a true "your extra rook" (it can't see the board) → by hand the rate is still ≈88%, ± a case or two. Lesson: the coach may have learned to avoid "because" and use softer words the checker doesn't catch, so a human spot-check is needed now and then. What to do about these two blind spots is **still your decision**. `git push` failed: the office firewall intercepts GitHub's secure connection → push from another network. Don't switch off git's security check to get around it: anyone on the network could then pretend to be GitHub.
+
+### 23 Sep (later) — Honest verdict; the learner model
+- **Did:** wrote the verdict above. Built the learner model (Step 3b). For each mistake kind it counts *chances* and *misses*. Every player starts from a guess that sits exactly on the bar and weighs as much as 10 moves of evidence, so one slip can't label anyone. A kind becomes a **pattern** only when we're 80% sure the player's rate is above a bar (e.g. "hangs material on more than 1 move in 10") and it has happened at least 3 times. The maths was checked against 200,000 random samples.
+- **Limit:** the bars are my guesses, set by hand, and one is already known to be too lenient ("misses more than half its chances", when the engine misses none).
+- **Test (Step 3d):** 4 kinds of bots that play like Stockfish except for one planted weakness: **hangs** (leaves pieces to be taken), **misses** (skips free material), **drifts** (makes random quiet moves), **solid** (no weakness: the control, i.e. the comparison group). 5 bots of each kind, 40 moves each against Stockfish.
+- **Result:** "hangs" found **5/5** (after about 9 moves); the solid bots were never flagged; "misses" and "drifts" **not found**. Why: a bot's planned mistake often wasn't what the engine judged its move to be; one habit got split across two kinds; and chances to win material are rare (~7 in 40 moves). The one extra flag was a drifter that really lost material on 8 of 40 moves: a real weakness, not a false alarm. Re-runs give identical games, so the test is repeatable.
+- **Decision:** don't tune the rules until my own bots pass (that would be marking my own exam). Set the bars from real Lichess games instead, and check there that weaker players hang more pieces.
+
+### 23 Sep (evening) — Reading the lab's chat
+- **Did:** read the lab's Discord chat (Aug 2025 – Aug 2026) as background only. What we learned about the lab's people and plans is in `lab_notes.md` (kept off GitHub: the repo is public). Turned it into questions for Dr. Marcolino (in `TODO.md`); the papers named in the chat are in `related_work.md` and `TODO.md`.
+- **Problem → fix:** the chat file holds personal data → told git never to save it (`.gitignore`).
+
+### 23 Sep (night) — "Your patterns" in the app
+- **Did:** the app shows the learner model ("Your patterns"): each mistake kind as Pattern / Not sure yet / Fine, with the moves as evidence. Only your moves count: pasted games get a "You played: White / Black / Both" choice. The notes build up across games until the page is reloaded. You decided the direction (above). Started `related_work.md`.
+- **Found:** a very close new paper, "Hallucinations on the Board" (Aug 2026; a "hallucination" is an AI making things up), and a paper at NAACL 2025 (a big AI conference) already using the "engine decides, AI phrases" design → that design alone isn't our contribution; the *tutor* is (levels, learner model, level guessing, all measured). A comparison against the coach without engine facts is now expected of us.
+- **End state:** panel built and tested (9/9 checks passed: grading as Black, re-grading as White, a second game, New game, Undo…), not committed; you'll check it first.
+
+### 24 Sep — Getting ready to talk to João
+- **Did:** Dr. Marcolino suggested you talk to João. Re-read the chat for João's work, named the ~20 untitled paper links (now in `related_work.md`), and prepared questions for him (in `lab_notes.md`). Message sent; he's busy until his 25 Sep deadline.
+- **Learned:** two chess papers on guessing a player's level (one from ICLR 2025, a big AI conference; "Predicting Chess Player Rating Based on a Single Game", 2023), now proposed comparisons. The rest (who works on what, Dr. Marcolino's remarks, ethics) is in `lab_notes.md`, kept off GitHub.
+
+### 24 Sep (midday) — Pushed; the online coach lost its key
+- **Did:** pushed the 7 waiting commits over your phone hotspot (it works; the office network still doesn't). That also updated the online app with the coach's retries and plain error messages.
+- **Problem → fix:** the online coach then said "no API key". I changed the code twice and pushed both, before you tried the simple fix: re-paste the secret and reboot the app. That fixed it. Kept: the key is now looked up on first use, not at start-up (so a newly added key works without a reboot), and a log line names the secrets it found (never their values). Undone: looking under other key names (4b46dbb). Lesson: let you try the simple fix first.
+- **End state:** 1 commit (4b46dbb) waits to be pushed.
+
+### 24 Sep (later) — Your rules for walking through a line
+- **Your complaint:** after your ...Nb4 (a Mistake), the coach said "O-O… followed by a6". It's unclear who plays a6, and there's no reason anyone would find it.
+- **Checked:** our engine agrees ...Nb4 is a Mistake (from Black's side the eval went −0.44 → −1.46: from slightly worse to clearly worse), but its line is O-O then **...c6**, not ...a6 (the online app probably runs a different Stockfish version). Both attack White's bishop on b5, so your point holds.
+- **Your rules** (also in `CLAUDE.md`): say who plays every move; say what the bad move changed; give the idea before each recommended move; only 1–2 moves deep; adapt to the level.
+- **Claude's pushback:** the engine gives no reasons, so reasons must be computed by code, not invented by Gemini. Example: after ...Nb4 the knight no longer defends e5, but taking it is bad for White (4.Nxe5? Qg5), so "you lose e5" would be a wrong reason. Also: the move you *should have played instead* (...a6) is kept apart from your *best reply now* (...c6).
+
+### 24 Sep (evening) — The new walk-through, built and measured
+- **Did:** the new `board_facts.py` works out what a player would notice about each move (captures, checks, attacks, "a pawn can chase it"…). Every move is labelled in code with who plays it. How deep to go is set by level (2 / 3 / 4 *half-moves*), and the line stops before any of your moves that has no fact to explain it. New coach instructions around your rules. The checker changed too: it now also accepts squares and moves named in the board facts, but judges reasons for the eval exactly as strictly as before (still 10/10 against your audit).
+- **Result:** the 25 cases, run twice (50 answers): the checker passed 44/50 before → **50/50** after; "followed by" 11 → 0. But the same 25 cases were used to build it, the checker itself changed (so this isn't directly comparable with July's numbers), and it can't see an invented *idea*. Reading by hand still finds: "attacks" stretched into "forces"; "the c3 or a3 pawn" once; a board fact linked to the verdict ("…can be chased, so your move was a mistake"); notation in square brackets.
+- **Problems → fixes:** Gemini got the eval backwards (told Black "−1.46 favors you") → the code now spells out who is ahead. A test run froze for minutes on one Gemini request → measurements use a 60-second limit; the app got its own limit later that day (below).
+- **End state:** not committed. Next: your hand check in `walkthrough_audit.md`, then the rule "an attack is only an attack".
+
+### 24 Sep (night) — A shorter diary
+- **Did:** the diary had grown to 1,050 lines and was a hassle to read. Rewrote it as this short version; the full text is frozen in `DEV_DIARY_full.md`. To-dos now live only in `TODO.md`. Two checks (mine, then a fresh reviewer's) put back what the first cut lost: the level-guessing step, key findings and limits, open decisions, and explanations for ~25 words.
+
+### 24 Sep (late) — A time limit for the coach
+- **Did:** the app's Gemini request now gives up after 20 seconds per try (3 tries, so about a minute at worst; a normal answer takes ~3 s). Before, one stuck connection could leave the coach waiting forever. When time runs out, the app says so in plain words ("Gemini didn't answer in time…") and keeps its "Try again" button.
+- **Tested:** a forced time-out gave up after 3 tries with that message; a normal call still answered in 3.2 s.
+- **End state:** not committed (with the rest of today's work).
+
+### 24 Sep (late night) — Are the notes up to date?
+- **Did:** checked every `.md` file against the code. Fixed: `CLAUDE.md` and `README.md` still said the engine stops after 1 second (removed on 1 Jul, because a time limit made it unrepeatable); the README said Python 3.9+ (the locked libraries need 3.10+) and had a placeholder GitHub address; this diary had no entry for the push and the key problem (added above, "midday").
+- **Left for later:** the README (the project's GitHub front page) still describes the July app: no checker, no game review from a PGN, no learner model. Its 3-level description will be wrong once the new walk-through is kept → update it after the panel and walk-through are committed (in `TODO.md`).
+
+### 25 Sep — A hand check you can actually do
+- **Did:** turned your hand check into a web page (link in `walkthrough_audit.md` and `TODO.md`). It shows 13 coach answers, freshly generated with the same code, each in full. Every case has a board you can step through move by move, whose caption always says who just moved and who is to move; the engine's facts, with move numbers; and one question per answer: "Any problem?". Your answers save on the page and Claude reads them from there.
+- **Problems → fixes:** the 265-line sheet was too long → 9 yes/no questions. Text alone wasn't enough → boards. My first boards showed positions several moves deep, with arrows for both sides mixed together, which made it hard to tell who played what → redone in the format of your "Chess Coach Correctness" page (board before the move, red = played, green = engine's best). Only excerpts of the answers → full answers.
+- **Result:** the checker passes the fresh run 25/25 again. Reading it by hand found one new problem: in the ...Nxe4 case the coach stops at 7...bxc6, just before 9.Kxf2 wins the knight, so ...Nxf2 sounds like a good move. That comes from our code's level cut, not from Gemini. Still there: "the c3 or a3 pawn", the missing reason for ...Ng4 (it attacks the bishop on e3; our board facts don't see that), and "−100.00" shown to a beginner instead of "checkmate".
+- **Your verdict:** 10 of 13 answers have a problem (fine: 1.h4, Ruy Lopez, QGD). In short: our code's facts are too thin or misleading (Be3 "opens a line for the queen" only frees back-rank squares; no fact for a piece left to be taken for free, for the attack on f7, or for claiming the centre); after a lost piece the coach should stop instead of walking on; it never says *why* the better move is better; wording (guessing what you "want", "the c3 pawn", copying "worth less"). Full table in `walkthrough_audit.md`.
+- **End state:** nothing committed. Next: agree which fixes to do first.
+
+### 26 Sep — Why board facts exist; one gap closed
+- **Your question:** where do the board facts come from, and why have them? → They're plain code (`board_facts.py`), not AI: a fixed list of yes/no checks on the board, each "yes" filling in a ready-made sentence, handed to Gemini as English. They exist because your rules ask for the *idea* behind each move ("on b4 it can be chased by c3 or a3"), and Stockfish gives no ideas. So the engine says what's good, the code says what's visible on the board, and Gemini only words it.
+- **Found while explaining:** "moves away from the attack" only counted attackers worth *less*. An undefended knight fleeing a bishop got no reason → now any attacker counts when nothing defended the piece (a defended piece attacked by an equal one is just an even trade, so still nothing).
+- **Result:** self-test passes (undefended knight → fact; defended → none; the ...Nb4 example unchanged). Of the 25 test cases, 1 prompt changes: Caro-Kann 3.e5 now "moves the pawn away from the attack by Black's pawn on d5" (true, and the real reason for e5). Side effect: pawns can now get this fact too. Not re-run through Gemini.
+- **End state:** not committed.
+
+### 26 Sep (later) — Simulated games for the patterns panel
+- **Your ask:** no time to play 10 games, so simulate games between 1000-rated players. → New `simulate_games.py`: Stockfish plays both sides at its weakest setting, and every move is graded exactly as the app grades a pasted game. 10 games in under a minute, saved in `sim_games/` (one PGN per game, ready to paste, plus a report).
+- **Limit:** Stockfish can't go below "1320", and that's an engine rating, not a human one. Its mistakes are random, not human (it once took a rook and promoted to a knight instead of a queen). Good for seeing the panel work; not evidence about real players, so not for setting the bars.
+- **Found:** players A and B are the *same* bot, yet after 10 games the panel calls "leaving material to be taken" *fine* for A (15 in 286 moves) and a *pattern* for B (40 in 287). B's slips come in runs: in game 10 one attacked knight on f3 was counted on 3 moves (20, 21, 23), because each move that didn't save it counts again. So the panel treats one problem as several pieces of evidence and gets sure too fast. This matters for real 1000-rated games too, where hung pieces often stay on the board for a few moves.
+- **End state:** not committed. The fix is your call (in `TODO.md`).
+
+### 26 Sep (night) — Saved to GitHub; private notes kept local
+- **Did:** committed and pushed the finished work: the "Your patterns" panel, the simulated games, and the notes (this diary, the to-do list, related work, README fixes).
+- **Found → fix:** the GitHub repo is public, and the diary and to-do list quoted the private lab chat (remarks about people in the lab and their unpublished work). → Moved those lines into `lab_notes.md`, which git ignores, as it now does `DEV_DIARY_full.md`; the diary and to-do list point there. None of it reached GitHub.
+- **Held back:** the walk-through code (`board_facts.py`, the coach's instructions, their test files). Another Claude session was changing `board_facts.py` at that very moment (the fixes from your hand check), so committing it would have saved half-finished work.
+- **End state:** pushed; the walk-through is committed once those fixes are done.
 
 ---
 
-# Part 2 — Was the first version good?
+## Reference (look things up here; no need to read it through)
 
-**What was good**
-- **The core design was right.** Keeping the chess with the engine and the words
-  with the AI avoids the AI's biggest weakness (making up moves).
-- **It worked as a product:** online, playable, grades every move, explains at
-  three levels, and says *why* a move fails.
-- Grading on win chance is the same idea chess.com and Lichess use.
+### How the checker works
+After Gemini writes an explanation, `faithfulness.py` checks the text. It never changes it.
+1. **Moves:** every move written (`Nf3`, `O-O`…) must be one the engine gave the coach, or (since 24 Sep) one named in the board facts. Not on the list → **hard flag** (the text fails). A bare square like "e5" → **soft note** only (shown to a human, doesn't fail), since it may just point at a square.
+2. **Reasons:** a sentence with the score *and* a reason word ("because", "due to"…) but no engine move → hard flag.
 
-**What was not good enough**
-1. **The main promise was never checked.** We *said* the AI never makes up chess,
-   but nothing verified it. It was a promise, not a measurement.
-2. **No evaluation.** There was no answer to the first question any supervisor
-   asks: *how do you know it works?*
-3. **Not personal.** Three fixed levels, but no memory of *this* player's
-   repeated mistakes. That's the "adapting to the learner" part of Project #40.
-4. **Hidden faults we only found later:** the engine could give a *different*
-   best move for the same position (found 1 July); engine lines could stop
-   mid-trade and look like a blunder (3 July); a checkmating move could be
-   graded "Blunder" (23 September); one Gemini hiccup killed an explanation for
-   good (23 September).
-5. **It read as an engineering demo, not research** (our own review on 27 June).
+**Can't do:** understand chess ideas written in words ("this pins the knight"); notice a real move said by the wrong side; hard-flag an invented pawn move; catch reasons without its trigger words; see pieces already on the board.
 
-**Verdict:** a good prototype and a sound idea, but **not yet research**. It
-claimed things it couldn't prove. Everything from Part 3 onward is about
-turning claims into measured results and making the tutor adapt to one person.
-
----
-
-# Part 3 — Upgrading it, step by step
-
-### 27 June 2026 — Taking stock: from demo to research
-
-**What we did**
-- Studied Dr. Marcolino's Project #40 ("virtual tutors for complex decision
-  problems": explain AI decisions, adapt to the player's level, find errors) and
-  his papers. His own field is multi-agent systems: working out a teammate's
-  hidden *type* from how it acts, plus robustness and guarantees for AI.
-- **Honest verdict:** a strong fit with the project, but the work looked like an
-  engineering demo.
-- **A 3-step plan came out of this** (agreed by 30 June): (1) a *faithfulness* checker, (2) a small evaluation,
-  (3) a *learner model*, which is the closest link to his "work out the type"
-  research.
-- Layout fixes: the coach panel is always on screen; a chess.com-style move log
-  with quality badges (★ ! ✓ ?! ? ??).
-
-**Difficulties → how we got past them**
-- *You got lost in your own project.* I'd used words like "PV", "SAN",
-  "refutation" without explaining them, and went too deep too fast. → New rule:
-  plain words, every term explained, one stage at a time, and I pause to check
-  you're following. (The next day you asked for shorter answers too; also a rule now.)
-
-**State:** a clear research plan. Step 1 next.
-
-### 30 June 2026 — Step 1: a checker that reads what the coach wrote
-
-**What we did**
-- Built `faithfulness.py`. After Gemini writes an explanation, it finds every
-  chess move in the text and checks that each one is a move the engine actually
-  gave. A made-up piece move is a **hard flag**. A bare square like "e5" is only
-  a **soft note**, because "your pawn on e5" is pointing at a square, not
-  claiming a move.
-- Connected it to the app: every explanation is checked and saved to a log,
-  without ever changing what the coach says.
-- **Planted-lie test:** we added fake moves (Nxe5, Bxf7+, Qh5, Qxf7#) to real
-  coach text, and all 6 were flagged. So the alarm isn't dead.
-- First run of the 25-case test: 25/25 clean.
-
-**Difficulties → how we got past them**
-- *The checker seemed not to run in the app.* An old Streamlit server from the
-  previous day was still running and serving the old code. → Stopped every old
-  server and restarted cleanly. Then the log filled up as expected.
-- *Two limits showed up:* (a) an invented **pawn** move (e.g. "c3") is only a soft
-  note; (b) re-running the engine sometimes gave slightly different lines, so
-  facts couldn't be reproduced later. → (a) Kept as a documented limit, to avoid
-  false alarms. (b) Fixed the next day.
-
-**State:** the checker works and is connected. Step 2 started.
-
-### 1 July 2026 — A repeatable engine, and the key question: "is the checker blind?"
-
-**What we did**
-- **Made the engine repeatable.** Same position → same best move, eval and line,
-  every time.
-- **Step 2:** `evaluate_faithfulness.py` runs 25 hand-picked cases (14 positions,
-  11 moves; openings, middlegames, endgames; good and bad moves) through the real
-  engine → coach → checker, and writes a report. Result: **25/25** clean.
-- Built the human audit sheet (`faithfulness_audit.md`) so you could grade all
-  25 answers yourself.
-
-**Difficulties → how we got past them**
-- *The engine gave different best moves for the same position* (you'd noticed it
-  in the app too). Three causes: a time limit (it stopped at different depths
-  depending on computer load), several threads racing each other, and memory
-  left over from earlier positions. → Fixed all three. Measuring showed fixing
-  only one wasn't enough. Speed cost: negligible.
-- *A perfect 25/25 looked suspicious.* Your question: "a checker that never flags
-  anything might just be blind." → That became the reason for the human audit:
-  **check the checker**, not just the coach.
-- *Found a real leniency:* case 4 said "bishop back to h4" (the move Bh4, not in
-  the engine's line) and wasn't flagged, because "h4" reads as a bare square.
-  → Recorded as a limit.
-- *I called Step 2 "done" while your audit was still unfinished*, and you were
-  rightly upset. → New rule: a step is only done when your review is finished
-  and we've decided together.
-
-**State:** repeatable engine; 25-case test built; your audit pending.
-
-### 3 July 2026 — Your audit changes everything; the checker learns to see reasons
-
-**What we did**
-- **Your audit of all 25:** 11 Yes · 5 Mostly · 7 Partially · 2 No. The checker
-  had said 25/25 clean, so you and it agreed only ~64% of the time. The gap was
-  the finding:
-  - **Main problem: invented reasons for the score** (~13/25). The engine gives a
-    number with no reason, and the coach kept making one up. Worst: case 8, where
-    −4.79 was "explained" by open files.
-  - Move purposes that don't match the engine's line (cases 2, 3, 9, 17).
-  - Two plain factual errors: case 4 (wrong bishop colour), case 11 (king and
-    pawn roles swapped).
-- **Decided together: fix the checker first, then the coach, then re-measure.**
-  Fixing the coach with a checker that can't see the problem would prove nothing.
-- **Checker upgrade:** a second check for sentences that mention the score AND
-  give a reason ("because", "due to", "comes from"…). No engine move in the
-  sentence → hard flag. An engine move cited → soft note.
-- **Validated against your audit:** found **10 of 10** cases you marked, **0**
-  good answers wrongly failed. Honest new baseline: **19/25**.
-- **Coach fix ("ground it or drop it"):** state the score and who it favours,
-  but only say *why* if the facts show it (material won in the line, or mate).
-  Re-measured: 24/25.
-- Also: full-game review from a pasted *PGN*; clickable move log.
-
-**Difficulties → how we got past them**
-- *"Gives you an edge" can be a translation or a made-up reason.* "Evaluated at
-  +0.20, which gives you a slight edge" is fine. "Your active pieces give you an
-  edge" is invented. → If the sentence credits the engine ("the engine
-  evaluates…"), it counts as a translation.
-- *"Edge" also means the edge of the board.* → "the edge" is ignored; only "a /
-  your / slight edge" counts.
-- *Case 9 looked like the engine hanging its queen* ("…Qxf4"). The line had just
-  been cut one move before the recapture. → Engine lines are now never cut in
-  the middle of a trade.
-- *After following the engine's line, a fresh search picked a different move*
-  (Qd5 vs Qa5+). → Explained, not "fixed": a line is a forecast, and later moves
-  in it are searched less deeply. Caching old lines would give worse answers.
-- *Four test cases had titles that disagreed with the engine's grade.* Checked:
-  the titles were my hand-written guesses and never reached the coach. → Titles
-  corrected.
-- *Every test run overwrites the results file*, which would destroy the exact
-  run you audited. → Saved a **frozen** copy (`faithfulness_records_audited.json`)
-  that the validator always uses.
-
-**State:** the checker sees both failure types and agrees with your audit. The
-coach is improved and measured.
-
-### 17 July 2026 — Two experiments, and the honest number
-
-**What we did**
-- You checked the last 4 flags yourself: case 23 accepted; cases 5, 15, 24 are
-  wording, not lies.
-- You named two quality problems: heavy vocabulary at advanced level, and deep
-  engine moves dropped in with no context and on the wrong side (case 24:
-  "…after dxe5", which was actually *your* move, 4 moves deep).
-- **Experiment 1, kept:** when the coach mentions a later move, it must walk
-  through the moves leading to it, in order, each on the right side. Case 24 is
-  now told correctly.
-- **Experiment 2, reverted:** "keep language plain at every level". Result:
-  **16/25** with it vs. **22/25** without, run twice.
-
-**Difficulties → how we got past them**
-- *The flags I showed you didn't match your audit sheet.* You spotted it. The
-  sheet shows the frozen July-3 run; the flags came from a newer run, and Gemini
-  words things differently each time. → Explained; no bug. Lesson: always say
-  which run a number comes from.
-- *"Explain plainly" backfired.* Plain explanations push the AI into
-  "because…", the exact thing the rules forbid. → Found by an *ablation*
-  (switch one change off and re-measure). Removed.
-- *24/25 turned out to be luck.* Re-runs gave 22/25 each time. → Reported the
-  honest, stable rate: **≈88%**. The report now warns that one run is one sample.
-
-**State:** Steps 1 and 2 closed and pushed. Remaining failures: occasional
-invented reasons, a documented limit. Next: Step 3.
-
-### 23 September 2026 — Accepted into the MSc; Step 1 re-checked; live app fixed; Step 3 begins
-
-**News:** accepted into the MSc at VinUniversity, with Dr. Marcolino as
-supervisor. His original idea was Go, but he agreed the project can continue
-with chess.
-
-**What we did**
-1. **Re-checked Step 1 from scratch** (offline, no AI calls):
-   - The audit comparison still holds: 10/10 found, 0 good answers wrongly failed.
-   - Planted lies in all 25 real coach texts: a *legal* move the engine never
-     gave → **25/25 flagged**; a made-up reason → **25/25 flagged**.
-   - Same text → same verdict: 25/25.
-2. **Fixed the live app.** The coach failed while you were showing it to Dr.
-   Marcolino.
-3. **Fixed a grading bug:** a checkmate could be graded "Blunder".
-4. **Step 3a:** built the mistake detector (below).
-5. Started this diary.
-
-**Difficulties → how we got past them** (the last one isn't solved yet)
-- *The checker makes mistakes in both directions (found today in the latest
-  run):*
-  - **Miss:** case 1 says "+0.42 … a slight edge, **as** your pieces are
-    developing nicely", an invented reason. "As" isn't one of its trigger words.
-  - **False alarm:** case 12 says "+6.30 … because you're winning with your extra
-    rook", which is **true** (king + rook + pawn vs. a lone king). The checker
-    can't see pieces already on the board.
-  - → Judged by hand, the latest run is 20–23 of 25 depending on three
-    borderline sentences, so **≈88% still stands, ± a case or two**. Lesson for
-    the thesis: the coach fix taught the AI to avoid "because", and it may have
-    moved to softer words the checker doesn't look for. A human spot-check now
-    and then guards against that. (Next step for this: your decision.)
-- *The coach failed during the demo.* I tested it: the key works, the model
-  still exists, and a live call answers in ~3s, so the failure was
-  **temporary** (the free plan's 15-requests-a-minute limit, or Gemini briefly
-  busy). But the app turned temporary failures into permanent ones:
-  - The Gemini library **never retries** by default. → It now tries up to 3
-    times (waits ~2s, then ~4s). Tested with a fake always-busy server: 3
-    attempts, then a clear message.
-  - Every failure said "check GOOGLE_API_KEY", even when the key was fine. → It
-    now says the real reason: usage limit, busy, key rejected, or model retired.
-  - After one failure the Explain button **disappeared** for that move. → It now
-    comes back as **Try again**. Tested end to end in Streamlit's test mode.
-  - Newer versions of the Gemini library **crash the whole app** if the key is
-    missing. → Now only the coach stops; the board and engine keep working.
-  - Streamlit Cloud installed the **newest version of every package** on each
-    update, so an untested upgrade could break a demo. → Versions are now fixed
-    to the ones tested on your computer.
-  - Tip: if it happens again, Streamlit Cloud → *Manage app* → *Logs* shows lines
-    starting `[coach]` with the exact error.
-- *A checkmate graded "Blunder".* With two mating moves (Ra8# and Rb8#), the one
-  the engine didn't list first was graded Blunder, and mating scores showed −100
-  instead of +100. The cause: a sign test that mistook "you just gave mate" for
-  "you are mated". → One-line fix, tested.
-- *Pushing to GitHub failed:* "certificate … not trusted". Checked: the
-  certificate that arrives for github.com is issued by **Fortinet**, a company
-  firewall on this network that opens and inspects secure connections. Git
-  correctly refuses it, because it can't tell the firewall from an attacker. The
-  SSH route is blocked too, and this laptop has no SSH key. → **Not solved on
-  this network, on purpose:** turning off git's security check would let anyone
-  on the network impersonate GitHub. The commits are safe on the laptop; push them
-  from another network (home Wi-Fi or a phone hotspot) with `git push`. Long term:
-  ask IT to install the firewall's certificate, or to exempt github.com.
-
-**Step 3a: the mistake detector.** Every bad move now gets one of five kinds,
-decided only from the engine's lines and a piece count (pawn 1, knight/bishop 3,
-rook 5, queen 9). No AI guessing:
-
+### The 5 mistake kinds
 | Kind | Meaning |
 |---|---|
-| allowed_mate | your move let the opponent force checkmate |
-| missed_mate | you had a forced checkmate and missed it |
-| lost_material | the engine's line after your move shows you losing material (e.g. a hanging piece) |
-| missed_material | the engine's best line won material you didn't take |
-| positional | no mate, no material: the problem is the position. We don't say which part, because the engine doesn't tell us |
+| allowed mate | your move let the opponent force checkmate |
+| missed mate | you had a forced checkmate and missed it |
+| lost material | after your move, the engine's line shows you losing material (e.g. a hanging piece) |
+| missed material | the engine's best line won material you didn't take |
+| positional | no mate, no material: the position got worse. We don't say how, because the engine doesn't say |
 
-Tested with one position per kind; all correct. Limit: it only sees about 6
-moves ahead.
-
-**Commits (made, not yet pushed; see the GitHub difficulty above):** `8c415ac`
-mistake detector + mate fix · `27f5e1b` coach reliability + fixed versions ·
-`c842515` and the next commit: this diary.
-
-**State after this part:** Steps 1–2 done and re-verified; 3a done; the coach
-fix is ready. **The live app keeps the old behaviour until the commits are
-pushed** (Streamlit Cloud rebuilds from GitHub). **Next:** push from another
-network; your OK on the Step 3b method; then build the learner model.
-
-### 23 September 2026 (later the same day) — An honest verdict; the learner model built and put to the test
-
-You couldn't reach another network yet, so pushing waits. You asked me to carry
-on with what I think should come next, and to judge honestly whether the
-results are good enough.
-
-**What we did**
-1. **The verdict** (full text in "Is it good enough for a master's thesis?" at
-   the top). In short: a strong prototype and first study, but not yet a full
-   thesis. The biggest issue is the sample: with 25 cases, "88%" really means
-   *70–96%*, so the prompt fix is likely but not proven.
-2. **"Chances" added to every move review:** two engine facts about the position
-   *before* the move: was there a forced mate, and did the engine's best line win
-   material? A "missed" mistake is only possible when a chance was there.
-3. **Step 3b, the learner model** (`learner_model.py`). For each mistake kind it
-   counts *chances* (moves where that mistake was possible) and *misses* (times
-   it happened). Every player starts from a starting guess worth 10 moves, so
-   one slip can't label anyone. A kind becomes a **pattern** only when we're 80%
-   sure the player's rate is above a bar (e.g. "hangs material on more than 1
-   move in 10") **and** it has happened at least 3 times. It's **fine** when
-   we're 80% sure the rate is below the bar, and **unsure** in between. The math
-   is exact, and was checked against 200,000 random samples.
-4. **Step 3d, the test** (`simulate_learners.py`). Four computer "players" play
-   like the engine except for one planted weakness (**hangs** pieces, **misses**
-   free material, **drifts** with random quiet moves, and **solid**, the control
-   with no weakness). Each plays real games against Stockfish, and every move
-   goes through the real pipeline. There are 5 players per bot, 40 moves each.
-
-**First results**
-
-| Bot | Weakness found? | Other kinds flagged | Engine agreed with the planted mistake |
-|---|---|---|---|
-| hangs | **5 of 5**, after about 4 moves | 0 | **44 of 44** |
-| misses | 0 of 5 | 0 | 12 of 24 |
-| drifts | 0 of 5 | 1 | 34 of 78 |
-| solid (control) | correctly nothing | **0** | — |
-
-**Difficulties → how we got past them**
-- *My first bots were too crude.* A "safe quiet" move only checked the piece
-  that moved, so it often left *another* piece hanging. → The bots now check
-  every piece. Even so, the engine still finds losses the simple check can't see
-  (pins, forks).
-- *"misses" and "drifts" weren't found.* Looking at every move showed the
-  learner model was doing its job; the causes were elsewhere:
-  - **The plan isn't the move.** 24 of the drifter's "safe" moves really lost
-    material, and when the misser skipped a recapture, the opponent often took
-    *more*. The engine judges what the move really was, so the planted label
-    isn't a clean answer key.
-  - **One habit, split across two kinds.** Skipping a recapture was labelled
-    "missed material" half the time and "lost material" the other half, so
-    neither count reached its bar.
-  - **Chances are rare.** Only about 7 chances to win material per 40 moves, so
-    a "misses chances" habit needs many games before anyone can be sure.
-  - **The bars are guesses.** "Misses more than half its chances" is too
-    lenient: the engine itself misses 0%.
-  - The one "other kind flagged" was a drifter losing material on 8 of 40
-    moves. That's a **real** weakness it showed, not a false alarm.
-  - → **Decided not to tune the rules until my own bots pass.** That would be
-    marking my own exam. The proper fix is real human games (next point).
-- *Real games were blocked.* Lichess publishes all its games for free, which
-  would let us set the bars from data and check that weaker players show more
-  hung pieces. The company firewall blocks it, just like GitHub. → Next time
-  you're on another network.
-- *A pattern flickered on and off.* In the first run, "positional" was flagged
-  after just 2 moves (2 slips in 2 moves) and vanished later. That breaks the
-  model's own rule that a slip or two must not label a player. → New rule:
-  **at least 3 mistakes of a kind before it can be called a pattern.** The
-  experiment was re-run (below).
-- *Re-running cost 15 minutes each time.* → The experiment now saves every
-  graded move, so a future change to the model can be re-scored in seconds.
-
-**Re-run with the new rule**
-
-| Bot | Weakness found? | First flagged at move (median) | Other kinds flagged |
-|---|---|---|---|
-| hangs | **5 of 5** | 9 (was 4) | 0 |
-| misses | 0 of 5 | — | 0 |
-| drifts | 0 of 5 | — (the move-2 flicker is gone) | 1 (the real material losses) |
-| solid (control) | correctly nothing | — | **0** |
-
-- Every game came out **identical** to the first run (same games, same planted
-  moves for all 20 players), so the experiment is repeatable.
-- Trade-off, chosen on purpose: the model now needs 3 hung pieces before saying
-  "habit", so it's slower (move 9 instead of 4) but never jumps to conclusions.
-- **What this shows:** the model reliably finds a clear, frequent habit (hanging
-  pieces, the classic beginner problem), never labels a clean player, and
-  refuses to guess on thin evidence. What it can't do yet is find *rare* habits
-  (missed chances) within one 40-move session, or sort overlapping kinds. Both
-  need real data to fix properly.
-
-**Commits:** made on the laptop, **not pushed yet** (firewall).
-
-**State at end of day:** Steps 1–2 done; Step 3's detector, learner model and
-first simulation test done. The model is not yet in the app. **Next:**
-(1) push from another network; (2) on that network, download real Lichess games
-to set the bars from data and test the model on real people; (3) show the
-learner model in the app (the "open learner model"); (4) only then give it to
-the coach, which is a prompt change, so faithfulness is re-measured.
-
----
-
-# Appendices
-
-## A. How the faithfulness checker works (Step 1)
-
-After Gemini writes an explanation, `faithfulness.py` runs two checks on the text:
-
-1. **Move check.** Every chess move written in the text (`Nf3`, `Bxc6`, `O-O`…)
-   must be one the engine gave the coach: the best move, the engine's line, the
-   player's move, or the line after it. The allowed list is *exactly* what the
-   coach was shown, so a move is flagged even if it's legal and sensible,
-   whenever the engine didn't give it.
-   - A piece move, capture or castle not on the list → **hard flag** (fails).
-   - A bare square ("e5") → **soft note** only (might just be pointing at a square).
-2. **Reason check.** A sentence that mentions the score ("+0.42", "advantage",
-   "edge") **and** gives a reason ("because", "due to", "comes from"…):
-   - no engine move in it → **hard flag** (the reason came from nowhere);
-   - an engine move cited → **soft note** (a human should confirm the story).
-
-It is **passive**: it never changes the coach's words. Every check is logged in
-`faithfulness_log.jsonl`.
-
-**How we know it works:** its self-test (9 cases); planted lies caught (25/25
-moves, 25/25 reasons); agreement with your audit (10/10 found, 0 wrong fails);
-same verdict every time (25/25).
-
-**What it can't do:** understand chess claims made in words ("this pins the
-knight"); notice a real move said at the wrong time or by the wrong side; hard-flag
-an invented pawn move; catch reasons without its trigger words ("…, as your pieces
-are developing"); see pieces already on the board (so it can flag a true "your
-extra rook").
-
-## B. Key files
-
+### Key files
 | File | What it is |
 |---|---|
-| `app.py` | The web app (the only entry point) |
-| `engine_analysis.py` · `move_review.py` | Engine facts: best move, eval, line · grading a move and naming its mistake kind |
-| `explainer.py` | The coach (Gemini): rules, levels, retries |
-| `faithfulness.py` | The checker |
-| `evaluate_faithfulness.py` | Runs the 25 test cases and writes `faithfulness_eval.md` |
-| `faithfulness_records.json` | Latest run's texts + facts (**overwritten** each run) |
-| `faithfulness_records_audited.json` | **Frozen** copy of the run you audited. Never overwrite it |
-| `faithfulness_audit.md` · `human response.txt` | Your audit sheet · your verdicts |
-| `validate_checker.py` | Scores the checker against your audit |
-| `learner_model.py` | Step 3: the tutor's running notes on one player (chances, misses, pattern / fine / unsure) |
-| `simulate_learners.py` | Step 3d: computer players with planted weaknesses play Stockfish; writes `learner_eval.md` |
-| `learner_eval.md` · `learner_eval_records.json` | The simulation's report · every graded move (so a model change can be re-scored with `--rescore`) |
+| `app.py` | The web app |
+| `engine_analysis.py` · `move_review.py` | Engine facts · grading a move and naming its mistake kind |
+| `board_facts.py` | What a player would notice about each move (for the walk-through) |
+| `explainer.py` | The coach (Gemini) |
+| `faithfulness.py` · `evaluate_faithfulness.py` | The checker · runs the 25 test cases |
+| `faithfulness_records_audited.json` | **Frozen** run you audited. Never overwrite it |
+| `validate_checker.py` · `human response.txt` | Scores the checker against your audit · your audit verdicts, word for word |
+| `learner_model.py` · `simulate_learners.py` | The learner model · the bot test |
+| `learner_eval_records.json` | Every move from the bot test; `python simulate_learners.py --rescore` re-scores it in seconds after a model change |
+| `simulate_games.py` · `sim_games/` | Weakest-Stockfish games against itself, graded like a pasted PGN · the saved games (paste any `game_NN.pgn` into the app) and what the panel says after each |
+| `walkthrough_eval/` · `walkthrough_audit.md` | The walk-through measurements · your hand-check sheet |
+| `related_work.md` | Notes on related papers, planned comparisons, candidate journals |
+| `TODO.md` | What to do next, who does it, and why |
 
-## C. How we work (agreed rules)
+### If the coach fails online
+Streamlit Cloud → *Manage app* → *Logs*. Lines starting `[coach]` show the exact error.
 
-- Plain words and short answers; every term explained; one stage at a time.
-- **No coach-prompt changes to "fix" a score before you've seen the flagged
-  cases.** A low flag count might mean a blind checker, not a faithful coach.
-- A step is done only when your review is finished and we've decided together.
-- Commits contain only the files that belong to the change; credit is yours.
+### Dr. Marcolino's writing checklist
+What he flags in drafts (where it comes from: `lab_notes.md`); go through it before sending him any draft.
+- No claim bigger than the results show. Back every fact with a reference; if you think something is new, check the literature or say "to the best of our knowledge".
+- Keep Experiments (the setup) separate from Results.
+- Enough comparisons (baselines): reviewers can treat too few as a flaw that can't be fixed later.
+- Citation style: `\citet` when the authors are part of the sentence ("Chen et al. (2025) proposed…"), `\citep` otherwise.
+- LaTeX (the tool papers are typeset in): read the warnings, not just the errors. No "Type 3" fonts, even inside figures (an old font format that paper-submission checks reject).
+- Release the code, and read the whole paper once before submitting. Cut vague sentences.
+
+### How we work
+- Plain words, short answers, every term explained.
+- Never change the coach's instructions to "fix" a score before you've seen the flagged cases.
+- A change to the coach's instructions is kept only if the faithful rate doesn't drop, so every such change is measured again (giving the learner model to the coach counts too).
+- A step is done only when you've reviewed it and we've decided together.
+- Always say which run a number comes from.
+- Commits hold only the files that belong to the change; credit is yours.
 - You start and restart the app yourself.
-- **This diary gets a new entry at the end of every working session**, in the
-  same shape: what we did → difficulties and how we got past them → state at end
-  of day. The "Where the project stands" section is updated too.
+- **This diary:** one short entry per session (a few bullets: did → problems and fixes → end state), and refresh "Where the project stands". To-dos go in `TODO.md`, not here.
 
-## D. Glossary
-
+### Glossary
 | Word | Meaning |
 |---|---|
 | **Engine** | Stockfish, a chess program far stronger than any human. The source of all chess facts |
-| **Eval / score** | The engine's number for who's better, in pawns: +0.50 = the side to move is half a pawn better. It comes with **no reason attached** |
-| **Centipawn** | 1/100 of a pawn (50 centipawns = 0.50) |
-| **Line** (PV) | The moves the engine expects next with best play. A forecast, not a promise |
-| **Refutation** | The engine's line *after the move you played*: how the opponent punishes a bad move |
+| **The coach** | Gemini, the language AI that turns the engine's facts into words |
+| **Eval / score** | The engine's number for who's better, in pawns: +0.50 = half a pawn better for the side it's measured from (this diary says whose side). It comes with **no reason attached** |
+| **Centipawn** | 1/100 of a pawn |
+| **Material** | The pieces a side has, counted in pawns: pawn 1, knight or bishop 3, rook 5, queen 9 |
+| **Hang / hung piece** | A piece left where it can be taken for free |
+| **Trade / recapture** | Both sides take each other's pieces; a recapture takes back right after a capture. "Mid-trade" = halfway through |
+| **Line** | The moves the engine expects next. A forecast, not a promise |
+| **Half-move** | One move by one side. "2 half-moves" = your opponent's reply, then yours |
+| **Move notation** | Nf3 = knight to f3 · x = captures · O-O = castles · "..." = a Black move (...c6) · "4.Nxe5" = White's 4th move · "?" = a bad move |
+| **Grades** | Best · Excellent · Good · Inaccuracy · Mistake · Blunder: a move's grade, by how much win chance it lost |
+| **Refutation** | The engine's line after the move you played: how the opponent punishes a bad move |
 | **Win chance** | The eval turned into a 0–100% chance of winning (the curve chess.com and Lichess use) |
-| **SAN** | The usual way to write a move: `Nf3`, `Bxc6`, `O-O` |
-| **FEN** | One line of text describing a whole position |
-| **PGN** | The text format for a whole game |
-| **LLM** | A language AI (here Gemini). Writes well, but can make up chess facts |
+| **FEN / PGN** | One line of text describing a position / the text format for a whole game |
 | **Faithful** | The coach's text says nothing the engine's facts don't support |
-| **Hard flag / soft note** | Hard = the checker fails the text. Soft = shown to a human, doesn't fail |
+| **Faithful rate** | The share of answers the checker passes: no invented moves and no invented reason for the eval. The checker can't see every kind of error (see "How the checker works"), so a human check is still needed |
 | **Planted-lie test** | Deliberately add a lie and check that the checker catches it |
 | **Ablation** | Switch one change off and re-measure, to see whether it really helped |
-| **Repeatable** (deterministic) | Same input → same output, every time |
+| **Repeatable** | Same input → same output, every time |
+| **Kind (of mistake)** | One of 5 labels for a bad move (table above) |
 | **Learner model** | The tutor's running notes on one player: which mistakes they repeat |
-| **Open learner model** | A learner model the player can see (the project brief mentions "open learning models") |
-| **Type** (Marcolino's research) | An agent's hidden style or habit, worked out from how it acts. Our analogue: a player's typical mistakes |
-| **Bayesian updating** | Start from a sensible starting guess, then adjust it with each piece of evidence, so one slip doesn't label a player |
-| **Chance / miss** | A *chance* is a move where a mistake was possible (e.g. there was free material). A *miss* is a chance where the mistake happened |
+| **Chance / miss** | A chance = a move where a mistake was possible (e.g. there was free material). A miss = a chance where the mistake happened |
 | **Bar** | The rate we'd call worth coaching, e.g. "hangs material on more than 1 move in 10" |
-| **Pattern / fine / unsure** | Pattern = 80% sure the player's rate is above the bar (and it has happened 3+ times). Fine = 80% sure it's below. Unsure = not enough evidence yet |
-| **Confidence range** | The range the true value probably lies in. With few cases it's wide: 22/25 = 88%, but really 70–96% |
-| **Simulated player (bot)** | A computer player with a weakness we planted on purpose, so we know the right answer when testing the learner model |
+| **Pattern / Not sure yet / Fine** | Pattern = 80% sure the player's rate is above the bar (and it happened 3+ times). Fine = 80% sure it's below. Not sure yet = too little evidence |
+| **Bot** | A computer player with a weakness planted on purpose, so we know the right answer when testing the learner model |
+| **Bayes' rule** | Start from a sensible guess, then adjust it a little with each new piece of evidence (here: each move the player makes) |
+| **Type** (Marcolino's research) | A player's or AI program's hidden style, worked out from how it acts. Ours: a player's typical mistakes |
+| **Maia** | A chess engine trained to play like humans of a given rating, not like the best player. Can tell how likely a player of each level is to play a move |
+| **Lichess** | A free chess website that publishes all its games, useful as real data |
+| **Baseline** | A simpler method to compare against, to show ours is better |
+| **Confidence range** | Where the true value probably lies. With few cases it's wide: 22/25 = 88%, but really 70–96% |
+| **Q1 journal** | A journal in the top quarter of its field by ranking |
+| **Streamlit / Streamlit Cloud** | The tool that makes the web page / the free service that hosts it online |
+| **API key** | A secret password that lets the app use Gemini. Never put it in the code |
+| **Commit / push** | Commit = save a snapshot of the code on the laptop. Push = copy the snapshots to GitHub (a backup; it also updates the online app) |
+| **Firewall** | The office network's security filter. It blocks GitHub, Lichess and Maia downloads |

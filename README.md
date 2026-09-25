@@ -114,12 +114,12 @@ Same engine facts, explained differently:
 
 ## Running it locally
 
-Requires Python 3.9+ and a free Google AI Studio API key.
+Requires Python 3.10+ and a free Google AI Studio API key.
 
 ```bash
 # 1. Clone, then create a virtual environment
-git clone https://github.com/YOUR_USERNAME/chess-tutor.git
-cd chess-tutor
+git clone https://github.com/phnam05/AI-chess-tutor.git
+cd AI-chess-tutor
 python -m venv venv
 venv\Scripts\activate          # Windows  (source venv/bin/activate on macOS/Linux)
 
@@ -158,8 +158,9 @@ app's actual rendering code, so they stay honest to what the UI shows.
 
 - Explanation polish depends on the language model; the architecture constrains
   *what* it can claim, not how well every sentence reads.
-- The engine searches to a bounded depth (with a short time cap) for
-  responsiveness — strong, but not exhaustive.
+- The engine searches to a fixed depth (15) — strong, but not exhaustive. A
+  fixed depth, not a time limit, keeps it repeatable: the same position always
+  gets the same answer.
 - Coaching is still per-move: no conversation across the game, no memory between
   sessions (see below).
 
