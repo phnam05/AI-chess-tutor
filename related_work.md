@@ -1,6 +1,6 @@
 # Related work and baselines: working notes
 
-Started 2026-09-23. Each entry was checked against its abstract or web page on
+Started 2026-09-23 13:56. Each entry was checked against its abstract or web page on
 that date. None has been read in full yet. Anything marked **to verify** is
 still unconfirmed and must be checked before citing.
 
@@ -37,6 +37,21 @@ Tool-Augmented Evaluation of LLM Chess Commentary." arXiv:2608.04240 (Aug 2026).
   compare them with human judges.
 - Their human study (several raters, agreement numbers) is the standard a Q1
   reviewer will hold us to.
+- **Their data and code are free to use** (checked 28 Sep 2026, 16:40):
+  https://github.com/hebbarashwin/act_eval, licence CC BY 4.0. The 325
+  position + move pairs are 75 from Chernev's textbook *Logical Chess: Move by
+  Move*, 50 from Lichess studies and 200 made with Maia-2. For the 125 from
+  the textbook and the studies, experts wrote down the key points ("gold
+  atoms"), and chess players rated 1800–2200 checked them.
+- **Their two scores match paper 1's two questions.** *Factual precision* =
+  the share of claims that are true, i.e. **correct**. *Atomic recall* = the
+  share of the expert's key points the explanation covers, i.e. **relevant**
+  (their judge matches strictly, so they call it a lower bound). Each model
+  was asked to explain the move "to an intermediate player", given only the
+  FEN and the move, once without and once with the chess tools.
+- **Plan (step 3 in `TODO.md`):** run our coach (v1, intermediate level) and
+  Gemini without engine facts on their 125 annotated positions. Score both
+  their way, so our numbers sit next to theirs.
 
 **Kim, Goh, Hwang, Cho, Ok (2025). "Bridging the Gap between Expert and
 Language Models: Concept-guided Chess Commentary Generation and Evaluation."
@@ -62,6 +77,44 @@ Computers and Games 2006, LNCS 4630, pp. 13–25. Turns a chess engine into a
 tutor that comments on moves in terms of goals to reach or keep. It's the
 pre-LLM ancestor of our "engine decides, tutor explains" split, so we must
 cite it and say what's new. Found by the lab (see section 5). **To read.**
+
+**DecodeChess** (company product, decodechess.com; added 28 Sep 2026, 16:35,
+from its own pages and reviews, since the app itself wouldn't load here).
+It runs Stockfish, then looks for *chess concepts* and shows them in fixed
+sections: Threats, Plans, Piece functionality, Good moves, with coloured
+arrows on the board. One review says it only mentions something "if it
+actually affects the course of the game": a built-in relevance filter. How
+it works inside isn't published (no paper and no accuracy numbers found). It
+seems to use fixed sentence templates, with no language AI. It's aimed at
+players up to about 2000; one review finds it generic for stronger players.
+- **Relation:** the same "engine + concept detectors" idea as our board
+  facts, but with fixed text where we use an LLM. It's a real example of the
+  "template" baseline (section 3); a comparison would be by hand on a few
+  positions (it's paid, 1 free game a day, and can't be run from code; check
+  its terms first).
+
+## 1b. Explaining *why* a move is good: which features matter (added 28 Sep 2026, 16:35)
+
+This is the "relevant" half of paper 1: finding the reason that matters, not
+just a true fact.
+
+- **Puri, Verma, Gupta, Kayastha, Deshmukh, Krishnamurthy, Singh (2020).
+  "Explain Your Move: Understanding Agent Actions Using Specific and Relevant
+  Feature Attribution." ICLR 2020. arXiv:1912.12191.** SARFA: change a
+  piece (a *perturbation*) and see how much the engine's value of the chosen
+  move changes. A feature counts only if it changes *that* move's value
+  (specific) and not the value of every move (relevant). Tested on chess
+  (with Stockfish) and Go, with human studies. The output is a *saliency
+  map* (which squares matter), not words. Very close to what "relevant"
+  could mean for us. **To read in full.**
+- **"Towards Piece-by-Piece Explanations for Chess Positions with SHAP"
+  (2025). arXiv:2510.25775.** Scores each piece's contribution to the
+  evaluation. Authors, venue and method: **to verify**.
+- **Björnsson (2024). "Chess and explainable AI." ICGA Journal.** An overview
+  of explainable AI in chess. **To read** (the page was blocked here).
+- **"Caïssa AI: A Neuro-Symbolic Chess Agent for Explainable Move Suggestion
+  and Grounded Commentary"** (Springer, 2025). Close to our design by its
+  title. Authors, venue and what it measures: **to verify**.
 
 ---
 
@@ -129,7 +182,8 @@ the same positions.
    engine's facts the coach needs. Optional.
 3. **Template, no language AI:** fixed sentences filled in with engine facts.
    Faithful by construction but stiff. It's the other end of the
-   faithful ↔ readable trade-off.
+   faithful ↔ readable trade-off. DecodeChess (section 1) is a commercial
+   example; it could be compared by hand on a small sample.
 4. **Checkers compared:** our rule-based checker vs an ACT-Eval-style
    LLM-with-tools checker, both measured against human judges.
 
@@ -173,7 +227,7 @@ critical path.
 ## 5. Found by the lab (João, Fabrício, Dr. Marcolino), not yet read
 
 These were shared in the lab's channel between Oct 2025 and Aug 2026. Titles
-were checked on 2026-09-24. This is only what was *posted*; João's own
+were checked on 2026-09-24 11:21. This is only what was *posted*; João's own
 reference list is bigger, so ask him for it.
 
 **Tutors, and explaining game AI (closest to us)**
@@ -213,6 +267,12 @@ Also Coulom (2007), "Elo ratings" of Go move patterns (an old baseline).
 
 Sources: [arXiv 2608.04240](https://arxiv.org/html/2608.04240) ·
 [arXiv 2410.20811](https://arxiv.org/abs/2410.20811) ·
+[DecodeChess about](https://decodechess.com/about/) ·
+[DecodeChess review](https://thechessadvisor.com/software-review/decodechess/) ·
+[arXiv 1912.12191 (SARFA)](https://arxiv.org/abs/1912.12191) ·
+[arXiv 2510.25775 (SHAP)](https://arxiv.org/pdf/2510.25775) ·
+[Björnsson 2024](https://journals.sagepub.com/doi/abs/10.3233/ICG-240256) ·
+[Caïssa AI](https://link.springer.com/chapter/10.1007/978-3-032-02813-6_11) ·
 [arXiv 2603.20510](https://arxiv.org/pdf/2603.20510) ·
 [Regan & Haworth, AAAI 2011](https://ojs.aaai.org/index.php/AAAI/article/view/7951) ·
 [ACPL study, HCI in Games 2023](https://link.springer.com/chapter/10.1007/978-3-031-35979-8_19) ·

@@ -27,7 +27,9 @@ leandro.txt
 # Lab chat export (Discord HTML): holds private personal data, never publish
 NESPeD-Lab*.html
 
-# Private: notes from the lab chat (repo is public) and the frozen long diary
-# that quotes them. Both stay on the laptop only.
+# Private: notes from the lab chat (repo is public), and the long diary and
+# the project story that quote them. All stay on the laptop only.
 lab_notes.md
 DEV_DIARY_full.md
+PROJECT_STORY.md
+PROJECT_STORY.html
