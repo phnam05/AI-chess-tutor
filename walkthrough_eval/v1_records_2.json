@@ -1,0 +1,3277 @@
+[
+  {
+    "name": "Ruy Lopez (after 3...a6)",
+    "phase": "opening",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+    "facts": {
+      "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+      "turn": "White",
+      "best_move": "Ba4",
+      "best_move_uci": "b5a4",
+      "eval_centipawns": 42,
+      "eval_text": "+0.42 pawns",
+      "principal_variation": [
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4",
+        "d4",
+        "b5"
+      ],
+      "line_steps": [
+        {
+          "san": "Ba4",
+          "color": "White",
+          "piece": "bishop",
+          "from": "b5",
+          "to": "a4",
+          "capture": false,
+          "facts": [
+            "moves the bishop away from the attack by Black's pawn on a6",
+            "on a4 it can be attacked by a Black pawn next move: b5"
+          ]
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square",
+            "attacks White's pawn on e4, which nothing defends"
+          ]
+        },
+        {
+          "san": "O-O",
+          "color": "White",
+          "piece": "king",
+          "from": "e1",
+          "to": "g1",
+          "capture": false,
+          "facts": [
+            "castles kingside: White's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "Nxe4",
+          "color": "Black",
+          "piece": "knight",
+          "from": "f6",
+          "to": "e4",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on e4",
+            "on e4 it can be attacked by a White pawn next move: d3",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "d4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's bishop on c1",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "b5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "b7",
+          "to": "b5",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on a4 with a pawn, which is worth less"
+          ]
+        }
+      ]
+    },
+    "text": "Your bishop is currently threatened by Black's pawn, so a natural idea is to move it to a safe square. That's why your best reply is Ba4. Your opponent will likely respond by developing their knight to f6 (...Nf6), which creates a new threat against your pawn on e4. With the evaluation at +0.42 favoring you, how do you think you should defend that pawn?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Ba4",
+        "f6",
+        "Nf6",
+        "e4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Italian Game (Giuoco Piano)",
+    "phase": "opening",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+    "facts": {
+      "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+      "turn": "White",
+      "best_move": "c3",
+      "best_move_uci": "c2c3",
+      "eval_centipawns": 20,
+      "eval_text": "+0.20 pawns",
+      "principal_variation": [
+        "c3",
+        "Nf6",
+        "d4",
+        "exd4",
+        "e5",
+        "d5"
+      ],
+      "line_steps": [
+        {
+          "san": "c3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "c2",
+          "to": "c3",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square",
+            "attacks White's pawn on e4, which nothing defends",
+            "opens a line for Black's rook on h8"
+          ]
+        },
+        {
+          "san": "d4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "attacks Black's bishop on c5 with a pawn, which is worth less",
+            "opens a line for White's bishop on c1",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "exd4",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e5",
+          "to": "d4",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on d4"
+          ]
+        },
+        {
+          "san": "e5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e4",
+          "to": "e5",
+          "capture": false,
+          "facts": [
+            "attacks Black's knight on f6 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "d5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "d5",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on c4 with a pawn, which is worth less",
+            "opens a line for Black's bishop on c8",
+            "opens a line for Black's queen on d8"
+          ]
+        }
+      ]
+    },
+    "text": "The current evaluation is +0.20, which is a slight edge for you. You have a chance to clear a path for your queen, so a natural idea is to prepare for further central expansion. That is why your best reply is c3. Your opponent will likely develop their knight to target your central pawn, so they play ...Nf6. To challenge their bishop and open lines for your pieces, your best reply is d4. How do you think the game might change once these central pawns begin to clash?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "c3",
+        "Nf6",
+        "d4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Sicilian Najdorf",
+    "phase": "opening",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+    "facts": {
+      "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+      "turn": "White",
+      "best_move": "Be3",
+      "best_move_uci": "c1e3",
+      "eval_centipawns": 51,
+      "eval_text": "+0.51 pawns",
+      "principal_variation": [
+        "Be3",
+        "e5",
+        "Nb3",
+        "Ng4",
+        "Bd2",
+        "Nf6"
+      ],
+      "line_steps": [
+        {
+          "san": "Be3",
+          "color": "White",
+          "piece": "bishop",
+          "from": "c1",
+          "to": "e3",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "e5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e7",
+          "to": "e5",
+          "capture": false,
+          "facts": [
+            "attacks White's knight on d4 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "Nb3",
+          "color": "White",
+          "piece": "knight",
+          "from": "d4",
+          "to": "b3",
+          "capture": false,
+          "facts": [
+            "moves the knight away from the attack by Black's pawn on e5",
+            "opens a line for White's queen on d1",
+            "opens a line for White's bishop on e3"
+          ]
+        },
+        {
+          "san": "Ng4",
+          "color": "Black",
+          "piece": "knight",
+          "from": "f6",
+          "to": "g4",
+          "capture": false,
+          "facts": [
+            "on g4 it can be attacked by a White pawn next move: h3 or f3",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "Bd2",
+          "color": "White",
+          "piece": "bishop",
+          "from": "e3",
+          "to": "d2",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g4",
+          "to": "f6",
+          "capture": false,
+          "facts": []
+        }
+      ]
+    },
+    "text": "The current position is evaluated at +0.51, giving you a slight edge. Since your bishop is currently restricted on c1, a natural idea is to develop it to an active square; that's why your best reply is Be3. Your opponent likely plays ...e5, which attacks your knight on d4 with a pawn. You should respond with Nb3, as moving your knight away from the attack opens new lines for your queen and bishop. Your opponent may then play ...Ng4, which places their knight on a square where it can be challenged by your pawns on h3 or f3. How would you choose to follow up on their knight placement?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "c1",
+        "Be3",
+        "e5",
+        "d4",
+        "Nb3",
+        "Ng4",
+        "h3",
+        "f3"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Queen's Gambit Declined",
+    "phase": "opening",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 4 5",
+    "facts": {
+      "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 4 5",
+      "turn": "White",
+      "best_move": "e3",
+      "best_move_uci": "e2e3",
+      "eval_centipawns": 31,
+      "eval_text": "+0.31 pawns",
+      "principal_variation": [
+        "e3",
+        "h6",
+        "Bh4",
+        "O-O",
+        "Nf3",
+        "Ne4",
+        "Bxe7",
+        "Qxe7"
+      ],
+      "line_steps": [
+        {
+          "san": "e3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e2",
+          "to": "e3",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on d1",
+            "opens a line for White's bishop on f1"
+          ]
+        },
+        {
+          "san": "h6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "h7",
+          "to": "h6",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on g5 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "Bh4",
+          "color": "White",
+          "piece": "bishop",
+          "from": "g5",
+          "to": "h4",
+          "capture": false,
+          "facts": [
+            "moves the bishop away from the attack by Black's pawn on h6",
+            "on h4 it can be attacked by a Black pawn next move: g5"
+          ]
+        },
+        {
+          "san": "O-O",
+          "color": "Black",
+          "piece": "king",
+          "from": "e8",
+          "to": "g8",
+          "capture": false,
+          "facts": [
+            "castles kingside: Black's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "Nf3",
+          "color": "White",
+          "piece": "knight",
+          "from": "g1",
+          "to": "f3",
+          "capture": false,
+          "facts": [
+            "brings White's knight into play from its starting square"
+          ]
+        },
+        {
+          "san": "Ne4",
+          "color": "Black",
+          "piece": "knight",
+          "from": "f6",
+          "to": "e4",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's bishop on e7"
+          ]
+        },
+        {
+          "san": "Bxe7",
+          "color": "White",
+          "piece": "bishop",
+          "from": "h4",
+          "to": "e7",
+          "capture": true,
+          "facts": [
+            "captures Black's bishop on e7",
+            "attacks Black's queen on d8 with a bishop, which is worth less",
+            "attacks Black's rook on f8 with a bishop, which is worth less"
+          ]
+        },
+        {
+          "san": "Qxe7",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "e7",
+          "capture": true,
+          "facts": [
+            "takes back on e7, capturing White's bishop"
+          ]
+        }
+      ]
+    },
+    "text": "The position is currently evaluated at +0.31, which is a slight advantage for you. You can open lines for your queen and your bishop, so a natural idea is to strengthen the center. That's why your best reply is e3. Your opponent might then play ...h6, which attacks your bishop on g5 with a pawn of lower value. You should respond by moving your bishop away from that threat to safety, so your best reply is Bh4. Given that this bishop can be challenged again by a pawn on g5, how would you prepare for that follow-up?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e3",
+        "h6",
+        "g5",
+        "Bh4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "French Defence (Winawer)",
+    "phase": "opening",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4",
+    "facts": {
+      "fen": "rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4",
+      "turn": "White",
+      "best_move": "e5",
+      "best_move_uci": "e4e5",
+      "eval_centipawns": 64,
+      "eval_text": "+0.64 pawns",
+      "principal_variation": [
+        "e5",
+        "c5",
+        "a3",
+        "Bxc3+",
+        "bxc3",
+        "Qc7"
+      ],
+      "line_steps": [
+        {
+          "san": "e5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e4",
+          "to": "e5",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "c5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "c7",
+          "to": "c5",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "a3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "a2",
+          "to": "a3",
+          "capture": false,
+          "facts": [
+            "attacks Black's bishop on b4 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "Bxc3+",
+          "color": "Black",
+          "piece": "bishop",
+          "from": "b4",
+          "to": "c3",
+          "capture": true,
+          "facts": [
+            "captures White's knight on c3",
+            "moves the bishop away from the attack by White's pawn on a3",
+            "gives check to White's king"
+          ]
+        },
+        {
+          "san": "bxc3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "b2",
+          "to": "c3",
+          "capture": true,
+          "facts": [
+            "gets White's king out of check",
+            "takes back on c3, capturing Black's bishop"
+          ]
+        },
+        {
+          "san": "Qc7",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "c7",
+          "capture": false,
+          "facts": []
+        }
+      ]
+    },
+    "text": "The evaluation is +0.64, which gives you a slight edge. You want to advance your central space, so your best reply is e5. Your opponent likely plays ...c5, which opens a line for their queen on d8. To challenge the bishop on b4, your next move is a3. Your opponent then probably plays ...Bxc3+, capturing your knight and giving check. Finally, your reply is bxc3, which clears the check while recapturing the bishop. How do you feel about the resulting structure for your queenside?",
+    "check": {
+      "ok": false,
+      "grounded": [
+        "e5",
+        "c5",
+        "d8",
+        "b4",
+        "a3",
+        "Bxc3+",
+        "bxc3"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [
+        "The evaluation is +0.64, which gives you a slight edge."
+      ],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "King's Indian Defence",
+    "phase": "opening",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5",
+    "facts": {
+      "fen": "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5",
+      "turn": "White",
+      "best_move": "Nf3",
+      "best_move_uci": "g1f3",
+      "eval_centipawns": 65,
+      "eval_text": "+0.65 pawns",
+      "principal_variation": [
+        "Nf3",
+        "O-O",
+        "Be2",
+        "e5",
+        "Be3",
+        "Qe8",
+        "dxe5"
+      ],
+      "line_steps": [
+        {
+          "san": "Nf3",
+          "color": "White",
+          "piece": "knight",
+          "from": "g1",
+          "to": "f3",
+          "capture": false,
+          "facts": [
+            "brings White's knight into play from its starting square"
+          ]
+        },
+        {
+          "san": "O-O",
+          "color": "Black",
+          "piece": "king",
+          "from": "e8",
+          "to": "g8",
+          "capture": false,
+          "facts": [
+            "castles kingside: Black's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "Be2",
+          "color": "White",
+          "piece": "bishop",
+          "from": "f1",
+          "to": "e2",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square"
+          ]
+        },
+        {
+          "san": "e5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e7",
+          "to": "e5",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Be3",
+          "color": "White",
+          "piece": "bishop",
+          "from": "c1",
+          "to": "e3",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "Qe8",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "e8",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "dxe5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d4",
+          "to": "e5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on e5",
+            "attacks Black's knight on f6 with a pawn, which is worth less",
+            "opens a line for White's queen on d1",
+            "opens a line for White's bishop on e3"
+          ]
+        }
+      ]
+    },
+    "text": "The current position is evaluated at +0.65, which gives you a slight advantage. Since your knight is still on its starting square, a natural idea is to develop it toward the center, so your best reply is Nf3. Your opponent will likely respond with ...O-O, which moves their king to safety while bringing a rook toward the middle. To continue your development, your best reply is Be2, as this brings your bishop into play from its starting square. How do you feel about the balance of control on the board after these moves?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Nf3",
+        "O-O",
+        "Be2"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Caro-Kann Defence",
+    "phase": "opening",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+    "facts": {
+      "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+      "turn": "White",
+      "best_move": "e5",
+      "best_move_uci": "e4e5",
+      "eval_centipawns": 30,
+      "eval_text": "+0.30 pawns",
+      "principal_variation": [
+        "e5",
+        "Bf5",
+        "c4",
+        "e6",
+        "Nc3",
+        "Ne7"
+      ],
+      "line_steps": [
+        {
+          "san": "e5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e4",
+          "to": "e5",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Bf5",
+          "color": "Black",
+          "piece": "bishop",
+          "from": "c8",
+          "to": "f5",
+          "capture": false,
+          "facts": [
+            "brings Black's bishop into play from its starting square",
+            "on f5 it can be attacked by a White pawn next move: g4"
+          ]
+        },
+        {
+          "san": "c4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "c2",
+          "to": "c4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "e6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e7",
+          "to": "e6",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's queen on d8",
+            "opens a line for Black's bishop on f8"
+          ]
+        },
+        {
+          "san": "Nc3",
+          "color": "White",
+          "piece": "knight",
+          "from": "b1",
+          "to": "c3",
+          "capture": false,
+          "facts": [
+            "brings White's knight into play from its starting square"
+          ]
+        },
+        {
+          "san": "Ne7",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "e7",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square"
+          ]
+        }
+      ]
+    },
+    "text": "The position is currently evaluated at +0.30, which gives you a very slight edge. You can gain space in the center, so your best reply is e5 [e5]. Your opponent will likely respond by bringing their bishop into play, so they may play ...Bf5 [...Bf5]. Since that move puts the bishop on a square where your pawn on g4 could eventually challenge it, how do you think you should react to their development?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e5",
+        "Bf5",
+        "g4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Closed centre, Black to plan",
+    "phase": "middlegame",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
+    "facts": {
+      "fen": "r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
+      "turn": "Black",
+      "best_move": "Qc7",
+      "best_move_uci": "d8c7",
+      "eval_centipawns": -479,
+      "eval_text": "-4.79 pawns",
+      "principal_variation": [
+        "Qc7",
+        "Bc2",
+        "Rad8",
+        "a4",
+        "Rfe8",
+        "Qe2",
+        "cxd4",
+        "exd4"
+      ],
+      "line_steps": [
+        {
+          "san": "Qc7",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "c7",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's rook on a8",
+            "opens a line for Black's rook on f8"
+          ]
+        },
+        {
+          "san": "Bc2",
+          "color": "White",
+          "piece": "bishop",
+          "from": "d3",
+          "to": "c2",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Rad8",
+          "color": "Black",
+          "piece": "rook",
+          "from": "a8",
+          "to": "d8",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "a4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "a2",
+          "to": "a4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's rook on a1"
+          ]
+        },
+        {
+          "san": "Rfe8",
+          "color": "Black",
+          "piece": "rook",
+          "from": "f8",
+          "to": "e8",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Qe2",
+          "color": "White",
+          "piece": "queen",
+          "from": "d1",
+          "to": "e2",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "cxd4",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "c5",
+          "to": "d4",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on d4",
+            "opens a line for Black's bishop on e7"
+          ]
+        },
+        {
+          "san": "exd4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e3",
+          "to": "d4",
+          "capture": true,
+          "facts": [
+            "takes back on d4, capturing Black's pawn",
+            "opens a line for White's queen on e2"
+          ]
+        }
+      ]
+    },
+    "text": "The current evaluation is -4.79, which favors you significantly. You want to connect your rooks and improve your queen's position, so your best reply is ...Qc7. White will likely respond with Bc2. How do you think these new lines for your rooks will influence your plan for the rest of the game?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Qc7",
+        "Bc2"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Queen on f4, White attacking",
+    "phase": "middlegame",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "r1bq1rk1/pp3pp1/2n1p3/2P1P2p/5Q2/8/PPP2PPP/R1B1KB1R w KQ - 1 13",
+    "facts": {
+      "fen": "r1bq1rk1/pp3pp1/2n1p3/2P1P2p/5Q2/8/PPP2PPP/R1B1KB1R w KQ - 1 13",
+      "turn": "White",
+      "best_move": "Be3",
+      "best_move_uci": "c1e3",
+      "eval_centipawns": 268,
+      "eval_text": "+2.68 pawns",
+      "principal_variation": [
+        "Be3",
+        "Qd5",
+        "Bc4",
+        "Qxe5",
+        "O-O-O",
+        "Qxf4",
+        "Bxf4"
+      ],
+      "line_steps": [
+        {
+          "san": "Be3",
+          "color": "White",
+          "piece": "bishop",
+          "from": "c1",
+          "to": "e3",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square",
+            "opens a line for White's rook on a1"
+          ]
+        },
+        {
+          "san": "Qd5",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "d5",
+          "capture": false,
+          "facts": [
+            "on d5 it can be attacked by a White pawn next move: c4"
+          ]
+        },
+        {
+          "san": "Bc4",
+          "color": "White",
+          "piece": "bishop",
+          "from": "f1",
+          "to": "c4",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square",
+            "attacks Black's queen on d5 with a bishop, which is worth less",
+            "on c4 it can be attacked by a Black pawn next move: b5"
+          ]
+        },
+        {
+          "san": "Qxe5",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d5",
+          "to": "e5",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on e5",
+            "moves the queen away from the attack by White's bishop on c4",
+            "attacks White's pawn on b2, which nothing defends"
+          ]
+        },
+        {
+          "san": "O-O-O",
+          "color": "White",
+          "piece": "king",
+          "from": "e1",
+          "to": "c1",
+          "capture": false,
+          "facts": [
+            "castles queenside: White's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "Qxf4",
+          "color": "Black",
+          "piece": "queen",
+          "from": "e5",
+          "to": "f4",
+          "capture": true,
+          "facts": [
+            "captures White's queen on f4",
+            "attacks White's bishop on c4, which nothing defends",
+            "on f4 it can be attacked by a White pawn next move: g3"
+          ]
+        },
+        {
+          "san": "Bxf4",
+          "color": "White",
+          "piece": "bishop",
+          "from": "e3",
+          "to": "f4",
+          "capture": true,
+          "facts": [
+            "takes back on f4, capturing Black's queen",
+            "on f4 it can be attacked by a Black pawn next move: e5 or g5"
+          ]
+        }
+      ]
+    },
+    "text": "The evaluation is +2.68, heavily favoring you. Developing the bishop from c1 clears the back rank and connects your rooks, so a natural idea is completing your development, and your best move is Be3. Your opponent likely replies with ...Qd5, placing their queen on a square where your pawn can challenge it. You should then look to gain tempo by playing Bc4, which develops your final minor piece while forcing the queen to move again. Your opponent will likely respond with ...Qxe5 to capture your pawn and escape the threat, shifting the tension toward your b2 pawn. How would you plan to defend your queenside if the game continues this way?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "c1",
+        "Be3",
+        "Qd5",
+        "Bc4",
+        "Qxe5",
+        "b2"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Open game, Black to move",
+    "phase": "middlegame",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+    "facts": {
+      "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+      "turn": "Black",
+      "best_move": "dxe4",
+      "best_move_uci": "d5e4",
+      "eval_centipawns": -87,
+      "eval_text": "-0.87 pawns",
+      "principal_variation": [
+        "dxe4",
+        "Nxe5",
+        "Qd5",
+        "Bxc6+",
+        "bxc6",
+        "d4"
+      ],
+      "line_steps": [
+        {
+          "san": "dxe4",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d5",
+          "to": "e4",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on e4",
+            "attacks White's knight on f3 with a pawn, which is worth less",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "Nxe5",
+          "color": "White",
+          "piece": "knight",
+          "from": "f3",
+          "to": "e5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on e5",
+            "moves the knight away from the attack by Black's pawn on e4",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "Qd5",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "d5",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on b5, which nothing defends",
+            "attacks White's knight on e5, which nothing defends",
+            "on d5 it can be attacked by a White pawn next move: c4"
+          ]
+        },
+        {
+          "san": "Bxc6+",
+          "color": "White",
+          "piece": "bishop",
+          "from": "b5",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "captures Black's knight on c6",
+            "attacks Black's queen on d5 with a bishop, which is worth less",
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "bxc6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "b7",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "gets Black's king out of check",
+            "takes back on c6, capturing White's bishop"
+          ]
+        },
+        {
+          "san": "d4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's bishop on c1",
+            "opens a line for White's queen on d1"
+          ]
+        }
+      ]
+    },
+    "text": "The position is currently evaluated at -0.87, which favors you slightly. Since your pawn on d5 can capture White's pawn on e4 and force their knight to move, your best reply is ...dxe4. Your opponent will likely respond to this threat by moving their knight to safety, so their best reply is Nxe5. How do you think that knight maneuver changes the pressure on your king?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "d5",
+        "e4",
+        "dxe4",
+        "Nxe5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "King + pawn vs king",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "8/8/4k3/8/4K3/8/4P3/8 w - - 0 1",
+    "facts": {
+      "fen": "8/8/4k3/8/4K3/8/4P3/8 w - - 0 1",
+      "turn": "White",
+      "best_move": "e3",
+      "best_move_uci": "e2e3",
+      "eval_centipawns": 511,
+      "eval_text": "+5.11 pawns",
+      "principal_variation": [
+        "e3",
+        "Kf6",
+        "Kd5",
+        "Kf7",
+        "e4",
+        "Ke7"
+      ],
+      "line_steps": [
+        {
+          "san": "e3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e2",
+          "to": "e3",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kf6",
+          "color": "Black",
+          "piece": "king",
+          "from": "e6",
+          "to": "f6",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kd5",
+          "color": "White",
+          "piece": "king",
+          "from": "e4",
+          "to": "d5",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kf7",
+          "color": "Black",
+          "piece": "king",
+          "from": "f6",
+          "to": "f7",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "e4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e3",
+          "to": "e4",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Ke7",
+          "color": "Black",
+          "piece": "king",
+          "from": "f7",
+          "to": "e7",
+          "capture": false,
+          "facts": []
+        }
+      ]
+    },
+    "text": "The evaluation is +5.11, which gives you a significant advantage. To control the center, a natural idea is to push your pawn forward. That is why your best reply is e3 (e3). Your opponent likely tries to keep their king active, so they play ...Kf6 (...Kf6). How do you think we should continue from here?",
+    "check": {
+      "ok": false,
+      "grounded": [
+        "e3",
+        "Kf6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [
+        "The evaluation is +5.11, which gives you a significant advantage."
+      ],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Rook + pawn endgame",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "8/8/8/4k3/8/8/4P3/4K2R w K - 0 1",
+    "facts": {
+      "fen": "8/8/8/4k3/8/8/4P3/4K2R w K - 0 1",
+      "turn": "White",
+      "best_move": "Kd2",
+      "best_move_uci": "e1d2",
+      "eval_centipawns": 630,
+      "eval_text": "+6.30 pawns",
+      "principal_variation": [
+        "Kd2",
+        "Ke4",
+        "Rg1",
+        "Kd4",
+        "e3+",
+        "Ke4"
+      ],
+      "line_steps": [
+        {
+          "san": "Kd2",
+          "color": "White",
+          "piece": "king",
+          "from": "e1",
+          "to": "d2",
+          "capture": false,
+          "facts": [
+            "opens a line for White's rook on h1"
+          ]
+        },
+        {
+          "san": "Ke4",
+          "color": "Black",
+          "piece": "king",
+          "from": "e5",
+          "to": "e4",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Rg1",
+          "color": "White",
+          "piece": "rook",
+          "from": "h1",
+          "to": "g1",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kd4",
+          "color": "Black",
+          "piece": "king",
+          "from": "e4",
+          "to": "d4",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "e3+",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e2",
+          "to": "e3",
+          "capture": false,
+          "facts": [
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "Ke4",
+          "color": "Black",
+          "piece": "king",
+          "from": "d4",
+          "to": "e4",
+          "capture": false,
+          "facts": [
+            "gets Black's king out of check",
+            "moves the king away from the attack by White's pawn on e3"
+          ]
+        }
+      ]
+    },
+    "text": "The position is currently evaluated at +6.30, which strongly favors you. Since moving your king opens a line for your rook on h1, a natural idea is to improve your king's position and activate your pieces. That's why your best reply is Kd2. Your opponent would then likely play ...Ke4. What do you think is the best way to coordinate your pieces after your opponent makes that move?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "h1",
+        "Kd2",
+        "Ke4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Queen vs lone king (mating)",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "8/5k2/8/8/8/8/5K2/5Q2 w - - 0 1",
+    "facts": {
+      "fen": "8/5k2/8/8/8/8/5K2/5Q2 w - - 0 1",
+      "turn": "White",
+      "best_move": "Kg3+",
+      "best_move_uci": "f2g3",
+      "eval_centipawns": 509,
+      "eval_text": "+5.09 pawns",
+      "principal_variation": [
+        "Kg3+",
+        "Kg6",
+        "Kh4",
+        "Kh6",
+        "Qf5",
+        "Kg7"
+      ],
+      "line_steps": [
+        {
+          "san": "Kg3+",
+          "color": "White",
+          "piece": "king",
+          "from": "f2",
+          "to": "g3",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on f1",
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "Kg6",
+          "color": "Black",
+          "piece": "king",
+          "from": "f7",
+          "to": "g6",
+          "capture": false,
+          "facts": [
+            "gets Black's king out of check",
+            "moves the king away from the attack by White's queen on f1"
+          ]
+        },
+        {
+          "san": "Kh4",
+          "color": "White",
+          "piece": "king",
+          "from": "g3",
+          "to": "h4",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kh6",
+          "color": "Black",
+          "piece": "king",
+          "from": "g6",
+          "to": "h6",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Qf5",
+          "color": "White",
+          "piece": "queen",
+          "from": "f1",
+          "to": "f5",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kg7",
+          "color": "Black",
+          "piece": "king",
+          "from": "h6",
+          "to": "g7",
+          "capture": false,
+          "facts": []
+        }
+      ]
+    },
+    "text": "The evaluation is +5.09, which significantly favors you. Your king can get closer to the action and put the pressure on, so a natural idea is to move your king forward while putting the opponent in check. That's why your best reply is Kg3+. Your opponent will likely try to escape the check by moving the king away, so they play ...Kg6. How do you think you can use your queen now that the king has moved?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Kg3+",
+        "Kg6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Central king & pawn",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "8/8/8/3k4/8/3K4/3P4/8 w - - 0 1",
+    "facts": {
+      "fen": "8/8/8/3k4/8/3K4/3P4/8 w - - 0 1",
+      "turn": "White",
+      "best_move": "Kc3",
+      "best_move_uci": "d3c3",
+      "eval_centipawns": 44,
+      "eval_text": "+0.44 pawns",
+      "principal_variation": [
+        "Kc3",
+        "Kc5",
+        "d4+",
+        "Kb6",
+        "Kc4"
+      ],
+      "line_steps": [
+        {
+          "san": "Kc3",
+          "color": "White",
+          "piece": "king",
+          "from": "d3",
+          "to": "c3",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Kc5",
+          "color": "Black",
+          "piece": "king",
+          "from": "d5",
+          "to": "c5",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "d4+",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "Kb6",
+          "color": "Black",
+          "piece": "king",
+          "from": "c5",
+          "to": "b6",
+          "capture": false,
+          "facts": [
+            "gets Black's king out of check",
+            "moves the king away from the attack by White's pawn on d4"
+          ]
+        },
+        {
+          "san": "Kc4",
+          "color": "White",
+          "piece": "king",
+          "from": "c3",
+          "to": "c4",
+          "capture": false,
+          "facts": []
+        }
+      ]
+    },
+    "text": "Your king needs to move toward the center to prepare for future play, so a natural idea is to centralize it. That’s why your best reply is Kc3. Your opponent probably responds with ...Kc5. Your next best move is d4+, which gives check to Black's king. Your opponent then likely plays ...Kb6, which moves their king away from the attack by your pawn on d4 and gets it out of check. The engine evaluates this position at +0.44 for you; how do you think the endgame will unfold from here?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Kc3",
+        "Kc5",
+        "d4+",
+        "Kb6",
+        "d4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Italian: 3.Bb5 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+      "played_move": "Bb5",
+      "played_move_uci": "f1b5",
+      "best_move": "Bb5",
+      "best_move_uci": "f1b5",
+      "best_eval": "+0.35",
+      "played_eval": "+0.44",
+      "centipawn_loss": 0,
+      "best_win_pct": 53.2,
+      "played_win_pct": 54.0,
+      "win_prob_drop": 0.0,
+      "label": "Best",
+      "refutation": [
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Be7",
+        "Re1"
+      ],
+      "best_line": [
+        "Bb5",
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Bb5",
+        "color": "White",
+        "piece": "bishop",
+        "from": "f1",
+        "to": "b5",
+        "capture": false,
+        "facts": [
+          "brings White's bishop into play from its starting square",
+          "on b5 it can be attacked by a Black pawn next move: a6"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "a6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "a7",
+          "to": "a6",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on b5 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "Ba4",
+          "color": "White",
+          "piece": "bishop",
+          "from": "b5",
+          "to": "a4",
+          "capture": false,
+          "facts": [
+            "moves the bishop away from the attack by Black's pawn on a6",
+            "on a4 it can be attacked by a Black pawn next move: b5"
+          ]
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square",
+            "attacks White's pawn on e4, which nothing defends"
+          ]
+        },
+        {
+          "san": "O-O",
+          "color": "White",
+          "piece": "king",
+          "from": "e1",
+          "to": "g1",
+          "capture": false,
+          "facts": [
+            "castles kingside: White's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "Be7",
+          "color": "Black",
+          "piece": "bishop",
+          "from": "f8",
+          "to": "e7",
+          "capture": false,
+          "facts": [
+            "brings Black's bishop into play from its starting square"
+          ]
+        },
+        {
+          "san": "Re1",
+          "color": "White",
+          "piece": "rook",
+          "from": "f1",
+          "to": "e1",
+          "capture": false,
+          "facts": []
+        }
+      ],
+      "best_facts": {
+        "san": "Bb5",
+        "color": "White",
+        "piece": "bishop",
+        "from": "f1",
+        "to": "b5",
+        "capture": false,
+        "facts": [
+          "brings White's bishop into play from its starting square",
+          "on b5 it can be attacked by a Black pawn next move: a6"
+        ]
+      }
+    },
+    "text": "Great choice playing your bishop to b5 [Bb5] to bring it into the game. The evaluation is +0.44, which slightly favors you. Your opponent will likely challenge your bishop by playing ...a6 to attack it with their pawn. You should then move your bishop to a4 [Ba4] to keep it safe from that pawn. How do you think your bishop will be useful from that new spot on the side of the board?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "b5",
+        "Bb5",
+        "a6",
+        "a4",
+        "Ba4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Opening move 1.e4 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "facts": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "played_move": "e4",
+      "played_move_uci": "e2e4",
+      "best_move": "e4",
+      "best_move_uci": "e2e4",
+      "best_eval": "+0.49",
+      "played_eval": "+0.35",
+      "centipawn_loss": 14,
+      "best_win_pct": 54.5,
+      "played_win_pct": 53.2,
+      "win_prob_drop": 1.3,
+      "label": "Best",
+      "refutation": [
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bb5",
+        "a6",
+        "Bxc6",
+        "dxc6"
+      ],
+      "best_line": [
+        "e4",
+        "c5",
+        "Nf3",
+        "a6",
+        "d4",
+        "cxd4",
+        "Nxd4"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "e4",
+        "color": "White",
+        "piece": "pawn",
+        "from": "e2",
+        "to": "e4",
+        "capture": false,
+        "facts": [
+          "opens a line for White's queen on d1",
+          "opens a line for White's bishop on f1"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "e5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e7",
+          "to": "e5",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's queen on d8",
+            "opens a line for Black's bishop on f8"
+          ]
+        },
+        {
+          "san": "Nf3",
+          "color": "White",
+          "piece": "knight",
+          "from": "g1",
+          "to": "f3",
+          "capture": false,
+          "facts": [
+            "brings White's knight into play from its starting square",
+            "attacks Black's pawn on e5, which nothing defends"
+          ]
+        },
+        {
+          "san": "Nc6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "b8",
+          "to": "c6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square"
+          ]
+        },
+        {
+          "san": "Bb5",
+          "color": "White",
+          "piece": "bishop",
+          "from": "f1",
+          "to": "b5",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square",
+            "on b5 it can be attacked by a Black pawn next move: a6"
+          ]
+        },
+        {
+          "san": "a6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "a7",
+          "to": "a6",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on b5 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "Bxc6",
+          "color": "White",
+          "piece": "bishop",
+          "from": "b5",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "captures Black's knight on c6",
+            "moves the bishop away from the attack by Black's pawn on a6"
+          ]
+        },
+        {
+          "san": "dxc6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "takes back on c6, capturing White's bishop",
+            "opens a line for Black's bishop on c8",
+            "opens a line for Black's queen on d8"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "e4",
+        "color": "White",
+        "piece": "pawn",
+        "from": "e2",
+        "to": "e4",
+        "capture": false,
+        "facts": [
+          "opens a line for White's queen on d1",
+          "opens a line for White's bishop on f1"
+        ]
+      }
+    },
+    "text": "You made a great start by opening lines for your queen and your bishop with e4. The engine evaluation is +0.35, which slightly favors you. Your opponent will likely play the pawn to e5 (...e5) to open lines for their own queen and bishop. Since your knight attacks that pawn, a natural idea is to bring your knight into play to put more pressure on the center. That is why your best reply is Nf3 (Nf3). How do you think your opponent will defend that pawn next?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e4",
+        "e5",
+        "Nf3"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Ruy Lopez: 4.Ba4 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+    "facts": {
+      "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+      "played_move": "Ba4",
+      "played_move_uci": "b5a4",
+      "best_move": "Ba4",
+      "best_move_uci": "b5a4",
+      "best_eval": "+0.42",
+      "played_eval": "+0.48",
+      "centipawn_loss": 0,
+      "best_win_pct": 53.9,
+      "played_win_pct": 54.4,
+      "win_prob_drop": 0.0,
+      "label": "Best",
+      "refutation": [
+        "Nf6",
+        "O-O",
+        "b5",
+        "Bb3",
+        "Nxe4",
+        "d4"
+      ],
+      "best_line": [
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4",
+        "d4",
+        "b5"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Ba4",
+        "color": "White",
+        "piece": "bishop",
+        "from": "b5",
+        "to": "a4",
+        "capture": false,
+        "facts": [
+          "moves the bishop away from the attack by Black's pawn on a6",
+          "on a4 it can be attacked by a Black pawn next move: b5"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square",
+            "attacks White's pawn on e4, which nothing defends"
+          ]
+        },
+        {
+          "san": "O-O",
+          "color": "White",
+          "piece": "king",
+          "from": "e1",
+          "to": "g1",
+          "capture": false,
+          "facts": [
+            "castles kingside: White's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "b5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "b7",
+          "to": "b5",
+          "capture": false,
+          "facts": [
+            "attacks White's bishop on a4 with a pawn, which is worth less"
+          ]
+        },
+        {
+          "san": "Bb3",
+          "color": "White",
+          "piece": "bishop",
+          "from": "a4",
+          "to": "b3",
+          "capture": false,
+          "facts": [
+            "moves the bishop away from the attack by Black's pawn on b5"
+          ]
+        },
+        {
+          "san": "Nxe4",
+          "color": "Black",
+          "piece": "knight",
+          "from": "f6",
+          "to": "e4",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on e4",
+            "on e4 it can be attacked by a White pawn next move: d3",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "d4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's bishop on c1",
+            "opens a line for White's queen on d1"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "Ba4",
+        "color": "White",
+        "piece": "bishop",
+        "from": "b5",
+        "to": "a4",
+        "capture": false,
+        "facts": [
+          "moves the bishop away from the attack by Black's pawn on a6",
+          "on a4 it can be attacked by a Black pawn next move: b5"
+        ]
+      }
+    },
+    "text": "You played a great move by shifting your bishop to a4 to avoid the immediate threat from the a6 pawn, resulting in a solid evaluation of +0.48 in your favor. Your opponent will likely develop their knight with ...Nf6 to pressure your e4 pawn. You should then prioritize king safety, so a natural idea is to castle kingside. That is why your best reply is O-O. Your opponent will probably look to gain space by playing ...b5 to attack your bishop. How do you think you should reposition your bishop once it is attacked?",
+    "check": {
+      "ok": false,
+      "grounded": [
+        "a4",
+        "a6",
+        "Nf6",
+        "e4",
+        "O-O",
+        "b5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [
+        "You played a great move by shifting your bishop to a4 to avoid the immediate threat from the a6 pawn, resulting in a solid evaluation of +0.48 in your favor."
+      ],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Develop with ...Be7 (mistake)",
+    "phase": "middlegame",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+    "facts": {
+      "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+      "played_move": "Be7",
+      "played_move_uci": "f8e7",
+      "best_move": "dxe4",
+      "best_move_uci": "d5e4",
+      "best_eval": "-0.87",
+      "played_eval": "-2.42",
+      "centipawn_loss": 155,
+      "best_win_pct": 42.1,
+      "played_win_pct": 29.1,
+      "win_prob_drop": 13.0,
+      "label": "Mistake",
+      "refutation": [
+        "Nxe5",
+        "O-O",
+        "Bxc6",
+        "bxc6",
+        "Nxc6",
+        "Qd6",
+        "Nxe7+",
+        "Qxe7"
+      ],
+      "best_line": [
+        "dxe4",
+        "Nxe5",
+        "Qd5",
+        "Bxc6+",
+        "bxc6",
+        "d4"
+      ],
+      "mistake_type": "lost_material",
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Be7",
+        "color": "Black",
+        "piece": "bishop",
+        "from": "f8",
+        "to": "e7",
+        "capture": false,
+        "facts": [
+          "brings Black's bishop into play from its starting square"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "Nxe5",
+          "color": "White",
+          "piece": "knight",
+          "from": "f3",
+          "to": "e5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on e5",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "O-O",
+          "color": "Black",
+          "piece": "king",
+          "from": "e8",
+          "to": "g8",
+          "capture": false,
+          "facts": [
+            "castles kingside: Black's king moves away from the centre and a rook comes toward the middle"
+          ]
+        },
+        {
+          "san": "Bxc6",
+          "color": "White",
+          "piece": "bishop",
+          "from": "b5",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "captures Black's knight on c6"
+          ]
+        },
+        {
+          "san": "bxc6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "b7",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "takes back on c6, capturing White's bishop"
+          ]
+        },
+        {
+          "san": "Nxc6",
+          "color": "White",
+          "piece": "knight",
+          "from": "e5",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "takes back on c6, capturing Black's pawn",
+            "attacks Black's queen on d8 with a knight, which is worth less"
+          ]
+        },
+        {
+          "san": "Qd6",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "d6",
+          "capture": false,
+          "facts": [
+            "moves the queen away from the attack by White's knight on c6",
+            "attacks White's knight on c6, which nothing defends",
+            "on d6 it can be attacked by a White pawn next move: e5"
+          ]
+        },
+        {
+          "san": "Nxe7+",
+          "color": "White",
+          "piece": "knight",
+          "from": "c6",
+          "to": "e7",
+          "capture": true,
+          "facts": [
+            "captures Black's bishop on e7",
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "Qxe7",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d6",
+          "to": "e7",
+          "capture": true,
+          "facts": [
+            "gets Black's king out of check",
+            "takes back on e7, capturing White's knight"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "dxe4",
+        "color": "Black",
+        "piece": "pawn",
+        "from": "d5",
+        "to": "e4",
+        "capture": true,
+        "facts": [
+          "captures White's pawn on e4",
+          "attacks White's knight on f3 with a pawn, which is worth less",
+          "opens a line for Black's queen on d8"
+        ]
+      }
+    },
+    "text": "You chose to bring your bishop into play with ...Be7, but this mistake leaves the evaluation at -2.42 in White's favor. Your opponent will likely capture your pawn on e5 with Nxe5 to open a path for their queen. You should then prioritize your king's safety with ...O-O. White will probably respond by taking your knight with Bxc6, and you will likely recapture with ...bxc6. Finally, White is expected to play Nxc6 to take your pawn and put your queen under pressure. You might have instead challenged White's control of the center by playing ...dxe4 to capture their pawn and attack their knight. How do you think your position would have changed if you had gone after that central pawn instead?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Be7",
+        "e5",
+        "Nxe5",
+        "O-O",
+        "Bxc6",
+        "bxc6",
+        "Nxc6",
+        "dxe4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Scotch: ...exd4 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3",
+      "played_move": "exd4",
+      "played_move_uci": "e5d4",
+      "best_move": "exd4",
+      "best_move_uci": "e5d4",
+      "best_eval": "-0.18",
+      "played_eval": "-0.42",
+      "centipawn_loss": 24,
+      "best_win_pct": 48.3,
+      "played_win_pct": 46.1,
+      "win_prob_drop": 2.2,
+      "label": "Best",
+      "refutation": [
+        "Nxd4",
+        "Nf6",
+        "Nxc6",
+        "dxc6",
+        "Qxd8+",
+        "Kxd8"
+      ],
+      "best_line": [
+        "exd4",
+        "Nxd4",
+        "Nf6",
+        "Nxc6",
+        "bxc6",
+        "Bd3"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "exd4",
+        "color": "Black",
+        "piece": "pawn",
+        "from": "e5",
+        "to": "d4",
+        "capture": true,
+        "facts": [
+          "captures White's pawn on d4"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "Nxd4",
+          "color": "White",
+          "piece": "knight",
+          "from": "f3",
+          "to": "d4",
+          "capture": true,
+          "facts": [
+            "takes back on d4, capturing Black's pawn",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square",
+            "attacks White's pawn on e4, which nothing defends",
+            "on f6 it can be attacked by a White pawn next move: e5"
+          ]
+        },
+        {
+          "san": "Nxc6",
+          "color": "White",
+          "piece": "knight",
+          "from": "d4",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "captures Black's knight on c6",
+            "attacks Black's queen on d8 with a knight, which is worth less",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "dxc6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "takes back on c6, capturing White's knight",
+            "opens a line for Black's bishop on c8",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "Qxd8+",
+          "color": "White",
+          "piece": "queen",
+          "from": "d1",
+          "to": "d8",
+          "capture": true,
+          "facts": [
+            "captures Black's queen on d8",
+            "attacks Black's pawn on c7, which nothing defends",
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "Kxd8",
+          "color": "Black",
+          "piece": "king",
+          "from": "e8",
+          "to": "d8",
+          "capture": true,
+          "facts": [
+            "gets Black's king out of check",
+            "takes back on d8, capturing White's queen"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "exd4",
+        "color": "Black",
+        "piece": "pawn",
+        "from": "e5",
+        "to": "d4",
+        "capture": true,
+        "facts": [
+          "captures White's pawn on d4"
+        ]
+      }
+    },
+    "text": "You played a strong move by capturing the pawn on d4. The evaluation is -0.42, which slightly favors you. Your opponent likely plays Nxd4, which captures your pawn and opens a line for their queen. You should probably respond with ...Nf6, which brings your knight into play and attacks the pawn on e4. Your opponent might then play Nxc6, capturing your knight and opening a line for their queen. You would then play ...dxc6, which captures their knight and opens lines for your bishop and queen. Does this sequence change how you feel about your opening position?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "d4",
+        "Nxd4",
+        "Nf6",
+        "e4",
+        "Nxc6",
+        "dxc6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Scholar's mate trap: ...Nf6?? (blunder)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3",
+      "played_move": "Nf6",
+      "played_move_uci": "g8f6",
+      "best_move": "g6",
+      "best_move_uci": "g7g6",
+      "best_eval": "+0.40",
+      "played_eval": "-100.00",
+      "centipawn_loss": 10040,
+      "best_win_pct": 53.7,
+      "played_win_pct": 2.5,
+      "win_prob_drop": 51.2,
+      "label": "Blunder",
+      "refutation": [
+        "Qxf7#"
+      ],
+      "best_line": [
+        "g6",
+        "Qf3",
+        "Nf6",
+        "Ne2",
+        "Bg7",
+        "d3"
+      ],
+      "mistake_type": "allowed_mate",
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Nf6",
+        "color": "Black",
+        "piece": "knight",
+        "from": "g8",
+        "to": "f6",
+        "capture": false,
+        "facts": [
+          "brings Black's knight into play from its starting square",
+          "attacks White's pawn on e4, which nothing defends",
+          "attacks White's queen on h5 with a knight, which is worth less"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "Qxf7#",
+          "color": "White",
+          "piece": "queen",
+          "from": "h5",
+          "to": "f7",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on f7",
+            "moves the queen away from the attack by Black's knight on f6",
+            "gives checkmate"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "g6",
+        "color": "Black",
+        "piece": "pawn",
+        "from": "g7",
+        "to": "g6",
+        "capture": false,
+        "facts": [
+          "attacks White's queen on h5 with a pawn, which is worth less"
+        ]
+      }
+    },
+    "text": "Your move brings your knight into play, but it also allows your opponent to end the game immediately. Your opponent plays queen to f7 (Qxf7#), which captures your pawn and delivers checkmate. Because you missed the chance to challenge the queen with your pawn, you might instead consider pawn to g6 (...g6) to chase White's queen away. What do you think you missed about the threats against your king?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "f7",
+        "Qxf7#",
+        "g6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "...Nxe4? loses material (mistake)",
+    "phase": "middlegame",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+    "facts": {
+      "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+      "played_move": "Nxe4",
+      "played_move_uci": "f6e4",
+      "best_move": "dxe4",
+      "best_move_uci": "d5e4",
+      "best_eval": "-0.87",
+      "played_eval": "-2.47",
+      "centipawn_loss": 160,
+      "best_win_pct": 42.1,
+      "played_win_pct": 28.7,
+      "win_prob_drop": 13.3,
+      "label": "Mistake",
+      "refutation": [
+        "d3",
+        "Nxf2",
+        "Bxc6+",
+        "bxc6",
+        "Rxe5+",
+        "Be6",
+        "Kxf2"
+      ],
+      "best_line": [
+        "dxe4",
+        "Nxe5",
+        "Qd5",
+        "Bxc6+",
+        "bxc6",
+        "d4"
+      ],
+      "mistake_type": "lost_material",
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Nxe4",
+        "color": "Black",
+        "piece": "knight",
+        "from": "f6",
+        "to": "e4",
+        "capture": true,
+        "facts": [
+          "captures White's pawn on e4",
+          "on e4 it can be attacked by a White pawn next move: d3",
+          "opens a line for Black's queen on d8"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "d3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d3",
+          "capture": false,
+          "facts": [
+            "attacks Black's knight on e4 with a pawn, which is worth less",
+            "opens a line for White's bishop on c1"
+          ]
+        },
+        {
+          "san": "Nxf2",
+          "color": "Black",
+          "piece": "knight",
+          "from": "e4",
+          "to": "f2",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on f2",
+            "moves the knight away from the attack by White's pawn on d3",
+            "attacks White's queen on d1 with a knight, which is worth less"
+          ]
+        },
+        {
+          "san": "Bxc6+",
+          "color": "White",
+          "piece": "bishop",
+          "from": "b5",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "captures Black's knight on c6",
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "bxc6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "b7",
+          "to": "c6",
+          "capture": true,
+          "facts": [
+            "gets Black's king out of check",
+            "takes back on c6, capturing White's bishop"
+          ]
+        },
+        {
+          "san": "Rxe5+",
+          "color": "White",
+          "piece": "rook",
+          "from": "e1",
+          "to": "e5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on e5",
+            "opens a line for White's queen on d1",
+            "gives check to Black's king"
+          ]
+        },
+        {
+          "san": "Be6",
+          "color": "Black",
+          "piece": "bishop",
+          "from": "c8",
+          "to": "e6",
+          "capture": false,
+          "facts": [
+            "gets Black's king out of check",
+            "brings Black's bishop into play from its starting square",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "Kxf2",
+          "color": "White",
+          "piece": "king",
+          "from": "g1",
+          "to": "f2",
+          "capture": true,
+          "facts": [
+            "captures Black's knight on f2"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "dxe4",
+        "color": "Black",
+        "piece": "pawn",
+        "from": "d5",
+        "to": "e4",
+        "capture": true,
+        "facts": [
+          "captures White's pawn on e4",
+          "attacks White's knight on f3 with a pawn, which is worth less",
+          "opens a line for Black's queen on d8"
+        ]
+      }
+    },
+    "text": "Your capture on e4 opens a line for your queen, but it leaves your knight vulnerable to a pawn attack. The evaluation is -2.47, which favors you, though it shows your position could be stronger. Your opponent plays d3, which attacks your knight with a pawn and opens a line for their bishop. You play ...Nxf2 to move your knight to safety while attacking their queen. Your opponent plays Bxc6+ to deliver a check to your king. You play ...bxc6 to capture their bishop and get your king out of check. It would have been better to play ...dxe4, which would have captured the pawn while also attacking their knight on f3. How do you feel about the position of your king after that exchange?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e4",
+        "d3",
+        "Nxf2",
+        "Bxc6+",
+        "bxc6",
+        "dxe4",
+        "f3"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Wing push 1.a4 (passive)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "facts": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "played_move": "a4",
+      "played_move_uci": "a2a4",
+      "best_move": "e4",
+      "best_move_uci": "e2e4",
+      "best_eval": "+0.49",
+      "played_eval": "-0.32",
+      "centipawn_loss": 81,
+      "best_win_pct": 54.5,
+      "played_win_pct": 47.1,
+      "win_prob_drop": 7.4,
+      "label": "Inaccuracy",
+      "refutation": [
+        "e5",
+        "e4",
+        "Nf6",
+        "Nf3",
+        "d5",
+        "exd5"
+      ],
+      "best_line": [
+        "e4",
+        "c5",
+        "Nf3",
+        "a6",
+        "d4",
+        "cxd4",
+        "Nxd4"
+      ],
+      "mistake_type": "positional",
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "a4",
+        "color": "White",
+        "piece": "pawn",
+        "from": "a2",
+        "to": "a4",
+        "capture": false,
+        "facts": [
+          "opens a line for White's rook on a1"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "e5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e7",
+          "to": "e5",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's queen on d8",
+            "opens a line for Black's bishop on f8"
+          ]
+        },
+        {
+          "san": "e4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e2",
+          "to": "e4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on d1",
+            "opens a line for White's bishop on f1"
+          ]
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square",
+            "attacks White's pawn on e4, which nothing defends"
+          ]
+        },
+        {
+          "san": "Nf3",
+          "color": "White",
+          "piece": "knight",
+          "from": "g1",
+          "to": "f3",
+          "capture": false,
+          "facts": [
+            "brings White's knight into play from its starting square",
+            "attacks Black's pawn on e5, which nothing defends"
+          ]
+        },
+        {
+          "san": "d5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "d5",
+          "capture": false,
+          "facts": [
+            "attacks White's pawn on e4, which nothing defends",
+            "opens a line for Black's bishop on c8",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "exd5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e4",
+          "to": "d5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on d5"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "e4",
+        "color": "White",
+        "piece": "pawn",
+        "from": "e2",
+        "to": "e4",
+        "capture": false,
+        "facts": [
+          "opens a line for White's queen on d1",
+          "opens a line for White's bishop on f1"
+        ]
+      }
+    },
+    "text": "Your move opens a line for your rook on a1, but the evaluation is now -0.32, which slightly favors Black. Your opponent likely plays ...e5, which opens lines for their queen and bishop. Your best reply is e4, which opens lines for your queen and your bishop. It is always helpful to control the center, so your best alternative was e4 to open lines for your queen and bishop. How do you think you can challenge your opponent's control of the center from here?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "a1",
+        "e5",
+        "e4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Edge push 1.h4 (passive)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "facts": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "played_move": "h4",
+      "played_move_uci": "h2h4",
+      "best_move": "e4",
+      "best_move_uci": "e2e4",
+      "best_eval": "+0.49",
+      "played_eval": "-0.43",
+      "centipawn_loss": 92,
+      "best_win_pct": 54.5,
+      "played_win_pct": 46.1,
+      "win_prob_drop": 8.4,
+      "label": "Mistake",
+      "refutation": [
+        "d5",
+        "d4",
+        "Nf6",
+        "e3",
+        "c5",
+        "c4",
+        "cxd4",
+        "exd4"
+      ],
+      "best_line": [
+        "e4",
+        "c5",
+        "Nf3",
+        "a6",
+        "d4",
+        "cxd4",
+        "Nxd4"
+      ],
+      "mistake_type": "positional",
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "h4",
+        "color": "White",
+        "piece": "pawn",
+        "from": "h2",
+        "to": "h4",
+        "capture": false,
+        "facts": [
+          "opens a line for White's rook on h1"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "d5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "d5",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's bishop on c8",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "d4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's bishop on c1",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "Nf6",
+          "color": "Black",
+          "piece": "knight",
+          "from": "g8",
+          "to": "f6",
+          "capture": false,
+          "facts": [
+            "brings Black's knight into play from its starting square"
+          ]
+        },
+        {
+          "san": "e3",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e2",
+          "to": "e3",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on d1",
+            "opens a line for White's bishop on f1"
+          ]
+        },
+        {
+          "san": "c5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "c7",
+          "to": "c5",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "c4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "c2",
+          "to": "c4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "cxd4",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "c5",
+          "to": "d4",
+          "capture": true,
+          "facts": [
+            "captures White's pawn on d4"
+          ]
+        },
+        {
+          "san": "exd4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e3",
+          "to": "d4",
+          "capture": true,
+          "facts": [
+            "takes back on d4, capturing Black's pawn",
+            "opens a line for White's bishop on c1"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "e4",
+        "color": "White",
+        "piece": "pawn",
+        "from": "e2",
+        "to": "e4",
+        "capture": false,
+        "facts": [
+          "opens a line for White's queen on d1",
+          "opens a line for White's bishop on f1"
+        ]
+      }
+    },
+    "text": "Your move opens a line for your rook on h1, but it drops the evaluation to -0.43, which favors your opponent. Your opponent plays ...d5, which opens lines for their bishop on c8 and their queen on d8. You play d4, which opens lines for your bishop on c1 and your queen on d1. Controlling the center is important, so you could have played e4 to open lines for your queen on d1 and your bishop on f1. How would you like to build your center now?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "h1",
+        "d5",
+        "c8",
+        "d8",
+        "d4",
+        "c1",
+        "d1",
+        "e4",
+        "f1"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Premature 3.Ng5?? (blunder)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "advanced",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+      "played_move": "Ng5",
+      "played_move_uci": "f3g5",
+      "best_move": "Bb5",
+      "best_move_uci": "f1b5",
+      "best_eval": "+0.35",
+      "played_eval": "-4.00",
+      "centipawn_loss": 435,
+      "best_win_pct": 53.2,
+      "played_win_pct": 18.7,
+      "win_prob_drop": 34.6,
+      "label": "Blunder",
+      "refutation": [
+        "Qxg5",
+        "d4",
+        "Qg6",
+        "dxe5",
+        "d6",
+        "exd6",
+        "Bxd6"
+      ],
+      "best_line": [
+        "Bb5",
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4"
+      ],
+      "mistake_type": "lost_material",
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Ng5",
+        "color": "White",
+        "piece": "knight",
+        "from": "f3",
+        "to": "g5",
+        "capture": false,
+        "facts": [
+          "on g5 it can be attacked by a Black pawn next move: h6 or f6",
+          "opens a line for White's queen on d1"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "Qxg5",
+          "color": "Black",
+          "piece": "queen",
+          "from": "d8",
+          "to": "g5",
+          "capture": true,
+          "facts": [
+            "captures White's knight on g5",
+            "on g5 it can be attacked by a White pawn next move: h4 or f4"
+          ]
+        },
+        {
+          "san": "d4",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d2",
+          "to": "d4",
+          "capture": false,
+          "facts": [
+            "opens a line for White's bishop on c1",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "Qg6",
+          "color": "Black",
+          "piece": "queen",
+          "from": "g5",
+          "to": "g6",
+          "capture": false,
+          "facts": [
+            "moves the queen away from the attack by White's bishop on c1",
+            "attacks White's pawn on e4, which nothing defends",
+            "no longer defends Black's pawn on e5, which the line goes on to capture"
+          ]
+        },
+        {
+          "san": "dxe5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "d4",
+          "to": "e5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on e5",
+            "opens a line for White's queen on d1"
+          ]
+        },
+        {
+          "san": "d6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "d6",
+          "capture": false,
+          "facts": [
+            "attacks White's pawn on e5, which nothing defends",
+            "opens a line for Black's bishop on c8"
+          ]
+        },
+        {
+          "san": "exd6",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e5",
+          "to": "d6",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on d6",
+            "attacks Black's pawn on c7, which nothing defends"
+          ]
+        },
+        {
+          "san": "Bxd6",
+          "color": "Black",
+          "piece": "bishop",
+          "from": "f8",
+          "to": "d6",
+          "capture": true,
+          "facts": [
+            "takes back on d6, capturing White's pawn",
+            "brings Black's bishop into play from its starting square",
+            "on d6 it can be attacked by a White pawn next move: e5"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "Bb5",
+        "color": "White",
+        "piece": "bishop",
+        "from": "f1",
+        "to": "b5",
+        "capture": false,
+        "facts": [
+          "brings White's bishop into play from its starting square",
+          "on b5 it can be attacked by a Black pawn next move: a6"
+        ]
+      }
+    },
+    "text": "Your move Ng5 exposes your knight to being attacked by a Black pawn, dropping the evaluation to -4.00, which heavily favors Black. Your opponent likely plays ...Qxg5, capturing your knight. You respond with d4, which opens a line for your bishop. Your opponent likely moves ...Qg6 to escape your bishop while attacking your e4 pawn, and you play dxe5 to capture their pawn. Since you need to develop your pieces effectively, it would have been better to play Bb5, which brings your bishop into play. How do you think you can recover your position from here?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Ng5",
+        "Qxg5",
+        "d4",
+        "Qg6",
+        "e4",
+        "dxe5",
+        "Bb5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Passive 2.Na3 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+    "facts": {
+      "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "played_move": "Na3",
+      "played_move_uci": "b1a3",
+      "best_move": "Nf3",
+      "best_move_uci": "g1f3",
+      "best_eval": "+0.36",
+      "played_eval": "+0.06",
+      "centipawn_loss": 30,
+      "best_win_pct": 53.3,
+      "played_win_pct": 50.6,
+      "win_prob_drop": 2.8,
+      "label": "Good",
+      "refutation": [
+        "e6",
+        "Nf3",
+        "a6",
+        "Be2",
+        "d5",
+        "exd5",
+        "exd5"
+      ],
+      "best_line": [
+        "Nf3",
+        "Nc6",
+        "Bb5",
+        "e6",
+        "O-O",
+        "Nge7"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      },
+      "played_facts": {
+        "san": "Na3",
+        "color": "White",
+        "piece": "knight",
+        "from": "b1",
+        "to": "a3",
+        "capture": false,
+        "facts": [
+          "brings White's knight into play from its starting square"
+        ]
+      },
+      "line_steps": [
+        {
+          "san": "e6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e7",
+          "to": "e6",
+          "capture": false,
+          "facts": [
+            "opens a line for Black's queen on d8",
+            "opens a line for Black's bishop on f8"
+          ]
+        },
+        {
+          "san": "Nf3",
+          "color": "White",
+          "piece": "knight",
+          "from": "g1",
+          "to": "f3",
+          "capture": false,
+          "facts": [
+            "brings White's knight into play from its starting square"
+          ]
+        },
+        {
+          "san": "a6",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "a7",
+          "to": "a6",
+          "capture": false,
+          "facts": []
+        },
+        {
+          "san": "Be2",
+          "color": "White",
+          "piece": "bishop",
+          "from": "f1",
+          "to": "e2",
+          "capture": false,
+          "facts": [
+            "brings White's bishop into play from its starting square"
+          ]
+        },
+        {
+          "san": "d5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "d7",
+          "to": "d5",
+          "capture": false,
+          "facts": [
+            "attacks White's pawn on e4, which nothing defends",
+            "opens a line for Black's queen on d8"
+          ]
+        },
+        {
+          "san": "exd5",
+          "color": "White",
+          "piece": "pawn",
+          "from": "e4",
+          "to": "d5",
+          "capture": true,
+          "facts": [
+            "captures Black's pawn on d5"
+          ]
+        },
+        {
+          "san": "exd5",
+          "color": "Black",
+          "piece": "pawn",
+          "from": "e6",
+          "to": "d5",
+          "capture": true,
+          "facts": [
+            "takes back on d5, capturing White's pawn",
+            "opens a line for Black's bishop on c8"
+          ]
+        }
+      ],
+      "best_facts": {
+        "san": "Nf3",
+        "color": "White",
+        "piece": "knight",
+        "from": "g1",
+        "to": "f3",
+        "capture": false,
+        "facts": [
+          "brings White's knight into play from its starting square"
+        ]
+      }
+    },
+    "text": "Your move Na3 is a good choice because it brings your knight into play from its starting square, keeping the evaluation at +0.06. Your opponent likely plays ...e6, which opens lines for their queen and bishop. Your best reply is Nf3, as it continues to develop your pieces. Your opponent then probably plays ...a6. You missed out on the slightly higher +0.36 evaluation offered by playing Nf3 immediately to develop your knight. How would you like to continue our development from here?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Na3",
+        "e6",
+        "Nf3",
+        "a6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": [
+        "Your move Na3 is a good choice because it brings your knight into play from its starting square, keeping the evaluation at +0.06.",
+        "You missed out on the slightly higher +0.36 evaluation offered by playing Nf3 immediately to develop your knight."
+      ]
+    }
+  }
+]

@@ -1,4 +1,5 @@
 import chess
+import board_facts
 from engine_pool import analyse, DEFAULT_DEPTH
 
 
@@ -70,6 +71,9 @@ def analyze_position(fen, depth=DEFAULT_DEPTH):
         "eval_centipawns": eval_centipawns,
         "eval_text": eval_text,
         "principal_variation": pv_san,
+        # What a player would notice about each move of the line, computed from
+        # the board (board_facts.py): the coach's only source for a move's idea.
+        "line_steps": board_facts.line_steps(board, pv_san),
     }
 
 

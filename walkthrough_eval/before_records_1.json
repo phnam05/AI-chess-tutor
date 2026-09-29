@@ -1,0 +1,1196 @@
+[
+  {
+    "name": "Ruy Lopez (after 3...a6)",
+    "phase": "opening",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+    "facts": {
+      "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+      "turn": "White",
+      "best_move": "Ba4",
+      "best_move_uci": "b5a4",
+      "eval_centipawns": 42,
+      "eval_text": "+0.42 pawns",
+      "principal_variation": [
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4",
+        "d4",
+        "b5"
+      ]
+    },
+    "text": "Your bishop is under attack by the pawn, so moving it to a4 keeps it active while staying safe from that pawn's reach. The evaluation is +0.42, which means the position is currently slightly better for you. After you play Ba4, your opponent will likely continue with Nf6, then you can castle to get your king to safety before preparing to challenge their center. If you were playing this game, what do you think your main plan should be after you finish developing your pieces?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Ba4",
+        "Nf6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "a4"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Italian Game (Giuoco Piano)",
+    "phase": "opening",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+    "facts": {
+      "fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+      "turn": "White",
+      "best_move": "c3",
+      "best_move_uci": "c2c3",
+      "eval_centipawns": 20,
+      "eval_text": "+0.20 pawns",
+      "principal_variation": [
+        "c3",
+        "Nf6",
+        "d4",
+        "exd4",
+        "e5",
+        "d5"
+      ]
+    },
+    "text": "It’s a balanced position with an evaluation of +0.20 for you, meaning you have a tiny edge just from being White. By playing c3, you are preparing to secure the center by supporting a d4 pawn push. Following this, you likely will play d4 to challenge their bishop, and if they exchange, you can drive their knight away with e5, ultimately gaining more space and central control. How do you think you can maintain that pressure if your opponent decides to ignore your pawn expansion?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "c3",
+        "d4",
+        "e5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Sicilian Najdorf",
+    "phase": "opening",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+    "facts": {
+      "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+      "turn": "White",
+      "best_move": "Be3",
+      "best_move_uci": "c1e3",
+      "eval_centipawns": 51,
+      "eval_text": "+0.51 pawns",
+      "principal_variation": [
+        "Be3",
+        "e5",
+        "Nb3",
+        "Ng4",
+        "Bd2",
+        "Nf6"
+      ]
+    },
+    "text": "The engine evaluates this position at +0.51, giving you a slight but stable opening edge. Playing Be3 is a strong developing move that reinforces your control over the center and prepares to meet your opponent's expansion. In the main line, Black likely continues with e5 to challenge your knight, which prompts you to retreat to b3 before rerouting the bishop to d2 to address the pressure from Ng4. Does this structure feel solid to you, or would you have preferred to challenge the d6 pawn immediately?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Be3",
+        "e5",
+        "Ng4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "b3",
+        "d2",
+        "d6"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Queen's Gambit Declined",
+    "phase": "opening",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 4 5",
+    "facts": {
+      "fen": "rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq - 4 5",
+      "turn": "White",
+      "best_move": "e3",
+      "best_move_uci": "e2e3",
+      "eval_centipawns": 31,
+      "eval_text": "+0.31 pawns",
+      "principal_variation": [
+        "e3",
+        "h6",
+        "Bh4",
+        "O-O",
+        "Nf3",
+        "Ne4",
+        "Bxe7",
+        "Qxe7"
+      ]
+    },
+    "text": "Playing e3 is a solid choice here because it shores up your center and prepares to develop your kingside pieces, giving you a slight edge with an evaluation of +0.31. The main plan is to tuck your bishop back to h4 if your opponent challenges it with h6, which keeps the pressure on their pinned knight while you finish your development with Nf3. Once you trade your bishop for their knight after they jump into the center with Ne4, you will have a stable position to build your middle-game attack. Since your opponent might try to mirror your development by castling, how would you like to coordinate your rooks to support your center once the queenside is clear?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e3",
+        "h6",
+        "Nf3",
+        "Ne4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "h4"
+      ],
+      "causal_invented": [],
+      "causal_unverified": [
+        "Playing e3 is a solid choice here because it shores up your center and prepares to develop your kingside pieces, giving you a slight edge with an evaluation of +0.31."
+      ]
+    }
+  },
+  {
+    "name": "French Defence (Winawer)",
+    "phase": "opening",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4",
+    "facts": {
+      "fen": "rnbqk1nr/ppp2ppp/4p3/3p4/1b1PP3/2N5/PPP2PPP/R1BQKBNR w KQkq - 2 4",
+      "turn": "White",
+      "best_move": "e5",
+      "best_move_uci": "e4e5",
+      "eval_centipawns": 64,
+      "eval_text": "+0.64 pawns",
+      "principal_variation": [
+        "e5",
+        "c5",
+        "a3",
+        "Bxc3+",
+        "bxc3",
+        "Qc7"
+      ]
+    },
+    "text": "The engine evaluates this position at +0.64, giving you a tangible edge as White. By pushing e5, you immediately claim space and force Black to define the structure of their center, which initiates the critical line of c5, followed by a3 to challenge the bishop. After your opponent probably plays Bxc3+ and you recapture with bxc3, your doubled c-pawns actually provide you with long-term control over the d4-square and a solid foundation for your center. How would you plan to utilize this central structure once Black brings their queen out to c7?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e5",
+        "c5",
+        "a3",
+        "Bxc3+",
+        "bxc3"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "d4",
+        "c7?"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "King's Indian Defence",
+    "phase": "opening",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5",
+    "facts": {
+      "fen": "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5",
+      "turn": "White",
+      "best_move": "Nf3",
+      "best_move_uci": "g1f3",
+      "eval_centipawns": 65,
+      "eval_text": "+0.65 pawns",
+      "principal_variation": [
+        "Nf3",
+        "O-O",
+        "Be2",
+        "e5",
+        "Be3",
+        "Qe8",
+        "dxe5"
+      ]
+    },
+    "text": "You’re in a solid opening position here, and the engine gives White a slight advantage of +0.65. By playing Nf3, you are developing your knight to a natural square to control the center and prepare for kingside castling. Following this, the plan is to play Be2 and eventually look at dxe5 after the center tensions develop. Since you are looking to build a space advantage in the middle, how would you handle it if your opponent tries to challenge your center with their own pawn breaks?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Nf3",
+        "Be2",
+        "dxe5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Caro-Kann Defence",
+    "phase": "opening",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+    "facts": {
+      "fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+      "turn": "White",
+      "best_move": "e5",
+      "best_move_uci": "e4e5",
+      "eval_centipawns": 30,
+      "eval_text": "+0.30 pawns",
+      "principal_variation": [
+        "e5",
+        "Bf5",
+        "c4",
+        "e6",
+        "Nc3",
+        "Ne7"
+      ]
+    },
+    "text": "Playing e5 is your best move here because it forces your opponent's bishop to move and helps you gain more space in the center. The evaluation of +0.30 means the position is currently very balanced, slightly favoring you because you have the first move. If you play e5, your opponent might try moving their bishop to f5, and then you can continue by pushing your c-pawn to c4 to challenge their center. If you were sitting there with the black pieces, how would you feel about having to move your bishop again so early in the game?",
+    "check": {
+      "ok": false,
+      "grounded": [
+        "e5",
+        "c4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "f5"
+      ],
+      "causal_invented": [
+        "The evaluation of +0.30 means the position is currently very balanced, slightly favoring you because you have the first move."
+      ],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Closed centre, Black to plan",
+    "phase": "middlegame",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
+    "facts": {
+      "fen": "r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
+      "turn": "Black",
+      "best_move": "Qc7",
+      "best_move_uci": "d8c7",
+      "eval_centipawns": -479,
+      "eval_text": "-4.79 pawns",
+      "principal_variation": [
+        "Qc7",
+        "Bc2",
+        "Rad8",
+        "a4",
+        "Rfe8",
+        "Qe2",
+        "cxd4",
+        "exd4"
+      ]
+    },
+    "text": "It looks like you have a solid setup here, and with an evaluation of -4.79 favoring you, the engine suggests that your position is very strong. By playing Qc7, you connect your rooks and prepare to challenge the center, which sets the stage for the line where you follow up with Rad8 to add even more pressure down the d-file. After White plays Bc2, moving your rook to the center shows you are aiming to control the key squares before eventually striking with cxd4. How do you think you can maintain this initiative if White tries to expand on the queenside instead?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Qc7",
+        "Rad8",
+        "Bc2",
+        "cxd4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Queen on f4, White attacking",
+    "phase": "middlegame",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "r1bq1rk1/pp3pp1/2n1p3/2P1P2p/5Q2/8/PPP2PPP/R1B1KB1R w KQ - 1 13",
+    "facts": {
+      "fen": "r1bq1rk1/pp3pp1/2n1p3/2P1P2p/5Q2/8/PPP2PPP/R1B1KB1R w KQ - 1 13",
+      "turn": "White",
+      "best_move": "Be3",
+      "best_move_uci": "c1e3",
+      "eval_centipawns": 268,
+      "eval_text": "+2.68 pawns",
+      "principal_variation": [
+        "Be3",
+        "Qd5",
+        "Bc4",
+        "Qxe5",
+        "O-O-O",
+        "Qxf4",
+        "Bxf4"
+      ]
+    },
+    "text": "The engine evaluates this position at +2.68 for you, which is a significant advantage that highlights your strong central control and active piece placement. Playing Be3 is a sophisticated choice because it develops your bishop to a stable outpost, allowing you to challenge the d5-square should your opponent attempt to contest the center. In the main line, after you play Be3, your opponent might try Qd5, but you can respond with Bc4 to force a trade that ultimately leads to you maintaining a comfortable edge in the resulting endgame. How do you feel about shifting into this slightly simplified position where your structural advantages are clearer?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Be3",
+        "Qd5",
+        "Bc4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "d5"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Open game, Black to move",
+    "phase": "middlegame",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+    "facts": {
+      "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+      "turn": "Black",
+      "best_move": "dxe4",
+      "best_move_uci": "d5e4",
+      "eval_centipawns": -87,
+      "eval_text": "-0.87 pawns",
+      "principal_variation": [
+        "dxe4",
+        "Nxe5",
+        "Qd5",
+        "Bxc6+",
+        "bxc6",
+        "d4"
+      ]
+    },
+    "text": "You are currently at a slight disadvantage, with the engine evaluation showing -0.87 for your opponent, meaning White has a small lead. Your best move is to capture their pawn with dxe4, which forces White to respond to your central pressure. If they continue with the most likely sequence, they will capture your knight with Nxe5 and then you play Qd5 to challenge them, eventually leading to a trade of bishops. How do you feel about opening up the center like this to challenge White's control?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "dxe4",
+        "Nxe5",
+        "Qd5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "King + pawn vs king",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "8/8/4k3/8/4K3/8/4P3/8 w - - 0 1",
+    "facts": {
+      "fen": "8/8/4k3/8/4K3/8/4P3/8 w - - 0 1",
+      "turn": "White",
+      "best_move": "e3",
+      "best_move_uci": "e2e3",
+      "eval_centipawns": 511,
+      "eval_text": "+5.11 pawns",
+      "principal_variation": [
+        "e3",
+        "Kf6",
+        "Kd5",
+        "Kf7",
+        "e4",
+        "Ke7"
+      ]
+    },
+    "text": "Right now you are in a very strong position with an evaluation of +5.11 for you, which means you have a significant advantage. Playing e3 is a great way to advance your pawn toward the other side of the board. If the game continues with your opponent playing Kf6, you will likely follow up by moving your king to d5, then they might move to f7, and you could push your pawn to e4. How do you think you can best use your pawn to keep your king safe while you try to reach the promotion square?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e3",
+        "Kf6",
+        "e4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "d5",
+        "f7"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Rook + pawn endgame",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "intermediate",
+    "fen": "8/8/8/4k3/8/8/4P3/4K2R w K - 0 1",
+    "facts": {
+      "fen": "8/8/8/4k3/8/8/4P3/4K2R w K - 0 1",
+      "turn": "White",
+      "best_move": "Kd2",
+      "best_move_uci": "e1d2",
+      "eval_centipawns": 630,
+      "eval_text": "+6.30 pawns",
+      "principal_variation": [
+        "Kd2",
+        "Ke4",
+        "Rg1",
+        "Kd4",
+        "e3+",
+        "Ke4"
+      ]
+    },
+    "text": "The engine evaluates this position at +6.30 for you, which is a massive advantage since you are essentially winning a full rook against your opponent's king. By playing Kd2, you bring your king toward the center to support your rook and restrict the enemy king, aiming to push your e-pawn forward to create a passed pawn. If the game follows the predicted line, after Kd2, your opponent might try Ke4, then you respond with Rg1 to secure your rook, and after Kd4, you push e3+ to force the king away and advance your pawn. Since you have such a dominant material lead, what do you think is the safest way to coordinate your king and rook to finish the game without letting their king create any trouble?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Kd2",
+        "Ke4",
+        "Rg1",
+        "Kd4",
+        "e3+"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Queen vs lone king (mating)",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "beginner",
+    "fen": "8/5k2/8/8/8/8/5K2/5Q2 w - - 0 1",
+    "facts": {
+      "fen": "8/5k2/8/8/8/8/5K2/5Q2 w - - 0 1",
+      "turn": "White",
+      "best_move": "Kg3+",
+      "best_move_uci": "f2g3",
+      "eval_centipawns": 509,
+      "eval_text": "+5.09 pawns",
+      "principal_variation": [
+        "Kg3+",
+        "Kg6",
+        "Kh4",
+        "Kh6",
+        "Qf5",
+        "Kg7"
+      ]
+    },
+    "text": "You are in a winning position here with an evaluation of +5.09, which shows you have a significant advantage. Playing Kg3+ is your best move because it forces the king to move and helps you move your king into a more active position while controlling the board. If your opponent responds with Kg6, you can continue by moving your king to h4 to keep the pressure on. How do you think you can best use your queen alongside your king to corner their king?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Kg3+",
+        "Kg6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "h4"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Central king & pawn",
+    "phase": "endgame",
+    "kind": "position",
+    "level": "advanced",
+    "fen": "8/8/8/3k4/8/3K4/3P4/8 w - - 0 1",
+    "facts": {
+      "fen": "8/8/8/3k4/8/3K4/3P4/8 w - - 0 1",
+      "turn": "White",
+      "best_move": "Kc3",
+      "best_move_uci": "d3c3",
+      "eval_centipawns": 44,
+      "eval_text": "+0.44 pawns",
+      "principal_variation": [
+        "Kc3",
+        "Kc5",
+        "d4+",
+        "Kb6",
+        "Kc4"
+      ]
+    },
+    "text": "You are in a narrow endgame where every tempo matters, so playing Kc3 is the right way to keep your king active while preparing to challenge the center. The engine evaluates this as +0.44 for you, showing that White has a slight edge by controlling the opposition and preparing the d4 push. If the game continues with the engine's main line of Kc5 for Black, you can follow up with d4+ to force their king back, eventually aiming to centralize your king on c4 to suffocate their movement. How do you see your pawn structure influencing their king's ability to approach your remaining resources?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Kc3",
+        "d4",
+        "Kc5",
+        "d4+"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "c4"
+      ],
+      "causal_invented": [],
+      "causal_unverified": [
+        "The engine evaluates this as +0.44 for you, showing that White has a slight edge by controlling the opposition and preparing the d4 push."
+      ]
+    }
+  },
+  {
+    "name": "Italian: 3.Bb5 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+      "played_move": "Bb5",
+      "played_move_uci": "f1b5",
+      "best_move": "Bb5",
+      "best_move_uci": "f1b5",
+      "best_eval": "+0.35",
+      "played_eval": "+0.44",
+      "centipawn_loss": 0,
+      "best_win_pct": 53.2,
+      "played_win_pct": 54.0,
+      "win_prob_drop": 0.0,
+      "label": "Best",
+      "refutation": [
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Be7",
+        "Re1"
+      ],
+      "best_line": [
+        "Bb5",
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "You played a great move by bringing your bishop out to put pressure on your opponent's knight, which indirectly makes it harder for them to defend their center pawn. The engine evaluation of +0.44 shows you have a slight edge, meaning your position is just a bit more comfortable than theirs. If your opponent responds with a6, they will likely challenge your bishop, forcing you to retreat to a4 to keep the pressure on their knight. How do you think you should keep developing your pieces if they decide to push you back?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "a6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "a4"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Opening move 1.e4 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "facts": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "played_move": "e4",
+      "played_move_uci": "e2e4",
+      "best_move": "e4",
+      "best_move_uci": "e2e4",
+      "best_eval": "+0.49",
+      "played_eval": "+0.35",
+      "centipawn_loss": 14,
+      "best_win_pct": 54.5,
+      "played_win_pct": 53.2,
+      "win_prob_drop": 1.3,
+      "label": "Best",
+      "refutation": [
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bb5",
+        "a6",
+        "Bxc6",
+        "dxc6"
+      ],
+      "best_line": [
+        "e4",
+        "c5",
+        "Nf3",
+        "a6",
+        "d4",
+        "cxd4",
+        "Nxd4"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "That is a great opening move to control the center and open lines for your queen and bishop to join the game. The engine gives this an evaluation of +0.35, which means you have a very slight advantage right now. If your opponent responds with e5, you might see them try to challenge your control by playing moves like Nc6 and a6 to push your bishop around. How would you plan to protect your center if they decide to put pressure on your knight?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "e5",
+        "Nc6",
+        "a6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Ruy Lopez: 4.Ba4 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+    "facts": {
+      "fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+      "played_move": "Ba4",
+      "played_move_uci": "b5a4",
+      "best_move": "Ba4",
+      "best_move_uci": "b5a4",
+      "best_eval": "+0.42",
+      "played_eval": "+0.48",
+      "centipawn_loss": 0,
+      "best_win_pct": 53.9,
+      "played_win_pct": 54.4,
+      "win_prob_drop": 0.0,
+      "label": "Best",
+      "refutation": [
+        "Nf6",
+        "O-O",
+        "b5",
+        "Bb3",
+        "Nxe4",
+        "d4"
+      ],
+      "best_line": [
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4",
+        "d4",
+        "b5"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "Great choice playing Ba4 to keep your bishop active while maintaining pressure on the e5-pawn. The evaluation of +0.48 shows you have a slight edge here. If your opponent follows the main line with Nf6 and you castle, you might see them play b5 to push your bishop to b3, followed by Nxe4 and d4 to strike back at your center. How would you plan to handle the tension in the center if they decide to go for that trade?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Ba4",
+        "Nf6",
+        "b5",
+        "Nxe4",
+        "d4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "e5",
+        "b3"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Develop with ...Be7 (mistake)",
+    "phase": "middlegame",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+    "facts": {
+      "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+      "played_move": "Be7",
+      "played_move_uci": "f8e7",
+      "best_move": "dxe4",
+      "best_move_uci": "d5e4",
+      "best_eval": "-0.87",
+      "played_eval": "-2.42",
+      "centipawn_loss": 155,
+      "best_win_pct": 42.1,
+      "played_win_pct": 29.1,
+      "win_prob_drop": 13.0,
+      "label": "Mistake",
+      "refutation": [
+        "Nxe5",
+        "O-O",
+        "Bxc6",
+        "bxc6",
+        "Nxc6",
+        "Qd6",
+        "Nxe7+",
+        "Qxe7"
+      ],
+      "best_line": [
+        "dxe4",
+        "Nxe5",
+        "Qd5",
+        "Bxc6+",
+        "bxc6",
+        "d4"
+      ],
+      "mistake_type": "lost_material",
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "It looks like your move Be7 allows your opponent to gain a significant advantage, shifting the evaluation to -2.42 in their favor. By playing this way, you allow them to follow up with Nxe5, putting immediate pressure on your center, and after you castle, they can play Bxc6 to break up your queenside structure before winning the pawn on c6 with Nxc6. They end up with a much stronger position because you missed the chance to simplify the center yourself with dxe4. Given how the game is unfolding, why do you think taking that central pawn might have been safer for your position?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Be7",
+        "Nxe5",
+        "Bxc6",
+        "Nxc6",
+        "dxe4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "c6"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Scotch: ...exd4 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3",
+      "played_move": "exd4",
+      "played_move_uci": "e5d4",
+      "best_move": "exd4",
+      "best_move_uci": "e5d4",
+      "best_eval": "-0.18",
+      "played_eval": "-0.42",
+      "centipawn_loss": 24,
+      "best_win_pct": 48.3,
+      "played_win_pct": 46.1,
+      "win_prob_drop": 2.2,
+      "label": "Best",
+      "refutation": [
+        "Nxd4",
+        "Nf6",
+        "Nxc6",
+        "dxc6",
+        "Qxd8+",
+        "Kxd8"
+      ],
+      "best_line": [
+        "exd4",
+        "Nxd4",
+        "Nf6",
+        "Nxc6",
+        "bxc6",
+        "Bd3"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "You played a solid move by opening the center, though the engine suggests it slightly shifts the balance to -0.42 in your opponent's favor. Your plan here is to challenge White's control of the middle, likely leading to a series of trades where your opponent plays Nxd4, you respond with Nf6, and they follow up with Nxc6. After you capture back with dxc6 and the queens are traded off with Qxd8+ and Kxd8, you reach an endgame where your king is centralized and the position remains quite balanced. How do you feel about heading into this type of simplified structure so early in the game?",
+    "check": {
+      "ok": false,
+      "grounded": [
+        "Nxd4",
+        "Nf6",
+        "Nxc6",
+        "dxc6",
+        "Qxd8+",
+        "Kxd8"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [
+        "You played a solid move by opening the center, though the engine suggests it slightly shifts the balance to -0.42 in your opponent's favor."
+      ],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Scholar's mate trap: ...Nf6?? (blunder)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3",
+      "played_move": "Nf6",
+      "played_move_uci": "g8f6",
+      "best_move": "g6",
+      "best_move_uci": "g7g6",
+      "best_eval": "+0.40",
+      "played_eval": "-100.00",
+      "centipawn_loss": 10040,
+      "best_win_pct": 53.7,
+      "played_win_pct": 2.5,
+      "win_prob_drop": 51.2,
+      "label": "Blunder",
+      "refutation": [
+        "Qxf7#"
+      ],
+      "best_line": [
+        "g6",
+        "Qf3",
+        "Nf6",
+        "Ne2",
+        "Bg7",
+        "d3"
+      ],
+      "mistake_type": "allowed_mate",
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "That move is a mistake because it leaves your king vulnerable to an immediate checkmate. Your opponent can now play Qxf7, which uses the bishop you already have staring at that pawn to trap your king with no way out. Before you bring your knight out, it is much safer to play g6 to block that direct line to your weak f7 square. Can you see why that pawn push would have kept your king safe?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Qxf7",
+        "g6"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "f7"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "...Nxe4? loses material (mistake)",
+    "phase": "middlegame",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+    "facts": {
+      "fen": "r1bqkb1r/ppp2ppp/2n2n2/1B1pp3/4P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 5",
+      "played_move": "Nxe4",
+      "played_move_uci": "f6e4",
+      "best_move": "dxe4",
+      "best_move_uci": "d5e4",
+      "best_eval": "-0.87",
+      "played_eval": "-2.47",
+      "centipawn_loss": 160,
+      "best_win_pct": 42.1,
+      "played_win_pct": 28.7,
+      "win_prob_drop": 13.3,
+      "label": "Mistake",
+      "refutation": [
+        "d3",
+        "Nxf2",
+        "Bxc6+",
+        "bxc6",
+        "Rxe5+",
+        "Be6",
+        "Kxf2"
+      ],
+      "best_line": [
+        "dxe4",
+        "Nxe5",
+        "Qd5",
+        "Bxc6+",
+        "bxc6",
+        "d4"
+      ],
+      "mistake_type": "lost_material",
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "Taking the pawn with your knight was a tough mistake here, as it allows your opponent to disrupt your position with d3. If they play that, your knight on e4 is immediately hit, and after you likely respond with Nxf2, they can respond with Bxc6+ followed by bxc6 to dismantle your queenside structure. Because you lose that pressure and allow them to stabilize with a lead of -2.47, you are now facing a significantly harder defense than you would have had with dxe4. How would you have handled the center if you had captured with the pawn instead?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "d3",
+        "Nxf2",
+        "Bxc6+",
+        "bxc6",
+        "dxe4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "e4"
+      ],
+      "causal_invented": [],
+      "causal_unverified": [
+        "Because you lose that pressure and allow them to stabilize with a lead of -2.47, you are now facing a significantly harder defense than you would have had with dxe4."
+      ]
+    }
+  },
+  {
+    "name": "Wing push 1.a4 (passive)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "facts": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "played_move": "a4",
+      "played_move_uci": "a2a4",
+      "best_move": "e4",
+      "best_move_uci": "e2e4",
+      "best_eval": "+0.49",
+      "played_eval": "-0.32",
+      "centipawn_loss": 81,
+      "best_win_pct": 54.5,
+      "played_win_pct": 47.1,
+      "win_prob_drop": 7.4,
+      "label": "Inaccuracy",
+      "refutation": [
+        "e5",
+        "e4",
+        "Nf6",
+        "Nf3",
+        "d5",
+        "exd5"
+      ],
+      "best_line": [
+        "e4",
+        "c5",
+        "Nf3",
+        "a6",
+        "d4",
+        "cxd4",
+        "Nxd4"
+      ],
+      "mistake_type": "positional",
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "Starting with a4 doesn't help you control the center, and the engine shows an evaluation of -0.32, which means your opponent now has a slight edge. After your move, they are likely to respond with e5 to grab that central space, followed by your e4, their Nf6, your Nf3, their d5, and finally an exchange where you lose your pawn on d5. Playing e4 instead would have helped you claim the middle of the board right from the start. Since you want to fight for the center early, what piece do you think would be most helpful to bring out first?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "a4",
+        "e5",
+        "e4",
+        "Nf6",
+        "Nf3",
+        "d5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Edge push 1.h4 (passive)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "beginner",
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "facts": {
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "played_move": "h4",
+      "played_move_uci": "h2h4",
+      "best_move": "e4",
+      "best_move_uci": "e2e4",
+      "best_eval": "+0.49",
+      "played_eval": "-0.43",
+      "centipawn_loss": 92,
+      "best_win_pct": 54.5,
+      "played_win_pct": 46.1,
+      "win_prob_drop": 8.4,
+      "label": "Mistake",
+      "refutation": [
+        "d5",
+        "d4",
+        "Nf6",
+        "e3",
+        "c5",
+        "c4",
+        "cxd4",
+        "exd4"
+      ],
+      "best_line": [
+        "e4",
+        "c5",
+        "Nf3",
+        "a6",
+        "d4",
+        "cxd4",
+        "Nxd4"
+      ],
+      "mistake_type": "positional",
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "You played h4, but that move doesn't help you take control of the center, and the computer now gives you a slightly negative score of -0.43. Your opponent might respond with d5 to claim space in the middle, followed by moves like d4 and Nf6 that let them develop their pieces faster than yours. Playing e4 instead would have put a pawn in the center to help open paths for your bishop and queen. What do you think is the best way to get your center pawns into the game?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "h4",
+        "d5",
+        "d4",
+        "Nf6",
+        "e4"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  },
+  {
+    "name": "Premature 3.Ng5?? (blunder)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "advanced",
+    "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+    "facts": {
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+      "played_move": "Ng5",
+      "played_move_uci": "f3g5",
+      "best_move": "Bb5",
+      "best_move_uci": "f1b5",
+      "best_eval": "+0.35",
+      "played_eval": "-4.00",
+      "centipawn_loss": 435,
+      "best_win_pct": 53.2,
+      "played_win_pct": 18.7,
+      "win_prob_drop": 34.6,
+      "label": "Blunder",
+      "refutation": [
+        "Qxg5",
+        "d4",
+        "Qg6",
+        "dxe5",
+        "d6",
+        "exd6",
+        "Bxd6"
+      ],
+      "best_line": [
+        "Bb5",
+        "a6",
+        "Ba4",
+        "Nf6",
+        "O-O",
+        "Nxe4"
+      ],
+      "mistake_type": "lost_material",
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "Moving your knight to g5 was a tough misstep because it invites your opponent to simply play Qxg5, winning a piece for nothing and leaving you with a -4.00 evaluation that heavily favors black. Even if you follow the engine’s predicted path of d4, Qg6, dxe5, d6, and exd6, the exchange of your pawn allows them to centralize their bishop with Bxd6, leaving you significantly behind in material. While your intention was likely to eye the f7 square, it neglected the fundamental need for sound development that a move like Bb5 would have provided to keep the position at +0.35. Looking at the board now, how would you approach your development differently if you could reset this position?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Qxg5",
+        "d4",
+        "Qg6",
+        "dxe5",
+        "d6",
+        "exd6",
+        "Bxd6",
+        "Bb5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "g5",
+        "f7"
+      ],
+      "causal_invented": [],
+      "causal_unverified": [
+        "Moving your knight to g5 was a tough misstep because it invites your opponent to simply play Qxg5, winning a piece for nothing and leaving you with a -4.00 evaluation that heavily favors black."
+      ]
+    }
+  },
+  {
+    "name": "Passive 2.Na3 (good)",
+    "phase": "opening",
+    "kind": "move",
+    "level": "intermediate",
+    "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+    "facts": {
+      "fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+      "played_move": "Na3",
+      "played_move_uci": "b1a3",
+      "best_move": "Nf3",
+      "best_move_uci": "g1f3",
+      "best_eval": "+0.36",
+      "played_eval": "+0.06",
+      "centipawn_loss": 30,
+      "best_win_pct": 53.3,
+      "played_win_pct": 50.6,
+      "win_prob_drop": 2.8,
+      "label": "Good",
+      "refutation": [
+        "e6",
+        "Nf3",
+        "a6",
+        "Be2",
+        "d5",
+        "exd5",
+        "exd5"
+      ],
+      "best_line": [
+        "Nf3",
+        "Nc6",
+        "Bb5",
+        "e6",
+        "O-O",
+        "Nge7"
+      ],
+      "mistake_type": null,
+      "chances": {
+        "mate": false,
+        "material": false
+      }
+    },
+    "text": "You played Na3, which is a solid and playable way to develop your knight toward the center, resulting in an evaluation of +0.06 that keeps the game perfectly balanced. Your opponent is likely to challenge your control by playing e6, which leads into a sequence where you follow up with Nf3, they play a6, and you continue with Be2 and d5. By developing this way, you are aiming to maintain flexibility and prepare for a stable middle game where you can gradually stake your claim in the center. How do you feel about the potential for your knight on a3 to eventually maneuver toward a more central square like c4?",
+    "check": {
+      "ok": true,
+      "grounded": [
+        "Na3",
+        "e6",
+        "Nf3",
+        "a6",
+        "Be2",
+        "d5"
+      ],
+      "ungrounded_moves": [],
+      "unverified_squares": [
+        "a3",
+        "c4?"
+      ],
+      "causal_invented": [],
+      "causal_unverified": []
+    }
+  }
+]

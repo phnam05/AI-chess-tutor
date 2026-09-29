@@ -35,6 +35,8 @@ leaves the rest as a clear extension point.
 
 import re
 
+import chess
+
 # A token shaped like Standard Algebraic Notation. Castling first (so "O-O-O"
 # isn't truncated to "O-O"), then piece moves, pawn captures, and finally a bare
 # pawn push / square. The lookarounds keep us from matching inside a word.
@@ -96,6 +98,29 @@ def build_allowed(facts):
     for m in moves:
         allowed |= _forms(m)
     return allowed
+
+
+def board_fact_tokens(facts):
+    """Squares and moves named by the board facts (board_facts.py), e.g. "the
+    bishop on b5" or "it can be attacked by ... a3 or c3". Those are computed
+    from the board, so the coach repeating them isn't inventing anything.
+
+    Kept apart from `build_allowed` on purpose: they only count as grounded
+    *mentions*. The eval-causality check still accepts only engine moves as an
+    anchor, so a story about the eval told around a board fact is judged exactly
+    as strictly as before the facts existed.
+    """
+    texts = []
+    for key in ("played_facts", "best_facts"):
+        if facts.get(key):
+            texts.append(facts[key])
+    texts.extend(facts.get("line_steps") or [])
+    tokens = set()
+    for step in texts:
+        for text in step["facts"] + [step["from"], step["to"]]:
+            for token in _SAN.findall(text):
+                tokens |= _forms(token)
+    return tokens
 
 
 # --- Eval-causality check -----------------------------------------------------
@@ -172,6 +197,34 @@ def check_eval_causality(text, allowed):
     return invented, unverified
 
 
+# A pawn named by a square it doesn't stand on: "the c3 or a3 pawn" for pawns
+# still on c2 and a2 (the author's hand check, 2026-09-25, three times). Matches
+# "the c3 pawn", "c3 or a3 pawn(s)", "pawn on/at/from c3"; not "a pawn to c3".
+_PAWN_NAMED = re.compile(r"\b((?:[a-h][1-8](?:\s*,\s*|\s+(?:or|and)\s+))*[a-h][1-8])[- ]pawns?\b")
+_PAWN_ON = re.compile(r"\bpawns? (?:on|at|from) ([a-h][1-8])\b")
+
+
+def misnamed_pawns(text, facts):
+    """Squares the text calls a pawn's that no pawn stands on at any point of
+    the position and the engine's line. Reported on its own, outside `ok`, so
+    the faithful rate stays comparable with earlier runs."""
+    board = chess.Board(facts["fen"])
+    if "played_move" in facts:
+        line = [facts["played_move"]] + list(facts.get("refutation") or [])
+    else:
+        line = list(facts.get("principal_variation") or [])
+    pawn_squares = set(board.pieces(chess.PAWN, chess.WHITE) | board.pieces(chess.PAWN, chess.BLACK))
+    for san in line:
+        try:
+            board.push_san(san)
+        except ValueError:
+            break
+        pawn_squares |= set(board.pieces(chess.PAWN, chess.WHITE) | board.pieces(chess.PAWN, chess.BLACK))
+    named = [sq for group in _PAWN_NAMED.findall(text) for sq in re.findall(r"[a-h][1-8]", group)]
+    named += _PAWN_ON.findall(text)
+    return sorted({sq for sq in named if chess.parse_square(sq) not in pawn_squares})
+
+
 def check_faithfulness(text, facts):
     """Check the coach's prose against the engine's facts.
 
@@ -183,9 +236,12 @@ def check_faithfulness(text, facts):
       unverified_squares -> bare squares not in the facts (could be a reference)
       causal_invented    -> sentences explaining the eval with no engine anchor
       causal_unverified  -> eval-causal sentences that at least cite engine moves
+      misnamed_pawns     -> "the c3 pawn" where no pawn ever stands on c3
+                            (reported only; not part of `ok`)
       allowed            -> the engine moves we checked against (for debugging)
     """
     allowed = build_allowed(facts)
+    mentionable = allowed | board_fact_tokens(facts)
 
     grounded, ungrounded_moves, unverified_squares = [], [], []
     seen = set()
@@ -193,7 +249,7 @@ def check_faithfulness(text, facts):
         if token in seen:          # report each distinct mention once
             continue
         seen.add(token)
-        if _forms(token) & allowed:
+        if _forms(token) & mentionable:
             grounded.append(token)
         elif _is_move(token):
             ungrounded_moves.append(token)
@@ -209,6 +265,7 @@ def check_faithfulness(text, facts):
         "unverified_squares": unverified_squares,
         "causal_invented": causal_invented,
         "causal_unverified": causal_unverified,
+        "misnamed_pawns": misnamed_pawns(text, facts),
         "allowed": sorted(allowed),
     }
 

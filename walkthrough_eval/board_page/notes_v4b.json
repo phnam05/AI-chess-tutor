@@ -1,0 +1,35 @@
+{
+  "nb4-beginner": [
+    {"phrase": "You should then push the pawn on c7 to c6 to attack White's bishop on b5.", "note": "The move comes before its idea (your rule: idea first). Small."},
+    {"phrase": "would have been better", "note": "Says ...a6 was better, but not <em>why</em>. That's point 3 from last round, not built yet."},
+    {"phrase": "after your knight is chased", "note": "The engine's line never chases the knight (it goes 4.O-O ...c6)."}
+  ],
+  "nb4-intermediate": [
+    {"phrase": "connect the rooks", "note": "Not a fact, and false here: after 4.O-O, White's knight, bishop and queen still stand between the rooks."},
+    {"phrase": "moving the pawn on a6", "note": "That pawn stands on a7 and would move to a6. Same slip as “the c3 pawn” (the new checker rule caught it)."},
+    {"phrase": "more effectively", "note": "Again says ...a6 was better without saying why (point 3, not built yet)."}
+  ],
+  "nb4-advanced": [
+    {"phrase": "Your opponent will likely play O-O, so a natural idea is", "note": "“O-O, so ...c6”: castling isn't why ...c6 is good; the two moves aren't connected."},
+    {"phrase": "while opening a line for your rook", "note": "True under your opening rule (the rook on a8 can now go to a7), but a weak reason. Is this kind of rook line worth saying?"},
+    {"phrase": "", "note": "Advanced now also stops after two moves: the engine's line ends a pawn down (6.exd5), so the code counts ...Nb4 as losing material and uses the short damage-control cut."}
+  ],
+  "Develop with ...Be7 (mistake)": [
+    {"phrase": "it misses an opportunity to challenge White", "note": "Vague. Our facts still give no reason why ...Be7 was a mistake, so this fills the gap with a guess."},
+    {"phrase": "You might instead consider", "note": "Should be “you could have”: it's the move you should have played, not a plan for later. Small."}
+  ],
+  "Scholar's mate trap: ...Nf6?? (blunder)": [
+    {"phrase": "allow White's pieces to focus their power on your f7 pawn", "note": "About f7 now, but it doesn't name the two pieces (bishop on c4, queen on h5), although the fact does. And “allow… to focus” sounds as if ...Nf6 aimed them at f7; they already were."}
+  ],
+  "...Nxe4? loses material (mistake)": [
+    {"phrase": "to get it out of that attack while striking at their queen", "note": "Short, as you asked. But White still wins that knight later (9.Kxf2, press ▶ to the end), and the text doesn't say so."},
+    {"phrase": "keep your initiative", "note": "You're clearly worse here (−2.47). “Keep your initiative” is made up and misleading."}
+  ],
+  "Premature 3.Ng5?? (blunder)": [
+    {"phrase": "This follows your blunder instead of the suggested Bb5", "note": "Garbled sentence."},
+    {"phrase": "how would you have handled the incoming pawn attack on your bishop?", "note": "Ends on a downside of the move you should have played (...a6 could attack a bishop on b5). Odd way to finish."}
+  ],
+  "Sicilian Najdorf": [
+    {"phrase": "Your bishop is currently stuck", "note": "Not true: the bishop on c1 can already go to d2, e3, f4, g5 or h6. The fact only says Be3 brings it into play."}
+  ]
+}

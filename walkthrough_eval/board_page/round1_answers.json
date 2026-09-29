@@ -1,0 +1,54 @@
+{
+  "nb4-beginner": {
+    "answer": "Y",
+    "note": "You said moving the knight made White to attack it by pushing a pawn to c3 or a3.  Although this is true in real situations i dont see any a3 or c3 from white in the future moves, so I'm not sure how you came up with this although it is indeed true. Regarding the suggested best move instead of the played move, you could have said more about why pushing the pawn to attack the bishop has more benefit than playing the knight. that's what the players need."
+  },
+  "nb4-intermediate": {
+    "answer": "Y",
+    "note": "Yes should have said White's pawns are on c2 and a2, and push to c2 to c3, rather than saying c3 or a3 pawn. Then same concern as above for the beginner explanation"
+  },
+  "nb4-advanced": {
+    "answer": "Y",
+    "note": "I keep dont know why you can come up with the c3 or a3 pawn although it is not wrong but i dont see it in the engine lines so i really dont know."
+  },
+  "Develop with ...Be7 (mistake)": {
+    "answer": "Y",
+    "note": ""
+  },
+  "Scholar's mate trap: ...Nf6?? (blunder)": {
+    "answer": "Y",
+    "note": "Yes should have put more focus on the hit on f7 square"
+  },
+  "...Nxe4? loses material (mistake)": {
+    "answer": "Y",
+    "note": "\", you should aim to capture the pawn on f2 and attack their queen\" but why?   completely not understand this decision here. i know it's hard to come up with the reason since it's just  the engine's line"
+  },
+  "Wing push 1.a4 (passive)": {
+    "answer": "Y",
+    "note": "Should have just said that usually move e4 e5 to claim the board center. Other than that it's fine"
+  },
+  "Edge push 1.h4 (passive)": {
+    "answer": "N",
+    "note": ""
+  },
+  "Premature 3.Ng5?? (blunder)": {
+    "answer": "Y",
+    "note": "it's simple: black move the knight to a square that is not defended by any piece, and can be easily captured by the opponent. Black \"hung\" the knight. Other than that dont go too deep on whats going on after this because usually when you hang a piece like that there's not much to discuss further. Then say that the good development move was the bishop because ... (got that)"
+  },
+  "Ruy Lopez (after 3...a6)": {
+    "answer": "N",
+    "note": ""
+  },
+  "Italian Game (Giuoco Piano)": {
+    "answer": "Y",
+    "note": "\"Since you want to open a line for your queen on d1\" i dont like this kind of assumption. Just say like, moving the pawn up creates space for queen to move is better, or something like that. \"To challenge their position by attacking their bishop on c5 with a pawn that is worth less,\" --> should say like you challenge the bishop by pushing pawn is enough"
+  },
+  "Sicilian Najdorf": {
+    "answer": "Y",
+    "note": "\"Bringing your bishop into play from its starting square also opens a line for your queen\" not quite. I mean it does open the b1 and c1 squares but those squares are useless. Other than that the queen is already opened. "
+  },
+  "Queen's Gambit Declined": {
+    "answer": "N",
+    "note": ""
+  }
+}

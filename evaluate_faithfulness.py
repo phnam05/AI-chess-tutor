@@ -181,6 +181,7 @@ def run_case(case):
         "unverified_squares": check["unverified_squares"],
         "causal_invented": check["causal_invented"],
         "causal_unverified": check["causal_unverified"],
+        "misnamed_pawns": check.get("misnamed_pawns", []),
         "text": text,
     }
 
@@ -298,7 +299,8 @@ def main():
         flag = "PASS" if r["ok"] else "FLAG"
         print(f"[{flag}] {i:>2}/{len(cases)} {r['name']:<40} "
               f"grounded={r['grounded']} invented={r['ungrounded_moves']} "
-              f"invented_cause={len(r['causal_invented'])}")
+              f"invented_cause={len(r['causal_invented'])}"
+              + (f" misnamed_pawns={r['misnamed_pawns']}" if r["misnamed_pawns"] else ""))
         results.append(r)
         if i < len(cases):
             time.sleep(args.delay)   # throttle for the 15-requests-per-minute limit
@@ -307,6 +309,8 @@ def main():
     faithful = sum(r["ok"] for r in results)
     rate = 100 * faithful / total if total else 0
     print(f"\n==== {faithful}/{total} faithful ({rate:.0f}%) ====")
+    print(f"Misnamed pawns (reported only, not in the rate): "
+          f"{sum(bool(r['misnamed_pawns']) for r in results)}/{total}")
     if total:
         write_report(results, args.out)
         print(f"Report written to {args.out}")

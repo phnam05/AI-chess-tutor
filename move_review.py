@@ -3,6 +3,7 @@ import math
 import chess
 import chess.engine
 import chess.pgn
+import board_facts
 from engine_analysis import render_line
 from engine_pool import analyse, DEFAULT_DEPTH
 
@@ -68,6 +69,15 @@ def _review_from_infos(board, played_move, info_before, info_after):
     mistake_type = classify_mistake(board, played_move, info_before, info_after, label)
     chances = position_chances(board, info_before)
 
+    # 6. What a player would *notice* about each move — computed from the board
+    # (board_facts.py), so the coach can give the idea behind a move without
+    # inventing one: the move played, each move of the line after it, and the
+    # move the engine would have played instead.
+    took_on = played_move.to_square if board.is_capture(played_move) else None
+    played_facts = board_facts.played_facts(board, played_san, refutation)
+    line_steps = board_facts.line_steps(line_board, refutation, took_on)
+    best_facts = board_facts.played_facts(board, best_move, best_line[1:])
+
     return {
         "fen": board.fen(),
         "played_move": played_san,
@@ -85,6 +95,9 @@ def _review_from_infos(board, played_move, info_before, info_after):
         "best_line": best_line,
         "mistake_type": mistake_type,
         "chances": chances,
+        "played_facts": played_facts,
+        "line_steps": line_steps,
+        "best_facts": best_facts,
     }
 
 

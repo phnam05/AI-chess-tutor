@@ -3,10 +3,13 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
+import httpx
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+import chess
 import streamlit as st
+import board_facts
 from faithfulness import check_faithfulness
 load_dotenv()
 
@@ -41,6 +44,11 @@ MODEL = "gemini-3.1-flash-lite"
 # whole app on import; now only the coach is unavailable and the engine still works.
 # Built on first use, not at import: an import-time lookup kept a key added in
 # Streamlit's settings unseen until the app was rebooted.
+# Each try also has a time limit. The SDK sets none, so one stuck connection
+# waited forever (a measurement run froze for minutes on a single request). A
+# normal answer takes a few seconds; a timed-out try is retried like a 503, so
+# the worst case is ~3 x 20s plus the short waits, about a minute.
+_TIMEOUT_S = 20
 _client = None
 
 
@@ -52,6 +60,7 @@ def _get_client():
             _client = genai.Client(
                 api_key=key,
                 http_options=types.HttpOptions(
+                    timeout=_TIMEOUT_S * 1000,   # milliseconds, per try
                     retry_options=types.HttpRetryOptions(attempts=3, initial_delay=2, max_delay=8)
                 ),
             )
@@ -74,6 +83,9 @@ def describe_coach_error(err):
         return f"Gemini rejected the request (error {code}) — check that GOOGLE_API_KEY is valid."
     if code == 404:
         return f"Gemini doesn't recognise the model '{MODEL}' — it may have been retired."
+    if isinstance(err, httpx.TimeoutException):
+        return (f"Gemini didn't answer in time ({_TIMEOUT_S} seconds, 3 tries). "
+                "Try again in a moment.")
     return f"Coach unavailable ({type(err).__name__}). Try again in a moment."
 
 
@@ -92,53 +104,88 @@ def _generate(level, facts):
     return response.text
 
 
+# Each level also sets how far down the engine's line the coach goes
+# (board_facts.LINE_PLIES): concepts over a short line for weaker players,
+# more concrete moves for stronger ones.
 LEVEL_INSTRUCTIONS = {
-    "beginner": """The player is a BEGINNER. Talk only about concrete, visible things:
-what the move attacks or defends, whether pieces are safe, simple threats, and
-king safety. Use no complicated chess jargon. Keep it to 2-3 short sentences.""",
+    "beginner": """The player is a BEGINNER. Use plain words and name the pieces
+("your knight", "White's bishop"), with the move's notation in brackets after
+the words, e.g. "castle (O-O)". Give each idea as a simple, visible thing: a
+piece is attacked, a piece can be chased, the king gets safe, a piece comes into
+play. No chess jargon. Keep it to 3-4 short sentences.""",
 
-    "intermediate": """The player is INTERMEDIATE. Explain the PLAN behind the move,
-not just what it does — use the predicted line to show what the player is building
-toward over the next few moves. You may use standard terms like space, tempo, and
-initiative. Keep it to 3-4 sentences.""",
+    "intermediate": """The player is INTERMEDIATE. Give each move's idea, then the
+move in notation. You may use standard terms like development, tempo and
+initiative, but only as a name for what a board fact already says, never as a
+new claim. Keep it to 4-5 sentences.""",
 
-    "advanced": """The player is ADVANCED. Focus on the underlying imbalances: pawn
-structure, long-term weaknesses, and the ideas the engine's line shows. Be precise
+    "advanced": """The player is ADVANCED. Be concrete: go through every move of
+the given line in notation, each with the board fact behind it, and be precise
 about the eval — do not round a slight edge into "equal," and never guess at why
-the eval is what it is. Assume the player knows the basics and wants the deeper
-reasoning. Keep it tight, 3-4 sentences.""",
+the eval is what it is. Assume the player knows the basics. Keep it tight, 4-5
+sentences.""",
 }
 
+# The author's rules for walking through a line (CLAUDE.md, 2026-09-24): who
+# plays every move, the idea before each recommended move, only the moves given.
+# The ideas are the risky part — an idea from Gemini's own chess knowledge is an
+# invented reason, the audit's most common failure — so they may come only from
+# the board facts (board_facts.py) or from what the line itself shows.
 SYSTEM_INSTRUCTION = """You are a friendly chess coach sitting next to one
-student, looking at their game together. The position and the engine's analysis
-(best move, evaluation, predicted line) are given to you and are correct. Treat
-them as ground truth.
+student, looking at their game together. The engine's analysis (best move,
+evaluation, the line it expects) and the board facts listed for each move are
+given to you and are correct. Treat them as ground truth, and as your ONLY
+source of chess claims: you put them into words, you never add to them.
 
 Your job is to coach this one student. Follow these rules:
 - Talk directly to the student as "you." Be warm and concise.
 - Write a few plain sentences. NO headings, NO numbered lists, NO bold text,
   NO "Summary" section.
-- Mention only the one or two most important ideas. Do not explain everything.
-- Explain WHY the engine's best move is good and what the evaluation means, in
-  simple language.
-- Do NOT suggest a different move than the engine's best move.
+- For each move, use only its one most useful board fact. Do not list them all.
+- Do NOT suggest a different move than the engine's.
 - Do NOT invent tactics or evaluations that aren't in the analysis given to you.
 - The evaluation is a NUMBER the engine computed; it comes with no reason
   attached. State it and say who it favors, but do NOT explain WHY it is what
   it is unless the reason is visible in the facts you were given (the line wins
   material, or forces mate). If you don't know the reason, say what the eval
   means for the player without inventing one.
-- When you describe what a move is FOR, take its purpose from what the given
-  line actually shows happening next, not from general chess knowledge.
-- If you point to a move from later in the line, first walk through the moves
-  that lead to it, in order, so it's clear how the position gets there — never
-  drop a deep move in on its own. Keep straight whose move each one is: the
-  line alternates sides (in a move review, the opponent moves first).
-- A predicted/refutation line is the engine's EXPECTED best play, not a
-  certainty — the opponent may not find it. Phrase it as what would *likely* or
-  *probably* follow, or call a reply the *critical* or *main* try. Never state a
-  future move as a guaranteed fact ("they will play…", "your opponent is going
-  to…").
+
+Walking through the engine's line:
+- Go through the moves you are given, in order, and only those.
+- Say who plays EVERY move, and change the subject of the sentence whenever the
+  side to move changes. Never join two sides' moves with "followed by", "then",
+  or "and".
+- The opponent's moves are the engine's EXPECTED best play, not a certainty:
+  "your opponent's strongest answer is probably ...", "your opponent will likely
+  ...". Never state one as a sure thing ("they will play…", "your opponent
+  plays…").
+- For each of the STUDENT's moves, the idea comes FIRST and the move LAST:
+  "<what to notice, from its board fact>, so a natural idea is <the idea>.
+  That's why your best reply is <move>." Never name the student's move first and
+  explain it afterwards ("You play ...c6 to attack…" is wrong). This pattern is
+  only for moves you RECOMMEND: never write "a natural idea is <move>" about a
+  move the student already played.
+- Write Black's moves with three dots (...c6) and White's without (Nf3).
+- A move's idea or purpose may come ONLY from its board facts, or from what the
+  line shows happening next. Never from general chess knowledge or rules of
+  thumb ("usually", "generally"), and never from your own reading of the board.
+  If a move's board facts say "none", name it and give it no reason.
+- Keep the evaluation apart from the moves: state it in its own sentence, with
+  who it favors exactly as given, and never say a move or a board fact raises,
+  drops or causes it.
+- Never say a piece or pawn is lost, hanging, or can be won unless the line
+  shows it being captured.
+- An attack is only an attack: never say a move "forces" a piece away or "wins"
+  anything unless the line shows it happening.
+- Name pieces and squares only as the facts and moves name them. Name a pawn by
+  the square it stands on ("the pawn on c2"), never by a square it could move
+  to ("the c3 pawn").
+- Never guess what the student wants or wanted ("since you want to...",
+  "since you wanted to..."). Say what the move does: "pushing the pawn makes
+  room for your queen."
+- Say each fact in plain, short words of your own ("you attack the bishop with
+  a pawn"), not by copying the fact's wording.
+- A move's board facts are listed with the most important first.
 - End on something that invites the student to think, but never lecture."""
 
 
@@ -203,18 +250,94 @@ def _check_and_log(text, facts, kind, level):
         return None
 
 
+def _dots(color, san):
+    """Black's moves are written with three dots (...c6), White's without, so a
+    reader can tell whose move it is from the notation alone."""
+    return f"...{san}" if color == "Black" else san
+
+
+def _facts_text(step):
+    if step and step["facts"]:
+        return "; ".join(step["facts"])
+    return "none (so give this move no reason)"
+
+
+def _eval_words(value, student):
+    """The evaluation with who it favours spelled out, so the coach never has to
+    read the sign itself: told "-1.46 (from their perspective)", it once said to
+    Black that -1.46 "favors you". `value` is a review eval ("-1.46", a mate
+    shown as +/-100.00) or an analysis eval_text ("+0.42 pawns", "Mate in -2")."""
+    opponent = "White" if student == "Black" else "Black"
+    mate = value.startswith("Mate in")
+    v = int(value.split()[-1]) if mate else float(value.split()[0])
+    if v == 0:
+        return f"{value}: level"
+    who = f"{student} (the student)" if v > 0 else f"{opponent} (the opponent)"
+    # No number for a mate: given "-100.00: a forced mate", the coach still told
+    # a beginner "the evaluation is -100.00" (a stand-in, not a real score).
+    if mate:
+        return f"a forced checkmate for {who} (mate in {abs(v)}); say it in words, with no number"
+    if abs(v) >= 100:
+        return f"a forced checkmate for {who}; say it in words, with no number"
+    return f"{value} from {student}'s side, so {who} is ahead"
+
+
+def _walkthrough(steps, student):
+    """The engine's line as numbered steps, each labelled with who plays it and
+    carrying its board facts. Labelling in code is what stops "O-O, followed by
+    a6" from reading as two moves by the same side. The labels say "likely
+    reply" / "best move", not "plays": the line is a forecast, not a promise."""
+    if not steps:
+        return "(none: the game is over)"
+    lines = []
+    for i, step in enumerate(steps, 1):
+        who = (f"Student ({step['color']}), best move:" if step["color"] == student
+               else f"Opponent ({step['color']}), likely reply:")
+        lines.append(f"{i}. {who} {_dots(step['color'], step['san'])} "
+                     f"(the {step['piece']}, {step['from']} to {step['to']}). "
+                     f"Board facts: {_facts_text(step)}.")
+    return "\n".join(lines)
+
+
+def _review_facts(review):
+    """The board facts of a review: (played move, line steps, best move). A
+    review made before board facts existed is rebuilt from its FEN and lines,
+    since Streamlit can keep an old review across a deploy."""
+    if "line_steps" in review:
+        return review["played_facts"], review["line_steps"], review["best_facts"]
+    board = chess.Board(review["fen"])
+    refutation = review.get("refutation") or []
+    played = board_facts.played_facts(board, review["played_move"], refutation)
+    after = board.copy()
+    after.push_san(review["played_move"])
+    steps = board_facts.line_steps(after, refutation)
+    best = board_facts.played_facts(board, review["best_move"], (review.get("best_line") or [])[1:])
+    return played, steps, best
+
+
 def explain_position(analysis, level="intermediate"):
     """
     Take the fact-dictionary from Stage 1 and return a natural-language
     explanation, grounded strictly in those facts.
     """
-    facts = f"""Position (FEN): {analysis['fen']}
-Side to move: {analysis['turn']}
-Engine's best move: {analysis['best_move']}
-Engine's evaluation: {analysis['eval_text']} (from {analysis['turn']}'s perspective)
-Engine's predicted line: {', '.join(analysis['principal_variation'])}
+    student = analysis["turn"]
+    steps = analysis.get("line_steps")
+    if steps is None:                     # an analysis from before board facts
+        steps = board_facts.line_steps(chess.Board(analysis["fen"]),
+                                       analysis["principal_variation"])
+    steps = board_facts.cut_line(steps, board_facts.LINE_PLIES[level], student)
 
-Explain this position and why the best move is strong."""
+    facts = f"""Position (FEN): {analysis['fen']}
+The student plays {student}, and it is their move.
+Engine's best move: {_dots(student, analysis['best_move'] or '(none)')}
+Engine's evaluation: {_eval_words(analysis['eval_text'], student)}
+
+What the engine expects, one move at a time (the student moves first):
+{_walkthrough(steps, student)}
+
+Explain the position through these moves, in order and no further: the
+student's best move first, with its idea before the move, then the opponent's
+likely reply, and so on."""
 
     text = _generate(level, facts)
     _check_and_log(text, analysis, "position", level)
@@ -225,29 +348,49 @@ def explain_move(review, level="intermediate"):
     """Coach the student on a move they just played, using the review facts."""
     # The engine's continuation after the move the student actually played. For a
     # weak move this is the refutation — concretely how the opponent punishes it.
-    # `.get` so a cached/old review without this key degrades gracefully.
-    refutation = review.get("refutation") or []
-    after_line = ", ".join(refutation) if refutation else "(none — the move ends the game)"
+    # Cut by level (and before any of the student's moves that no board fact can
+    # explain), then labelled move by move.
+    student = "White" if chess.Board(review["fen"]).turn == chess.WHITE else "Black"
+    played, steps, best = _review_facts(review)
+    # After a move that lost material or allowed mate, the rest of the line is
+    # damage control: keep it to the punishment and one answer (cut_line).
+    damage = review.get("mistake_type") in ("lost_material", "allowed_mate")
+    steps = board_facts.cut_line(steps, board_facts.LINE_PLIES[level], student, damage=damage)
+    damage_note = ""
+    if damage and any(s["color"] == student for s in steps):
+        damage_note = ("\n   Their move lost material or allowed mate, so keep this part short:\n"
+                       "   say what the opponent's reply does, then give the student's move in\n"
+                       "   ONE short clause as the best way to limit the damage, using the problem\n"
+                       "   it solves (out of check, out of an attack) if its facts give one.")
 
-    facts = f"""The student is playing and just made a move. Here is the engine's review:
+    # The move they should have played instead is a different thing from their
+    # best reply in the line: keep the two apart for the coach.
+    instead = ""
+    if review["label"] != "Best":
+        instead = (f"\n\nThe move the engine would have played instead: "
+                   f"{_dots(student, review['best_move'])}. Board facts: {_facts_text(best)}.")
+
+    facts = f"""The student plays {student} and just made a move. Here is the engine's review:
 
 Position before their move (FEN): {review['fen']}
-Their move: {review['played_move']}
+Their move: {_dots(student, review['played_move'])}
 Move quality: {review['label']}
-Engine's best move was: {review['best_move']}
-Evaluation after their move: {review['played_eval']} (from their perspective)
-Evaluation if they had played the best move: {review['best_eval']}
-What the engine expects to follow their move (opponent moves first): {after_line}
+Evaluation after their move: {_eval_words(review['played_eval'], student)}
+Evaluation if they had played the best move: {_eval_words(review['best_eval'], student)}
+What their move did, from the board: {_facts_text(played)}.
 
-Coach the student on the move THEY played.
-- If it was strong, affirm briefly why, and what it builds toward.
-- If it lost value, LEAD with what goes wrong with THEIR move: use the line the
-  engine expects to follow it to show concretely how the opponent punishes the
-  move — the reply they overlooked, the piece or square that falls, why a piece
-  can't move. Name the better move only briefly at the end; don't dwell on it.
-Read the position from the FEN to ground your explanation, but state only what
-the facts and that line show — never invent a threat, tactic, or line that
-isn't there. Be encouraging and specific."""
+What the engine expects to follow their move, one move at a time:
+{_walkthrough(steps, student)}{instead}
+
+Coach the student on the move THEY played, in this order:
+1. What their move did, from its board facts: if it lost value, what it
+   changed on the board; if it was strong, affirm it briefly. If it has no
+   board facts, give no reason and let the line show what follows. Give the
+   evaluation in a separate sentence of its own.
+2. Walk through the moves above, in order and no further.{damage_note}
+3. If it lost value, end with one short clause naming the move the engine
+   would have played instead, with its idea first if it has board facts.
+Be encouraging and specific."""
 
     text = _generate(level, facts)
     _check_and_log(text, review, "move", level)

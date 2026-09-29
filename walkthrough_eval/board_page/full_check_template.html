@@ -1,0 +1,341 @@
+<title>Walkthrough Board Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --bg: #F3F5F2;
+  --surface: #FFFFFF;
+  --ink: #18201C;
+  --muted: #56615B;
+  --line: #D5DBD4;
+  --accent: #1F6B45;
+  --flag: #B0442E;
+  --ok-bg: #E2EFE6;
+  --flag-bg: #F6E2DC;
+  --quote-bg: #F7F8F5;
+  --sans: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111713; --surface: #19211C; --ink: #E4EAE5; --muted: #98A69E;
+    --line: #2C3831; --accent: #72C499; --flag: #EC8A73; --ok-bg: #1D3327;
+    --flag-bg: #3B2520; --quote-bg: #151C18;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111713; --surface: #19211C; --ink: #E4EAE5; --muted: #98A69E;
+  --line: #2C3831; --accent: #72C499; --flag: #EC8A73; --ok-bg: #1D3327;
+  --flag-bg: #3B2520; --quote-bg: #151C18;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 0; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--sans); text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+h2 .lvl { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header { display: grid; gap: 14px; }
+.answer { display: grid; gap: 8px; border-left: 3px solid var(--accent); padding-left: 16px; }
+.answer p { font-size: 1.05rem; }
+section { display: grid; gap: 16px; }
+.mv { font-family: var(--mono); font-size: 0.88em; }
+.muted { color: var(--muted); }
+
+.case { display: grid; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; }
+.case-top { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 22px; align-items: start; }
+.board svg { width: 100%; height: auto; display: block; border-radius: 3px; }
+.svgbox { aspect-ratio: 1 / 1; max-width: 100%; background: #26302B; border-radius: 3px; }
+.board .cap { font-family: var(--sans); font-size: 0.85rem; color: var(--ink); margin-top: 8px; min-height: 2.6em; }
+.step-ctrl { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.nav {
+  font-size: 0.85rem; width: 44px; height: 34px; border-radius: 6px; cursor: pointer;
+  background: var(--ink); color: var(--surface); border: 0;
+}
+.nav:disabled { opacity: 0.3; cursor: default; }
+.step-hint { font-family: var(--sans); font-size: 0.78rem; color: var(--muted); }
+.step-moves { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.step-mv {
+  font-family: var(--mono); font-size: 0.78rem; padding: 2px 7px; border-radius: 4px; cursor: pointer;
+  background: transparent; color: var(--muted); border: 1px solid transparent;
+}
+.step-mv.shown { color: var(--ink); font-weight: 600; }
+.step-mv[aria-current="true"] { background: var(--ink); color: var(--surface); }
+.step-mv:hover { border-color: var(--line); }
+
+.facts { display: grid; gap: 8px; font-family: var(--sans); font-size: 0.92rem; }
+.facts dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 14px; margin: 0; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+
+.bf summary { font-family: var(--sans); font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.table-box { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; margin-top: 8px; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.86rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num { font-family: var(--mono); font-weight: 600; white-space: nowrap; }
+
+.qa { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; }
+.quote { background: var(--quote-bg); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; display: grid; gap: 8px; }
+.who { display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.num {
+  display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--ink); color: var(--surface); font-size: 0.8rem; letter-spacing: 0; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.quote p { font-size: 1rem; }
+.quote mark { background: none; color: inherit; border-bottom: 2px solid var(--flag); }
+.verdict { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; font-family: var(--sans); font-size: 0.86rem; color: var(--muted); }
+.pill { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.pill.ok { background: var(--ok-bg); color: var(--accent); }
+.pill.no { background: var(--flag-bg); color: var(--flag); }
+.noticed { font-family: var(--sans); font-size: 0.9rem; display: grid; gap: 4px; }
+.prev { font-family: var(--sans); font-size: 0.9rem; display: grid; gap: 4px; border-left: 3px solid var(--line); padding-left: 12px; }
+.prev p { color: var(--muted); }
+.changes { font-family: var(--sans); font-size: 0.92rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 18px; display: grid; gap: 8px; }
+.changes ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.noticed ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.askrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.ask { font-family: var(--sans); font-weight: 700; font-size: 1rem; }
+.yn { display: flex; gap: 8px; }
+.yn button {
+  font-family: var(--sans); font-size: 0.9rem; font-weight: 700; min-width: 78px; padding: 7px 16px; border-radius: 99px; cursor: pointer;
+  background: var(--surface); color: var(--ink); border: 1.5px solid var(--line);
+}
+.yn button:hover { border-color: var(--muted); }
+button:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.yn .yes[aria-pressed="true"] { background: var(--flag-bg); border-color: var(--flag); color: var(--flag); }
+.yn .no[aria-pressed="true"] { background: var(--ok-bg); border-color: var(--accent); color: var(--accent); }
+.note-label { font-family: var(--sans); font-size: 0.75rem; color: var(--muted); margin-bottom: -6px; }
+textarea {
+  font-family: var(--sans); font-size: 0.9rem; width: 100%; resize: vertical; padding: 7px 10px;
+  background: var(--quote-bg); color: var(--ink); border: 1px solid var(--line); border-radius: 4px;
+}
+.bar {
+  position: sticky; bottom: 0;
+  background: var(--surface); border-top: 1px solid var(--line);
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+  margin-inline: -20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+  font-family: var(--sans);
+}
+.progress { font-weight: 700; font-variant-numeric: tabular-nums; }
+.status { color: var(--muted); font-size: 0.85rem; flex: 1 1 200px; }
+.line { font-family: var(--mono); font-size: 0.8rem; order: 3; flex: 1 1 100%; color: var(--muted); border: 0; background: transparent; padding: 0; width: 100%; }
+.copy { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; padding: 7px 14px; border-radius: 99px; cursor: pointer; background: var(--ink); color: var(--surface); border: 0; }
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  h1 { font-size: 1.6rem; }
+  .case-top { grid-template-columns: minmax(0, 1fr); }
+  .board { max-width: 340px; }
+  .case { padding: 16px; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">%%DEFS%%</svg>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">AI chess tutor · hand check · %%ROUND%%</div>
+  <h1>Walkthrough Board Check</h1>
+  <div class="answer">
+    <p><strong>%%COUNT%% full coach answers, freshly generated, in %%CASES%% positions.</strong> For each one: is there any problem? Yes means “something needs fixing.”</p>
+    <p class="muted">Each board starts at the position <em>before</em> the move, from the student's side: red = the move played, green = the engine's best. Use ◀ ▶ to play through the engine's line; the caption always says who just moved and who is to move. Bold moves are the ones the coach was shown. Answers save when you click.</p>
+  </div>
+  %%CHANGES%%
+</header>
+
+%%SECTIONS%%
+
+<div class="bar">
+  <span class="progress" id="progress">0 of %%COUNT%% answered</span>
+  <span class="status" id="status">Connecting…</span>
+  <button type="button" class="copy" id="copy">Copy answers</button>
+  <input class="line" id="line" readonly aria-label="Your answers as one line">
+</div>
+
+</div>
+
+<script>
+(function () {
+  // ---- board drawing (same look as python-chess's SVG boards) ----
+  var COLORS = %%COLORS%%;
+  var PIECE = { P: "white-pawn", N: "white-knight", B: "white-bishop", R: "white-rook", Q: "white-queen", K: "white-king",
+                p: "black-pawn", n: "black-knight", b: "black-bishop", r: "black-rook", q: "black-queen", k: "black-king" };
+  var M = 15, S = 45;
+  function corner(f, r, flip) {
+    var fx = flip ? 7 - f : f, ry = flip ? 7 - r : r;
+    return [M + fx * S, M + (7 - ry) * S];
+  }
+  function sqOf(name) { return [name.charCodeAt(0) - 97, Number(name[1]) - 1]; }
+  function drawBoard(d, flip) {
+    var o = ['<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 390 390">',
+             '<rect width="390" height="390" fill="' + COLORS.margin + '"/>'];
+    var last = d.last || [];
+    for (var r = 0; r < 8; r++) {
+      for (var f = 0; f < 8; f++) {
+        var name = String.fromCharCode(97 + f) + (r + 1);
+        var key = "square " + ((f + r) % 2 === 0 ? "dark" : "light") + (last.indexOf(name) >= 0 ? " lastmove" : "");
+        var c = corner(f, r, flip);
+        o.push('<rect x="' + c[0] + '" y="' + c[1] + '" width="45" height="45" fill="' + COLORS[key] + '"/>');
+      }
+    }
+    var t = 'font-family="Instrument Sans, Segoe UI, sans-serif" font-size="11" font-weight="600" fill="' + COLORS.coord + '" text-anchor="middle" dominant-baseline="central"';
+    for (var i = 0; i < 8; i++) {
+      var file = String.fromCharCode(97 + (flip ? 7 - i : i));
+      var rank = String(flip ? i + 1 : 8 - i);
+      var mid = M + i * S + S / 2;
+      o.push('<text x="' + mid + '" y="7.5" ' + t + '>' + file + '</text><text x="' + mid + '" y="383" ' + t + '>' + file + '</text>');
+      o.push('<text x="7.5" y="' + mid + '" ' + t + '>' + rank + '</text><text x="382.5" y="' + mid + '" ' + t + '>' + rank + '</text>');
+    }
+    var rows = d.b.split("/");
+    for (var ri = 0; ri < 8; ri++) {
+      var rr = 7 - ri, ff = 0;
+      for (var k = 0; k < rows[ri].length; k++) {
+        var ch = rows[ri][k];
+        if (ch >= "1" && ch <= "8") { ff += Number(ch); continue; }
+        var p = corner(ff, rr, flip), id = PIECE[ch];
+        o.push('<use href="#' + id + '" xlink:href="#' + id + '" transform="translate(' + p[0] + ', ' + p[1] + ')"/>');
+        ff++;
+      }
+    }
+    (d.arrows || []).forEach(function (a) {
+      var tq = sqOf(a[0]), hq = sqOf(a[1]), col = COLORS["arrow " + a[2]];
+      var tc = corner(tq[0], tq[1], flip), hc = corner(hq[0], hq[1], flip);
+      var xt = tc[0] + S / 2, yt = tc[1] + S / 2, xh = hc[0] + S / 2, yh = hc[1] + S / 2;
+      var dx = xh - xt, dy = yh - yt, hyp = Math.hypot(dx, dy);
+      var ms = 0.75 * S, mm = 0.1 * S;
+      var sx = xh - dx * (ms + mm) / hyp, sy = yh - dy * (ms + mm) / hyp;
+      var tx = xh - dx * mm / hyp, ty = yh - dy * mm / hyp;
+      o.push('<line x1="' + xt + '" y1="' + yt + '" x2="' + sx + '" y2="' + sy + '" stroke="' + col + '" stroke-width="' + (S * 0.2) + '" stroke-linecap="butt"/>');
+      o.push('<polygon points="' + tx + ',' + ty + ' ' + (sx + dy * 0.5 * ms / hyp) + ',' + (sy - dx * 0.5 * ms / hyp) + ' ' +
+             (sx - dy * 0.5 * ms / hyp) + ',' + (sy + dx * 0.5 * ms / hyp) + '" fill="' + col + '"/>');
+    });
+    o.push("</svg>");
+    return o.join("");
+  }
+
+  // ---- steppers ----
+  document.querySelectorAll(".stepper").forEach(function (st) {
+    var plies = JSON.parse(st.querySelector("script.plies").textContent);
+    var flip = st.dataset.orient === "b";
+    var box = st.querySelector(".svgbox");
+    var cap = st.querySelector(".cap");
+    var prev = st.querySelector(".prev");
+    var next = st.querySelector(".next");
+    var mvs = st.querySelectorAll(".step-mv");
+    var idx = 0;
+    function show(i) {
+      idx = Math.max(0, Math.min(plies.length - 1, i));
+      box.innerHTML = drawBoard(plies[idx], flip);
+      cap.innerHTML = plies[idx].cap;
+      prev.disabled = idx === 0;
+      next.disabled = idx === plies.length - 1;
+      mvs.forEach(function (b) { b.setAttribute("aria-current", String(Number(b.dataset.i) === idx)); });
+    }
+    prev.addEventListener("click", function () { show(idx - 1); });
+    next.addEventListener("click", function () { show(idx + 1); });
+    mvs.forEach(function (b) { b.addEventListener("click", function () { show(Number(b.dataset.i)); }); });
+    show(0);
+  });
+
+  // ---- answers ----
+  var IDS = [];
+  for (var i = 1; i <= %%COUNT%%; i++) IDS.push("a" + i);
+  var state = {};
+  IDS.forEach(function (id) { state[id] = { answer: null, note: "" }; });
+  var db = null, queues = {}, timers = {};
+  var statusEl = document.getElementById("status");
+  function setStatus(t) { statusEl.textContent = t; }
+
+  function summary() {
+    var parts = IDS.map(function (id, i) { return (i + 1) + (state[id].answer || "–"); });
+    var notes = IDS.filter(function (id) { return state[id].note.trim(); })
+      .map(function (id) { return id.slice(1) + ": " + state[id].note.trim().replace(/\s+/g, " "); });
+    return parts.join(" ") + (notes.length ? "  | notes: " + notes.join(" · ") : "");
+  }
+  function render() {
+    var done = 0;
+    IDS.forEach(function (id) {
+      var a = state[id].answer;
+      if (a) done++;
+      document.querySelectorAll('.yn button[data-q="' + id + '"]').forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.v === a));
+      });
+      var ta = document.getElementById("note-" + id);
+      if (ta && document.activeElement !== ta && ta.value !== state[id].note) ta.value = state[id].note;
+    });
+    document.getElementById("progress").textContent = done + " of " + IDS.length + " answered";
+    document.getElementById("line").value = summary();
+  }
+  function save(id) {
+    if (!db) return;
+    setStatus("Saving…");
+    var body = { answer: state[id].answer, note: state[id].note, at: new Date().toISOString() };
+    queues[id] = (queues[id] || Promise.resolve()).then(function () {
+      return db.doc("%%COLL%%/" + id).set(body);
+    }).then(function () {
+      setStatus("Saved. Claude can read your answers.");
+    }).catch(function (e) {
+      setStatus("Couldn't save (" + ((e && e.code) || "error") + "). Use Copy answers and paste into chat.");
+    });
+  }
+  document.querySelectorAll(".yn button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var id = b.dataset.q;
+      if (state[id].answer === b.dataset.v) return;
+      state[id].answer = b.dataset.v;
+      render();
+      save(id);
+    });
+  });
+  document.querySelectorAll("textarea[data-q]").forEach(function (ta) {
+    ta.addEventListener("input", function () {
+      var id = ta.dataset.q;
+      state[id].note = ta.value;
+      document.getElementById("line").value = summary();
+      clearTimeout(timers[id]);
+      timers[id] = setTimeout(function () { save(id); }, 800);
+    });
+  });
+  document.getElementById("copy").addEventListener("click", function () {
+    var text = summary();
+    var line = document.getElementById("line");
+    function fallback() { line.focus(); line.select(); setStatus("Selected. Press Ctrl+C to copy."); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { setStatus("Copied. Paste it into chat."); }, fallback);
+    } else fallback();
+  });
+  render();
+
+  var use = window.claude && window.claude.use ? window.claude.use("db") : Promise.resolve(null);
+  use.then(function (d) {
+    db = d;
+    if (!db) { setStatus("Answers can't be saved here. Use Copy answers and paste into chat."); return; }
+    setStatus("Answers save when you click.");
+    db.collection("%%COLL%%").onSnapshot(function (snap) {
+      snap.docs.forEach(function (doc) {
+        if (!state[doc.id] || !doc.exists) return;
+        var d = doc.data() || {};
+        state[doc.id].answer = d.answer || null;
+        var ta = document.getElementById("note-" + doc.id);
+        if (!(ta && document.activeElement === ta)) state[doc.id].note = d.note || "";
+      });
+      render();
+    }, function (e) {
+      setStatus("Live sync stopped (" + ((e && e.code) || "error") + "). Clicks may not save; use Copy answers.");
+    });
+  }, function () {
+    setStatus("Answers can't be saved here. Use Copy answers and paste into chat.");
+  });
+})();
+</script>

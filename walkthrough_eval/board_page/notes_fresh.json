@@ -1,0 +1,48 @@
+{
+  "nb4-beginner": [
+    {"phrase": "To force the bishop back", "note": "The fact only says ...c6 <em>attacks</em> the bishop. Here the bishop really does have to move (taking on c6 would lose it for a pawn), so this is close to true, but it says more than the fact."}
+  ],
+  "nb4-intermediate": [
+    {"phrase": "the c3 or a3 pawn", "note": "White's pawns are on c2 and a2. Same slip as the last run, even though the facts now name both squares (“the pawn on c2 to c3”)."},
+    {"phrase": "Since you wanted to pressure the bishop", "note": "Guesses what you wanted. 3...Nb4 doesn't attack the bishop at all."},
+    {"phrase": "the move the engine would have played", "note": "Mentions “the engine” to the student, which the coach normally doesn't. Small style point."}
+  ],
+  "nb4-advanced": [
+    {"phrase": "Your move Nb4", "note": "Written “Nb4” instead of “...Nb4” (Black's moves get the three dots). Small notation slip."},
+    {"phrase": "so a natural idea is ...d5", "note": "Recommends ...d5 without saying White takes that pawn next (6.exd5). The facts say “the very next move in the line captures it”."}
+  ],
+  "Develop with ...Be7 (mistake)": [
+    {"phrase": "but this move was a mistake", "note": "Never says <em>why</em> it was a mistake. The line it was shown has White taking two pawns (6.Nxe5 and 8.Nxc6), but the coach doesn't point that out."},
+    {"phrase": "challenge your knight on c6 with Bxc6", "note": "Bxc6 <em>captures</em> your knight (that's in the facts). “Challenge” hides that you lose it and have to take back."}
+  ],
+  "Scholar's mate trap: ...Nf6?? (blunder)": [
+    {"phrase": "placed your king in a difficult position", "note": "Vague. The real point: White's queen (h5) and bishop (c4) both hit f7, and ...Nf6 does nothing about it. Our board facts don't report that, so the coach couldn't say it."},
+    {"phrase": "The evaluation is -100.00", "note": "A beginner is shown “−100.00”. It should just say White has a forced checkmate. Our code tells the coach “a forced mate for White”, but it still printed the number."}
+  ],
+  "...Nxe4? loses material (mistake)": [
+    {"phrase": "you should aim to capture the pawn on f2 and attack their queen", "note": "Makes ...Nxf2 sound good, but the coach stops just before White wins that knight: the line goes on 8.Rxe5+ Be6 9.Kxf2 (press ▶ to the end). Our level cut hid the punchline."},
+    {"phrase": "Bxc6+, putting your king in check", "note": "Leaves out that Bxc6+ also captures your knight on c6 (it's in the facts)."}
+  ],
+  "Wing push 1.a4 (passive)": [
+    {"phrase": "You opened a line for your rook on a1 with your move [a4].", "note": "Doesn't say why 1.a4 was an inaccuracy. Our facts have no reason, so the coach correctly made none up."},
+    {"phrase": "which means Black is now ahead", "note": "−0.32 is close to equal. “Black is ahead” overstates it."},
+    {"phrase": "move their pawn to [e5]", "note": "Beginner notation in brackets reads oddly (“move their pawn to [e5]”)."}
+  ],
+  "Edge push 1.h4 (passive)": [
+    {"phrase": "You opened a line for your rook on h1 by moving your pawn [h4].", "note": "Doesn't say why 1.h4 was a mistake (no fact for it)."},
+    {"phrase": "which means Black is currently ahead", "note": "−0.43 is close to equal. “Black is ahead” overstates it."},
+    {"phrase": "play the pawn to d5 [...d5]", "note": "Says the move twice, in words and in brackets."}
+  ],
+  "Premature 3.Ng5?? (blunder)": [
+    {"phrase": "You should then play d4, which opens a line for your bishop on c1.", "note": "The move comes before its idea (your rule: idea first). And the real point of 4.d4 is that your bishop on c1 now attacks the queen on g5. That only becomes clear in the next sentence."},
+    {"phrase": "inviting a pawn attack on a6", "note": "Garbled: the fact is that Black could attack the bishop by pushing a7–a6. It's also odd to name only a downside of the move you should have played."}
+  ],
+  "Italian Game (Giuoco Piano)": [
+    {"phrase": "Since you want to open a line for your queen on d1", "note": "True but minor. The main idea of 4.c3 is to support d4, which the line plays two moves later."},
+    {"phrase": "with a pawn that is worth less", "note": "Copies the fact's wording word for word, which sounds unnatural."},
+    {"phrase": "after these pieces are exchanged", "note": "No exchange happens in the moves the coach showed. The capture (5...exd4) comes after them."}
+  ],
+  "Sicilian Najdorf": [
+    {"phrase": "which opens a line for their queen", "note": "Misses the point of ...Ng4: it attacks your bishop on e3 (the engine's next move is 8.Bd2, the bishop stepping away). Our board facts don't report that attack, so the coach couldn't say it."}
+  ]
+}
