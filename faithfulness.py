@@ -274,7 +274,7 @@ def check_faithfulness(text, facts):
 if __name__ == "__main__":
     # The same sample facts explainer.py uses, so the two stages line up.
     analysis = {
-        "fen": "r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b kq - 0 9",
+        "fen": "r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
         "best_move": "c4",
         "principal_variation": ["c4", "Bc2", "b5", "e4", "b4"],
     }

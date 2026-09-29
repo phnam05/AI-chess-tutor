@@ -67,8 +67,11 @@ CASES = [
          setup=["e4", "c6", "d4", "d5"], kind="position"),
 
     # ---- Middlegame positions (FENs the repo/log already exercise) ----
+    # Fixed 2026-09-30: the FEN had "r2q" for "r1bq" (no Black bishop on c8) and
+    # castling rights for a Black king already castled, so every run before then
+    # measured Black a bishop down (-4.79), not the closed centre the name says.
     dict(name="Closed centre, Black to plan", phase="middlegame", level="intermediate",
-         fen="r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b kq - 0 9",
+         fen="r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
          setup=[], kind="position"),
     dict(name="Queen on f4, White attacking", phase="middlegame", level="advanced",
          fen="r1bq1rk1/pp3pp1/2n1p3/2P1P2p/5Q2/8/PPP2PPP/R1B1KB1R w KQ - 1 13",

@@ -6,6 +6,9 @@ only 1–2 moves deep, and adapt to the level (rules in `CLAUDE.md`, "How the co
 walks through a line"). The ideas come from `board_facts.py`, never from Gemini.
 
 Each run is the 25-case set of `evaluate_faithfulness.py`, one Gemini call per case.
+Every run below (and every July run) used a mistyped case 8, "Closed centre": Black
+had no bishop on c8, so it was a bishop down (−4.79). Fixed 30 Sep 2026, 02:06;
+runs from then on aren't comparable with these on that case.
 
 | Version | What changed | Faithful (checker) | "followed by" |
 |---|---|---|---|

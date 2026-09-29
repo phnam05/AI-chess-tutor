@@ -407,7 +407,7 @@ if __name__ == "__main__":
         "principal_variation": ["Bb5", "a6", "Ba4", "Nf6", "O-O"],
     }
     midgame = {
-        "fen": "r2q1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b kq - 0 9",
+        "fen": "r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P4/2PBPN2/PP1N1PPP/R1BQ1RK1 b - - 0 9",
         "turn": "Black",
         "best_move": "c4",
         "eval_text": "-0.20 pawns",

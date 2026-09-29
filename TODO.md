@@ -1,6 +1,6 @@
 # To-do list
 
-*Last updated: 30 September 2026, 01:41 (Vietnam time).* Tick a box (`[x]`) when a task is done.
+*Last updated: 30 September 2026, 02:30 (Vietnam time).* Tick a box (`[x]`) when a task is done.
 Each task says **who** does it: **You**, **Claude** (you just say "go"), or
 **Waiting** (someone else has to act first).
 
@@ -197,14 +197,13 @@ Later, for the related-work chapter (check each before citing):
   reported with a confidence range, as Dr. Marcolino's ReCePS paper does.
   Starts in step 3.
   *Why:* with 25 cases, "88%" could really be anywhere from 70% to 96%.
-- [ ] **You: decide about test case 8** ("Closed centre, Black to plan").
-  *(Found 30 Sep, 01:18.)* Its position has no Black bishop on c8, so Black
-  is a bishop down and −4.79 is against Black (the coach told Black "heavily
-  in your favor"). Probably mistyped when the 25 cases were written. Fix the
-  practice case, or keep it as it is (it still shows an invented reason)?
-  *Why:* the case's name says "closed centre", not "a piece down", so anyone
-  reading the results would be misled. The frozen audited run stays as it is
-  either way.
+- [x] **You: decide about test case 8** ("Closed centre, Black to plan").
+  *(Found 30 Sep, 01:18. You said fix it; fixed 30 Sep, 02:06.)* Its
+  position had no Black bishop on c8, so Black was a bishop down (−4.79,
+  and the coach told Black "heavily in your favor"). Now the bishop is back:
+  about equal (+0.26), and the engine's plan is ...b6 and ...Bb7. The same
+  mistyped position in the two self-tests is fixed too. The frozen July
+  audit and all old runs stay as they were; they measured the old position.
 - [ ] **You: decide what to do about the checker's two blind spots.** It
   misses reasons without a trigger word ("…, as your pieces are
   developing") and wrongly fails a true "your extra rook" (it can't see the

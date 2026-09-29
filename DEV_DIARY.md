@@ -6,13 +6,14 @@ The project's story, a few lines per working day. **What to do next is in
 `TODO.md`**, not here. The same story with every detail is in the long
 version, `DEV_DIARY_full.md` (on your laptop only, not on GitHub). Both are
 updated every session: read this one, and open the long one when you want to
-go deeper into a day. Feeling lost? `PROJECT_STORY.md` (also laptop only)
-tells the whole project as one story, up to 29 Sep.
+go deeper into a day. Feeling lost? `PROJECT_STORY.md` (also laptop only;
+the same with boards: `PROJECT_STORY.html`) tells the whole project as one
+story, kept up to date too.
 Words in *italics* are in the Glossary at the bottom.
 
 ---
 
-## Where the project stands (30 Sep 2026, 01:41)
+## Where the project stands (30 Sep 2026, 02:30)
 
 **The idea:** the *engine* (Stockfish) decides the chess; a language AI
 (Gemini), called **the coach** here, only puts the engine's facts into words,
@@ -63,7 +64,8 @@ and Kim 2025.
 **Git:** version 1 (`37aef2a`) and these notes are on GitHub (30 Sep,
 01:41), and the live app runs the version 1 coach. Only on this laptop: the
 counting fix (waits for your look at the panel) and `CLAUDE.md`, which
-describes that fix, so it goes up with it.
+describes that fix, so it goes up with it. The test case 8 fix is on GitHub
+too (30 Sep, 02:30).
 The office firewall usually blocks GitHub (and Lichess, Maia); your home
 wifi and the phone hotspot work. The repo is public, so private lab notes live in
 `lab_notes.md`, which git ignores.
@@ -265,6 +267,14 @@ different best moves for the same position, lines could stop in the middle of a
 - **Did:** checked that the committed files run on their own (everything loads, a full game grades, the app calls the coach correctly), then pushed version 1 and committed + pushed these notes (diary, `TODO.md`, `related_work.md`, `.gitignore`). The live app now runs the version 1 coach. Also fixed old to-do lines that still said "not committed".
 - **Held back:** `CLAUDE.md` (part of it describes the counting fix, which isn't on GitHub yet) and the counting fix itself (waits for your look at the panel).
 - **End state:** next step is still yours: the talk with João.
+
+### 30 Sep, 02:06 — Test case 8 fixed
+- **Your decision:** fix it.
+- **Did:** put Black's missing bishop back on c8 in "Closed centre, Black to plan" (and removed castling rights for a Black king that had already castled, which made the old position invalid). The engine now calls it about equal (+0.26, plan ...b6 and ...Bb7), not −4.79. The same wrong position sat in two self-tests (`faithfulness.py`, `explainer.py`), so they're fixed too. It was never the coach, so version 1 is unchanged.
+- **Checked:** all 25 cases are legal; the checker's self-test passes; the self-tests' own line (...c4 Bc2 b5 e4 b4) is legal in the fixed position.
+- **Worth knowing:** every earlier run (July's 88%, the walk-through's 25/25) measured the wrong case 8. Those numbers stay as they were; `walkthrough_eval/README.md` now says so. The set's `--validate` only checks moves, which is why it said "all legal".
+- **Also (02:30, your ask):** `PROJECT_STORY.md` and its web page are now kept up to date along with the diaries. Both got 30 Sep: a timeline row, the push and the case 8 fix in chapters 3 and 7, "where you are now", and a 9th lesson ("check the test, not only the answers").
+- **End state:** committed and pushed to GitHub (the story stays on your laptop).
 
 ---
 
