@@ -12,6 +12,20 @@ player made), gets a strong engine's analysis, and turns that analysis into
 short, level-adapted coaching. See `README.md` for the full narrative and the
 design rationale; this file is the operational map.
 
+## Research focus (the author, 2026-10-01 21:55)
+
+Only paper 1's question: is an explanation **correct and relevant**. Paper
+2's, meaningful at the player's level (level guessing, Maia, a model of the
+player), gets no work until the author says so. **The player model is
+removed** (the author, 2026-10-05 16:22: "remove anything that's related to the
+player model. Right now only focus on explanation"): the learner model, the
+"Your patterns" panel, saved games and the simulations are gone from `main`.
+They are kept on the local branch `paper2-player-model`, with the old to-do
+list. Still in the app: the bot opponent (a way to get positions to explain)
+and the 3 explanation levels (part of the frozen version 1 coach). Before
+proposing anything, ask whether it helps measure or improve correct +
+relevant. The plan is `TODO.md`, section 1.
+
 ## The invariant — do not break this
 
 **The engine decides the chess; the language model only explains it.**
@@ -40,19 +54,13 @@ app.py              Streamlit UI — the only entry point. Orchestrates the stag
   ├─ board_facts.py       What a human would *notice* about each move (attacks,
   │                       chases, castling…), computed with python-chess: the
   │                       coach's only source for the idea behind a move.
-  ├─ engine_pool.py       Shared persistent Stockfish handle + engine discovery.
-  ├─ board_ui.py          Pillow board for the interactive click-to-move UI.
-  └─ learner_model.py     Step 3: per-player mistake-rate estimates (shown in the
-                          app's "Your patterns" panel; not given to the coach).
+  ├─ engine_pool.py       Shared persistent Stockfish handle + engine discovery,
+  │                       and a separate weak Stockfish that plays the bot.
+  └─ board_ui.py          Pillow board for the interactive click-to-move UI.
 
 Research scripts (run by hand, not imported by the app):
   faithfulness.py / evaluate_faithfulness.py / validate_checker.py / build_audit.py
                           Steps 1–2: check, measure and audit the coach's faithfulness.
-  simulate_games.py       Weakest Stockfish (Skill 0) vs itself, graded like a pasted
-                          PGN → sim_games/ (demo data for the patterns panel; not
-                          evidence about real players, never for setting the bars).
-  simulate_learners.py    Step 3d: bots with planted weaknesses → does the learner
-                          model find them? Writes learner_eval.md.
 ```
 
 Each file is one stage of a pipeline and is meant to stay independently runnable
@@ -83,10 +91,17 @@ or `positional` — by comparing the engine's best line (`best_line`, kept in th
 review) with the line after the played move, on mate and a plain 1/3/3/5/9
 material count. It's the same kind of fact as the label: read off engine output,
 never guessed. `positional` deliberately doesn't say *which* positional thing
-went wrong, because the engine doesn't say. These kinds are the input for the
-session learner model (Step 3).
+went wrong, because the engine doesn't say. The coach uses the kind to keep
+its walk-through short after a move that lost material or allowed mate (see
+`cut_line`'s `damage` below).
 
-## How the coach walks through a line (author's rules, 2026-09-24)
+**Every number needs a source** (the author, 2026-09-30 10:52, about the
+since-removed learner model: "where does the numbers like 10 moves, 80%, 3
+times come from? … You cant just pull up those numbers"). Never present a
+hand-picked constant as settled or research-backed: cite it, measure it, or say
+"hand-picked for now" wherever it's explained.
+
+## How the coach walks through a line (author's rules, 2026-09-24 14:27)
 
 The author's requirements for every explanation that narrates an engine line
 (`explain_move` *and* `explain_position`). The target style, in the author's
@@ -140,7 +155,26 @@ prompt:
 - `board_facts.cut_line` decides depth by level (`LINE_PLIES`: beginner 2
   half-moves, intermediate 3, advanced 4), finishes a same-square exchange but
   never starts a new one past the cut, and stops before any of the student's
-  moves that has no fact (no honest idea to give it).
+  moves that has no fact (no honest idea to give it). After a move that lost
+  material or allowed mate (`damage=True`), it keeps only the opponent's reply
+  and the student's one answer, which the coach gives in one clause as damage
+  control (author, 2026-09-26 00:44: "could just be shorter on how to minimize the
+  damage").
+- **Which facts are worth saying (author's hand check, 2026-09-25 15:48 and 2026-09-26 00:44).** A true
+  fact can still be useless: 6.Be3 frees c1 and b1 for the queen. "Opens a line
+  for X" is stated only if (1) through the opened line X now attacks something
+  worth more or undefended, or (2) *in the opening* (that side still has a
+  knight or bishop on its starting square) X gains a square off its home rank,
+  a way into the game (nobody can say yet when that line will be used), or
+  (3) the engine's line later moves X along it. The author rejected both a fixed
+  "ignore the back rank" rule and a "now or later only" rule; don't bring either
+  back. Other facts added from that check: a piece left where nothing defends
+  it and the next move takes it ("hanging", not said for a trade); "allows
+  checkmate next move", naming the pieces that hit the mating square; "puts a
+  pawn in the centre"; "prepares d4" (a pawn move covering the square of the
+  side's next, non-capturing move); an attack on an equal, defended piece only
+  when the line's next move steps it away (7...Ng4 8.Bd2). Attack facts no
+  longer say "which is worth less" (the coach copied it word for word).
 - The move the student *should have played instead* (engine best) is passed
   separately from their *best reply now* (in the line), so the two aren't mixed.
 - `faithfulness.py` counts squares/moves named in the facts as grounded mentions
@@ -150,8 +184,12 @@ prompt:
 Measured (`walkthrough_eval/README.md`): checker 44/50 before → 50/50 after,
 "followed by" 11 → 0. But the 25 cases were used to develop the change, and the
 checker can't see an invented *idea* or a misread fact, so the author's hand
-check (`walkthrough_audit.md`) is the real test. Known leftover: Gemini stretches
-"attacks X" into "forces X to move" — an attack is only an attack.
+check (`walkthrough_audit.md`, done on a board page: full answers, a board you
+can step through, one Yes/No each) is the real test. The prompt now also says:
+an attack is only an attack (no "forces"), name a pawn by the square it stands
+on, never guess what the student "wants", say facts in plain words. The checker
+reports `misnamed_pawns` ("the c3 pawn" with no pawn on c3) separately, outside
+`ok`, so the faithful rate stays comparable.
 
 ## Running it
 
@@ -185,7 +223,6 @@ python engine_analysis.py   # prints facts for a sample FEN
 python move_review.py        # grades a good move and a bad one
 python board_facts.py        # board facts + level cuts for the ...Nb4 example (no engine)
 python explainer.py          # explains a sample position at all 3 levels
-python learner_model.py      # learner-model rules on hand-made reviews (no engine)
 ```
 
 ## Conventions & gotchas
@@ -203,6 +240,14 @@ python learner_model.py      # learner-model rules on hand-made reviews (no engi
   turns a failure into a plain reason (quota / busy / timeout / bad key / retired model);
   the app shows it and keeps a "Try again" button. Never go back to one
   catch-all "check GOOGLE_API_KEY" message — it hid the real cause.
+- **The exact prompt is visible in the app** (the author, 2026-10-03 01:52,
+  for research and debugging): `explain_move` / `explain_position` take an
+  optional `prompt_out` dict, filled with the model, level, system instruction
+  and facts message *before* the call (so a failed call still shows it);
+  `app.py`'s `_render_prompt` shows it in a collapsed "Prompt sent to Gemini"
+  box. Keep it a caller-owned dict, not a module global: the online app is one
+  process shared by all visitors. Build the system instruction only through
+  `_system(level)`, so what's shown is what's sent.
 - **Scores are always taken from the moving side's POV** via `.pov(board.turn)`.
   After a move is pushed it's the opponent's turn, so `move_review.py` flips the
   post-move score back to the mover's perspective. Watch this whenever you touch
@@ -230,6 +275,14 @@ python learner_model.py      # learner-model rules on hand-made reviews (no engi
   searched shallower and gave a different answer for the same position. Together
   with one thread and a fresh hash per call, depth-only makes the engine
   deterministic (`engine_pool.analyse`).
+- **The bot opponent is a second Stockfish process** (`engine_pool.bot_move`,
+  2026-09-30 11:38). Never set `Skill Level` on the shared grading engine: it
+  would weaken every verdict. The bot is time-limited (0.3 s, hand-picked) and
+  random on purpose (below Skill 20 Stockfish picks among its top few moves);
+  none of the grader's determinism rules apply to it. Its moves are graded like
+  any other (marked `bot=True`), and the coach's desk keeps the student's own
+  move when the bot has just replied.
+  Undo takes back the bot's reply and the student's move together.
 - **The engine's line (PV) is a forecast, not a promise.** In a fixed-depth
   search only the first move gets the full depth; each later move in the line was
   effectively searched shallower. So re-analysing a position you reached *by
@@ -245,22 +298,50 @@ python learner_model.py      # learner-model rules on hand-made reviews (no engi
 ## Development diary
 
 `DEV_DIARY.md` is the project's running story, written for the author: plain
-words, no unexplained jargon. At the end of **every** working session, add a
-dated entry at the end of Part 3 and refresh "Where the project stands".
+words, no unexplained jargon. At the end of **every** working session, add an
+entry at the end of Part 3 and refresh "Where the project stands".
 Record honest results, including what failed or was reverted.
 
-**Keep it short** (the author asked, 2026-09-24: the 1,050-line version was a
+**Date and time on everything** (the author, 2026-09-26 04:03: "i want a clear
+timestamp too, not just the date"). Every diary heading, both "Where the
+project stands" blocks, `TODO.md`'s "Last updated" and "(Done …)" notes,
+`lab_notes.md` entries, dated notes in this file and the "Generated on" line
+of reports carry the date *and* the time: 24-hour clock, Vietnam time (UTC+7),
+e.g. "26 Sep, 04:06". Read the time off the clock as you write (`Get-Date` /
+`date`); never guess it, and don't write "(later)" or "(night)" instead.
+Older entries from 23 Sep on got their times from the session logs (when
+each was written); the June–July ones keep only their dates (no logs left).
+
+**Keep it short** (the author asked, 2026-09-24 15:20: the 1,050-line version was a
 hassle to read). An entry is a few bullets: **Did** → **Problems → fixes** →
 **End state** (or the result). Only what the author needs to follow the story,
-not every detail. To-dos live in `TODO.md` only; don't copy them into the
-diary. `DEV_DIARY_full.md` is the frozen long version up to 2026-09-24: never
-append to it.
+not every detail. To-dos live in `TODO.md` only; don't copy them into either
+diary.
+
+**`DEV_DIARY_full.md` is the long version, and it is kept up to date too**
+(the author, 2026-09-26 03:55: "so in case I want to read deeper"). Every session
+adds its entry to both: a few bullets in `DEV_DIARY.md`, the full story in
+`DEV_DIARY_full.md` (what was done and why → difficulties and how they were
+solved → state at end of day, with the numbers and file names). Refresh both
+"Where the project stands" blocks. Same story in both: the long one only adds
+detail, never a different claim.
 
 **The GitHub repo is public.** Notes from the lab's private chat (the
 supervisor's remarks, labmates' unpublished work) go in `lab_notes.md`, never
-in the diary or `TODO.md`; point to it instead. `lab_notes.md` and
-`DEV_DIARY_full.md` (which quotes the chat) are git-ignored, and so is the chat
-export itself (`NESPeD-Lab*.html`, it holds personal data).
+in the diary or `TODO.md`; point to it instead. `lab_notes.md`,
+`DEV_DIARY_full.md` and `PROJECT_STORY.md`/`.html` (they quote the chat) are
+git-ignored, and so is the chat export itself (`NESPeD-Lab*.html`, it holds
+personal data). `PROJECT_STORY.md` is the whole project told as one story
+(written 2026-09-29 17:08, for when the author feels lost), and
+`PROJECT_STORY.html` the same story with step-through boards (2026-09-30
+01:17). Since 2026-09-30 02:30 both are kept up to date along with the
+diaries (the author: "dont forget the story and diary too so i can keep
+track"): each session that changes the story adds to its timeline, the
+matching chapter and "Where you are right now", in both files. When the
+author asks a question about the project, it goes in the story's "Your
+questions, answered" part (since 2026-09-30 14:47: "make a part where i asked
+a question and you provide the explanation"): the question in their own
+words with its time, then the answer that made sense to them, kept short.
 
 ## When extending
 
@@ -275,10 +356,5 @@ export itself (`NESPeD-Lab*.html`, it holds personal data).
 ## Out of scope (by design, for now)
 
 No conversation with the coach across moves, no persistence between sessions,
-no automated test suite (only the per-stage self-tests). The learner model
-(`learner_model.py`, Step 3) is validated in simulation and shown to the
-student ("Your patterns" in `app.py`: only the student's moves — in a reviewed
-PGN, the side they pick — kept across games until the page reloads, rebuilt
-from the move history on every render so Undo and re-grading stay exact). It
-is **not** given to the coach yet: that's a prompt change — measure
-faithfulness again after it.
+no model of the player (removed 2026-10-05; see "Research focus"), no
+automated test suite (only the per-stage self-tests).

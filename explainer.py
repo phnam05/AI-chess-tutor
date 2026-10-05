@@ -89,6 +89,21 @@ def describe_coach_error(err):
     return f"Coach unavailable ({type(err).__name__}). Try again in a moment."
 
 
+def _system(level):
+    """The system instruction for one call: the fixed persona + the level."""
+    return SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]
+
+
+def _record_prompt(prompt_out, level, facts):
+    """Fill the caller's dict with exactly what goes to Gemini, for research and
+    debugging (the app shows it under the explanation). Filled before the call,
+    so a failed call still shows what was sent. A dict passed in, not a module
+    variable: the online app is shared, and a global "last prompt" could show
+    one visitor another visitor's prompt."""
+    if prompt_out is not None:
+        prompt_out.update(model=MODEL, level=level, system=_system(level), contents=facts)
+
+
 def _generate(level, facts):
     """One coach call: the fixed persona + the level, then the engine facts."""
     client = _get_client()
@@ -96,9 +111,7 @@ def _generate(level, facts):
         raise RuntimeError("no GOOGLE_API_KEY set")
     response = client.models.generate_content(
         model=MODEL,
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]
-        ),
+        config=types.GenerateContentConfig(system_instruction=_system(level)),
         contents=facts,
     )
     return response.text
@@ -315,10 +328,11 @@ def _review_facts(review):
     return played, steps, best
 
 
-def explain_position(analysis, level="intermediate"):
+def explain_position(analysis, level="intermediate", prompt_out=None):
     """
     Take the fact-dictionary from Stage 1 and return a natural-language
-    explanation, grounded strictly in those facts.
+    explanation, grounded strictly in those facts. Pass a dict as `prompt_out`
+    to get back the exact prompt sent (see _record_prompt).
     """
     student = analysis["turn"]
     steps = analysis.get("line_steps")
@@ -339,13 +353,15 @@ Explain the position through these moves, in order and no further: the
 student's best move first, with its idea before the move, then the opponent's
 likely reply, and so on."""
 
+    _record_prompt(prompt_out, level, facts)
     text = _generate(level, facts)
     _check_and_log(text, analysis, "position", level)
     return text
 
 
-def explain_move(review, level="intermediate"):
-    """Coach the student on a move they just played, using the review facts."""
+def explain_move(review, level="intermediate", prompt_out=None):
+    """Coach the student on a move they just played, using the review facts.
+    Pass a dict as `prompt_out` to get back the exact prompt sent."""
     # The engine's continuation after the move the student actually played. For a
     # weak move this is the refutation — concretely how the opponent punishes it.
     # Cut by level (and before any of the student's moves that no board fact can
@@ -392,6 +408,7 @@ Coach the student on the move THEY played, in this order:
    would have played instead, with its idea first if it has board facts.
 Be encouraging and specific."""
 
+    _record_prompt(prompt_out, level, facts)
     text = _generate(level, facts)
     _check_and_log(text, review, "move", level)
     return text

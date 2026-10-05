@@ -4,11 +4,9 @@ import chess.svg
 from engine_analysis import analyze_position
 from explainer import explain_position, explain_move, describe_coach_error
 from move_review import review_move, review_game, win_chance
-from learner_model import (KINDS, CONFIDENT, MIN_MISSES, new_model,
-                           update as learner_update, summary as learner_summary)
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
-from engine_pool import warmup
+from engine_pool import warmup, bot_move
 
 # ----------------------------------------------------------------------------
 # Page setup
@@ -71,18 +69,29 @@ def move_board_svg(fen, move_uci, *, after, arrow_color, size=320):
 
 # ----------------------------------------------------------------------------
 # The app's single screen — an interactive, click-to-move board where the
-# student plays BOTH sides and the coach reviews every move, plus a "Show best
-# move" button that analyses whatever position is on the board (for whichever
-# side is to move). The chess stays the engine's job: every move runs through
-# review_move (the single source of truth for quality) and explain_move (which
-# only phrases the verdict), and the hint runs through analyze_position /
-# explain_position — all reused untouched. The only new logic here is the board
-# UI + the session-state loop.
+# student plays both sides or one side against a weak Stockfish bot, and the
+# coach reviews every move, plus a "Show best move" button that analyses
+# whatever position is on the board (for whichever side is to move). The chess
+# stays the engine's job: every move (the bot's too) runs through review_move
+# (the single source of truth for quality) and explain_move (which only phrases
+# the verdict), and the hint runs through analyze_position / explain_position —
+# all reused untouched. The only new logic here is the board UI + the
+# session-state loop.
 # ----------------------------------------------------------------------------
 PROMO = {
     "Queen": chess.QUEEN, "Rook": chess.ROOK,
     "Bishop": chess.BISHOP, "Knight": chess.KNIGHT,
 }
+
+# Who the student plays against -> the bot's colour (None: they move both sides).
+OPPONENTS = {
+    "Yourself (both sides)": None,
+    "Bot · you're White": chess.BLACK,
+    "Bot · you're Black": chess.WHITE,
+}
+# The bot starts at Stockfish's weakest setting. The student can raise it; 0 is
+# simply the bottom of the scale, not a tuned pick.
+BOT_SKILL_DEFAULT = 0
 
 
 def _result_text(board):
@@ -103,12 +112,7 @@ def _result_text(board):
 
 def _init_game():
     """Reset to a fresh game. g_last_click is a watermark, not game state, so we
-    only seed it (setdefault) — never clear it (see render_game for why). The
-    learner notes are NOT reset: the game being cleared is filed away first, so
-    patterns build up across every game of the session."""
-    _archive_current_game()
-    st.session_state.lm_started = st.session_state.get("lm_started", 0) + 1
-    st.session_state.g_game_key = f'live:{st.session_state.lm_started}'
+    only seed it (setdefault) — never clear it (see render_game for why)."""
     st.session_state.g_board = chess.Board()
     st.session_state.g_history = []
     st.session_state.g_from = None
@@ -119,28 +123,23 @@ def _init_game():
     st.session_state.setdefault("g_flip", False)
 
 
-def _load_reviewed_game(entries, side):
+def _load_reviewed_game(entries):
     """Install a graded game (from review_game) as the live session: the board
     at the final position, every move in the history with its engine review.
     From here it behaves exactly like a game played on the board — click any
     move in the log to rewind to it, per-move verdicts, opt-in explanations.
 
-    A PGN game has two players, and only one is the student: `side` ("White",
-    "Black" or "Both sides") marks which moves are theirs, so the learner notes
-    never mix in the opponent's mistakes. The game's key is its moves, so
-    re-grading the same game (say, to switch sides) replaces it in the notes
-    instead of counting it twice."""
+    A reviewed game is for reading, not for playing on, so the bot is switched
+    off (on the next run, before its radio is drawn: Streamlit won't change a
+    widget's value once it's on the page)."""
     _init_game()
+    st.session_state.g_bot_off = True
     board = chess.Board(entries[0]["review"]["fen"])
     for e in entries:
         board.push(chess.Move.from_uci(e["review"]["played_move_uci"]))
     st.session_state.g_board = board
-    st.session_state.g_history = [
-        dict(e, comment=None, mine=side in (e["color"], "Both sides")) for e in entries
-    ]
+    st.session_state.g_history = [dict(e, comment=None) for e in entries]
     st.session_state.g_lastmove = board.move_stack[-1]
-    st.session_state.g_game_key = "pgn:" + entries[0]["review"]["fen"] + " " + " ".join(
-        e["review"]["played_move_uci"] for e in entries)
 
 
 def _build_move(board, frm, to):
@@ -152,11 +151,45 @@ def _build_move(board, frm, to):
     return chess.Move(frm, to)
 
 
-def _play_and_review(move):
+def _bot_color():
+    """The bot's colour, or None when the student moves both sides."""
+    return OPPONENTS.get(st.session_state.get("g_opponent"))
+
+
+def _bot_to_move():
+    """It's the bot's turn in the live game (and the game isn't over)."""
+    board = st.session_state.g_board
+    bot = _bot_color()
+    return bot is not None and board.turn == bot and not board.is_game_over()
+
+
+def _on_opponent_change():
+    """A new opponent means a new game, with the student's own colour at the
+    bottom of the board."""
+    _init_game()
+    st.session_state.g_flip = _bot_color() == chess.WHITE
+
+
+def _desk_index(history):
+    """Which move is on the coach's desk (and lit in the log): the log's pick,
+    else the latest move. Against the bot, its reply lands a moment after the
+    student's move, so the desk keeps the student's own move, the one they
+    want graded; the bot's verdict is one click away in the log."""
+    sel = st.session_state.get("g_selected")
+    if sel is not None and 0 <= sel < len(history):
+        return sel
+    idx = len(history) - 1
+    while idx > 0 and history[idx].get("bot"):
+        idx -= 1
+    return idx
+
+
+def _play_and_review(move, by_bot=False):
     """Grade the move with the engine — the single source of truth — and push it.
     review_move already scores from board.turn's side, so each colour is judged
-    correctly. No LLM here: the coach's prose costs an API call, so it's fetched
-    later and only if the student asks for it (see _render_coach_panel)."""
+    correctly. The bot's moves are graded too (the log shows them). No LLM
+    here: the coach's prose costs an API call, so it's fetched later and only
+    if the student asks for it (see _render_coach_panel)."""
     board = st.session_state.g_board
     fen = board.fen()
     mover = "White" if board.turn == chess.WHITE else "Black"
@@ -168,7 +201,8 @@ def _play_and_review(move):
         "move_no": move_no, "color": mover,
         "review": review,     # full engine facts: label + win-chance/eval metrics
         "comment": None,      # LLM explanation, filled in on demand
-        "mine": True,         # on the live board the student moves both sides
+        "bot": by_bot,
+        "skill": st.session_state.get("g_bot_skill", BOT_SKILL_DEFAULT) if by_bot else None,
     })
     st.session_state.g_selected = None       # a new move: coach snaps back to it
 
@@ -210,8 +244,9 @@ def _render_coach_panel():
     history = st.session_state.g_history
     if not history:
         st.markdown(
-            '<div class="commentary">Play a move for either side and I&rsquo;ll grade '
-            'it &mdash; the verdict, the win-chance swing, and the engine&rsquo;s pick. '
+            '<div class="commentary">Play a move (for either side, or against the bot) '
+            'and I&rsquo;ll grade it &mdash; the verdict, the win-chance swing, and the '
+            'engine&rsquo;s pick. '
             'Press <em>Explain this move</em> whenever you want it put into words. '
             'Or paste a game&rsquo;s PGN below the board and I&rsquo;ll grade every '
             'move of it.</div>',
@@ -219,12 +254,15 @@ def _render_coach_panel():
         )
         return
 
-    # Which move is on the coach's desk: the log's pick, or the latest move.
-    sel = st.session_state.get("g_selected")
-    idx = sel if sel is not None and 0 <= sel < len(history) else len(history) - 1
+    # Which move is on the coach's desk: the log's pick, or the latest move
+    # (against the bot, the student's latest move).
+    idx = _desk_index(history)
     last = history[idx]
     review = last["review"]
-    if idx != len(history) - 1:
+    if st.session_state.get("g_selected") is None and idx != len(history) - 1:
+        st.caption(f'Your move. The bot answered {_move_name(history[-1])}: '
+                   'click it in the log to see its grade.')
+    elif idx != len(history) - 1:
         st.caption(
             f'Reviewing move {last["move_no"]} ({last["color"]}) — the board '
             f'shows the position after it.'
@@ -286,9 +324,11 @@ def _render_coach_panel():
     # a sentinel that hid the button for good — one quota blip mid-demo and that
     # move could never be explained.) The level is recorded only on success.
     def _write_comment():
+        last["prompt"] = {}
         with st.spinner("Coach is thinking…"):
             try:
-                last["comment"] = explain_move(review, level=cur_level)
+                last["comment"] = explain_move(review, level=cur_level,
+                                               prompt_out=last["prompt"])
                 last["comment_level"] = cur_level
                 last["comment_error"] = None
             except Exception as err:
@@ -308,6 +348,23 @@ def _render_coach_panel():
         st.caption(f'{last["comment_error"]} The engine verdict still stands.')
     if last["comment"]:
         st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
+    _render_prompt(last.get("prompt"))
+
+
+def _render_prompt(prompt):
+    """For research and debugging: the exact prompt the coach sent to Gemini
+    (system instruction + the facts message), collapsed under the explanation.
+    Kept on the move or hint, so it's still there after a failed call and when
+    you step back to an earlier move. Moves explained before this existed have
+    no prompt stored, so nothing is shown for them."""
+    if not prompt:
+        return
+    with st.expander("Prompt sent to Gemini"):
+        st.caption(f'Model: {prompt["model"]} · level: {prompt["level"]}')
+        st.markdown("**System instruction**")
+        st.code(prompt["system"], language=None, wrap_lines=True)
+        st.markdown("**Message (the engine and board facts)**")
+        st.code(prompt["contents"], language=None, wrap_lines=True)
 
 
 def _render_move_log():
@@ -340,8 +397,7 @@ def _render_move_log():
             side = "white" if h["color"] == "White" else "black"
             pairs.append({"no": h["move_no"], "white": None, "black": None, side: (idx, h)})
 
-    sel = st.session_state.get("g_selected")
-    shown = sel if sel is not None and 0 <= sel < len(history) else len(history) - 1
+    shown = _desk_index(history)
 
     def _cell(col, entry):
         """One move as a quiet button styled like the old score-sheet row: the
@@ -459,9 +515,11 @@ def _render_hint(board):
 
     # Same failure handling as the move panel: keep the reason, offer a retry.
     def _write_comment():
+        hint["prompt"] = {}
         with st.spinner("Coach is thinking…"):
             try:
-                hint["comment"] = explain_position(analysis, level=cur_level)
+                hint["comment"] = explain_position(analysis, level=cur_level,
+                                                   prompt_out=hint["prompt"])
                 hint["comment_level"] = cur_level
                 hint["comment_error"] = None
             except Exception as err:
@@ -480,6 +538,7 @@ def _render_hint(board):
         st.caption(f'{hint["comment_error"]} The engine\'s move still stands.')
     if hint["comment"]:
         st.markdown(f'<div class="commentary">{hint["comment"]}</div>', unsafe_allow_html=True)
+    _render_prompt(hint.get("prompt"))
 
 
 def _render_move_boards(review):
@@ -532,122 +591,10 @@ def _render_move_boards(review):
         st.image(move_board_svg(fen0, played_uci, after=True, arrow_color=meta["color"], size=300))
 
 
-# ----------------------------------------------------------------------------
-# The open learner model: the tutor's running notes on which kinds of mistake
-# the student repeats — shown to the student, with the evidence. Every input is
-# an engine fact (each weak move's kind and the chances the position offered,
-# both from move_review); learner_model only counts them. No LLM here.
-# ----------------------------------------------------------------------------
-STATUS = {                       # verdict -> (words, badge colour); also the display order
-    "pattern": ("Pattern", "red"),
-    "unsure":  ("Not sure yet", "gray"),
-    "fine":    ("Fine", "green"),
-}
-
-
 def _move_name(entry):
     """'12. Qg5' for White, '12... Qg5' for Black, as a score sheet writes it."""
     dots = "." if entry["color"] == "White" else "..."
     return f'{entry["move_no"]}{dots} {entry["review"]["played_move"]}'
-
-
-def _my_moves(history):
-    """The student's graded moves in one game: not the opponent's in a reviewed
-    PGN, and not a stale entry from before reviews existed."""
-    return [e for e in history if e.get("review") and e.get("mine", True)]
-
-
-def _archive_current_game():
-    """File the game about to be cleared under the session's learner notes.
-    A game keeps its slot (and its "game N" name) if it comes back — that's how
-    a re-graded PGN replaces itself instead of being counted twice."""
-    moves = _my_moves(st.session_state.get("g_history", []))
-    if not moves:
-        return
-    past = st.session_state.setdefault("lm_past", {})
-    key = st.session_state.get("g_game_key") or f"old:{len(past)}"
-    label = past[key]["label"] if key in past else f"game {len(past) + 1}"
-    past[key] = {"label": label, "moves": moves}
-
-
-def _learner_model():
-    """Rebuild the notes from the moves themselves on every render (a few
-    counters per move, so it's instant). Rebuilding rather than updating in
-    place means Undo or a re-graded PGN can never leave a stale count behind.
-    Returns the model and how many games fed it."""
-    model, games = new_model(), 0
-    cur = st.session_state.get("g_game_key")
-    for key, game in st.session_state.get("lm_past", {}).items():
-        if key == cur:
-            continue                  # the same PGN is on the board again: count it once
-        games += 1
-        for e in game["moves"]:
-            learner_update(model, e["review"], where=f'{_move_name(e)} ({game["label"]})')
-    mine = _my_moves(st.session_state.get("g_history", []))
-    games += bool(mine)
-    for e in mine:
-        learner_update(model, e["review"], where=_move_name(e))
-    return model, games
-
-
-def _bar_words(kind, bar):
-    """The bar in plain words: how often is often enough to be worth coaching."""
-    if KINDS[kind][0] == "every":
-        return f"more than 1 move in {round(1 / bar)}"
-    return f"more than {bar:.0%} of the chances"
-
-
-def _render_patterns():
-    """The "open learner model" of the project brief: the student sees exactly
-    what the tutor believes about them — each kind of mistake, the verdict,
-    the counts behind it, the bar it's judged against, and the moves that are
-    the evidence. It's a plain section rather than an expander on purpose: an
-    expander whose title changes (the count does, every move) resets itself."""
-    st.markdown('<div class="eyebrow" style="margin-top:22px;">Your patterns</div>',
-                unsafe_allow_html=True)
-    model, games = _learner_model()
-    rows = learner_summary(model)
-    moves = max(r["chances"] for r in rows)   # every-move kinds count every move
-    if not moves:
-        st.markdown(
-            '<div class="commentary">Play or review a game and I&rsquo;ll keep notes '
-            'on which kinds of mistake you repeat, with the moves as evidence.</div>',
-            unsafe_allow_html=True,
-        )
-        return
-    st.caption(f'From {moves} of your moves'
-               + (f' across {games} games.' if games > 1 else '.'))
-
-    for status in ("pattern", "unsure"):
-        name, color = STATUS[status]
-        for r in (r for r in rows if r["status"] == status):
-            if KINDS[r["kind"]][0] == "every":
-                count = f'{r["misses"]} in {r["chances"]} moves'
-            elif r["chances"]:
-                count = f'{r["misses"]} of {r["chances"]} chances'
-            else:
-                count = "no chance has come up yet"
-            st.markdown(f':{color}-badge[{name}] **{r["words"].capitalize()}** · {count}')
-            detail = f'Bar: {_bar_words(r["kind"], r["bar"])}.'
-            if r["examples"]:
-                shown = r["examples"][-6:]
-                more = len(r["examples"]) - len(shown)
-                detail += (' Moves: ' + (f'(+{more} earlier) ' if more else '')
-                           + ', '.join(shown))
-            st.caption(detail)
-
-    fine = [r["words"] for r in rows if r["status"] == "fine"]
-    if fine:
-        name, color = STATUS["fine"]
-        st.markdown(f':{color}-badge[{name}] ' + ' · '.join(fine))
-
-    st.caption(
-        f'A kind of mistake becomes a pattern only after {MIN_MISSES} or more '
-        f"slips, once I'm {CONFIDENT:.0%} sure it happens more often than "
-        'its bar. One slip never labels you. Only your moves count (in a '
-        'reviewed game, the side you picked). The notes carry over to new games '
-        'and last until you reload the page.'
-    )
 
 
 def render_game():
@@ -659,6 +606,17 @@ def render_game():
     stale = st.session_state.g_history
     if stale and "review" not in stale[0]:
         _init_game()
+
+    if st.session_state.pop("g_bot_off", False):     # a PGN was just loaded
+        st.session_state.g_opponent = next(iter(OPPONENTS))
+
+    # The bot's turn: it answers before anything is drawn, so the board, the
+    # log and the coach all show its reply at once. Its move is graded like any
+    # other (the log shows it).
+    if _bot_to_move():
+        with st.spinner("The bot is thinking…"):
+            skill = st.session_state.get("g_bot_skill", BOT_SKILL_DEFAULT)
+            _play_and_review(bot_move(st.session_state.g_board, skill), by_bot=True)
 
     # Three columns: the move log gets its own panel on the far left (beside the
     # board, not stacked beneath it), the board in the middle, the coach on the
@@ -674,14 +632,39 @@ def render_game():
         if b1.button("New game", use_container_width=True):
             _init_game()
         if b2.button("Undo", use_container_width=True) and st.session_state.g_history:
-            st.session_state.g_board.pop()
-            st.session_state.g_history.pop()
+            # Against the bot, take back its reply AND the student's move before
+            # it; stopping on the bot's turn would just make it move again.
+            while True:
+                st.session_state.g_board.pop()
+                st.session_state.g_history.pop()
+                if not (st.session_state.g_history and _bot_to_move()):
+                    break
             st.session_state.g_from = None
             st.session_state.g_selected = None    # the picked move may be gone
             stack = st.session_state.g_board.move_stack
             st.session_state.g_lastmove = stack[-1] if stack else None
         if b3.button("Flip board", use_container_width=True):
             st.session_state.g_flip = not st.session_state.get("g_flip", False)
+
+        # --- Opponent: yourself, or a weak Stockfish bot -------------------
+        # The bot is a separate Stockfish process (engine_pool.bot_move); the
+        # grading engine stays at full strength, so the bot's own weakness
+        # never leaks into a verdict.
+        st.radio("Play against", list(OPPONENTS), horizontal=True, key="g_opponent",
+                 on_change=_on_opponent_change,
+                 help="Changing this starts a new game.")
+        if _bot_color() is not None:
+            st.slider(
+                "Bot strength (Stockfish Skill Level)", 0, 20, BOT_SKILL_DEFAULT,
+                key="g_bot_skill",
+                help="0 is Stockfish's weakest setting: it looks about one move deep "
+                     "and picks at random among its top few moves, so it hangs "
+                     "pieces. 20 is full strength. These levels have no human rating.",
+            )
+        # The bot moves at the top of a run; if New game or Undo just handed it
+        # the move, start that run now.
+        if _bot_to_move():
+            st.rerun()
 
         board = st.session_state.g_board
         flipped = st.session_state.get("g_flip", False)
@@ -714,7 +697,8 @@ def render_game():
         elif board.is_game_over():
             head = _result_text(board)
         else:
-            head = f'{"White" if board.turn == chess.WHITE else "Black"} to move'
+            mover = "White" if board.turn == chess.WHITE else "Black"
+            head = f'Your move ({mover})' if _bot_color() is not None else f'{mover} to move'
             if not st.session_state.g_history:
                 head += " · click a piece to begin"
         st.markdown(f'<div class="eyebrow">{head}</div>', unsafe_allow_html=True)
@@ -779,10 +763,6 @@ def render_game():
                 "PGN", key="g_pgn_box", height=140, label_visibility="collapsed",
                 placeholder="1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 ...",
             )
-            # A game has two players; only the student's moves go into their
-            # patterns, so the opponent's mistakes aren't pinned on them.
-            side = st.radio("You played", ["White", "Black", "Both sides"],
-                            horizontal=True, key="g_pgn_side")
             if st.button("Grade the game", key="g_pgn_grade", use_container_width=True):
                 bar = st.progress(0.0, text="Reading the game…")
                 try:
@@ -797,7 +777,7 @@ def render_game():
                     st.error(str(err))
                 else:
                     bar.empty()
-                    _load_reviewed_game(entries, side)
+                    _load_reviewed_game(entries)
                     st.rerun()
 
         # --- Per-move controls ---------------------------------------------
@@ -838,7 +818,6 @@ def render_game():
         # The coach's per-move verdict follows below.
         _render_hint(disp_board)
         _render_coach_panel()
-        _render_patterns()
 
 # ----------------------------------------------------------------------------
 # Styling. The palette comes from the board itself — aged boxwood and walnut,

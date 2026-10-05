@@ -29,9 +29,12 @@ model is a translator, not a player.
 
 ## Ways to use it
 
-One screen: a click-to-move board you play on — for **both sides** — with the
-coach watching every move, plus a **Show best move** button that reads whatever
-position is on the board.
+One screen: a click-to-move board you play on — for **both sides**, or one
+side against a weak **Stockfish bot** (strength 0–20) — with the coach watching
+every move, plus a **Show best move** button that reads whatever position is on
+the board. Under every explanation, a closed box, **Prompt sent to Gemini**,
+shows the exact text the coach sent (the model, the level, the instructions and
+the engine and board facts), for research and debugging.
 
 **Play a move.** Click a piece (its legal moves dot the board) and move it. The
 coach grades it instantly: a quality label (*Best* → *Blunder*), the win-chance
@@ -169,11 +172,6 @@ app's actual rendering code, so they stay honest to what the UI shows.
 - **Conversational dialogue.** Let the student ask "why?" or "what if?" and have
   the coach answer in context across the whole game — a real tutoring session, not
   one move at a time.
-- **A learner model.** Track a player's moves to infer *characteristic* weaknesses
-  (e.g. missing tactical defenses) and shape explanations around the recurring gap.
-  Inferring a learner's hidden understanding from behaviour parallels inferring an
-  agent's hidden type from its actions — a well-studied multi-agent problem, which
-  makes this a principled next step.
 - **Beyond board games.** The same architecture — ground an explanation in an
   authoritative source, then adapt it to the learner — transfers to decision
   problems with *no* clean evaluation function (e.g. coaching a physical skill from

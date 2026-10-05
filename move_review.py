@@ -67,7 +67,6 @@ def _review_from_infos(board, played_move, info_before, info_after):
     # kind can be checked by hand against the lines it came from.
     best_line = render_line(board, info_before.get("pv", []))
     mistake_type = classify_mistake(board, played_move, info_before, info_after, label)
-    chances = position_chances(board, info_before)
 
     # 6. What a player would *notice* about each move — computed from the board
     # (board_facts.py), so the coach can give the idea behind a move without
@@ -94,7 +93,6 @@ def _review_from_infos(board, played_move, info_before, info_after):
         "refutation": refutation,
         "best_line": best_line,
         "mistake_type": mistake_type,
-        "chances": chances,
         "played_facts": played_facts,
         "line_steps": line_steps,
         "best_facts": best_facts,
@@ -221,22 +219,6 @@ def _material_at_line_end(board, moves, color):
     return material(end, color)
 
 
-def position_chances(board, info_before):
-    """What the position offered BEFORE the move, whatever was then played:
-    a forced mate for the mover, and/or a best line that wins material. These
-    are the moments a "missed" mistake was even possible — the learner model
-    counts a missed chance against the chances there were, not against every
-    move (you can't miss a free piece that wasn't there)."""
-    mover = board.turn
-    best = info_before["score"].pov(mover)
-    gain = (_material_at_line_end(board, info_before.get("pv", []), mover)
-            - material(board, mover))
-    return {
-        "mate": best.is_mate() and best > chess.engine.Cp(0),
-        "material": gain >= 1,
-    }
-
-
 def classify_mistake(board, played_move, info_before, info_after, label):
     """Name the KIND of mistake a weak move was; None if the move wasn't weak.
 
@@ -258,7 +240,8 @@ def classify_mistake(board, played_move, info_before, info_after, label):
     Checked in that order: a mate ends the game, and a concrete material loss
     is the first thing a player should fix. Limit: it only sees as far as the
     lines go (~6 plies), so a loss that lands later reads as "positional".
-    These kinds are what the learner model counts across a game.
+    The coach uses the kind to keep its walk-through short after a move that
+    lost material or allowed mate (explainer.py).
     """
     if label not in WEAK_LABELS:
         return None

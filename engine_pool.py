@@ -1,4 +1,5 @@
 """One persistent Stockfish process, shared across the whole app.
+(Plus a second, deliberately weak one that plays the bot opponent; see bot_move.)
 
 The original design spawned a fresh engine for every request and quit it
 afterwards (the note CLAUDE.md anticipated: "pool or reuse the engine"). That
@@ -93,7 +94,17 @@ def _new_engine():
     return eng
 
 
-def _spawn():
+def _new_bot():
+    # The bot needs no big hash table: it's meant to play weakly, not deeply.
+    eng = chess.engine.SimpleEngine.popen_uci(ENGINE_PATH)
+    try:
+        eng.configure({"Threads": 1, "Hash": 16})
+    except chess.engine.EngineError:
+        pass
+    return eng
+
+
+def _spawn(make=_new_engine):
     """Launch Stockfish from a short-lived *daemon* thread.
 
     python-chess runs each engine's event loop on a background thread, and that
@@ -109,7 +120,7 @@ def _spawn():
 
     def _launch():
         try:
-            box["engine"] = _new_engine()
+            box["engine"] = make()
         except BaseException as exc:  # report the real error to the caller
             box["error"] = exc
 
@@ -143,6 +154,35 @@ def analyse(board, *, depth=DEFAULT_DEPTH):
             return _engine.analyse(board, limit, game=object())
 
 
+# The sparring partner for "Play against: Bot". It is a SECOND Stockfish process,
+# never the shared engine above: Skill Level makes Stockfish play worse on
+# purpose, and on the grading engine it would weaken every verdict. Unlike the
+# grader it isn't meant to be repeatable: below Skill Level 20 Stockfish picks
+# at random among its top few moves, so the same position can get a different
+# reply. BOT_TIME_S (0.3 s a move) is hand-picked: quick enough to feel instant,
+# and at Skill Level 20 still far stronger than a student.
+BOT_TIME_S = 0.3
+_bot = None
+_bot_lock = threading.Lock()
+
+
+def bot_move(board, skill):
+    """The bot's move in `board` at Stockfish Skill Level `skill` (0 = weakest,
+    20 = full strength). Respawns once if the process has died, like analyse."""
+    global _bot
+    limit = chess.engine.Limit(time=BOT_TIME_S)
+    with _bot_lock:
+        if _bot is None:
+            _bot = _spawn(_new_bot)
+        try:
+            _bot.configure({"Skill Level": skill})
+            return _bot.play(board, limit).move
+        except chess.engine.EngineError:
+            _bot = _spawn(_new_bot)
+            _bot.configure({"Skill Level": skill})
+            return _bot.play(board, limit).move
+
+
 def warmup():
     """Pre-spawn the engine so the first real analysis isn't cold (~0.5s launch).
 
@@ -160,14 +200,15 @@ def warmup():
 
 @atexit.register
 def _shutdown():
-    """Quit the engine on exit so we don't orphan a Stockfish subprocess."""
-    global _engine
-    if _engine is not None:
-        try:
-            _engine.quit()
-        except Exception:
-            pass
-        _engine = None
+    """Quit the engines on exit so we don't orphan a Stockfish subprocess."""
+    global _engine, _bot
+    for eng in (_engine, _bot):
+        if eng is not None:
+            try:
+                eng.quit()
+            except Exception:
+                pass
+    _engine = _bot = None
 
 
 if __name__ == "__main__":
@@ -188,3 +229,9 @@ if __name__ == "__main__":
     analyse(board)
     warm = time.perf_counter() - t0
     print(f"second analysis: {warm:6.3f}s  (warm - reused engine)")
+
+    # The bot is its own process: a weak reply here must not change the grader.
+    replies = {board.san(bot_move(board, 0)) for _ in range(5)}
+    print(f"bot (Skill 0), 5 tries from the start: {sorted(replies)}")
+    again = analyse(board)
+    print(f"grader after the bot: best={board.san(again['pv'][0])} (same as above)")
