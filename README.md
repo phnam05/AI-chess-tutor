@@ -6,12 +6,12 @@
   <img src="images/hero.png" width="440" alt="The tutor's chess board, showing an Italian Game position with the last move highlighted">
 </p>
 
-A chess engine knows the best move — but it outputs a *number*, not an
-explanation. This prototype builds the layer between "the machine knows" and
-"the human understands": it takes a strong engine's analysis and turns it into
-short, level-adapted coaching. The point isn't an AI that plays well, but one
-that **explains its reasoning so people learn from it** — the subject of
-Explainable AI (XAI).
+A chess engine knows the best move, but it outputs a *number*, not an
+explanation. A language model writes explanations that read well, but it gets
+the chess wrong: it invents moves, miscounts pieces and makes up reasons, and
+a learner can't tell. This MSc project (VinUniversity) builds and measures the
+layer in between: a tutor that turns a strong engine's analysis into short,
+level-adapted coaching **that is correct and names the reason that matters**.
 
 ## The core idea
 
@@ -26,6 +26,37 @@ This separation is deliberate. Language models are unreliable at actually playin
 chess — they hallucinate moves and miscount material. Grounding every explanation
 in the engine's verified output keeps the tutor faithful to correct chess. The
 model is a translator, not a player.
+
+But the engine gives no *reasons*, and a model left to supply them makes them
+up. So a third part, **board facts** (`board_facts.py`), computes in plain
+Python, with no AI, what a human would notice about each move: "a pawn on c2
+can chase it to c3", "it attacks the bishop on b5", "it allows checkmate on
+f7". The model may give a move only the reasons those facts state.
+
+## The research question
+
+*When a language model explains a chess move from the engine's facts, is the
+explanation **correct** (every claim true) and **relevant** (it names the
+reason that matters)?*
+
+- **The gap.** Letting the engine decide and the model phrase it is not new
+  ([Kim et al., NAACL 2025](https://arxiv.org/abs/2410.20811)), and neither is
+  checking each claim against the engine
+  ([Hebbar et al., 2026](https://arxiv.org/abs/2608.04240)). Both find the
+  engine cuts wrong facts, but the key idea is often still missing: in
+  Hebbar et al.'s test the best set-up covers 60.9% of the experts' key points.
+- **Results so far** (25 hand-picked test positions, so small):
+  - invented moves: 0; answers fully faithful to the engine: 19/25 → 22/25
+    (about 88%; 70–96% with this few cases) after two prompt fixes, checked
+    against the author's hand audit (`faithfulness_eval.md`);
+  - asking for "plainer language" made it *less* faithful (16/25 vs 22/25):
+    plain explanations invite an invented "because…";
+  - a hand check of how the coach walks through a line: 9 of 13 answers
+    still had a problem, mostly that it never says *why the better move is
+    better* (`walkthrough_audit.md`). That's the relevance gap.
+- **Next:** fresh test positions with a human answer key, and a comparison
+  with simpler ways of explaining (the model alone; the model with the raw
+  engine output; fixed sentences with no model).
 
 ## Ways to use it
 
@@ -79,31 +110,40 @@ it and press *Load* to jump there and study a specific spot.
 Position (FEN)  [+ a played move, when you make one]
       │
       ▼
-python-chess ──► Stockfish        →  best move, evaluation (centipawns),
-   (rules,         (analysis)          principal variation; and, for a played
-    board)                              move, its eval + refutation
+python-chess ──► Stockfish        →  best move, evaluation, the line it
+   (rules,         (analysis)          expects; for a played move, its grade
+    board)                              and refutation
       │
       ▼
-Explanation layer (Gemini)        →  grounded, level-adapted coaching
+Board facts (plain code)          →  what a human would notice about each
+      │                                move in those lines
+      ▼
+Explanation layer (Gemini)        →  the facts in words, level-adapted
       │                                (beginner / intermediate / advanced)
       ▼
 Streamlit UI                      →  board + engine verdict + coaching
+                                       + the exact prompt sent to Gemini
 ```
 
-`python-chess` validates the position and queries Stockfish. For a played move it
-also evaluates that move and captures the engine's line *after* it — the
-refutation — so a weak move's punishment can be explained. Those facts are packaged
-into a prompt with a system instruction that fixes a coach persona, forbids
-suggesting a different move or inventing evaluations, and adapts depth to the level.
+For a played move the engine also gives its line *after* that move — the
+refutation — so a weak move's punishment can be explained. The facts go into
+a prompt whose system instruction forbids suggesting a different move,
+inventing evaluations, or giving a move a reason its facts don't state. A
+separate checker (`faithfulness.py`) flags any move or reason in the answer
+that the engine never gave; it is a research tool, not part of the app.
 
 ## Level adaptation
 
-Same engine facts, explained differently:
+Same engine and board facts, explained differently, and only as far as there
+is a reason to give (the line is cut at 2 / 3 / 4 half-moves; hand-picked):
 
-- **Beginner** — one clear idea in plain words (development, king safety, simple
-  threats); no jargon.
-- **Intermediate** — plans, why a move creates pressure, typical responses.
-- **Advanced** — pawn structure, the bishop pair, tempo, long-term imbalances.
+- **Beginner** — 3–4 short sentences, pieces named in words ("your knight"),
+  each idea a simple visible thing (a piece is attacked, can be chased, the
+  king gets safe); no jargon.
+- **Intermediate** — each move's idea, then the move; standard terms
+  (development, tempo) only as names for what a fact already says.
+- **Advanced** — every move of the line in notation with its fact, and a
+  precise evaluation; never a guess at why the evaluation is what it is.
 
 ## Tech stack
 
@@ -148,10 +188,18 @@ On Streamlit Community Cloud, add the same `GOOGLE_API_KEY` line via the app's
 engine_analysis.py    # Stage 1: queries Stockfish → facts (the backbone)
 move_review.py        # grades a played move against the engine's best
 explainer.py          # Stage 2: grounded, level-adapted explanation layer
+board_facts.py        # what a human would notice about each move (no AI)
 engine_pool.py        # one shared, persistent Stockfish process + engine discovery
 board_ui.py           # renders the clickable board + maps click → square
 app.py                # Streamlit interface (analyze + play)
 scripts/make_readme_images.py   # regenerates images/ from the app's own renderers
+
+# Research scripts (run by hand)
+faithfulness.py           # the checker: flags moves/reasons the engine never gave
+evaluate_faithfulness.py  # runs the 25 test cases through the whole chain
+validate_checker.py       # scores the checker against the author's hand audit
+build_audit.py            # builds the hand-audit sheet
+walkthrough_eval/         # measurements of the line walk-through
 ```
 
 README images are produced by `python scripts/make_readme_images.py` using the
@@ -161,6 +209,12 @@ app's actual rendering code, so they stay honest to what the UI shows.
 
 - Explanation polish depends on the language model; the architecture constrains
   *what* it can claim, not how well every sentence reads.
+- The checker sees invented moves and invented reasons for the evaluation, not
+  an invented *idea* written in words ("the threat to your knight"), so human
+  checks are still needed. The results above come from only 25 cases, used
+  while building the fixes.
+- Board facts can't name pins, forks or skewers, pawn structure or plans; for
+  those the coach has no reason to give.
 - The engine searches to a fixed depth (15) — strong, but not exhaustive. A
   fixed depth, not a time limit, keeps it repeatable: the same position always
   gets the same answer.
@@ -169,14 +223,13 @@ app's actual rendering code, so they stay honest to what the UI shows.
 
 ## Future directions
 
-- **Conversational dialogue.** Let the student ask "why?" or "what if?" and have
-  the coach answer in context across the whole game — a real tutoring session, not
-  one move at a time.
-- **Beyond board games.** The same architecture — ground an explanation in an
-  authoritative source, then adapt it to the learner — transfers to decision
-  problems with *no* clean evaluation function (e.g. coaching a physical skill from
-  video, like badminton footage with pose estimation), moving into computer vision
-  while keeping the explainable-tutor goal intact.
+- **Explanations that fit the player** (a later study): guess a player's level
+  from their moves and adapt to it.
+- **Conversational dialogue.** Let the student ask "why?" or "what if?" across
+  the whole game.
+- **Beyond board games.** Ground an explanation in an authoritative source, then
+  adapt it to the learner, in problems with no clean evaluation function (e.g.
+  coaching a physical skill from video).
 
 ## Why this project
 
