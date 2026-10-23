@@ -89,29 +89,40 @@ def describe_coach_error(err):
     return f"Coach unavailable ({type(err).__name__}). Try again in a moment."
 
 
-def _system(level):
-    """The system instruction for one call: the fixed persona + the level."""
-    return SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]
+def _system(level, mode="full"):
+    """The system instruction for one call: the mode's persona + the level. The
+    "bare" mode sends none (None)."""
+    if mode == "bare":
+        return None
+    if mode == "full":
+        return SYSTEM_INSTRUCTION + "\n\n" + LEVEL_INSTRUCTIONS[level]
+    if mode == "engine":
+        return ENGINE_SYSTEM + "\n\n" + ENGINE_LEVELS[level]
+    if mode == "persona":
+        return PERSONA_SYSTEM + "\n\n" + PERSONA_LEVELS[level]
+    raise ValueError(f"unknown explanation mode {mode!r}; one of {list(MODES)}")
 
 
-def _record_prompt(prompt_out, level, facts):
+def _record_prompt(prompt_out, level, mode, system, facts):
     """Fill the caller's dict with exactly what goes to Gemini, for research and
     debugging (the app shows it under the explanation). Filled before the call,
     so a failed call still shows what was sent. A dict passed in, not a module
     variable: the online app is shared, and a global "last prompt" could show
     one visitor another visitor's prompt."""
     if prompt_out is not None:
-        prompt_out.update(model=MODEL, level=level, system=_system(level), contents=facts)
+        prompt_out.update(model=MODEL, level=level, mode=mode, system=system, contents=facts)
 
 
-def _generate(level, facts):
-    """One coach call: the fixed persona + the level, then the engine facts."""
+def _generate(system, facts):
+    """One coach call: the system instruction (None sends none), then the
+    message. Callers pass the same `system` to _record_prompt, so what the app
+    shows is what was sent."""
     client = _get_client()
     if client is None:
         raise RuntimeError("no GOOGLE_API_KEY set")
     response = client.models.generate_content(
         model=MODEL,
-        config=types.GenerateContentConfig(system_instruction=_system(level)),
+        config=types.GenerateContentConfig(system_instruction=system),
         contents=facts,
     )
     return response.text
@@ -202,6 +213,81 @@ Walking through the engine's line:
 - End on something that invites the student to think, but never lecture."""
 
 
+# --- Explanation modes: what does each input add? ----------------------------
+# The author (2026-10-23): the same explanation in four modes, each giving
+# Gemini one thing more than the mode before, so two neighbouring modes differ
+# by one input. "full" is the coach (version 1) and the default. The other
+# three are for comparison only: "bare" and "persona" leave the chess to
+# Gemini, which breaks the invariant on purpose, to show what the engine and
+# the board facts are there to fix. "engine" walks through the same moves as
+# "full" (the same cut_line), so the board facts are the only thing it lacks.
+# Modes 2 and 3 use the prompts of walkthrough_eval/three_inputs/run.py's A
+# and B, word for word at the intermediate level.
+MODES = {
+    "bare":    "Gemini alone, with no system instruction",
+    "persona": "Gemini with a system instruction (the coach's persona and style), no engine",
+    "engine":  "Gemini + Stockfish (the engine's review and line), no board facts",
+    "full":    "Gemini + Stockfish + board facts: the coach, version 1",
+}
+
+
+def _cut(text, old, new=""):
+    """`text` with `old` taken out (or swapped for `new`). Fails loudly if `old`
+    isn't there, so an edit to version 1's prompt can't silently leave a
+    comparison mode with a rule about an input it doesn't get."""
+    assert old in text, old
+    return text.replace(old, new)
+
+
+# Mode 3: version 1's system instruction with the board-fact rules taken out
+# (with no board facts, "an idea may come only from its board facts" would
+# leave it nothing to say). Everything else is word for word the same.
+ENGINE_SYSTEM = _cut(SYSTEM_INSTRUCTION, """The engine's analysis (best move,
+evaluation, the line it expects) and the board facts listed for each move are
+given to you and are correct. Treat them as ground truth, and as your ONLY
+source of chess claims: you put them into words, you never add to them.""",
+                     """The engine's analysis (best move,
+evaluation, the line it expects) is given to you and is correct. Treat it as
+ground truth.""")
+ENGINE_SYSTEM = _cut(ENGINE_SYSTEM, "- For each move, use only its one most useful board fact. Do not list them all.\n")
+ENGINE_SYSTEM = _cut(ENGINE_SYSTEM, "<what to notice, from its board fact>", "<what to notice>")
+ENGINE_SYSTEM = _cut(ENGINE_SYSTEM, """- A move's idea or purpose may come ONLY from its board facts, or from what the
+  line shows happening next. Never from general chess knowledge or rules of
+  thumb ("usually", "generally"), and never from your own reading of the board.
+  If a move's board facts say "none", name it and give it no reason.
+""")
+ENGINE_SYSTEM = _cut(ENGINE_SYSTEM, "never say a move or a board fact raises", "never say a move raises")
+ENGINE_SYSTEM = _cut(ENGINE_SYSTEM, "- A move's board facts are listed with the most important first.\n")
+
+# Mode 2: the coach's persona and style only, nothing about an engine.
+PERSONA_SYSTEM = """You are a friendly chess coach sitting next to one
+student, looking at their game together.
+
+Your job is to coach this one student. Follow these rules:
+- Talk directly to the student as "you." Be warm and concise.
+- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,
+  NO "Summary" section.
+- Write Black's moves with three dots (...c6) and White's without (Nf3).
+- Never guess what the student wants or wanted ("since you want to...").
+  Say what the move does.
+- End on something that invites the student to think, but never lecture."""
+
+# The level lines without what refers to inputs a mode doesn't get: the board
+# facts (modes 2 and 3) and, for mode 2, the engine's line and eval.
+ENGINE_LEVELS = {
+    "beginner": LEVEL_INSTRUCTIONS["beginner"],
+    "intermediate": _cut(LEVEL_INSTRUCTIONS["intermediate"],
+                         ", but only as a name for what a board fact already says, never as a\nnew claim"),
+    "advanced": _cut(LEVEL_INSTRUCTIONS["advanced"], ", each with the board fact behind it"),
+}
+PERSONA_LEVELS = dict(ENGINE_LEVELS, advanced="""The player is ADVANCED. Be concrete, with the moves in notation, and
+assume the player knows the basics. Keep it tight, 4-5 sentences.""")
+
+# Mode 1 has no system instruction, so its whole request is one short message,
+# as a player might type it to Gemini themselves.
+_A_LEVEL = {"beginner": "a beginner", "intermediate": "an intermediate", "advanced": "an advanced"}
+
+
 # --- Output-level faithfulness watchdog --------------------------------------
 # The system prompt above keeps Gemini honest at the *prompt* level; faithfulness.py
 # checks the prose it actually produced (does it name a move the engine never gave?).
@@ -213,12 +299,14 @@ _FAITH_LOG = Path(__file__).with_name("faithfulness_log.jsonl")
 _faith_logger = logging.getLogger("faithfulness")
 
 
-def _check_and_log(text, facts, kind, level):
+def _check_and_log(text, facts, kind, level, mode):
     """Check the coach's prose against the engine facts, then log the result.
 
     `facts` is the analysis/review dict (not the prompt string); `kind` is
-    "position" or "move". Returns the checker's result dict, but callers use it
-    only for its side effect — the explanation itself is returned unchanged.
+    "position" or "move"; `mode` is the explanation mode (MODES; records from
+    before 2026-10-23 have none and are all "full"). Returns the checker's
+    result dict, but callers use it only for its side effect — the explanation
+    itself is returned unchanged.
     """
     try:
         result = check_faithfulness(text, facts)
@@ -226,6 +314,7 @@ def _check_and_log(text, facts, kind, level):
             "time": datetime.now().isoformat(timespec="seconds"),
             "kind": kind,
             "level": level,
+            "mode": mode,
             "fen": facts.get("fen"),
             "ok": result["ok"],
             "grounded": result["grounded"],
@@ -240,20 +329,20 @@ def _check_and_log(text, facts, kind, level):
         # Always-on console signal: see the watchdog run for every explanation
         # (clean or flagged), so you don't have to open the log to confirm it works.
         print(
-            f"[faithfulness] {kind}/{level}: ok={result['ok']} "
+            f"[faithfulness] {kind}/{level}/{mode}: ok={result['ok']} "
             f"grounded={result['grounded']} ungrounded={result['ungrounded_moves']} "
             f"invented_cause={len(result['causal_invented'])}",
             flush=True,
         )
         if result["ungrounded_moves"]:
             _faith_logger.warning(
-                "coach named ungrounded move(s) %s [%s/%s]",
-                result["ungrounded_moves"], kind, level,
+                "coach named ungrounded move(s) %s [%s/%s/%s]",
+                result["ungrounded_moves"], kind, level, mode,
             )
         if result["causal_invented"]:
             _faith_logger.warning(
-                "coach invented a cause for the eval: %s [%s/%s]",
-                result["causal_invented"], kind, level,
+                "coach invented a cause for the eval: %s [%s/%s/%s]",
+                result["causal_invented"], kind, level, mode,
             )
         return result
     except Exception as e:
@@ -295,20 +384,23 @@ def _eval_words(value, student):
     return f"{value} from {student}'s side, so {who} is ahead"
 
 
-def _walkthrough(steps, student):
+def _walkthrough(steps, student, with_facts=True):
     """The engine's line as numbered steps, each labelled with who plays it and
-    carrying its board facts. Labelling in code is what stops "O-O, followed by
-    a6" from reading as two moves by the same side. The labels say "likely
-    reply" / "best move", not "plays": the line is a forecast, not a promise."""
+    carrying its board facts (left out for the "engine" mode). Labelling in
+    code is what stops "O-O, followed by a6" from reading as two moves by the
+    same side. The labels say "likely reply" / "best move", not "plays": the
+    line is a forecast, not a promise."""
     if not steps:
         return "(none: the game is over)"
     lines = []
     for i, step in enumerate(steps, 1):
         who = (f"Student ({step['color']}), best move:" if step["color"] == student
                else f"Opponent ({step['color']}), likely reply:")
-        lines.append(f"{i}. {who} {_dots(step['color'], step['san'])} "
-                     f"(the {step['piece']}, {step['from']} to {step['to']}). "
-                     f"Board facts: {_facts_text(step)}.")
+        line = (f"{i}. {who} {_dots(step['color'], step['san'])} "
+                f"(the {step['piece']}, {step['from']} to {step['to']}).")
+        if with_facts:
+            line += f" Board facts: {_facts_text(step)}."
+        lines.append(line)
     return "\n".join(lines)
 
 
@@ -328,13 +420,20 @@ def _review_facts(review):
     return played, steps, best
 
 
-def explain_position(analysis, level="intermediate", prompt_out=None):
-    """
-    Take the fact-dictionary from Stage 1 and return a natural-language
-    explanation, grounded strictly in those facts. Pass a dict as `prompt_out`
-    to get back the exact prompt sent (see _record_prompt).
-    """
+def _position_prompt(analysis, level, mode):
+    """(system instruction, message) for explaining a position in `mode`."""
     student = analysis["turn"]
+    if mode == "bare":
+        return None, (f"I'm {_A_LEVEL[level]} chess player, playing {student}, and it's my "
+                      f"move. Here is the position (FEN): {analysis['fen']}\n"
+                      f"Explain the position and what I should play.")
+    if mode == "persona":
+        return _system(level, mode), f"""Position (FEN): {analysis['fen']}
+The student plays {student}, and it is their move.
+
+Explain the position: the student's best move first, with its idea before the
+move, then the opponent's likely reply."""
+
     steps = analysis.get("line_steps")
     if steps is None:                     # an analysis from before board facts
         steps = board_facts.line_steps(chess.Board(analysis["fen"]),
@@ -347,31 +446,83 @@ Engine's best move: {_dots(student, analysis['best_move'] or '(none)')}
 Engine's evaluation: {_eval_words(analysis['eval_text'], student)}
 
 What the engine expects, one move at a time (the student moves first):
-{_walkthrough(steps, student)}
+{_walkthrough(steps, student, with_facts=mode == "full")}
 
 Explain the position through these moves, in order and no further: the
 student's best move first, with its idea before the move, then the opponent's
 likely reply, and so on."""
+    return _system(level, mode), facts
 
-    _record_prompt(prompt_out, level, facts)
-    text = _generate(level, facts)
-    _check_and_log(text, analysis, "position", level)
+
+def explain_position(analysis, level="intermediate", prompt_out=None, mode="full"):
+    """
+    Take the fact-dictionary from Stage 1 and return a natural-language
+    explanation, grounded strictly in those facts. `mode` picks how much of it
+    Gemini gets (MODES; the default is the coach). Pass a dict as `prompt_out`
+    to get back the exact prompt sent (see _record_prompt).
+    """
+    system, facts = _position_prompt(analysis, level, mode)
+    _record_prompt(prompt_out, level, mode, system, facts)
+    text = _generate(system, facts)
+    _check_and_log(text, analysis, "position", level, mode)
     return text
 
 
-def explain_move(review, level="intermediate", prompt_out=None):
-    """Coach the student on a move they just played, using the review facts.
-    Pass a dict as `prompt_out` to get back the exact prompt sent."""
+def _move_prompt(review, level, mode):
+    """(system instruction, message) for coaching a played move in `mode`."""
+    student = "White" if chess.Board(review["fen"]).turn == chess.WHITE else "Black"
+    move = _dots(student, review["played_move"])
+    if mode == "bare":
+        return None, (f"I'm {_A_LEVEL[level]} chess player, playing {student}. Here is the "
+                      f"position before my move (FEN): {review['fen']}\n"
+                      f"I played {move}. Explain my move.")
+    if mode == "persona":
+        return _system(level, mode), f"""The student plays {student} and just made a move.
+
+Position before their move (FEN): {review['fen']}
+Their move: {move}
+
+Coach the student on the move THEY played: say what it did and whether it was
+good, and if it was not, what they should have played instead and why.
+Be encouraging and specific."""
+
     # The engine's continuation after the move the student actually played. For a
     # weak move this is the refutation — concretely how the opponent punishes it.
     # Cut by level (and before any of the student's moves that no board fact can
     # explain), then labelled move by move.
-    student = "White" if chess.Board(review["fen"]).turn == chess.WHITE else "Black"
     played, steps, best = _review_facts(review)
     # After a move that lost material or allowed mate, the rest of the line is
     # damage control: keep it to the punishment and one answer (cut_line).
     damage = review.get("mistake_type") in ("lost_material", "allowed_mate")
     steps = board_facts.cut_line(steps, board_facts.LINE_PLIES[level], student, damage=damage)
+
+    if mode == "engine":
+        # The coach's message below with every board fact (and the damage
+        # note, which leans on them) taken out; the same moves.
+        instead = ""
+        if review["label"] != "Best":
+            instead = (f"\n\nThe move the engine would have played instead: "
+                       f"{_dots(student, review['best_move'])}.")
+        return _system(level, mode), f"""The student plays {student} and just made a move. Here is the engine's review:
+
+Position before their move (FEN): {review['fen']}
+Their move: {move}
+Move quality: {review['label']}
+Evaluation after their move: {_eval_words(review['played_eval'], student)}
+Evaluation if they had played the best move: {_eval_words(review['best_eval'], student)}
+
+What the engine expects to follow their move, one move at a time:
+{_walkthrough(steps, student, with_facts=False)}{instead}
+
+Coach the student on the move THEY played, in this order:
+1. What their move did: if it lost value, what it changed on the board; if it
+   was strong, affirm it briefly. Give the evaluation in a separate sentence
+   of its own.
+2. Walk through the moves above, in order and no further.
+3. If it lost value, end with one short clause naming the move the engine
+   would have played instead, with its idea first.
+Be encouraging and specific."""
+
     damage_note = ""
     if damage and any(s["color"] == student for s in steps):
         damage_note = ("\n   Their move lost material or allowed mate, so keep this part short:\n"
@@ -407,10 +558,17 @@ Coach the student on the move THEY played, in this order:
 3. If it lost value, end with one short clause naming the move the engine
    would have played instead, with its idea first if it has board facts.
 Be encouraging and specific."""
+    return _system(level, mode), facts
 
-    _record_prompt(prompt_out, level, facts)
-    text = _generate(level, facts)
-    _check_and_log(text, review, "move", level)
+
+def explain_move(review, level="intermediate", prompt_out=None, mode="full"):
+    """Coach the student on a move they just played, using the review facts.
+    `mode` picks how much of them Gemini gets (MODES; the default is the
+    coach). Pass a dict as `prompt_out` to get back the exact prompt sent."""
+    system, facts = _move_prompt(review, level, mode)
+    _record_prompt(prompt_out, level, mode, system, facts)
+    text = _generate(system, facts)
+    _check_and_log(text, review, "move", level, mode)
     return text
 
 
@@ -449,3 +607,8 @@ if __name__ == "__main__":
     for lvl in ["beginner", "intermediate", "advanced"]:
         print(f"\n========== MOVE REVIEW - {lvl.upper()} ==========")
         print(explain_move(fake_review, level=lvl))
+
+    # The comparison modes (the coach, "full", is above).
+    for mode in [m for m in MODES if m != "full"]:
+        print(f"\n========== MOVE REVIEW - INTERMEDIATE - MODE {mode.upper()} ==========")
+        print(explain_move(fake_review, mode=mode))

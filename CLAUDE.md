@@ -42,6 +42,9 @@ ask: *is this a chess fact?* → it comes from the engine. *Is this phrasing a f
 for a human?* → that's the LLM's job. Never blur the two. The system prompt in
 `explainer.py` enforces this at the model level ("do NOT suggest a different
 move… do NOT invent tactics or evaluations"); keep those guardrails intact.
+The one deliberate exception is the comparison modes (`explainer.MODES`, see
+"Four explanation modes" below): labelled "for comparison only", they give
+Gemini less, to measure what the engine and the board facts add.
 
 ## Pipeline / file map
 
@@ -50,7 +53,8 @@ app.py              Streamlit UI — the only entry point. Orchestrates the stag
   │
   ├─ engine_analysis.py   Stage 1: FEN → engine facts (best move, eval, PV).
   ├─ move_review.py       Grades a *played* move vs. the engine's best.
-  ├─ explainer.py         Stage 2: engine facts → grounded, level-adapted prose.
+  ├─ explainer.py         Stage 2: engine facts → grounded, level-adapted prose
+  │                       (plus 3 weaker comparison modes, MODES).
   ├─ board_facts.py       What a human would *notice* about each move (attacks,
   │                       chases, castling…), computed with python-chess: the
   │                       coach's only source for the idea behind a move.
@@ -242,12 +246,31 @@ python explainer.py          # explains a sample position at all 3 levels
   catch-all "check GOOGLE_API_KEY" message — it hid the real cause.
 - **The exact prompt is visible in the app** (the author, 2026-10-03 01:52,
   for research and debugging): `explain_move` / `explain_position` take an
-  optional `prompt_out` dict, filled with the model, level, system instruction
-  and facts message *before* the call (so a failed call still shows it);
-  `app.py`'s `_render_prompt` shows it in a collapsed "Prompt sent to Gemini"
-  box. Keep it a caller-owned dict, not a module global: the online app is one
-  process shared by all visitors. Build the system instruction only through
-  `_system(level)`, so what's shown is what's sent.
+  optional `prompt_out` dict, filled with the model, level, mode, system
+  instruction and facts message *before* the call (so a failed call still
+  shows it); `app.py`'s `_render_prompt` shows it in a collapsed "Prompt sent
+  to Gemini" box. Keep it a caller-owned dict, not a module global: the online
+  app is one process shared by all visitors. `_move_prompt` /
+  `_position_prompt` build the system instruction (through `_system(level,
+  mode)`) and the message once, and that same pair is both recorded and sent,
+  so what's shown is what's sent.
+- **Four explanation modes, for comparison** (the author, 2026-10-23 18:28:
+  "keep the prompt being sent in each case so that I can compare by
+  eyeballing it"). `explainer.MODES`, each giving Gemini one input more than
+  the one before: `bare` (no system instruction, one short request), `persona`
+  (the coach's persona and style, no engine), `engine` (Stockfish's review
+  and line, no board facts), `full` (the coach, version 1, and the default).
+  The app shows one tab per mode under every explanation, each with its own
+  answer and prompt. `bare` and `persona` break the invariant **on purpose**
+  (Gemini judges the chess itself) and are labelled "for comparison only";
+  they exist to show what the engine and board facts fix, never to coach.
+  `engine` walks through the same moves as `full` (same `cut_line`), so the
+  board facts are the only difference. Modes 2 and 3 are word for word the
+  prompts of `walkthrough_eval/three_inputs/run.py`'s A and B at the
+  intermediate level; the comparison prompts are cut from version 1's text
+  with `_cut`, which asserts each cut, so editing v1's prompt fails loudly
+  instead of leaving a mode with a rule about an input it doesn't get. The
+  faithfulness log records each answer's `mode` (older records: `full`).
 - **Scores are always taken from the moving side's POV** via `.pov(board.turn)`.
   After a move is pushed it's the opponent's turn, so `move_review.py` flips the
   post-move score back to the mover's perspective. Watch this whenever you touch

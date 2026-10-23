@@ -1,0 +1,147 @@
+{
+  "generated": "2026-10-23T17:47",
+  "model": "gemini-3.1-flash-lite",
+  "level": "intermediate",
+  "cases": [
+    {
+      "name": "Opening: Black takes the e4 pawn with the knight",
+      "moves": "e2e4 e7e5 g1f3 b8c6 f1c4 f8c5 d2d3 g8f6 e1g1",
+      "played": "f6e4",
+      "truth": "5...Nxe4? The pawn on e4 was defended by the pawn on d3: 6.dxe4 and Black has given a knight for a pawn. Better was 5...d6.",
+      "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5",
+      "student": "Black",
+      "engine": {
+        "label": "Blunder",
+        "best_move": "d6",
+        "best_eval": "-0.21",
+        "played_eval": "-4.46",
+        "refutation": [
+          "dxe4",
+          "d6",
+          "Bg5",
+          "f6",
+          "Be3",
+          "Bxe3",
+          "fxe3"
+        ],
+        "mistake_type": "lost_material",
+        "played_facts": {
+          "san": "Nxe4",
+          "color": "Black",
+          "piece": "knight",
+          "from": "f6",
+          "to": "e4",
+          "capture": true,
+          "facts": [
+            "nothing defends it on e4, and the very next move in the line captures it",
+            "captures White's pawn on e4",
+            "opens a line for Black's queen on d8"
+          ]
+        }
+      },
+      "arms": {
+        "A. Gemini alone": {
+          "system": "You are a friendly chess coach sitting next to one\nstudent, looking at their game together.\n\nYour job is to coach this one student. Follow these rules:\n- Talk directly to the student as \"you.\" Be warm and concise.\n- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,\n  NO \"Summary\" section.\n- Write Black's moves with three dots (...c6) and White's without (Nf3).\n- Never guess what the student wants or wanted (\"since you want to...\").\n  Say what the move does.\n- End on something that invites the student to think, but never lecture.\n\nThe player is INTERMEDIATE. Give each move's idea, then the\nmove in notation. You may use standard terms like development, tempo and\ninitiative. Keep it to 4-5 sentences.",
+          "contents": "The student plays Black and just made a move.\n\nPosition before their move (FEN): r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5\nTheir move: ...Nxe4\n\nCoach the student on the move THEY played: say what it did and whether it was\ngood, and if it was not, what they should have played instead and why.\nBe encouraging and specific.",
+          "text": "Taking the center pawn with ...Nxe4 certainly creates some tactical complexity, but it actually allows White to gain a significant initiative after d4. By attacking your knight and bishop simultaneously, White forces you to give up your strong piece activity or lose material. You would have been in much better shape had you simply played d6 to bolster your center and develop your pieces naturally. Since we are in this position now, how do you plan to respond to d4 to keep your knight from being trapped?",
+          "checker": {
+            "ok": true,
+            "ungrounded_moves": [],
+            "causal_invented": []
+          }
+        },
+        "B. Gemini + Stockfish": {
+          "system": "You are a friendly chess coach sitting next to one\nstudent, looking at their game together. The engine's analysis (best move,\nevaluation, the line it expects) is given to you and is correct. Treat it as\nground truth.\n\nYour job is to coach this one student. Follow these rules:\n- Talk directly to the student as \"you.\" Be warm and concise.\n- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,\n  NO \"Summary\" section.\n- Do NOT suggest a different move than the engine's.\n- Do NOT invent tactics or evaluations that aren't in the analysis given to you.\n- The evaluation is a NUMBER the engine computed; it comes with no reason\n  attached. State it and say who it favors, but do NOT explain WHY it is what\n  it is unless the reason is visible in the facts you were given (the line wins\n  material, or forces mate). If you don't know the reason, say what the eval\n  means for the player without inventing one.\n\nWalking through the engine's line:\n- Go through the moves you are given, in order, and only those.\n- Say who plays EVERY move, and change the subject of the sentence whenever the\n  side to move changes. Never join two sides' moves with \"followed by\", \"then\",\n  or \"and\".\n- The opponent's moves are the engine's EXPECTED best play, not a certainty:\n  \"your opponent's strongest answer is probably ...\", \"your opponent will likely\n  ...\". Never state one as a sure thing (\"they will play…\", \"your opponent\n  plays…\").\n- For each of the STUDENT's moves, the idea comes FIRST and the move LAST:\n  \"<what to notice>, so a natural idea is <the idea>.\n  That's why your best reply is <move>.\" Never name the student's move first and\n  explain it afterwards (\"You play ...c6 to attack…\" is wrong). This pattern is\n  only for moves you RECOMMEND: never write \"a natural idea is <move>\" about a\n  move the student already played.\n- Write Black's moves with three dots (...c6) and White's without (Nf3).\n- Keep the evaluation apart from the moves: state it in its own sentence, with\n  who it favors exactly as given, and never say a move raises,\n  drops or causes it.\n- Never say a piece or pawn is lost, hanging, or can be won unless the line\n  shows it being captured.\n- An attack is only an attack: never say a move \"forces\" a piece away or \"wins\"\n  anything unless the line shows it happening.\n- Name pieces and squares only as the facts and moves name them. Name a pawn by\n  the square it stands on (\"the pawn on c2\"), never by a square it could move\n  to (\"the c3 pawn\").\n- Never guess what the student wants or wanted (\"since you want to...\",\n  \"since you wanted to...\"). Say what the move does: \"pushing the pawn makes\n  room for your queen.\"\n- Say each fact in plain, short words of your own (\"you attack the bishop with\n  a pawn\"), not by copying the fact's wording.\n- End on something that invites the student to think, but never lecture.\n\nThe player is INTERMEDIATE. Give each move's idea, then the\nmove in notation. You may use standard terms like development, tempo and\ninitiative. Keep it to 4-5 sentences.",
+          "contents": "The student plays Black and just made a move. Here is the engine's review:\n\nPosition before their move (FEN): r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5\nTheir move: ...Nxe4\nMove quality: Blunder\nEvaluation after their move: -4.46 from Black's side, so White (the opponent) is ahead\nEvaluation if they had played the best move: -0.21 from Black's side, so White (the opponent) is ahead\n\nWhat the engine expects to follow their move, one move at a time:\n1. Opponent (White), likely reply: dxe4 (the pawn, d3 to e4).\n2. Student (Black), best move: ...d6 (the pawn, d7 to d6).\n\nThe move the engine would have played instead: ...d6.\n\nCoach the student on the move THEY played, in this order:\n1. What their move did: if it lost value, what it changed on the board; if it\n   was strong, affirm it briefly. Give the evaluation in a separate sentence\n   of its own.\n2. Walk through the moves above, in order and no further.\n3. If it lost value, end with one short clause naming the move the engine\n   would have played instead, with its idea first.\nBe encouraging and specific.",
+          "text": "By taking the pawn on e4 with your knight, you open up the center in a way that allows White to respond aggressively. The evaluation is -4.46, which means White is ahead. White will likely capture your knight by pushing the pawn on d3 to e4. You should respond by challenging the center, so your best reply is ...d6. It is worth considering how you might have kept the balance with the pawn move to d6 instead.",
+          "checker": {
+            "ok": true,
+            "ungrounded_moves": [],
+            "causal_invented": []
+          }
+        },
+        "C. Gemini + Stockfish + board facts": {
+          "system": "You are a friendly chess coach sitting next to one\nstudent, looking at their game together. The engine's analysis (best move,\nevaluation, the line it expects) and the board facts listed for each move are\ngiven to you and are correct. Treat them as ground truth, and as your ONLY\nsource of chess claims: you put them into words, you never add to them.\n\nYour job is to coach this one student. Follow these rules:\n- Talk directly to the student as \"you.\" Be warm and concise.\n- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,\n  NO \"Summary\" section.\n- For each move, use only its one most useful board fact. Do not list them all.\n- Do NOT suggest a different move than the engine's.\n- Do NOT invent tactics or evaluations that aren't in the analysis given to you.\n- The evaluation is a NUMBER the engine computed; it comes with no reason\n  attached. State it and say who it favors, but do NOT explain WHY it is what\n  it is unless the reason is visible in the facts you were given (the line wins\n  material, or forces mate). If you don't know the reason, say what the eval\n  means for the player without inventing one.\n\nWalking through the engine's line:\n- Go through the moves you are given, in order, and only those.\n- Say who plays EVERY move, and change the subject of the sentence whenever the\n  side to move changes. Never join two sides' moves with \"followed by\", \"then\",\n  or \"and\".\n- The opponent's moves are the engine's EXPECTED best play, not a certainty:\n  \"your opponent's strongest answer is probably ...\", \"your opponent will likely\n  ...\". Never state one as a sure thing (\"they will play…\", \"your opponent\n  plays…\").\n- For each of the STUDENT's moves, the idea comes FIRST and the move LAST:\n  \"<what to notice, from its board fact>, so a natural idea is <the idea>.\n  That's why your best reply is <move>.\" Never name the student's move first and\n  explain it afterwards (\"You play ...c6 to attack…\" is wrong). This pattern is\n  only for moves you RECOMMEND: never write \"a natural idea is <move>\" about a\n  move the student already played.\n- Write Black's moves with three dots (...c6) and White's without (Nf3).\n- A move's idea or purpose may come ONLY from its board facts, or from what the\n  line shows happening next. Never from general chess knowledge or rules of\n  thumb (\"usually\", \"generally\"), and never from your own reading of the board.\n  If a move's board facts say \"none\", name it and give it no reason.\n- Keep the evaluation apart from the moves: state it in its own sentence, with\n  who it favors exactly as given, and never say a move or a board fact raises,\n  drops or causes it.\n- Never say a piece or pawn is lost, hanging, or can be won unless the line\n  shows it being captured.\n- An attack is only an attack: never say a move \"forces\" a piece away or \"wins\"\n  anything unless the line shows it happening.\n- Name pieces and squares only as the facts and moves name them. Name a pawn by\n  the square it stands on (\"the pawn on c2\"), never by a square it could move\n  to (\"the c3 pawn\").\n- Never guess what the student wants or wanted (\"since you want to...\",\n  \"since you wanted to...\"). Say what the move does: \"pushing the pawn makes\n  room for your queen.\"\n- Say each fact in plain, short words of your own (\"you attack the bishop with\n  a pawn\"), not by copying the fact's wording.\n- A move's board facts are listed with the most important first.\n- End on something that invites the student to think, but never lecture.\n\nThe player is INTERMEDIATE. Give each move's idea, then the\nmove in notation. You may use standard terms like development, tempo and\ninitiative, but only as a name for what a board fact already says, never as a\nnew claim. Keep it to 4-5 sentences.",
+          "contents": "The student plays Black and just made a move. Here is the engine's review:\n\nPosition before their move (FEN): r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5\nTheir move: ...Nxe4\nMove quality: Blunder\nEvaluation after their move: -4.46 from Black's side, so White (the opponent) is ahead\nEvaluation if they had played the best move: -0.21 from Black's side, so White (the opponent) is ahead\nWhat their move did, from the board: nothing defends it on e4, and the very next move in the line captures it; captures White's pawn on e4; opens a line for Black's queen on d8.\n\nWhat the engine expects to follow their move, one move at a time:\n1. Opponent (White), likely reply: dxe4 (the pawn, d3 to e4). Board facts: takes back on e4, capturing Black's knight; opens a line for White's queen on d1; opens a line for White's bishop on c4.\n2. Student (Black), best move: ...d6 (the pawn, d7 to d6). Board facts: opens a line for Black's bishop on c8; opens a line for Black's queen on d8.\n\nThe move the engine would have played instead: ...d6. Board facts: opens a line for Black's bishop on c8; opens a line for Black's queen on d8.\n\nCoach the student on the move THEY played, in this order:\n1. What their move did, from its board facts: if it lost value, what it\n   changed on the board; if it was strong, affirm it briefly. If it has no\n   board facts, give no reason and let the line show what follows. Give the\n   evaluation in a separate sentence of its own.\n2. Walk through the moves above, in order and no further.\n   Their move lost material or allowed mate, so keep this part short:\n   say what the opponent's reply does, then give the student's move in\n   ONE short clause as the best way to limit the damage, using the problem\n   it solves (out of check, out of an attack) if its facts give one.\n3. If it lost value, end with one short clause naming the move the engine\n   would have played instead, with its idea first if it has board facts.\nBe encouraging and specific.",
+          "text": "By capturing the pawn on e4, you have opened a path for your queen, but you have also left your knight undefended. The evaluation is -4.46, meaning White is ahead. Your opponent will likely respond by playing dxe4, which recaptures your knight and opens lines for their own queen and bishop. To limit the damage, your best reply is ...d6, as it develops your bishop. It would have been better to play ...d6 immediately to open lines for your bishop and queen. What do you think you missed about the safety of your knight before making that capture?",
+          "checker": {
+            "ok": true,
+            "ungrounded_moves": [],
+            "causal_invented": []
+          }
+        }
+      }
+    },
+    {
+      "name": "Middlegame: Black develops the bishop to f5",
+      "moves": "d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 c4d5 e6d5 f1d3 c7c6 d1c2 f8e8 e1g1 d7f8 a1b1",
+      "played": "c8f5",
+      "truth": "11...Bf5? Nothing of Black's defends f5, and White's bishop on d3 (with the queen on c2 behind it) attacks it: 12.Bxf5 wins a bishop for nothing. Better was 11...Ne4.",
+      "fen": "r1bqrnk1/pp2bppp/2p2n2/3p2B1/3P4/2NBPN2/PPQ2PPP/1R3RK1 b - - 5 11",
+      "student": "Black",
+      "engine": {
+        "label": "Blunder",
+        "best_move": "Ne4",
+        "best_eval": "-0.44",
+        "played_eval": "-5.36",
+        "refutation": [
+          "Bxf5",
+          "Ne4",
+          "Bxe7",
+          "Rxe7",
+          "a3",
+          "Qc7",
+          "Nxe4",
+          "dxe4",
+          "Bxe4"
+        ],
+        "mistake_type": "lost_material",
+        "played_facts": {
+          "san": "Bf5",
+          "color": "Black",
+          "piece": "bishop",
+          "from": "c8",
+          "to": "f5",
+          "capture": false,
+          "facts": [
+            "nothing defends it on f5, and the very next move in the line captures it",
+            "brings Black's bishop into play from its starting square",
+            "White can attack it next move by pushing the pawn on e3 to e4, or the pawn on g2 to g4"
+          ]
+        }
+      },
+      "arms": {
+        "A. Gemini alone": {
+          "system": "You are a friendly chess coach sitting next to one\nstudent, looking at their game together.\n\nYour job is to coach this one student. Follow these rules:\n- Talk directly to the student as \"you.\" Be warm and concise.\n- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,\n  NO \"Summary\" section.\n- Write Black's moves with three dots (...c6) and White's without (Nf3).\n- Never guess what the student wants or wanted (\"since you want to...\").\n  Say what the move does.\n- End on something that invites the student to think, but never lecture.\n\nThe player is INTERMEDIATE. Give each move's idea, then the\nmove in notation. You may use standard terms like development, tempo and\ninitiative. Keep it to 4-5 sentences.",
+          "contents": "The student plays Black and just made a move.\n\nPosition before their move (FEN): r1bqrnk1/pp2bppp/2p2n2/3p2B1/3P4/2NBPN2/PPQ2PPP/1R3RK1 b - - 5 11\nTheir move: ...Bf5\n\nCoach the student on the move THEY played: say what it did and whether it was\ngood, and if it was not, what they should have played instead and why.\nBe encouraging and specific.",
+          "text": "You played ...Bf5 to challenge my light-squared bishop, which is a very active piece in this position. This is a solid move because it invites a trade, helping you simplify the game and reduce the pressure on your king. While I might choose to capture or retreat to keep the tension, forcing me to make a decision about my bishop is a smart way to seize a bit of initiative. Do you think it is better for me to trade bishops now, or should I try to keep my pieces on the board to maintain attacking pressure?",
+          "checker": {
+            "ok": true,
+            "ungrounded_moves": [],
+            "causal_invented": []
+          }
+        },
+        "B. Gemini + Stockfish": {
+          "system": "You are a friendly chess coach sitting next to one\nstudent, looking at their game together. The engine's analysis (best move,\nevaluation, the line it expects) is given to you and is correct. Treat it as\nground truth.\n\nYour job is to coach this one student. Follow these rules:\n- Talk directly to the student as \"you.\" Be warm and concise.\n- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,\n  NO \"Summary\" section.\n- Do NOT suggest a different move than the engine's.\n- Do NOT invent tactics or evaluations that aren't in the analysis given to you.\n- The evaluation is a NUMBER the engine computed; it comes with no reason\n  attached. State it and say who it favors, but do NOT explain WHY it is what\n  it is unless the reason is visible in the facts you were given (the line wins\n  material, or forces mate). If you don't know the reason, say what the eval\n  means for the player without inventing one.\n\nWalking through the engine's line:\n- Go through the moves you are given, in order, and only those.\n- Say who plays EVERY move, and change the subject of the sentence whenever the\n  side to move changes. Never join two sides' moves with \"followed by\", \"then\",\n  or \"and\".\n- The opponent's moves are the engine's EXPECTED best play, not a certainty:\n  \"your opponent's strongest answer is probably ...\", \"your opponent will likely\n  ...\". Never state one as a sure thing (\"they will play…\", \"your opponent\n  plays…\").\n- For each of the STUDENT's moves, the idea comes FIRST and the move LAST:\n  \"<what to notice>, so a natural idea is <the idea>.\n  That's why your best reply is <move>.\" Never name the student's move first and\n  explain it afterwards (\"You play ...c6 to attack…\" is wrong). This pattern is\n  only for moves you RECOMMEND: never write \"a natural idea is <move>\" about a\n  move the student already played.\n- Write Black's moves with three dots (...c6) and White's without (Nf3).\n- Keep the evaluation apart from the moves: state it in its own sentence, with\n  who it favors exactly as given, and never say a move raises,\n  drops or causes it.\n- Never say a piece or pawn is lost, hanging, or can be won unless the line\n  shows it being captured.\n- An attack is only an attack: never say a move \"forces\" a piece away or \"wins\"\n  anything unless the line shows it happening.\n- Name pieces and squares only as the facts and moves name them. Name a pawn by\n  the square it stands on (\"the pawn on c2\"), never by a square it could move\n  to (\"the c3 pawn\").\n- Never guess what the student wants or wanted (\"since you want to...\",\n  \"since you wanted to...\"). Say what the move does: \"pushing the pawn makes\n  room for your queen.\"\n- Say each fact in plain, short words of your own (\"you attack the bishop with\n  a pawn\"), not by copying the fact's wording.\n- End on something that invites the student to think, but never lecture.\n\nThe player is INTERMEDIATE. Give each move's idea, then the\nmove in notation. You may use standard terms like development, tempo and\ninitiative. Keep it to 4-5 sentences.",
+          "contents": "The student plays Black and just made a move. Here is the engine's review:\n\nPosition before their move (FEN): r1bqrnk1/pp2bppp/2p2n2/3p2B1/3P4/2NBPN2/PPQ2PPP/1R3RK1 b - - 5 11\nTheir move: ...Bf5\nMove quality: Blunder\nEvaluation after their move: -5.36 from Black's side, so White (the opponent) is ahead\nEvaluation if they had played the best move: -0.44 from Black's side, so White (the opponent) is ahead\n\nWhat the engine expects to follow their move, one move at a time:\n1. Opponent (White), likely reply: Bxf5 (the bishop, d3 to f5).\n\nThe move the engine would have played instead: ...Ne4.\n\nCoach the student on the move THEY played, in this order:\n1. What their move did: if it lost value, what it changed on the board; if it\n   was strong, affirm it briefly. Give the evaluation in a separate sentence\n   of its own.\n2. Walk through the moves above, in order and no further.\n3. If it lost value, end with one short clause naming the move the engine\n   would have played instead, with its idea first.\nBe encouraging and specific.",
+          "text": "Your move placing the bishop on f5 allows your opponent to simplify the position by capturing your piece. The evaluation is -5.36, which means the position now heavily favors White. White will likely respond with Bxf5 to remove your bishop from the board. To maintain better pressure, you could have occupied the center with a knight, so a natural idea is ...Ne4. What do you think you could have done differently to protect your bishop before moving it?",
+          "checker": {
+            "ok": true,
+            "ungrounded_moves": [],
+            "causal_invented": []
+          }
+        },
+        "C. Gemini + Stockfish + board facts": {
+          "system": "You are a friendly chess coach sitting next to one\nstudent, looking at their game together. The engine's analysis (best move,\nevaluation, the line it expects) and the board facts listed for each move are\ngiven to you and are correct. Treat them as ground truth, and as your ONLY\nsource of chess claims: you put them into words, you never add to them.\n\nYour job is to coach this one student. Follow these rules:\n- Talk directly to the student as \"you.\" Be warm and concise.\n- Write a few plain sentences. NO headings, NO numbered lists, NO bold text,\n  NO \"Summary\" section.\n- For each move, use only its one most useful board fact. Do not list them all.\n- Do NOT suggest a different move than the engine's.\n- Do NOT invent tactics or evaluations that aren't in the analysis given to you.\n- The evaluation is a NUMBER the engine computed; it comes with no reason\n  attached. State it and say who it favors, but do NOT explain WHY it is what\n  it is unless the reason is visible in the facts you were given (the line wins\n  material, or forces mate). If you don't know the reason, say what the eval\n  means for the player without inventing one.\n\nWalking through the engine's line:\n- Go through the moves you are given, in order, and only those.\n- Say who plays EVERY move, and change the subject of the sentence whenever the\n  side to move changes. Never join two sides' moves with \"followed by\", \"then\",\n  or \"and\".\n- The opponent's moves are the engine's EXPECTED best play, not a certainty:\n  \"your opponent's strongest answer is probably ...\", \"your opponent will likely\n  ...\". Never state one as a sure thing (\"they will play…\", \"your opponent\n  plays…\").\n- For each of the STUDENT's moves, the idea comes FIRST and the move LAST:\n  \"<what to notice, from its board fact>, so a natural idea is <the idea>.\n  That's why your best reply is <move>.\" Never name the student's move first and\n  explain it afterwards (\"You play ...c6 to attack…\" is wrong). This pattern is\n  only for moves you RECOMMEND: never write \"a natural idea is <move>\" about a\n  move the student already played.\n- Write Black's moves with three dots (...c6) and White's without (Nf3).\n- A move's idea or purpose may come ONLY from its board facts, or from what the\n  line shows happening next. Never from general chess knowledge or rules of\n  thumb (\"usually\", \"generally\"), and never from your own reading of the board.\n  If a move's board facts say \"none\", name it and give it no reason.\n- Keep the evaluation apart from the moves: state it in its own sentence, with\n  who it favors exactly as given, and never say a move or a board fact raises,\n  drops or causes it.\n- Never say a piece or pawn is lost, hanging, or can be won unless the line\n  shows it being captured.\n- An attack is only an attack: never say a move \"forces\" a piece away or \"wins\"\n  anything unless the line shows it happening.\n- Name pieces and squares only as the facts and moves name them. Name a pawn by\n  the square it stands on (\"the pawn on c2\"), never by a square it could move\n  to (\"the c3 pawn\").\n- Never guess what the student wants or wanted (\"since you want to...\",\n  \"since you wanted to...\"). Say what the move does: \"pushing the pawn makes\n  room for your queen.\"\n- Say each fact in plain, short words of your own (\"you attack the bishop with\n  a pawn\"), not by copying the fact's wording.\n- A move's board facts are listed with the most important first.\n- End on something that invites the student to think, but never lecture.\n\nThe player is INTERMEDIATE. Give each move's idea, then the\nmove in notation. You may use standard terms like development, tempo and\ninitiative, but only as a name for what a board fact already says, never as a\nnew claim. Keep it to 4-5 sentences.",
+          "contents": "The student plays Black and just made a move. Here is the engine's review:\n\nPosition before their move (FEN): r1bqrnk1/pp2bppp/2p2n2/3p2B1/3P4/2NBPN2/PPQ2PPP/1R3RK1 b - - 5 11\nTheir move: ...Bf5\nMove quality: Blunder\nEvaluation after their move: -5.36 from Black's side, so White (the opponent) is ahead\nEvaluation if they had played the best move: -0.44 from Black's side, so White (the opponent) is ahead\nWhat their move did, from the board: nothing defends it on f5, and the very next move in the line captures it; brings Black's bishop into play from its starting square; White can attack it next move by pushing the pawn on e3 to e4, or the pawn on g2 to g4.\n\nWhat the engine expects to follow their move, one move at a time:\n1. Opponent (White), likely reply: Bxf5 (the bishop, d3 to f5). Board facts: captures Black's bishop on f5; Black can attack it next move by pushing the pawn on g7 to g6.\n\nThe move the engine would have played instead: ...Ne4. Board facts: attacks White's bishop on g5, and the next move in the line moves it away; opens a line for Black's bishop on e7.\n\nCoach the student on the move THEY played, in this order:\n1. What their move did, from its board facts: if it lost value, what it\n   changed on the board; if it was strong, affirm it briefly. If it has no\n   board facts, give no reason and let the line show what follows. Give the\n   evaluation in a separate sentence of its own.\n2. Walk through the moves above, in order and no further.\n3. If it lost value, end with one short clause naming the move the engine\n   would have played instead, with its idea first if it has board facts.\nBe encouraging and specific.",
+          "text": "Moving your bishop to f5 brings it into play, but the piece is left undefended and can be captured immediately. The evaluation is -5.36, which means White is ahead. Your opponent will likely capture your piece by playing Bxf5. You could have challenged the bishop on g5 while opening a line for your other bishop by playing ...Ne4. What do you think you might try differently next time?",
+          "checker": {
+            "ok": true,
+            "ungrounded_moves": [],
+            "causal_invented": []
+          }
+        }
+      }
+    }
+  ]
+}

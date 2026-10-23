@@ -2,7 +2,7 @@ import streamlit as st
 import chess
 import chess.svg
 from engine_analysis import analyze_position
-from explainer import explain_position, explain_move, describe_coach_error
+from explainer import explain_position, explain_move, describe_coach_error, MODES
 from move_review import review_move, review_game, win_chance
 from board_ui import render_board, click_to_square, SIZE as BOARD_PX
 from streamlit_image_coordinates import streamlit_image_coordinates
@@ -44,6 +44,24 @@ LEVELS = {
     "Advanced":     "advanced",
 }
 
+# The explanation modes (explainer.MODES), one tab each, in the order the
+# inputs are added: neighbouring tabs differ by one input. The coach (version
+# 1) is the default tab; the other three are there to compare against.
+MODE_TABS = {
+    "bare":    "1 · Gemini",
+    "persona": "2 · + system prompt",
+    "engine":  "3 · + Stockfish",
+    "full":    "4 · + board facts",
+}
+# Modes 1-3 break the project's rule (the engine decides the chess) on purpose;
+# say so under them, since the app is public.
+MODE_WARNINGS = {
+    "bare":    "For comparison only: Gemini judges the chess on its own, so it can be wrong.",
+    "persona": "For comparison only: Gemini judges the chess on its own, so it can be wrong.",
+    "engine":  "For comparison only: the moves are Stockfish's, the reasons Gemini's own.",
+    "full":    "",
+}
+
 # Warm boxwood-and-walnut board, matching the page palette.
 BOARD_COLORS = {"square light": "#f0e6d2", "square dark": "#b08d57"}
 
@@ -76,7 +94,8 @@ def move_board_svg(fen, move_uci, *, after, arrow_color, size=320):
 # (the single source of truth for quality) and explain_move (which only phrases
 # the verdict), and the hint runs through analyze_position / explain_position —
 # all reused untouched. The only new logic here is the board UI + the
-# session-state loop.
+# session-state loop. (The one exception: explanation tabs 1-3, MODE_TABS,
+# are comparison modes that give Gemini less, labelled as such.)
 # ----------------------------------------------------------------------------
 PROMO = {
     "Queen": chess.QUEEN, "Rook": chess.ROOK,
@@ -138,7 +157,7 @@ def _load_reviewed_game(entries):
     for e in entries:
         board.push(chess.Move.from_uci(e["review"]["played_move_uci"]))
     st.session_state.g_board = board
-    st.session_state.g_history = [dict(e, comment=None) for e in entries]
+    st.session_state.g_history = [dict(e, coach={}) for e in entries]
     st.session_state.g_lastmove = board.move_stack[-1]
 
 
@@ -200,7 +219,7 @@ def _play_and_review(move, by_bot=False):
     st.session_state.g_history.append({
         "move_no": move_no, "color": mover,
         "review": review,     # full engine facts: label + win-chance/eval metrics
-        "comment": None,      # LLM explanation, filled in on demand
+        "coach": {},          # LLM explanation per mode, filled in on demand
         "bot": by_bot,
         "skill": st.session_state.get("g_bot_skill", BOT_SKILL_DEFAULT) if by_bot else None,
     })
@@ -311,59 +330,80 @@ def _render_coach_panel():
     # one of the two is ever on screen, and it's visible without scrolling.
     _render_move_boards(review)
 
-    # The explanation is opt-in: only call Gemini when the student presses the
-    # button, then cache the prose on the move so reruns don't re-call it. We
-    # also record the level it was written for: if the student changes the level
-    # afterwards, the cached prose is stuck at the old level with no button to
-    # redo it, so we offer a re-explain whenever the selected level has moved on.
+    _render_explanations(last, explain_move, review, what="move", key=f"g_m{idx}",
+                         tabs_key="g_modes", stands="The engine verdict still stands.")
+
+
+def _render_explanations(holder, explain, facts, *, what, key, tabs_key, stands):
+    """The opt-in explanation, one tab per explanation mode (MODE_TABS), so the
+    same move or position can be read as each mode explains it, each with the
+    prompt it sent. `holder` is the move's history entry or the hint; `explain`
+    is explain_move or explain_position, called on `facts`.
+
+    Gemini is called only when a tab's button is pressed, and each mode's prose
+    and prompt are cached on `holder`, so switching tabs, levels or moves never
+    re-calls it. The level it was written for is recorded too: if the student
+    changes the level afterwards, the cached prose is stuck at the old level,
+    so that tab offers a re-explain.
+
+    A failed call stores its reason, not a placeholder, so the tab stays
+    explainable: the button comes back as "Try again". (It used to store a
+    sentinel that hid the button for good — one quota blip mid-demo and that
+    move could never be explained.) The level is recorded only on success."""
     cur_label = st.session_state.get("g_level_label", "Intermediate")
     cur_level = LEVELS[cur_label]
-
-    # A failed call stores its reason, not a placeholder comment, so the move
-    # stays explainable: the button comes back as "Try again". (It used to store
-    # a sentinel that hid the button for good — one quota blip mid-demo and that
-    # move could never be explained.) The level is recorded only on success.
-    def _write_comment():
-        last["prompt"] = {}
-        with st.spinner("Coach is thinking…"):
-            try:
-                last["comment"] = explain_move(review, level=cur_level,
-                                               prompt_out=last["prompt"])
-                last["comment_level"] = cur_level
-                last["comment_error"] = None
-            except Exception as err:
-                print(f"[coach] explain_move failed: {err!r}", flush=True)
-                last["comment_error"] = describe_coach_error(err)
-
-    if not last["comment"]:
-        label = "Try again" if last.get("comment_error") else "Explain this move"
-        if st.button(label, key=f"g_explain_{idx}"):
-            _write_comment()
-    elif last.get("comment_level") != cur_level:
-        # Already explained, but the student has since picked a different level.
-        if st.button(f"Re-explain for {cur_label}", key=f"g_reexplain_{idx}"):
-            _write_comment()
-
-    if last.get("comment_error"):
-        st.caption(f'{last["comment_error"]} The engine verdict still stands.')
-    if last["comment"]:
-        st.markdown(f'<div class="commentary">{last["comment"]}</div>', unsafe_allow_html=True)
-    _render_prompt(last.get("prompt"))
+    done = holder.setdefault("coach", {})    # entries from before the modes: none
+    # Tracked tabs (on_change="rerun") keep the chosen tab across the rerun a
+    # button press makes, and across moves (one key for every move).
+    tabs = st.tabs(list(MODE_TABS.values()), default=MODE_TABS["full"],
+                   key=tabs_key, on_change="rerun")
+    for (mode, _), tab in zip(MODE_TABS.items(), tabs):
+        c = done.setdefault(mode, {"text": None, "level": None, "error": None, "prompt": None})
+        with tab:
+            st.caption(f"{MODES[mode]}. {MODE_WARNINGS[mode]}".strip())
+            if not c["text"]:
+                label = "Try again" if c["error"] else f"Explain this {what}"
+                pressed = st.button(label, key=f"{key}_explain_{mode}")
+            else:
+                # Already explained, but the student may have picked another level.
+                pressed = (c["level"] != cur_level
+                           and st.button(f"Re-explain for {cur_label}", key=f"{key}_reexplain_{mode}"))
+            if pressed:
+                c["prompt"] = {}
+                with st.spinner("Coach is thinking…"):
+                    try:
+                        c["text"] = explain(facts, level=cur_level, mode=mode, prompt_out=c["prompt"])
+                        c["level"], c["error"] = cur_level, None
+                    except Exception as err:
+                        print(f"[coach] {explain.__name__} ({mode}) failed: {err!r}", flush=True)
+                        c["error"] = describe_coach_error(err)
+            if c["error"]:
+                st.caption(f'{c["error"]} {stands}')
+            if c["text"] and mode == "full":
+                st.markdown(f'<div class="commentary">{c["text"]}</div>', unsafe_allow_html=True)
+            elif c["text"]:
+                # The comparison modes may answer in Markdown (mode 1 has no
+                # rule against headings or lists): show it as Gemini wrote it.
+                st.markdown(c["text"])
+            _render_prompt(c["prompt"])
 
 
 def _render_prompt(prompt):
     """For research and debugging: the exact prompt the coach sent to Gemini
     (system instruction + the facts message), collapsed under the explanation.
-    Kept on the move or hint, so it's still there after a failed call and when
-    you step back to an earlier move. Moves explained before this existed have
-    no prompt stored, so nothing is shown for them."""
+    Kept per mode on the move or hint, so it's still there after a failed call
+    and when you step back to an earlier move."""
     if not prompt:
         return
     with st.expander("Prompt sent to Gemini"):
-        st.caption(f'Model: {prompt["model"]} · level: {prompt["level"]}')
+        st.caption(f'Model: {prompt["model"]} · level: {prompt["level"]} · '
+                   f'mode: {MODES[prompt.get("mode", "full")]}')
         st.markdown("**System instruction**")
-        st.code(prompt["system"], language=None, wrap_lines=True)
-        st.markdown("**Message (the engine and board facts)**")
+        if prompt["system"] is None:
+            st.caption("None: this mode sends no system instruction.")
+        else:
+            st.code(prompt["system"], language=None, wrap_lines=True)
+        st.markdown("**Message**")
         st.code(prompt["contents"], language=None, wrap_lines=True)
 
 
@@ -465,8 +505,7 @@ def _render_hint(board):
             st.session_state.g_hint = {
                 "fen": cur_fen,
                 "analysis": analyze_position(cur_fen),
-                "comment": None,
-                "comment_level": None,
+                "coach": {},          # LLM explanation per mode, filled in on demand
             }
 
     hint = st.session_state.get("g_hint")
@@ -507,38 +546,9 @@ def _render_hint(board):
         unsafe_allow_html=True,
     )
 
-    # The explanation is opt-in and cached on the hint, mirroring the move panel:
-    # only call Gemini when asked, and offer a re-explain if the level has moved
-    # on since the prose was written.
-    cur_label = st.session_state.get("g_level_label", "Intermediate")
-    cur_level = LEVELS[cur_label]
-
-    # Same failure handling as the move panel: keep the reason, offer a retry.
-    def _write_comment():
-        hint["prompt"] = {}
-        with st.spinner("Coach is thinking…"):
-            try:
-                hint["comment"] = explain_position(analysis, level=cur_level,
-                                                   prompt_out=hint["prompt"])
-                hint["comment_level"] = cur_level
-                hint["comment_error"] = None
-            except Exception as err:
-                print(f"[coach] explain_position failed: {err!r}", flush=True)
-                hint["comment_error"] = describe_coach_error(err)
-
-    if not hint["comment"]:
-        label = "Try again" if hint.get("comment_error") else "Explain this position"
-        if st.button(label, key="g_hint_explain"):
-            _write_comment()
-    elif hint.get("comment_level") != cur_level:
-        if st.button(f"Re-explain for {cur_label}", key="g_hint_reexplain"):
-            _write_comment()
-
-    if hint.get("comment_error"):
-        st.caption(f'{hint["comment_error"]} The engine\'s move still stands.')
-    if hint["comment"]:
-        st.markdown(f'<div class="commentary">{hint["comment"]}</div>', unsafe_allow_html=True)
-    _render_prompt(hint.get("prompt"))
+    # The explanation is opt-in and cached on the hint, mirroring the move panel.
+    _render_explanations(hint, explain_position, analysis, what="position", key="g_hint",
+                         tabs_key="g_hint_modes", stands="The engine's move still stands.")
 
 
 def _render_move_boards(review):

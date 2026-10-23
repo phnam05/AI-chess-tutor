@@ -67,6 +67,13 @@ the board. Under every explanation, a closed box, **Prompt sent to Gemini**,
 shows the exact text the coach sent (the model, the level, the instructions and
 the engine and board facts), for research and debugging.
 
+Every explanation also comes in **four modes**, one tab each, so you can see
+what each input adds: (1) Gemini alone, with no system instruction; (2) Gemini
+with a coach's system instruction; (3) + Stockfish's review and line; (4) +
+board facts, which is the coach itself and the default. Modes 1–3 are for
+comparison only: in 1 and 2 Gemini judges the chess itself and can be wrong.
+Each tab keeps its own answer and its own prompt.
+
 **Play a move.** Click a piece (its legal moves dot the board) and move it. The
 coach grades it instantly: a quality label (*Best* → *Blunder*), the win-chance
 swing, and the engine's preferred move when you missed it. For a weak move the
